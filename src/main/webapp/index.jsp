@@ -21,82 +21,27 @@
 				"menuid" : "12",
 				"menuname" : "疯狂秀才",
 				"icon" : "icon-add",
-				"url" : "http://hxling.cnblogs.com",
-				"child" : [ {
-					"menuid" : "140",
-					"menuname" : "角色管理 3",
-					"icon" : "icon-role",
-					"url" : "demo2.html"
-				}, {
-					"menuid" : "150",
-					"menuname" : "权限设置 3",
-					"icon" : "icon-set",
-					"url" : "demo.html"
-				} ]
+				"url" : "http://hxling.cnblogs.com"
 			}, {
 				"menuid" : "13",
-				"menuname" : "用户管理",
+				"menuname" : "文件上传",
 				"icon" : "icon-users",
-				"url" : "demo2.html",
-				"child" : [ {
-					"menuid" : "141",
-					"menuname" : "角色管理 3",
-					"icon" : "icon-role",
-					"url" : "demo2.html"
-				}, {
-					"menuid" : "151",
-					"menuname" : "权限设置 3",
-					"icon" : "icon-set",
-					"url" : "demo.html"
-				} ]
+				"url" : "upload.jsp"
 			}, {
 				"menuid" : "14",
 				"menuname" : "角色管理",
 				"icon" : "icon-role",
-				"url" : "demo2.html",
-				"child" : [ {
-					"menuid" : "142",
-					"menuname" : "角色管理 3",
-					"icon" : "icon-role",
-					"url" : "demo2.html"
-				}, {
-					"menuid" : "152",
-					"menuname" : "权限设置 3",
-					"icon" : "icon-set",
-					"url" : "demo.html"
-				} ]
+				"url" : "main.jsp"
 			}, {
 				"menuid" : "15",
 				"menuname" : "权限设置",
 				"icon" : "icon-set",
-				"url" : "demo.html",
-				"child" : [ {
-					"menuid" : "143",
-					"menuname" : "角色管理 3",
-					"icon" : "icon-role",
-					"url" : "demo2.html"
-				}, {
-					"menuid" : "153",
-					"menuname" : "权限设置 3",
-					"icon" : "icon-set",
-					"url" : "demo.html"
-				} ]
+				"url" : "demo.html"
 			}, {
 				"menuid" : "16",
 				"menuname" : "系统日志",
 				"icon" : "icon-log",
-				"url" : "demo1.html",
-				"child" : [ {
-					"menuid" : "144",
-					"menuname" : "角色管理 3",
-					"icon" : "icon-role",
-					"url" : "demo2.html"
-				}, {
-					"menuid" : "154",
-					"menuname" : "权限设置 3",
-					"icon" : "icon-set",
-					"url" : "demo.html"
-				} ]
+				"url" : "demo1.html"
 			} ]
 		}, {
 			"menuid" : "8",
