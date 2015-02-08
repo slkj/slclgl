@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css"
 	href="js/easyui/themes/default/easyui.css" />
 <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css" />
+<link rel="stylesheet" type="text/css" href="css/default.css" />
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
@@ -16,8 +17,8 @@
 	$(function() {
 		grid = $("#test").datagrid({
 			loadMsg : '数据加载中....',
-			title : '管理员信息一览表',
-			iconCls : 'icon-users',
+// 			title : '管理员信息一览表',
+			iconCls : 'icon-edit',
 			width : 'auto',
 			height : 'auto',
 			nowrap : true,
@@ -111,8 +112,6 @@
 </head>
 <body>
 	<!-- 用户列表 -->
-	<div id="tabs" class="easyui-tabs" fit="true" border="false">
-		<table id="test" data-options="fit:true,border:false"></table>
-	</div>
+	<table id="test" data-options="fit:true,border:false"></table>
 </body>
 </html>

@@ -17,10 +17,10 @@ public class ModuleController {
 	@Autowired
 	private ModuleServiceImpl moduleServiceImpl;
 
-	@RequestMapping(value = "/list/{parentId}")
+	@RequestMapping(value = "/list/{roleid}")
 	@ResponseBody
-	public List<Module> list(@PathVariable Long parentId) {
-		List<Module> list = moduleServiceImpl.getAll();
+	public List<Module> list(@PathVariable String roleid) {
+		List<Module> list = moduleServiceImpl.getAll(roleid);
 		return list;
 	}
 

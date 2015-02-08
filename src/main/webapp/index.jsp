@@ -5,97 +5,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>EasyUI 后台DEMO</title>
+<link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
 <link rel="stylesheet" type="text/css" href="css/default.css" />
-<link rel="stylesheet" type="text/css"
-	href="js/easyui/themes/default/easyui.css" />
-<link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css" />
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src='js/SL.index.js'></script>
+
 <script type="text/javascript">
-	var _menus = [ {
-		"menuid" : "1",
-		"icon" : "icon-sys",
-		"menuname" : "控件使用",
-		"menus" : [ {
-			"menuid" : "12",
-			"menuname" : "疯狂秀才",
-			"icon" : "icon-add",
-			"url" : "http://hxling.cnblogs.com"
-		}, {
-			"menuid" : "13",
-			"menuname" : "文件上传",
-			"icon" : "icon-users",
-			"url" : "upload.jsp"
-		}, {
-			"menuid" : "14",
-			"menuname" : "角色管理",
-			"icon" : "icon-role",
-			"url" : "main.jsp"
-		}, {
-			"menuid" : "15",
-			"menuname" : "权限设置",
-			"icon" : "icon-set",
-			"url" : "demo.html"
-		}, {
-			"menuid" : "16",
-			"menuname" : "系统日志",
-			"icon" : "icon-log",
-			"url" : "demo1.html"
-		} ]
-	}, {
-		"menuid" : "8",
-		"icon" : "icon-sys",
-		"menuname" : "员工管理",
-		"menus" : [ {
-			"menuid" : "21",
-			"menuname" : "员工列表",
-			"icon" : "icon-nav",
-			"url" : "demo.html"
-		}, {
-			"menuid" : "22",
-			"menuname" : "视频监控",
-			"icon" : "icon-nav",
-			"url" : "demo1.html",
-			"child" : [ {
-				"menuid" : "221",
-				"menuname" : "员工列表 3",
-				"icon" : "icon-nav",
-				"url" : "demo.html"
-			}, {
-				"menuid" : "222",
-				"menuname" : "视频监控 3",
-				"icon" : "icon-nav",
-				"url" : "demo1.html"
-			} ]
-		} ]
-	}, {
-		"menuid" : "56",
-		"icon" : "icon-sys",
-		"menuname" : "部门管理",
-		"menus" : [ {
-			"menuid" : "31",
-			"menuname" : "添加部门",
-			"icon" : "icon-nav",
-			"url" : "demo1.html"
-		}, {
-			"menuid" : "321",
-			"menuname" : "部门列表",
-			"icon" : "icon-nav",
-			"url" : "demo2.html",
-			"child" : [ {
-				"menuid" : "311",
-				"menuname" : "添加部门 4",
-				"icon" : "icon-nav",
-				"url" : "demo1.html"
-			}, {
-				"menuid" : "312",
-				"menuname" : "部门列表 4",
-				"icon" : "icon-nav",
-				"url" : "demo2.html"
-			} ]
-		} ]
-	} ];
+	 
 
 	//设置登录窗口
 	function openPwd() {

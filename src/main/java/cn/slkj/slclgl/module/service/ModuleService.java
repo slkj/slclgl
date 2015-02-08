@@ -6,5 +6,5 @@ import cn.slkj.slclgl.module.bean.Module;
 
 public interface ModuleService {
 
-	List<Module> getAll();
+	List<Module> getAll(String parentId);
 }

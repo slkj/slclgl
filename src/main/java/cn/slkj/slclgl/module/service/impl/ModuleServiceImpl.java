@@ -1,9 +1,9 @@
 package cn.slkj.slclgl.module.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +17,17 @@ public class ModuleServiceImpl implements ModuleService {
 	private ModuleMapper mapper;
 
 	@Override
-	public List<Module> getAll() {
-		List<Module> list = mapper.getAll();
-		return makeTree(list);
+	public List<Module> getAll(String parentId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+//		map.put("parentId",parentId);
+		List<Module> list = mapper.getAll(map);
+		List<Module> rootList = makeTree(list);
+		return rootList;
 	}
 
 	private List<Module> makeTree(List<Module> list) {
 		List<Module> parent = new ArrayList<Module>();
+		// get parentId = null;
 		for (Module e : list) {
 			if (e.getParent_id() == null) {
 				e.setChildren(new ArrayList<Module>(0));
@@ -35,24 +39,22 @@ public class ModuleServiceImpl implements ModuleService {
 		makeChildren(parent, list);
 		return parent;
 	}
+
 	private void makeChildren(List<Module> parent, List<Module> children) {
 		if (children.isEmpty()) {
-			return ;
+			return;
 		}
-		
 		List<Module> tmp = new ArrayList<Module>();
 		for (Module c1 : parent) {
 			for (Module c2 : children) {
 				c2.setChildren(new ArrayList<Module>(0));
-				if (c1.getId().equals(c2.getParent().getId())) {
+				if (c1.getId().equals(c2.getParent_id())) {
 					c1.getChildren().add(c2);
 					tmp.add(c2);
 				}
 			}
 		}
-		
 		children.removeAll(tmp);
-		
 		makeChildren(tmp, children);
 	}
 }

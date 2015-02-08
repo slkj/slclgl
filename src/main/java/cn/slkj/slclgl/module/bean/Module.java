@@ -13,8 +13,8 @@ public class Module implements Serializable{
 	private String name;
 	private String url;
 	private String parent_id;
+	private String icon;
 	private String description;
-	private Module parent;
 	private List<Module> children;
 	public String getId() {
 		return id;
@@ -52,11 +52,11 @@ public class Module implements Serializable{
 	public void setChildren(List<Module> children) {
 		this.children = children;
 	}
-	public Module getParent() {
-		return parent;
+	public String getIcon() {
+		return icon;
 	}
-	public void setParent(Module parent) {
-		this.parent = parent;
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 	@Override
 	public String toString() {
