@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.slkj.slclgl.user.bean.User;
-import cn.slkj.slclgl.user.mapper.UserMapper;
 import cn.slkj.slclgl.user.service.impl.UserServiceImpl;
 
 @Controller

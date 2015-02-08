@@ -13,8 +13,11 @@ public class User implements Serializable {
 	private Integer id;
 	private String name;
 	private String password;
+	private String age;
+	private String phone;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date time;
+	
 
 	public User() {
 		super();
@@ -66,10 +69,26 @@ public class User implements Serializable {
 		this.time = time;
 	}
 
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", password=" + password + ", time=" + time
-				+ "]";
+		return "User [id=" + id + ", name=" + name + ", password=" + password + ", age=" + age
+				+ ", phone=" + phone + ", time=" + time + "]";
 	}
 
 }

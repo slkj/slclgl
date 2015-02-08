@@ -8,7 +8,7 @@ $(function(){
 	InitLeftMenu();
 	tabClose();
 	tabCloseEven();
-/* 选择TAB时刷新内容
+/* 选择TAB时刷新内容*/
 	$('#tabs').tabs({
         onSelect: function (title) {
             var currTab = $('#tabs').tabs('getTab', title);
@@ -20,13 +20,13 @@ $(function(){
 
         }
     });
-*/
+
 })
 //初始化左侧
 function InitLeftMenu() {
 	$("#nav").accordion({animate:false,fit:true,border:false});
 	var selectedPanelname = '';
-    $.each(_menus.menus, function(i, n) {
+    $.each(_menus, function(i, n) {
 		var menulist ='';
 		menulist +='<ul class="navlist">';
         $.each(n.menus, function(j, o) {
@@ -101,7 +101,7 @@ function InitLeftMenu() {
 //获取左侧导航的图标
 function getIcon(menuid){
 	var icon = 'icon ';
-	$.each(_menus.menus, function(i, n) {
+	$.each(_menus, function(i, n) {
 		 $.each(n.menus, function(j, o) {
 		 	if(o.menuid==menuid){
 				icon += o.icon;
@@ -114,7 +114,7 @@ function getIcon(menuid){
 
 function find(menuid){
 	var obj=null;
-	$.each(_menus.menus, function(i, n) {
+	$.each(_menus, function(i, n) {
 		 $.each(n.menus, function(j, o) {
 		 	if(o.menuid==menuid){
 				obj = o;

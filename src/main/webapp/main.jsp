@@ -10,21 +10,20 @@
 <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css" />
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#test").datagrid({
+	var grid;
+	$(function() {
+		grid = $("#test").datagrid({
 			loadMsg : '数据加载中....',
 			title : '管理员信息一览表',
-			iconCls : 'icon-edit',
-			width : 1184,
-			height : 530,
-			url : 'userlist.do',
-			nowrap : false,
+			iconCls : 'icon-users',
+			width : 'auto',
+			height : 'auto',
+			nowrap : true,
 			striped : true,
+			url : 'user/list',
 			collapsible : true,
-			sortName : 'uid',
-			sortOrder : 'desc',
-			remoteSort : false,
 			pagination : true,
 			rownumbers : true,
 			frozenColumns : [ [ {
@@ -33,12 +32,11 @@
 			}, {
 				title : '编号',
 				field : 'id',
-				width : 80,
 				sortable : true
 			} ] ],
 			columns : [ [ {
 				title : '基本信息',
-				colspan : 3
+				colspan : 4
 			}, {
 				field : 'opt',
 				title : '操作',
@@ -55,10 +53,17 @@
 			}, {
 				field : 'age',
 				title : '年龄',
-				width : 120
+				align : 'center',
+				formatter : function(value, rec) {
+					return value == 1 ? '男' : '女';
+				}
 			}, {
 				field : 'phone',
 				title : '联系方式',
+				width : 120
+			}, {
+				field : 'time',
+				title : '创建时间',
 				width : 120
 			} ] ],
 
@@ -92,64 +97,22 @@
 				}
 			} ]
 		});
-		var p = $('#test').datagrid('getPager');
-		if (p) {
-			$(p).pagination({
-				onBeforeRefresh : function() {
-					alert('before refresh');
-				}
-			});
-		}
+		// 设置分页控件
+		var p = grid.datagrid('getPager');
+		$(p).pagination({
+			pageSize : 15,// 每页显示的记录条数，默认为10
+			pageList : [ 1, 10, 15, 20, 30, 50 ],// 可以设置每页记录条数的列表
+			beforePageText : '第',// 页数文本框前显示的汉字
+			afterPageText : '页    共 {pages} 页',
+			displayMsg : '当前显示 {from} - {to} 条记录   共 {total} 条记录',
+		});
 	});
-	function resize() {
-		$('#test').datagrid('resize', {
-			width : 700,
-			height : 400
-		});
-	}
-	function getSelected() {
-		var selected = $('#test').datagrid('getSelected');
-		if (selected) {
-			alert(selected.code + ":" + selected.name + ":" + selected.addr
-					+ ":" + selected.col4);
-		}
-	}
-	function getSelections() {
-		var ids = [];
-		var rows = $('#test').datagrid('getSelections');
-		for (var i = 0; i < rows.length; i++) {
-			ids.push(rows[i].code);
-		}
-		alert(ids.join(':'));
-	}
-	function clearSelections() {
-		$('#test').datagrid('clearSelections');
-	}
-	function selectRow() {
-		$('#test').datagrid('selectRow', 2);
-	}
-	function selectRecord() {
-		$('#test').datagrid('selectRecord', '002');
-	}
-	function unselectRow() {
-		$('#test').datagrid('unselectRow', 2);
-	}
-	function mergeCells() {
-		$('#test').datagrid('mergeCells', {
-			index : 2,
-			field : 'addr',
-			rowspan : 2,
-			colspan : 2
-		});
-	}
 </script>
 </head>
 <body>
 	<!-- 用户列表 -->
 	<div id="tabs" class="easyui-tabs" fit="true" border="false">
-		<div title="用户列表" style="padding: 0px; overflow: hidden; color: red;">
-			<div id="test"></div>
-		</div>
+		<table id="test" data-options="fit:true,border:false"></table>
 	</div>
 </body>
 </html>
