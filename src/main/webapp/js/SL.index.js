@@ -30,7 +30,7 @@ $(function() {
 function getMeuns() {
 	_menus = null;
 	$.ajax({
-		url : "module/list/1",
+		url : "module/list",
 		async : false,
 		dataType : "json",
 		cache : false,

@@ -15,18 +15,18 @@
 <script type="text/javascript">
 	var grid;
 	$(function() {
+		var winSize = { width: $(window).width() - 4, height: $(window).height() - 40 };
 		grid = $("#test").datagrid({
-			loadMsg : '数据加载中....',
-// 			title : '管理员信息一览表',
-			iconCls : 'icon-edit',
-			width : 'auto',
-			height : 'auto',
-			nowrap : true,
-			striped : true,
 			url : 'user/list',
-			collapsible : true,
+			loadMsg : '数据加载中....',
+			title : '管理员信息一览表',
+			iconCls : 'icon-edit',
+		    width: winSize.width,
+            height: winSize.height,
+            nowrap: true, //false:折行
+            rownumbers: true, //行号
+            striped: true, //隔行变色
 			pagination : true,
-			rownumbers : true,
 			frozenColumns : [ [ {
 				field : 'ck',
 				checkbox : true
@@ -96,8 +96,12 @@
 				handle : function() {
 					batch('invalid');
 				}
-			} ]
+			} ],
+			getSelectedRow : function() {
+				return $('#test').datagrid('getSelected');
+			}
 		});
+
 		// 设置分页控件
 		var p = grid.datagrid('getPager');
 		$(p).pagination({

@@ -9,17 +9,18 @@ public class Module implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String id;
+	private int id;
 	private String name;
 	private String url;
-	private String parent_id;
+	private int parent_id;
+	private int priority;
 	private String icon;
 	private String description;
 	private List<Module> children;
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -34,11 +35,17 @@ public class Module implements Serializable{
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public String getParent_id() {
+	public int getParent_id() {
 		return parent_id;
 	}
-	public void setParent_id(String parent_id) {
+	public void setParent_id(int parent_id) {
 		this.parent_id = parent_id;
+	}
+	public String getIcon() {
+		return icon;
+	}
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 	public String getDescription() {
 		return description;
@@ -52,17 +59,17 @@ public class Module implements Serializable{
 	public void setChildren(List<Module> children) {
 		this.children = children;
 	}
-	public String getIcon() {
-		return icon;
+	public int getPriority() {
+		return priority;
 	}
-	public void setIcon(String icon) {
-		this.icon = icon;
+	public void setPriority(int priority) {
+		this.priority = priority;
 	}
 	@Override
 	public String toString() {
 		return "Module [id=" + id + ", name=" + name + ", url=" + url + ", parent_id=" + parent_id
-				+ ", description=" + description + "]";
+				+ ", priority=" + priority + ", icon=" + icon + ", description=" + description
+				+ ", children=" + children + "]";
 	}
-	
 
 }

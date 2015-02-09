@@ -5,7 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>EasyUI 后台DEMO</title>
-<link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="js/easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
 <link rel="stylesheet" type="text/css" href="css/default.css" />
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
@@ -13,8 +14,6 @@
 <script type="text/javascript" src='js/SL.index.js'></script>
 
 <script type="text/javascript">
-	 
-
 	//设置登录窗口
 	function openPwd() {
 		$('#w').window({
@@ -51,8 +50,7 @@
 			return false;
 		}
 
-		$.post('/ajax/editpassword.ashx?newpass=' + $newpass.val(), function(
-				msg) {
+		$.post('/ajax/editpassword.ashx?newpass=' + $newpass.val(), function(msg) {
 			msgShow('系统提示', '恭喜，密码修改成功！<br>您的新密码为：' + msg, 'info');
 			$newpass.val('');
 			$rePass.val('');
@@ -175,7 +173,6 @@
 		<div class="menu-sep"></div>
 		<div id="exit">退出</div>
 	</div>
-
-
+	<div id="dd"/>
 </body>
 </html>

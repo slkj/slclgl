@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.slkj.slclgl.module.mapper.ModuleMapper">
-	<select id="getAll" resultType="Module" parameterType="hashmap">
-		select * from tb_module 
+	<select id="temp">
+		id,name,priority,url,parent_id,icon,description
 	</select>
+	<select id="getAll" resultType="Module" parameterType="hashmap">
+		select *
+		from tb_module
+	</select>
+	<insert id="insert" parameterType="Module">
+		insert into tb_module
+		(id,name,priority,url,parent_id,icon,description)
+		values(#{id},#{name},#{priority},#{url},#{parent_id},#{icon},#{description})
+	</insert>
+	<update id="update" parameterType="Module">
+		update tb_module set
+		name=#{name},priority=#{priority},url=#{url},parent_id=#{parent_id},icon=#{icon},description=#{description}
+		where id =#{id}
+	</update>
+	<delete id="delete" parameterType="string">
+		delete from tb_module
+		where id = #{id}
+	</delete>
 </mapper>

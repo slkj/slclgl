@@ -13,106 +13,130 @@
 <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="../js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript">
-
-var grid;
-$(function() {
-	grid = $("#tt").datagrid({
-		loadMsg : '数据加载中....',
-// 		title : '管理员信息一览表',
-		iconCls: 'icon-edit',
-		width : 'auto',
-		height : 'auto',
-		nowrap : true,
-		striped : true,
-		url : '../user/list',
-		collapsible : true,
-		pagination : true,
-		rownumbers : true,
-		frozenColumns : [ [ {
-			field : 'ck',
-			checkbox : true
-		}, {
-			title : '编号',
-			field : 'id',
-			sortable : true
-		} ] ],
-		columns : [ [ {
-			title : '基本信息',
-			colspan : 4
-		}, {
-			field : 'opt',
-			title : '操作',
-			width : 100,
-			align : 'center',
-			rowspan : 2,
-			formatter : function(value, rec) {
-				return '<span style="color:red">编辑    删除</span>';
-			}
-		} ], [ {
-			field : 'name',
-			title : '用户名',
-			width : 120
-		}, {
-			field : 'age',
-			title : '年龄',
-			align : 'center',
-			formatter : function(value, rec) {
-				return value == 1 ? '男' : '女';
-			}
-		}, {
-			field : 'phone',
-			title : '联系方式',
-			width : 120
-		}, {
-			field : 'time',
-			title : '创建时间',
-			width : 120
-		} ] ],
-
-		toolbar : [ {
-			id : 'btnadd',
-			text : '新增用户',
+	var grid;
+	$(function() {
+		var winSize = {
+			width : $(window).width() - 4,
+			height : $(window).height() - 40
+		};
+		grid = $('#tt').treegrid({
+			url : '../module/list',
+			loadMsg : '数据加载中....',
+			title : '系统资源管理列表',
+			width : winSize.width,
+			height : winSize.height,
+			nowrap : true, //false:折行
+			rownumbers : true, //行号
+			striped : true, //隔行变色
+			singleSelect : true, //单选
+			checkOnSelect : true,
+			idField : 'id',
+			treeField : 'name',
+			lines : true,
+			animate : true,
+			columns : [ [ {
+				field : 'id',
+				title : '编号'
+			}, {
+				field : 'name',
+				title : '资源名称',
+				width : 180
+			}, {
+				field : 'url',
+				title : 'url'
+			}, {
+				field : 'icon',
+				title : '图标',
+				width : 80
+			}, {
+				field : 'description',
+				title : '说明'
+			}, {
+				field : 'opt',
+				title : '操作',
+				width : 100,
+				align : 'center',
+				formatter : function(value, rec) {
+					return '<span style="color:red">编辑    <a onclick="deleteRow('+rec.id+')">删除</a></span>';
+				}
+			} ] ],
+			toolbar : [ {
+				text : '新增',
+				iconCls : 'icon-add',
+				handler : function() {
+					add();
+				}
+			} ]
+		});
+	});
+	function add() {
+		top.$('#dd').dialog({
+			title : '添加模块（菜单）',
 			iconCls : 'icon-add',
-			handler : function() {
-				openDialog_add();
-			}
-		}, '-', {
-			id : 'btncut',
-			text : '删除用户',
-			iconCls : 'icon-cancel',
-			handler : function() {
-				batch('delete');
-			}
-		}, '-', {
-			id : 'btnstart',
-			text : '批量启用',
-			iconCls : 'icon-ok',
-			handler : function() {
-				batch('delete');
-			}
-		}, '-', {
-			id : 'btnstop',
-			text : '批量禁用',
-			iconCls : 'icon-remove',
-			handle : function() {
-				batch('invalid');
-			}
-		} ]
-	});
-	// 设置分页控件
-	var p = grid.datagrid('getPager');
-	$(p).pagination({
-		pageSize : 15,// 每页显示的记录条数，默认为10
-		pageList : [ 1, 10, 15, 20, 30, 50 ],// 可以设置每页记录条数的列表
-		beforePageText : '第',// 页数文本框前显示的汉字
-		afterPageText : '页    共 {pages} 页',
-		displayMsg : '当前显示 {from} - {to} 条记录   共 {total} 条记录',
-	});
-});
+			href : 'module/moduleAdd.jsp',
+			width : 450,
+			height : 350,
+			closed : false,
+			cache : false,
+			modal : true,
+			onLoad : function() {
+				top.$("#cc").combotree({
+					url : 'module/getCombotree',
+					lines : true,
+					required : true
+				});
+			},
+			buttons : [ {
+				text : '确定',
+				iconCls : 'icon-add',
+				handler : function() {
+					fCallback();
+				}
+			}, {
+				text : '关闭',
+				handler : function() {
+					top.$('#dd').dialog('close');
+				}
+			} ]
+		});
+	}
+	function fCallback() {
+		if (top.$("#uform").form('enableValidation').form('validate')) {
+			var data = top.$("#uform").serialize();
+			$.ajax({
+				cache : false,
+				type : "POST",
+				url : '../module/addModule',
+				data :data,
+				async : false,
+				success : function(data) {
+					if (data) {
+						top.$('#dd').dialog('close');
+						grid.treegrid('reload'); // 重新载入所有行
+					}
+				}
+			});
 
+		}
+	}
+	function deleteRow(id){
+		$.ajax({
+			cache : false,
+			type : "POST",
+			url : '../module/deleteModule/'+id,
+			async : false,
+			success : function(data) {
+				if (data) {
+					grid.treegrid('reload'); // 重新载入所有行
+				}
+			}
+		});
+	}
+	
 </script>
 </head>
 <body>
 	<table id="tt" data-options="fit:true,border:false"></table>
+
 </body>
 </html>
