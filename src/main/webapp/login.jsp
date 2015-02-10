@@ -70,8 +70,7 @@
 						<li><a onclick="SetHome(window.location)"
 							href="javascript:void(0)">设为首页</a></li>
 						<li><a onclick="AddFavorite(window.location,document.title)"
-							href="javascript:void(0)">加入收藏</a></li> |
-
+							href="javascript:void(0)">加入收藏</a></li>|
 						<li><a href="#">反馈</a></li>
 						<li><a href="#">帮助</a></li>
 					</ul>
@@ -91,11 +90,11 @@
 					<label>密码：</label> <input type="password" id="password" size="20"
 						class="login_input" />
 				</p>
-<!-- 				<p> -->
-<!-- 					<label>验证码：</label> <input id="vcode" class="vcode" type="text" -->
-<!-- 						size="5" /> <span> <img src="images/AuthImageServlet" -->
-<!-- 						alt="" width="75" height="24" onclick="change(this)" /></span> -->
-<!-- 				</p> -->
+				<!-- 				<p> -->
+				<!-- 					<label>验证码：</label> <input id="vcode" class="vcode" type="text" -->
+				<!-- 						size="5" /> <span> <img src="images/AuthImageServlet" -->
+				<!-- 						alt="" width="75" height="24" onclick="change(this)" /></span> -->
+				<!-- 				</p> -->
 				<div class="login_bar">
 					<input id="loginBtn" class="sub" type="button" value=""
 						onclick="login()" />

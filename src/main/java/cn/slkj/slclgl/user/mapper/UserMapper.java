@@ -1,6 +1,7 @@
 package cn.slkj.slclgl.user.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.slkj.slclgl.user.bean.User;
 
@@ -8,5 +9,7 @@ import cn.slkj.slclgl.user.bean.User;
 public interface UserMapper {
 	User login(String name, String password);
 
-	List<User> getAllUsers();
+	List<User> getAllUsers(Map<String, Object> map);
+
+	int getAllUsersCount(Map<String, Object> map);
 }

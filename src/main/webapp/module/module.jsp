@@ -117,10 +117,17 @@
 	function fCallback() {
 		if (top.$("#uform").form('enableValidation').form('validate')) {
 			var data = top.$("#uform").serialize();
+			var url = "";
+
+			if(top.$("#id").val() == null){
+				url ='../module/addModule';
+			}else{
+				url ='../module/editModule';
+			}
 			$.ajax({
 				cache : false,
 				type : "POST",
-				url : '../module/addModule',
+				url : url,
 				data : data,
 				async : false,
 				success : function(data) {
@@ -157,11 +164,7 @@
 			cache : false,
 			modal : true,
 			onLoad : function() {
-				top.$("#cc").combotree({
-					url : 'module/getCombotree',
-					lines : true,
-					required : true
-				});
+				
 				$.ajax({
 					type : "POST",
 					url : '../module/queryOne/'+id,
@@ -172,6 +175,11 @@
 							top.$("#uform").form('load',data);
 						}
 					}
+				});
+				top.$("#cc").combotree({
+					url : 'module/getCombotree',
+					lines : true,
+					required : true
 				});
 				
 			},

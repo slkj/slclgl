@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.slkj.slclgl.user.mapper.UserMapper">
 	<select id="login" resultType="User" parameterType="hashmap">
-		select * from
-		dt_user
-		where
-		name=#{name}
-		and pwd=#{password}
+		SELECT * FROM TB_USER
+		WHERE NAME=#{name} AND PWD=#{password}
 	</select>
 	<select id="getAllUsers" resultType="User" parameterType="hashmap">
-		select *
-		from dt_user
+		SELECT * FROM TB_USER limit  #{startPage},#{endPage}
+	</select>
+	
+	<select id="getAllUsersCount" resultType="int" parameterType="hashmap">
+		SELECT COUNT(1) FROM TB_USER
 	</select>
 </mapper>

@@ -5,14 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import cn.slkj.easyui.util.Tree;
 import cn.slkj.slclgl.module.bean.Module;
 import cn.slkj.slclgl.module.mapper.ModuleMapper;
 import cn.slkj.slclgl.module.service.ModuleService;
 
-@Service
+@Repository
 public class ModuleServiceImpl implements ModuleService {
 	@Autowired
 	private ModuleMapper mapper;

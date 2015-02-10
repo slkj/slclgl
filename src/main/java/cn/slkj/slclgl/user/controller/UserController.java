@@ -1,8 +1,11 @@
 package cn.slkj.slclgl.user.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
+
+import cn.slkj.easyui.util.EPager;
 import cn.slkj.slclgl.user.bean.User;
 import cn.slkj.slclgl.user.service.impl.UserServiceImpl;
 
@@ -38,7 +44,14 @@ public class UserController {
 
 	@RequestMapping("/list")
 	@ResponseBody
-	public List<User> getAllUsers(Model model) {
-		return userServiceImpl.getAllUsers();
+	public EPager<User> getAllUsers(HttpServletRequest request) throws Exception {
+		int page = Integer.parseInt(request.getParameter("page"));
+		int rows = Integer.parseInt(request.getParameter("rows"));
+		Map<String, Object> pageMap = new HashMap<String, Object>();
+		pageMap.put("startPage", (page - 1) * rows);
+		pageMap.put("endPage", rows);
+		List<User> list = userServiceImpl.getAllUsers(pageMap);
+		int total = userServiceImpl.getAllUsersCount(pageMap);
+		return new EPager<User>(total, list);
 	}
 }

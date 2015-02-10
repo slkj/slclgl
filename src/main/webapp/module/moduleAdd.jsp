@@ -7,7 +7,9 @@
 <title>添加模块</title>
 </head>
 <body>
+
 	<form id="uform">
+		<input id="id" name="id" type="hidden" />
 		<table class="grid">
 			<tr>
 				<th style="width: 80px">资源名称：</th>

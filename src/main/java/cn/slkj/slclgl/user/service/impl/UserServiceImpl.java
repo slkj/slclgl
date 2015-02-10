@@ -1,15 +1,16 @@
 package cn.slkj.slclgl.user.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import cn.slkj.slclgl.user.bean.User;
 import cn.slkj.slclgl.user.mapper.UserMapper;
 import cn.slkj.slclgl.user.service.UserService;
 
-@Service
+@Repository
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserMapper usermapper;
@@ -20,8 +21,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> getAllUsers() {
-		return usermapper.getAllUsers();
+	public List<User> getAllUsers(Map<String, Object> map) {
+		return usermapper.getAllUsers(map);
+	}
+
+	@Override
+	public int getAllUsersCount(Map<String, Object> map) {
+		return usermapper.getAllUsersCount(map);
 	}
 
 }

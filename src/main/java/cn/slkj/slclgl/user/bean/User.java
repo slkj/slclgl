@@ -1,9 +1,6 @@
 package cn.slkj.slclgl.user.bean;
 
 import java.io.Serializable;
-import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 public class User implements Serializable {
 	/**
@@ -11,84 +8,82 @@ public class User implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	private String name;
+	private String username;
 	private String password;
 	private String age;
 	private String phone;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date time;
-	
-
-	public User() {
-		super();
-	}
-
-	public User(String name, String password) {
-		super();
-		this.name = name;
-		this.password = password;
-	}
-
-	public User(Integer id, String name, String password, Date time) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.password = password;
-		this.time = time;
-	}
-
+	private String email;
+	private String status;
+	private String realname;
+	private Integer org_id;
+	private String create_time;
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public Date getTime() {
-		return time;
-	}
-
-	public void setTime(Date time) {
-		this.time = time;
-	}
-
 	public String getAge() {
 		return age;
 	}
-
 	public void setAge(String age) {
 		this.age = age;
 	}
-
 	public String getPhone() {
 		return phone;
 	}
-
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getRealname() {
+		return realname;
+	}
+	public void setRealname(String realname) {
+		this.realname = realname;
+	}
+	public Integer getOrg_id() {
+		return org_id;
+	}
+	public void setOrg_id(Integer org_id) {
+		this.org_id = org_id;
+	}
+	public String getCreate_time() {
+		return create_time;
+	}
+	public void setCreate_time(String create_time) {
+		this.create_time = create_time;
+	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", password=" + password + ", age=" + age
-				+ ", phone=" + phone + ", time=" + time + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", age="
+				+ age + ", phone=" + phone + ", email=" + email + ", status=" + status
+				+ ", realname=" + realname + ", org_id=" + org_id + ", create_time=" + create_time
+				+ "]";
 	}
+
 
 }
