@@ -16,4 +16,6 @@ public interface ModuleService {
 	int update(Module module);
 
 	int delete(String id);
+
+	Module queryOne(String id);
 }

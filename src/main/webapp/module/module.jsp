@@ -19,55 +19,69 @@
 			width : $(window).width() - 4,
 			height : $(window).height() - 40
 		};
-		grid = $('#tt').treegrid({
-			url : '../module/list',
-			loadMsg : '数据加载中....',
-			title : '系统资源管理列表',
-			width : winSize.width,
-			height : winSize.height,
-			nowrap : true, //false:折行
-			rownumbers : true, //行号
-			striped : true, //隔行变色
-			singleSelect : true, //单选
-			checkOnSelect : true,
-			idField : 'id',
-			treeField : 'name',
-			lines : true,
-			animate : true,
-			columns : [ [ {
-				field : 'id',
-				title : '编号'
-			}, {
-				field : 'name',
-				title : '资源名称',
-				width : 180
-			}, {
-				field : 'url',
-				title : 'url'
-			}, {
-				field : 'icon',
-				title : '图标',
-				width : 80
-			}, {
-				field : 'description',
-				title : '说明'
-			}, {
-				field : 'opt',
-				title : '操作',
-				width : 100,
-				align : 'center',
-				formatter : function(value, rec) {
-					return '<span style="color:red">编辑    <a onclick="deleteRow('+rec.id+')">删除</a></span>';
-				}
-			} ] ],
-			toolbar : [ {
-				text : '新增',
-				iconCls : 'icon-add',
-				handler : function() {
-					add();
-				}
-			} ]
-		});
+		grid = $('#tt')
+				.treegrid(
+						{
+							url : '../module/list',
+							loadMsg : '数据加载中....',
+							title : '系统资源管理列表',
+							width : winSize.width,
+							height : winSize.height,
+							nowrap : true, //false:折行
+							rownumbers : true, //行号
+							striped : true, //隔行变色
+							singleSelect : true, //单选
+							checkOnSelect : true,
+							idField : 'id',
+							treeField : 'name',
+							lines : true,
+							animate : true,
+							columns : [ [
+									{
+										field : 'id',
+										title : '编号'
+									},
+									{
+										field : 'name',
+										title : '资源名称',
+										width : 180
+									},
+									{
+										field : 'url',
+										title : 'url'
+									},
+									{
+										field : 'icon',
+										title : '图标',
+										width : 80
+									},
+									{
+										field : 'description',
+										title : '说明'
+									},
+									{
+										field : 'opt',
+										title : '操作',
+										width : 100,
+										align : 'center',
+										formatter : function(value, row) {
+											var s = "";
+											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editRow('"
+													+ row.id + "');\">修改</span></a>";
+											s += "|";
+											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:deleteRow('"
+													+ row.id + "');\">删除</span>&nbsp;&nbsp;</a>";
+											return s;
+										}
+									} ] ],
+							toolbar : [ {
+								text : '新增',
+								iconCls : 'icon-add',
+								handler : function() {
+									add();
+								}
+							} ]
+						});
 	});
 	function add() {
 		top.$('#dd').dialog({
@@ -107,7 +121,7 @@
 				cache : false,
 				type : "POST",
 				url : '../module/addModule',
-				data :data,
+				data : data,
 				async : false,
 				success : function(data) {
 					if (data) {
@@ -119,11 +133,11 @@
 
 		}
 	}
-	function deleteRow(id){
+	function deleteRow(id) {
 		$.ajax({
 			cache : false,
 			type : "POST",
-			url : '../module/deleteModule/'+id,
+			url : '../module/deleteModule/' + id,
 			async : false,
 			success : function(data) {
 				if (data) {
@@ -132,7 +146,49 @@
 			}
 		});
 	}
-	
+	function editRow(id) {
+		top.$('#dd').dialog({
+			title : '修改模块（菜单）',
+			iconCls : 'icon-add',
+			href : 'module/moduleAdd.jsp',
+			width : 450,
+			height : 350,
+			closed : false,
+			cache : false,
+			modal : true,
+			onLoad : function() {
+				top.$("#cc").combotree({
+					url : 'module/getCombotree',
+					lines : true,
+					required : true
+				});
+				$.ajax({
+					type : "POST",
+					url : '../module/queryOne/'+id,
+					async : false,
+					cache : false,
+					success : function(data) {
+						if (data) {
+							top.$("#uform").form('load',data);
+						}
+					}
+				});
+				
+			},
+			buttons : [ {
+				text : '确定',
+				iconCls : 'icon-add',
+				handler : function() {
+					fCallback();
+				}
+			}, {
+				text : '关闭',
+				handler : function() {
+					top.$('#dd').dialog('close');
+				}
+			} ]
+		});
+	}
 </script>
 </head>
 <body>

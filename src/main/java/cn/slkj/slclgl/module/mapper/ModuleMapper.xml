@@ -8,6 +8,12 @@
 		select *
 		from tb_module
 	</select>
+	
+	<select id="queryOne" resultType="Module" parameterType="string">
+		select * from tb_module where id =#{id}
+	</select>
+	
+	
 	<insert id="insert" parameterType="Module">
 		insert into tb_module
 		(id,name,priority,url,parent_id,icon,description)

@@ -17,7 +17,11 @@ import cn.slkj.slclgl.module.service.impl.ModuleServiceImpl;
 public class ModuleController {
 	@Autowired
 	private ModuleServiceImpl moduleServiceImpl;
-
+	@RequestMapping(value = "/queryOne/{id}")
+	@ResponseBody
+	public Module queryOne(@PathVariable String id) {
+		return moduleServiceImpl.queryOne(id);
+	}
 	@RequestMapping(value = "/list")
 	@ResponseBody
 	public List<Module> list() {

@@ -97,4 +97,9 @@ public class ModuleServiceImpl implements ModuleService {
 	public int delete(String id) {
 		return mapper.delete(id);
 	}
+	@Override
+	public Module queryOne(String id) {
+		// TODO Auto-generated method stub
+		return mapper.queryOne(id);
+	}
 }
