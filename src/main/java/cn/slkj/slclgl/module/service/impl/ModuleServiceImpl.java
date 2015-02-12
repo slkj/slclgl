@@ -30,7 +30,7 @@ public class ModuleServiceImpl implements ModuleService {
 		List<Module> parent = new ArrayList<Module>();
 		// get parentId = null;
 		for (Module e : list) {
-			if (e.getParent_id() == 0) {
+			if (e.getParent_id().equals("0")) {
 				e.setChildren(new ArrayList<Module>(0));
 				parent.add(e);
 			}
@@ -49,7 +49,7 @@ public class ModuleServiceImpl implements ModuleService {
 		for (Module c1 : parent) {
 			for (Module c2 : children) {
 				c2.setChildren(new ArrayList<Module>(0));
-				if (c1.getId() == c2.getParent_id()) {
+				if (c1.getId().equals(c2.getParent_id())) {
 					c1.getChildren().add(c2);
 					tmp.add(c2);
 				}
@@ -63,10 +63,10 @@ public class ModuleServiceImpl implements ModuleService {
 	public List<Tree> getCombotree(String parentId) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		List<Module> list = mapper.getAll(map);
-		return toTree(list, 0);
+		return toTree(list, "0");
 	}
 
-	private List<Tree> toTree(List<Module> list, int code) {
+	private List<Tree> toTree(List<Module> list, String code) {
 		List<Tree> trees = new ArrayList<Tree>();
 		for (Module m : list) {
 			Tree t = new Tree();
@@ -74,7 +74,7 @@ public class ModuleServiceImpl implements ModuleService {
 			t.setText(m.getName());
 			// t.setState();
 			// t.setChecked();
-			if (code == m.getParent_id()) {
+			if (code.equals(m.getParent_id())) {
 				t.setChildren(toTree(list, m.getId()));
 				trees.add(t);
 			}
@@ -85,21 +85,38 @@ public class ModuleServiceImpl implements ModuleService {
 
 	@Override
 	public int insert(Module module) {
-		return mapper.insert(module);
+		try {
+			return mapper.insert(module);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+
 	}
 
 	@Override
 	public int update(Module module) {
-		return mapper.update(module);
+		try {
+			return mapper.update(module);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 	@Override
 	public int delete(String id) {
-		return mapper.delete(id);
+		try {
+			return mapper.delete(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+
 	}
+
 	@Override
 	public Module queryOne(String id) {
-		// TODO Auto-generated method stub
 		return mapper.queryOne(id);
 	}
 }

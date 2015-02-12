@@ -9,18 +9,18 @@ public class Module implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private String id;
 	private String name;
 	private String url;
-	private int parent_id;
+	private String parent_id;
 	private int priority;
 	private String icon;
 	private String description;
 	private List<Module> children;
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -35,11 +35,17 @@ public class Module implements Serializable{
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public int getParent_id() {
+	public String getParent_id() {
 		return parent_id;
 	}
-	public void setParent_id(int parent_id) {
+	public void setParent_id(String parent_id) {
 		this.parent_id = parent_id;
+	}
+	public int getPriority() {
+		return priority;
+	}
+	public void setPriority(int priority) {
+		this.priority = priority;
 	}
 	public String getIcon() {
 		return icon;
@@ -58,12 +64,6 @@ public class Module implements Serializable{
 	}
 	public void setChildren(List<Module> children) {
 		this.children = children;
-	}
-	public int getPriority() {
-		return priority;
-	}
-	public void setPriority(int priority) {
-		this.priority = priority;
 	}
 	@Override
 	public String toString() {

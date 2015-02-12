@@ -18,11 +18,11 @@
 	function openPwd() {
 		$('#w').window({
 			title : '修改密码',
-			width : 300,
+			width : 350,
+			height : 200,
 			modal : true,
 			shadow : true,
 			closed : true,
-			height : 160,
 			resizable : false
 		});
 	}
@@ -173,6 +173,6 @@
 		<div class="menu-sep"></div>
 		<div id="exit">退出</div>
 	</div>
-	<div id="dd"/>
+	<div id="dd" />
 </body>
 </html>

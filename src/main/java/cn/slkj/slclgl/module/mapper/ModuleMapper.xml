@@ -16,8 +16,8 @@
 	
 	<insert id="insert" parameterType="Module">
 		insert into tb_module
-		(id,name,priority,url,parent_id,icon,description)
-		values(#{id},#{name},#{priority},#{url},#{parent_id},#{icon},#{description})
+		(name,priority,url,parent_id,icon,description)
+		values(#{name},#{priority},#{url},#{parent_id},#{icon},#{description})
 	</insert>
 	<update id="update" parameterType="Module">
 		update tb_module set
