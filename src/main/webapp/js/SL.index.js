@@ -58,7 +58,7 @@ function InitLeftMenu() {
 				{
 					//li.find('div').addClass('icon-arrow');
 					menulist += '<ul class="third_ul">';
-					$.each(o.child,function(k,p){
+					$.each(o.children,function(k,p){
 						menulist += '<li><div><a ref="'+p.id+'" href="#" rel="' + p.url + '" ><span class="icon '+p.icon+'" >&nbsp;</span><span class="nav">' + p.name + '</span></a></div> </li>'
 					});
 					menulist += '</ul>';
@@ -86,7 +86,7 @@ function InitLeftMenu() {
 		var menuid = $(this).attr("ref");
 		var icon = $(this).find('.icon').attr('class');
 		var third = find(menuid);
-		if (third && third.child && third.child.length > 0) {
+		if (third && third.children && third.children.length > 0) {
 			$('.third_ul').slideUp();
 			var ul = $(this).parent().next();
 			if (ul.is(":hidden"))
