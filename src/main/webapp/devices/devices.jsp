@@ -9,22 +9,322 @@
 	href="../js/easyui/themes/default/easyui.css" />
 <link rel="stylesheet" type="text/css"
 	href="../js/easyui/themes/icon.css" />
-<!-- <link rel="stylesheet" type="text/css" href="../css/default.css" /> -->
+<link rel="stylesheet" type="text/css" href="../css/default.css" />
+<link rel="stylesheet" type="text/css" href="../css/syscss.css" />
 <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="../js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript"
+	src="http://www.jeasyui.com/easyui/datagrid-detailview.js"></script>
 <script type="text/javascript" src="../js/easyui/easyui-lang-zh_CN.js"></script>
+
+<script type="text/javascript">
+	var grid;
+	$(function() {
+		//初始化页面
+		initDataGrid();
+		//加载数据
+		loadData();
+	});
+
+	function loadData() {
+		// 		var obj = {};
+		// 		obj.page = pageNumber;
+		// 		obj.rows = pageSize;
+		// 		obj.type = 2;
+		// 		grid.datagrid({
+		// 			method : 'post',
+		// 			url : '../sim/list?type=1'
+		// 		});
+	}
+	function initDataGrid() {
+		grid = $('#dg')
+				.datagrid(
+						{
+							method : 'post',
+							url : '../sim/list?type=1',
+							title : 'GPS设备列表',
+							fit : true,
+							nowrap : true, //false:折行
+							rownumbers : true, //行号
+							striped : true, //隔行变色
+							pagination : true,
+							fitColumns : true,
+							pageSize : 15,
+							pageList : [ 1, 10, 15, 20, 30, 50 ],
+							loadMsg : '数据加载中,请稍后……',
+							columns : [ [
+									{
+										field : 'ck',
+										checkbox : true
+									},
+									{
+										field : 'opt',
+										title : '操作',
+										align : 'center',
+										formatter : function(value, row) {
+											var s = "";
+											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editRow('"
+													+ row.id + "');\">修改</span></a>";
+											s += "&nbsp;|&nbsp;";
+											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:deleteRow('"
+													+ row.id + "');\">删除</span></a>";
+											s += "&nbsp;|&nbsp;";
+											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:deleteRow('"
+													+ row.id + "');\">出库</span></a>";
+											return s;
+										}
+									}, {
+										field : 'listnum',
+										title : '设备编号'
+									}, {
+										field : 'gys',
+										title : '供应商'
+									},
+
+									{
+										field : 'cardType',
+										title : '设备厂商'
+									}, {
+										field : 'telnum',
+										title : '厂牌型号'
+									}, {
+										field : 'state',
+										title : '使用状态',
+										formatter : function(value, row) {
+											var s = "";
+											if (value == "1") {
+												s = "<span style=\"color:green;\">已出库</span>";
+											} else {
+												s = "<span style=\"color:red;\">未出库</span>";
+											}
+											return s;
+										}
+									}, {
+										field : 'fhtime',
+										title : '入库时间'
+									}, {
+										field : 'fhtime',
+										title : '返还时间'
+									}, {
+										field : 'beizhu',
+										title : '领用人'
+									}, {
+										field : 'fhtime',
+										title : '领用时间'
+									}, {
+										field : 'state',
+										title : '测试状态',
+										formatter : function(value, row) {
+											var s = "";
+											if (value == "1") {
+												s = "<span style=\"color:green;\">已测试</span>";
+											} else {
+												s = "<span style=\"color:red;\">未测试</span>";
+											}
+											return s;
+										}
+									}, {
+										field : 'fhtime',
+										title : '卡号'
+									}, {
+										field : 'fhtime',
+										title : '测试时间'
+									}, {
+										field : 'fhtime',
+										title : '测试结果',
+										formatter : function(value, row) {
+											var s = "";
+											if (value == "1") {
+												s = "<span style=\"color:green;\">定位</span>";
+											} else {
+												s = "<span style=\"color:red;\">不定位</span>";
+											}
+											return s;
+										}
+									} ] ],
+							// 							columns : [ [ {
+							// 								field : 'intime',
+							// 								title : 'Gps主机'
+							// 							}, {
+							// 								field : 'kktime',
+							// 								title : 'Gps天线'
+							// 							}, {
+							// 								field : 'outtime',
+							// 								title : 'Gsm天线	'
+							// 							}, {
+							// 								field : 'lyr',
+							// 								title : '电源线'
+							// 							}, {
+							// 								field : 'fhtime',
+							// 								title : '电源线'
+							// 							}, {
+							// 								field : 'lrr',
+							// 								title : '防水袋'
+							// 							}, {
+							// 								field : 'beizhu',
+							// 								title : '计算器'
+							// 							}, {
+							// 								field : 'beizhu',
+							// 								title : '摄像仪'
+							// 							}, {
+							// 								field : 'beizhu',
+							// 								title : '扬声器'
+							// 							}, {
+							// 								field : 'beizhu',
+							// 								title : '麦克风'
+							// 							},
+
+							// 							{
+							// 								field : 'beizhu',
+							// 								title : '备注'
+							// 							} ] ],
+							view : detailview,
+							detailFormatter : function(index, row) {
+								var s = '<div style="padding:2px;hight:100px;"><table class="grid">'
+										+ '<tr><th style="width: 80px">Gps主机：</th>'
+										+ '<td>'+row.intime+'</td>'
+										+ '<th style="width: 80px">Gps天线：</th>'
+										+ '<td>'+row.intime+'</td>'
+										+ '<th style="width: 80px">Gsm天线：</th>'
+										+ '<td>'+row.intime+'</td>'
+										+ '<th style="width: 80px">电源线：</th>'
+										+ '<td>'+row.intime+'</td>'
+										+ '<th style="width: 80px">防水袋：</th>'
+										+ '<td>'+row.intime+'</td></tr>'
+										+ '<tr><th style="width: 80px">计算器：</th>'
+										+ '<td>'+row.intime+'</td>'
+										+ '<th style="width: 80px">摄像仪：</th>'
+										+ '<td>'+row.intime+'</td>'
+										+ '<th style="width: 80px">扬声器：</th>'
+										+ '<td>'+row.intime+'</td>'
+										+ '<th style="width: 80px">麦克风：</th>'
+										+ '<td>'+row.intime+'</td>'
+										+ '<th style="width: 80px"></th>'
+										+ '<td></td></tr>'
+										+'</table></div>';
+// 								return '<div style="padding:2px;hight:80px;"><table id="ddv-' + index + '"></table></div>';
+								return s;
+							},
+// 							onExpandRow : function(index, row) {
+// 								$('#ddv-' + index).empty();
+// 								var s = '<tr>'
+// 										+ '<td rowspan=2 style="border:0"><img src="images/' + row.id + '.png" style="height:50px;"></td>'
+// 										+ '<td style="border:0">' + '<p>Attribute: ' + row.id
+// 										+ '</p>' + '<p>Status: ' + row.id + '</p>' + '</td>'
+// 										+ '</tr>';
+// 								$('#ddv-' + index).append(s);
+// 							},
+							toolbar : '#tb',
+							getSelectedRow : function() {
+								return $('#dg').datagrid('getSelected');
+							}
+						});
+		// 设置分页控件
+		var p = grid.datagrid('getPager');
+		$(p).pagination({
+			beforePageText : '第',// 页数文本框前显示的汉字
+			afterPageText : '页    共 {pages} 页',
+			displayMsg : '当前显示 {from} - {to} 条记录   共 {total} 条记录'
+		});
+	}
+
+	function addNew() {
+		top.$('#dd').dialog({
+			title : '联通SIM卡出入库信息',
+			iconCls : 'icon-add',
+			href : 'sim/simAdd.jsp',
+			width : 550,
+			height : 400,
+			closed : false,
+			cache : false,
+			modal : true,
+			onLoad : function() {
+				top.$("#type").val("1");
+			},
+			buttons : [ {
+				text : '确定',
+				iconCls : 'icon-add',
+				handler : function() {
+					fCallback();
+				}
+			}, {
+				text : '关闭',
+				handler : function() {
+					top.$('#dd').dialog('close');
+				}
+			} ]
+		});
+	}
+	function fCallback() {
+		if (top.$("#uform").form('enableValidation').form('validate')) {
+			var data = top.$("#uform").serialize();
+			var url = "";
+			$.ajax({
+				cache : false,
+				type : "POST",
+				url : "../sim/addSim",
+				data : data,
+				async : false,
+				success : function(data) {
+					if (data) {
+						top.$('#dd').dialog('close');
+						grid.datagrid('reload'); // 重新载入所有行
+					}
+				}
+			});
+
+		}
+	}
+</script>
 </head>
 <body>
-	<div id="DIV_toolbar'" style=" margin :0px; padding :5px;"> |
-	单据编号：XSD2013060001 &nbsp; 客户姓名：
-	<select id="cc" class="easyui-combobox" name="state"
-		style="width: 100px;" data-options="required:true">
-		<option value="张三">张三</option>
-		<option value="李四">李四</option>
-		<option value="王五">王五</option>
-	</select> &nbsp; 日期：
-	<input id="Text4" type="text" class="Wdate"
-		onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" />
+	<div id="tb" style="padding: 5px; height: auto">
+		<div>
+			<table cellspacing="0" cellpadding="0">
+				<tr>
+					<td>&nbsp;&nbsp;入库时间从: <input id="StartTime" name="StartTime"
+						class="easyui-datebox" style="width: 100px" editable="false">
+						到: <input id="EndTime" name="EndTime" class="easyui-datebox"
+						style="width: 100px"> 出库时间从: <input id="StartTime"
+						name="StartTime" class="easyui-datebox" style="width: 100px"
+						editable="false"> 到: <input id="EndTime" name="EndTime"
+						class="easyui-datebox" style="width: 100px">
+					</td>
+				</tr>
+				<tr>
+					<td>&nbsp;&nbsp;使用状态: <select class="easyui-combobox"
+						id="Category" name="Category" panelheight="auto"
+						style="width: 100px">
+							<option value="Yes">已出库</option>
+							<option value="No">出库</option>
+					</select> &nbsp;&nbsp;设备厂商 : <input class="easyui-textbox"
+						style="width: 150px" /> &nbsp;&nbsp;领用人：<input
+						class="easyui-textbox" style="width: 150px" /> <a id="btn"
+						href="#" class="easyui-linkbutton"
+						data-options="iconCls:'icon-search',plain:'true'">查询</a></td>
+				</tr>
+			</table>
+		</div>
+		<table cellspacing="0" cellpadding="0">
+			<tr>
+				<td><a href="#" class="easyui-linkbutton"
+					data-options="iconCls:'icon-add',plain:true"
+					onClick="javascript:addNew();">新增</a></td>
+				<td><div class="datagrid-btn-separator"></div></td>
+				<td><a href="#" class="easyui-linkbutton"
+					data-options="iconCls:'pic pic_48',plain:true"
+					onClick="javascript:addNew();">返回</a></td>
+				<td><div class="datagrid-btn-separator"></div></td>
+				<td align="right"><a href="#" class="easyui-linkbutton"
+					data-options="iconCls:'pic pic_154',plain:true"
+					onClick="javascript:addNew();">导入</a></td>
+				<td><div class="datagrid-btn-separator"></div></td>
+				<td align="right"><a href="#" class="easyui-linkbutton"
+					data-options="iconCls:'pic pic_157',plain:true"
+					onClick="javascript:addNew();">导出</a></td>
+			</tr>
+		</table>
 	</div>
+	<table id="dg"></table>
 </body>
 </html>
