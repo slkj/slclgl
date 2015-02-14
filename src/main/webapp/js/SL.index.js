@@ -9,22 +9,22 @@ $(function() {
 	tabClose();
 	tabCloseEven();
 	/* 选择TAB时刷新内容 */
-	$('#tabs').tabs({
-		onSelect : function(title) {
-			var currTab = $('#tabs').tabs('getTab', title);
-			var iframe = $(currTab.panel('options').content);
-
-			var src = iframe.attr('src');
-			if (src)
-				$('#tabs').tabs('update', {
-					tab : currTab,
-					options : {
-						content : createFrame(src)
-					}
-				});
-
-		}
-	});
+//	$('#tabs').tabs({
+//		onSelect : function(title) {
+//			var currTab = $('#tabs').tabs('getTab', title);
+//			var iframe = $(currTab.panel('options').content);
+//
+//			var src = iframe.attr('src');
+//			if (src)
+//				$('#tabs').tabs('update', {
+//					tab : currTab,
+//					options : {
+//						content : createFrame(src)
+//					}
+//				});
+//
+//		}
+//	});
 
 })
 function getMeuns() {
@@ -52,14 +52,14 @@ function InitLeftMenu() {
 		var menulist = '';
 		menulist += '<ul class="navlist">';
 		 $.each(n.children, function(j, o) {
-				menulist += '<li><div><a ref="'+o.id+'" href="#" rel="' + o.url + '" ><span class="icon '+o.icon+'" >&nbsp;</span><span class="nav">' + o.name + '</span></a></div> ';
+				menulist += '<li><div><a ref="'+o.id+'" href="#" rel="' + o.url + '" ><span class="pic '+o.icon+'" >&nbsp;</span><span class="nav">' + o.name + '</span></a></div> ';
 
 				if(o.children && o.children.length>0)
 				{
 					//li.find('div').addClass('icon-arrow');
 					menulist += '<ul class="third_ul">';
 					$.each(o.children,function(k,p){
-						menulist += '<li><div><a ref="'+p.id+'" href="#" rel="' + p.url + '" ><span class="icon '+p.icon+'" >&nbsp;</span><span class="nav">' + p.name + '</span></a></div> </li>'
+						menulist += '<li><div><a ref="'+p.id+'" href="#" rel="' + p.url + '" ><span class="pic '+p.icon+'" >&nbsp;</span><span class="nav">' + p.name + '</span></a></div> </li>'
 					});
 					menulist += '</ul>';
 				}
@@ -71,7 +71,7 @@ function InitLeftMenu() {
 			title : n.name,
 			content : menulist,
 			border : false,
-			iconCls : 'icon ' + n.icon
+			iconCls : 'pic ' + n.icon
 		});
 
 		if (i == 0) {
@@ -111,7 +111,7 @@ function InitLeftMenu() {
 }
 // 获取左侧导航的图标
 function getIcon(menuid) {
-	var icon = 'icon ';
+	var icon = 'pic ';
 	$.each(_menus, function(i, n) {
 		$.each(n.children, function(j, o) {
 			if (o.id == menuid) {

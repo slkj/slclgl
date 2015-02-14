@@ -4,13 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>EasyUI 后台DEMO</title>
+<title>神龙OA管理系统</title>
 <link rel="stylesheet" type="text/css"
 	href="js/easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
 <link rel="stylesheet" type="text/css" href="css/default.css" />
+<link rel="stylesheet" type="text/css" href="css/syscss.css" />
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/easyui/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src='js/SL.index.js'></script>
 
 <script type="text/javascript">
@@ -107,10 +109,10 @@
 	<div region="north" split="true" border="false"
 		style="overflow: hidden; height: 30px; background: url(images/layout-browser-hd-bg.gif) #7f99be repeat-x center 50%; line-height: 20px; color: #fff; font-family: Verdana, 微软雅黑, 黑体">
 		<span style="float: right; padding-right: 20px;" class="head">欢迎
-			疯狂秀才 <a href="#" id="editpass">修改密码</a> <a href="#" id="loginOut">安全退出</a>
+		ADMIN <a href="#" id="editpass">修改密码</a> <a href="#" id="loginOut">安全退出</a>
 		</span> <span style="padding-left: 10px; font-size: 16px;"><img
 			src="images/blocks.gif" width="20" height="20" align="absmiddle" />
-			jQuery.EasyUI- 1.2.6 应用实例</span>
+			神龙OA管理系统</span>
 	</div>
 	<div region="south" split="true"
 		style="height: 30px; background: #D2E0F2;">

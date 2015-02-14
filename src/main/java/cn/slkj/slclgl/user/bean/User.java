@@ -15,7 +15,6 @@ public class User implements Serializable {
 	private String email;
 	private String status;
 	private String realname;
-	private Integer org_id;
 	private String create_time;
 	public Integer getId() {
 		return id;
@@ -65,12 +64,6 @@ public class User implements Serializable {
 	public void setRealname(String realname) {
 		this.realname = realname;
 	}
-	public Integer getOrg_id() {
-		return org_id;
-	}
-	public void setOrg_id(Integer org_id) {
-		this.org_id = org_id;
-	}
 	public String getCreate_time() {
 		return create_time;
 	}
@@ -81,9 +74,7 @@ public class User implements Serializable {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", age="
 				+ age + ", phone=" + phone + ", email=" + email + ", status=" + status
-				+ ", realname=" + realname + ", org_id=" + org_id + ", create_time=" + create_time
-				+ "]";
+				+ ", realname=" + realname + ", create_time=" + create_time + "]";
 	}
-
 
 }

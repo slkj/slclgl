@@ -2,30 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.slkj.slclgl.module.mapper.ModuleMapper">
 	<select id="temp">
-		id,name,priority,url,parent_id,icon,description
+		ID,NAME,PRIORITY,URL,PARENT_ID,ICON,DESCRIPTION
 	</select>
 	<select id="getAll" resultType="Module" parameterType="hashmap">
-		select *
-		from tb_module
+		SELECT * FROM TB_MODULE  ORDER BY PRIORITY
 	</select>
 	
 	<select id="queryOne" resultType="Module" parameterType="string">
-		select * from tb_module where id =#{id}
+		SELECT * FROM TB_MODULE WHERE ID =#{id}
 	</select>
 	
 	
 	<insert id="insert" parameterType="Module">
-		insert into tb_module
-		(name,priority,url,parent_id,icon,description)
-		values(#{name},#{priority},#{url},#{parent_id},#{icon},#{description})
+		INSERT INTO TB_MODULE
+		(NAME,PRIORITY,URL,PARENT_ID,ICON,DESCRIPTION)
+		VALUES(#{name},#{priority},#{url},#{parent_id},#{icon},#{description})
 	</insert>
 	<update id="update" parameterType="Module">
-		update tb_module set
-		name=#{name},priority=#{priority},url=#{url},parent_id=#{parent_id},icon=#{icon},description=#{description}
-		where id =#{id}
+		UPDATE TB_MODULE SET
+		NAME=#{name},PRIORITY=#{priority},URL=#{url},PARENT_ID=#{parent_id},ICON=#{icon},DESCRIPTION=#{description}
+		WHERE ID =#{id}
 	</update>
 	<delete id="delete" parameterType="string">
-		delete from tb_module
-		where id = #{id}
+		DELETE FROM TB_MODULE WHERE ID = #{id}
 	</delete>
 </mapper>

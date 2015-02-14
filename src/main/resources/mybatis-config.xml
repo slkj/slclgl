@@ -9,11 +9,15 @@
 	<typeAliases>
 		<typeAlias type="cn.slkj.slclgl.user.bean.User" alias="User" />
 		<typeAlias type="cn.slkj.slclgl.module.bean.Module" alias="Module" />
+		
+		<typeAlias type="cn.slkj.slclgl.sim.bean.Sim" alias="Sim" />
 	</typeAliases>
 	<!-- 设置数据库连接环境 -->
 	<!-- 映射文件 -->
 	<mappers>
 		<mapper resource="cn/slkj/slclgl/user/mapper/UserMapper.xml" />
 		<mapper resource="cn/slkj/slclgl/module/mapper/ModuleMapper.xml" />
+		
+		<mapper resource="cn/slkj/slclgl/sim/mapper/SimMapper.xml" />
 	</mappers>
 </configuration>

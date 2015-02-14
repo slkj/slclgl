@@ -28,7 +28,7 @@
 							width : winSize.width,
 							height : winSize.height,
 							nowrap : true, //false:折行
-							rownumbers : true, //行号
+// 							rownumbers : true, //行号
 							striped : true, //隔行变色
 							singleSelect : true, //单选
 							checkOnSelect : true,
@@ -37,10 +37,10 @@
 							lines : true,
 							animate : true,
 							columns : [ [
-									{
-										field : 'id',
-										title : '编号'
-									},
+// 									{
+// 										field : 'id',
+// 										title : '编号'
+// 									},
 									{
 										field : 'name',
 										title : '资源名称',
@@ -66,11 +66,14 @@
 										align : 'center',
 										formatter : function(value, row) {
 											var s = "";
-											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editRow('"
-													+ row.id + "');\">修改</span></a>";
+											s += "<a class=\"editcls\" href=\"javascript:void(0)\" onclick=\"editRow('"
+													+ row.id + "');\">编辑</a>";
 											s += "|";
-											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:deleteRow('"
-													+ row.id + "');\">删除</span>&nbsp;&nbsp;</a>";
+											s += "<a href=\"javascript:void(0)\" onclick=\"javaScript:deleteRow('"
+													+ row.id + "');\"> 删除 </a>";
+											if (row.parent_id == "0") {
+												return "";
+											}
 											return s;
 										}
 									} ] ],
@@ -80,7 +83,14 @@
 								handler : function() {
 									add();
 								}
-							} ]
+							} ],
+							onLoadSuccess : function(data) {
+								$('.editcls').linkbutton({
+									text : '编辑',
+									plain : true,
+									iconCls : 'icon-edit'
+								});
+							}
 						});
 	});
 	function add() {
@@ -118,11 +128,10 @@
 		if (top.$("#uform").form('enableValidation').form('validate')) {
 			var data = top.$("#uform").serialize();
 			var url = "";
-
-			if(top.$("#id").val() == null){
-				url ='../module/addModule';
-			}else{
-				url ='../module/editModule';
+			if (top.$("#id").val().length <= 0) {
+				url = '../module/addModule';
+			} else {
+				url = '../module/editModule';
 			}
 			$.ajax({
 				cache : false,
@@ -164,15 +173,15 @@
 			cache : false,
 			modal : true,
 			onLoad : function() {
-				
+
 				$.ajax({
 					type : "POST",
-					url : '../module/queryOne/'+id,
+					url : '../module/queryOne/' + id,
 					async : false,
 					cache : false,
 					success : function(data) {
 						if (data) {
-							top.$("#uform").form('load',data);
+							top.$("#uform").form('load', data);
 						}
 					}
 				});
@@ -181,7 +190,7 @@
 					lines : true,
 					required : true
 				});
-				
+
 			},
 			buttons : [ {
 				text : '确定',
