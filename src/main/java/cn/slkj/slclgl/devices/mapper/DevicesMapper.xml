@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.slkj.slclgl.devices.mapper.DevicesMapper">
+	<select id="getAll" resultType="Devices" parameterType="hashmap">
+		SELECT * FROM TB_DEVICES LIMIT #{startPage},#{endPage}
+	</select>
+
+	<select id="getAllCount" resultType="int" parameterType="hashmap">
+		SELECT COUNT(1) FROM TB_DEVICES
+	</select>
+
+	<insert id="insert" parameterType="Devices">
+		INSERT INTO TB_DEVICES
+		(listnum,firm,model,genre,rktime,state,fhtime,lyr,lytime,test,phone,cstime,tresult)
+		VALUES(#{listnum},#{firm},#{model},#{genre},#{rktime},#{state},#{fhtime},#{lyr},#{lytime},#{test},#{phone},#{cstime},#{tresult})
+	</insert>
+</mapper>

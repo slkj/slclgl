@@ -16,7 +16,7 @@
 <script type="text/javascript"
 	src="http://www.jeasyui.com/easyui/datagrid-detailview.js"></script>
 <script type="text/javascript" src="../js/easyui/easyui-lang-zh_CN.js"></script>
-
+<script type="text/javascript" src="../js/ajaxfileupload.js"></script>
 <script type="text/javascript">
 	var grid;
 	$(function() {
@@ -41,7 +41,7 @@
 				.datagrid(
 						{
 							method : 'post',
-							url : '../sim/list?type=1',
+							url : '../devices/list',
 							title : 'GPS设备列表',
 							fit : true,
 							nowrap : true, //false:折行
@@ -77,16 +77,19 @@
 										field : 'listnum',
 										title : '设备编号'
 									}, {
-										field : 'gys',
-										title : '供应商'
+										field : 'firm',
+										title : '设备厂商'
 									},
 
 									{
-										field : 'cardType',
-										title : '设备厂商'
-									}, {
-										field : 'telnum',
+										field : 'model',
 										title : '厂牌型号'
+									}, {
+										field : 'genre',
+										title : '设备类别'
+									}, {
+										field : 'rktime',
+										title : '入库时间'
 									}, {
 										field : 'state',
 										title : '使用状态',
@@ -101,22 +104,19 @@
 										}
 									}, {
 										field : 'fhtime',
-										title : '入库时间'
-									}, {
-										field : 'fhtime',
 										title : '返还时间'
 									}, {
-										field : 'beizhu',
+										field : 'lyr',
 										title : '领用人'
 									}, {
-										field : 'fhtime',
+										field : 'lytime',
 										title : '领用时间'
 									}, {
-										field : 'state',
-										title : '测试状态',
-										formatter : function(value, row) {
+										field : 'test',
+										title : '测试',
+										formatter : function(value, row, index) {
 											var s = "";
-											if (value == "1") {
+											if (value == 1) {
 												s = "<span style=\"color:green;\">已测试</span>";
 											} else {
 												s = "<span style=\"color:red;\">未测试</span>";
@@ -124,17 +124,17 @@
 											return s;
 										}
 									}, {
-										field : 'fhtime',
+										field : 'phone',
 										title : '卡号'
 									}, {
-										field : 'fhtime',
+										field : 'cstime',
 										title : '测试时间'
 									}, {
-										field : 'fhtime',
+										field : 'tresult',
 										title : '测试结果',
-										formatter : function(value, row) {
+										formatter : function(value, row, index) {
 											var s = "";
-											if (value == "1") {
+											if (value == 1) {
 												s = "<span style=\"color:green;\">定位</span>";
 											} else {
 												s = "<span style=\"color:red;\">不定位</span>";
@@ -181,39 +181,55 @@
 							view : detailview,
 							detailFormatter : function(index, row) {
 								var s = '<div style="padding:2px;hight:100px;"><table class="grid">'
-										+ '<tr><th style="width: 80px">Gps主机：</th>'
-										+ '<td>'+row.intime+'</td>'
+										+ '<tr><th style="width: 80px">Gps主机：</th>' + '<td>'
+										+ row.intime
+										+ '</td>'
 										+ '<th style="width: 80px">Gps天线：</th>'
-										+ '<td>'+row.intime+'</td>'
+										+ '<td>'
+										+ row.intime
+										+ '</td>'
 										+ '<th style="width: 80px">Gsm天线：</th>'
-										+ '<td>'+row.intime+'</td>'
+										+ '<td>'
+										+ row.intime
+										+ '</td>'
 										+ '<th style="width: 80px">电源线：</th>'
-										+ '<td>'+row.intime+'</td>'
+										+ '<td>'
+										+ row.intime
+										+ '</td>'
 										+ '<th style="width: 80px">防水袋：</th>'
-										+ '<td>'+row.intime+'</td></tr>'
+										+ '<td>'
+										+ row.intime
+										+ '</td></tr>'
 										+ '<tr><th style="width: 80px">计算器：</th>'
-										+ '<td>'+row.intime+'</td>'
+										+ '<td>'
+										+ row.intime
+										+ '</td>'
 										+ '<th style="width: 80px">摄像仪：</th>'
-										+ '<td>'+row.intime+'</td>'
+										+ '<td>'
+										+ row.intime
+										+ '</td>'
 										+ '<th style="width: 80px">扬声器：</th>'
-										+ '<td>'+row.intime+'</td>'
+										+ '<td>'
+										+ row.intime
+										+ '</td>'
 										+ '<th style="width: 80px">麦克风：</th>'
-										+ '<td>'+row.intime+'</td>'
+										+ '<td>'
+										+ row.intime
+										+ '</td>'
 										+ '<th style="width: 80px"></th>'
-										+ '<td></td></tr>'
-										+'</table></div>';
-// 								return '<div style="padding:2px;hight:80px;"><table id="ddv-' + index + '"></table></div>';
+										+ '<td></td></tr>' + '</table></div>';
+								// 								return '<div style="padding:2px;hight:80px;"><table id="ddv-' + index + '"></table></div>';
 								return s;
 							},
-// 							onExpandRow : function(index, row) {
-// 								$('#ddv-' + index).empty();
-// 								var s = '<tr>'
-// 										+ '<td rowspan=2 style="border:0"><img src="images/' + row.id + '.png" style="height:50px;"></td>'
-// 										+ '<td style="border:0">' + '<p>Attribute: ' + row.id
-// 										+ '</p>' + '<p>Status: ' + row.id + '</p>' + '</td>'
-// 										+ '</tr>';
-// 								$('#ddv-' + index).append(s);
-// 							},
+							// 							onExpandRow : function(index, row) {
+							// 								$('#ddv-' + index).empty();
+							// 								var s = '<tr>'
+							// 										+ '<td rowspan=2 style="border:0"><img src="images/' + row.id + '.png" style="height:50px;"></td>'
+							// 										+ '<td style="border:0">' + '<p>Attribute: ' + row.id
+							// 										+ '</p>' + '<p>Status: ' + row.id + '</p>' + '</td>'
+							// 										+ '</tr>';
+							// 								$('#ddv-' + index).append(s);
+							// 							},
 							toolbar : '#tb',
 							getSelectedRow : function() {
 								return $('#dg').datagrid('getSelected');
@@ -255,6 +271,27 @@
 			} ]
 		});
 	}
+	// 	function addExcel() {
+	// 		top.$('#dd').dialog({
+	// 			title : '导入设备信息',
+	// 			iconCls : 'icon-add',
+	// 			href : 'devices/uploadExecl.jsp',
+	// 			width : 550,
+	// 			height : 400,
+	// 			closed : false,
+	// 			cache : false,
+	// 			modal : true,
+	// 			onLoad : function() {
+	// 				top.$("#type").val("1");
+	// 			},
+	// 			buttons : [ {
+	// 				text : '关闭',
+	// 				handler : function() {
+	// 					top.$('#dd').dialog('close');
+	// 				}
+	// 			} ]
+	// 		});
+	// 	}
 	function fCallback() {
 		if (top.$("#uform").form('enableValidation').form('validate')) {
 			var data = top.$("#uform").serialize();
@@ -268,12 +305,25 @@
 				success : function(data) {
 					if (data) {
 						top.$('#dd').dialog('close');
-						grid.datagrid('reload'); // 重新载入所有行
+						grid.datagrid('reload'); 
 					}
 				}
 			});
 
 		}
+	}
+
+	//导入客户,在页面中引入 js/swfupload/ajaxfileupload.js
+	function ajaxFileUpload() {
+		$.ajaxFileUpload({
+			url : '../upload/excel', //你处理上传文件的服务端
+			secureuri : false, //是否启用安全提交,默认为false
+			fileElementId : 'myfile', //文件选择框的id属性
+			dataType : 'text', //服务器返回的格式,可以是json或xml等
+			success : function(data, status) { //服务器响应成功时的处理函数
+				grid.datagrid('reload'); 
+			}
+		});
 	}
 </script>
 </head>
@@ -305,25 +355,29 @@
 				</tr>
 			</table>
 		</div>
-		<table cellspacing="0" cellpadding="0">
-			<tr>
-				<td><a href="#" class="easyui-linkbutton"
-					data-options="iconCls:'icon-add',plain:true"
-					onClick="javascript:addNew();">新增</a></td>
-				<td><div class="datagrid-btn-separator"></div></td>
-				<td><a href="#" class="easyui-linkbutton"
-					data-options="iconCls:'pic pic_48',plain:true"
-					onClick="javascript:addNew();">返回</a></td>
-				<td><div class="datagrid-btn-separator"></div></td>
-				<td align="right"><a href="#" class="easyui-linkbutton"
-					data-options="iconCls:'pic pic_154',plain:true"
-					onClick="javascript:addNew();">导入</a></td>
-				<td><div class="datagrid-btn-separator"></div></td>
-				<td align="right"><a href="#" class="easyui-linkbutton"
-					data-options="iconCls:'pic pic_157',plain:true"
-					onClick="javascript:addNew();">导出</a></td>
-			</tr>
-		</table>
+		<div>
+			<table cellspacing="0" cellpadding="0">
+				<tr>
+					<td><a href="#" class="easyui-linkbutton"
+						data-options="iconCls:'icon-add',plain:true"
+						onClick="javascript:addNew();">新增</a></td>
+					<td><div class="datagrid-btn-separator"></div></td>
+					<td><a href="#" class="easyui-linkbutton"
+						data-options="iconCls:'pic pic_48',plain:true"
+						onClick="javascript:addNew();">返回</a></td>
+					<td><div class="datagrid-btn-separator"></div></td>
+					<td align="right"><a href="#" class="easyui-linkbutton"
+						data-options="iconCls:'pic pic_157',plain:true"
+						onClick="javascript:addNew();">导出</a></td>
+					<td><div class="datagrid-btn-separator"></div></td>
+					<td style="text-align: right;"><input id="myfile"
+						name="myfile" style="width: 200px" type="file"> <a
+						href="#" class="easyui-linkbutton"
+						data-options="iconCls:'pic pic_154',plain:true"
+						onclick="return ajaxFileUpload();">导入</a></td>
+				</tr>
+			</table>
+		</div>
 	</div>
 	<table id="dg"></table>
 </body>

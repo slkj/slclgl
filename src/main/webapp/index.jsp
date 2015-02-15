@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="css/syscss.css" />
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="../js/easyui/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src='js/SL.index.js'></script>
 
 <script type="text/javascript">

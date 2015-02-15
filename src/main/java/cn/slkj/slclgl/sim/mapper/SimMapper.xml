@@ -9,7 +9,7 @@
 		SELECT COUNT(1) FROM TB_SIM WHERE TYPE =#{type}
 	</select>
 	
-	<insert id="insert" parameterType="Module">
+	<insert id="insert" parameterType="Sim">
 		INSERT INTO TB_SIM
 		(TYPE,CARDTYPE,LISTNUM,TELNUM,STATE,INTIME,OUTTIME,KKTIME,FHTIME,BEIZHU,LYR,GYS,lrr)
 		VALUES(#{type},#{cardType},#{listnum},#{telnum},#{state},#{intime},#{outtime},#{kktime},#{fhtime},#{beizhu},
