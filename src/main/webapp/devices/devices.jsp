@@ -182,39 +182,39 @@
 							detailFormatter : function(index, row) {
 								var s = '<div style="padding:2px;hight:100px;"><table class="grid">'
 										+ '<tr><th style="width: 80px">Gps主机：</th>' + '<td>'
-										+ row.intime
+										+ row.gpszj
 										+ '</td>'
 										+ '<th style="width: 80px">Gps天线：</th>'
 										+ '<td>'
-										+ row.intime
+										+ row.gpstx
 										+ '</td>'
 										+ '<th style="width: 80px">Gsm天线：</th>'
 										+ '<td>'
-										+ row.intime
+										+ row.gsmtx
 										+ '</td>'
 										+ '<th style="width: 80px">电源线：</th>'
 										+ '<td>'
-										+ row.intime
+										+ row.dy
 										+ '</td>'
 										+ '<th style="width: 80px">防水袋：</th>'
 										+ '<td>'
-										+ row.intime
+										+ row.fsd
 										+ '</td></tr>'
 										+ '<tr><th style="width: 80px">计算器：</th>'
 										+ '<td>'
-										+ row.intime
+										+ row.jsq
 										+ '</td>'
 										+ '<th style="width: 80px">摄像仪：</th>'
 										+ '<td>'
-										+ row.intime
+										+ row.sxy
 										+ '</td>'
 										+ '<th style="width: 80px">扬声器：</th>'
 										+ '<td>'
-										+ row.intime
+										+ row.ysq
 										+ '</td>'
 										+ '<th style="width: 80px">麦克风：</th>'
 										+ '<td>'
-										+ row.intime
+										+ row.mkf
 										+ '</td>'
 										+ '<th style="width: 80px"></th>'
 										+ '<td></td></tr>' + '</table></div>';
@@ -366,9 +366,8 @@
 						data-options="iconCls:'pic pic_48',plain:true"
 						onClick="javascript:addNew();">返回</a></td>
 					<td><div class="datagrid-btn-separator"></div></td>
-					<td align="right"><a href="#" class="easyui-linkbutton"
-						data-options="iconCls:'pic pic_157',plain:true"
-						onClick="javascript:addNew();">导出</a></td>
+					<td align="right"><a href="outExcel.jsp" class="easyui-linkbutton"
+						data-options="iconCls:'pic pic_157',plain:true" >导出</a></td>
 					<td><div class="datagrid-btn-separator"></div></td>
 					<td style="text-align: right;"><input id="myfile"
 						name="myfile" style="width: 200px" type="file"> <a
