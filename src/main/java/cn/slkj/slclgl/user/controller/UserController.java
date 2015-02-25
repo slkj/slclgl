@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
@@ -44,9 +45,10 @@ public class UserController {
 
 	@RequestMapping("/list")
 	@ResponseBody
-	public EPager<User> getAllUsers(HttpServletRequest request) throws Exception {
-		int page = Integer.parseInt(request.getParameter("page"));
-		int rows = Integer.parseInt(request.getParameter("rows"));
+	public EPager<User> getAllUsers(HttpServletRequest request,@RequestParam(required = false, defaultValue = "1") Integer page,// 第几页
+			@RequestParam(required = false, defaultValue = "10") Integer rows) throws Exception {
+//		int page = Integer.parseInt(request.getParameter("page"));
+//		int rows = Integer.parseInt(request.getParameter("rows"));
 		Map<String, Object> pageMap = new HashMap<String, Object>();
 		pageMap.put("startPage", (page - 1) * rows);
 		pageMap.put("endPage", rows);
