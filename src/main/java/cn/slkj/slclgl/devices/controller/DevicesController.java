@@ -23,11 +23,29 @@ public class DevicesController {
 
 	@RequestMapping("/list")
 	@ResponseBody
-	public EPager<Devices> getAllUsers(HttpServletRequest request) throws Exception {
+	public EPager<Devices> getAll(HttpServletRequest request) throws Exception {
+		Map<String, Object> pageMap = new HashMap<String, Object>();
 		int page = Integer.parseInt(request.getParameter("page"));
 		int rows = Integer.parseInt(request.getParameter("rows"));
-//		int type = Integer.parseInt(request.getParameter("type"));
-		Map<String, Object> pageMap = new HashMap<String, Object>();
+		String rktime = request.getParameter("rktime");
+		String rktime1 = request.getParameter("rktime1");
+		String lytime = request.getParameter("lytime");
+		String lytime1 = request.getParameter("lytime1");
+		String fhtime = request.getParameter("fhtime");
+		String fhtime1 = request.getParameter("fhtime1");
+		String state = request.getParameter("state");
+		String lyr = request.getParameter("lyr");
+		String firm = request.getParameter("firm");
+		pageMap.put("rktime", rktime);
+		pageMap.put("rktime1", rktime1);
+		pageMap.put("lytime", lytime);
+		pageMap.put("lytime1", lytime1);
+		pageMap.put("fhtime", fhtime);
+		pageMap.put("fhtime1", fhtime1);
+		pageMap.put("state", state);
+		pageMap.put("lyr", lyr);
+		pageMap.put("firm", firm);
+
 		pageMap.put("startPage", (page - 1) * rows);
 		pageMap.put("endPage", rows);
 		int total = impl.getAllCount(pageMap);

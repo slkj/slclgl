@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,7 +36,7 @@ import cn.slkj.slclgl.devices.service.impl.DevicesServiceImpl;
 
 @Controller
 @RequestMapping("/upload")
-public class TestExportExcelController {
+public class DevicesExportExcel {
 	@Autowired
 	private DevicesServiceImpl impl;
 
@@ -82,48 +81,33 @@ public class TestExportExcelController {
 		// 默认从1 开始 本来是为0 剔除掉
 		for (int i = 0; i < rowLength; i++) {
 			Devices devices = new Devices();
-//			devices.setId(UUID.randomUUID().toString());
+			// id 设备编号 设备厂商 厂牌型号 设备类别 入库时间 使用状态 返还时间 领用人 领用时间 测试 卡号 测试时间 测试结果
 			for (int j = 1; j < result[i].length; j++) {// 默认从1开始添加
 				// System.out.print(result[i][j] + "\t\t");
-				if (j == 1) {
-					devices.setListnum(result[i][j]);
-				}
-				if (j == 2) {
-					devices.setFirm(result[i][j]);
-				}
-				if (j == 3) {
-					devices.setModel(result[i][j]);
-				}
-				if (j == 4) {
-					devices.setGenre(result[i][j]);
-				}
-				if (j == 5) {
-					devices.setRktime(result[i][j]);
-				}
-				if (j == 6) {
-					devices.setState(result[i][j]);
-				}
-				if (j == 7) {
-					devices.setFhtime(result[i][j]);
-				}
-				if (j == 8) {
-					devices.setLyr(result[i][j]);
-				}
-				if (j == 9) {
-					devices.setLytime(result[i][j]);
-				}
-				if (j == 10) {
-					devices.setTest(result[i][j]);
-				}
-				if (j == 11) {
-					devices.setPhone(result[i][j]);
-				}
-				if (j == 12) {
-					devices.setCstime(result[i][j]);
-				}
-				if (j == 13) {
-					devices.setTresult(result[i][j]);
-				}
+				if (j == 1) { devices.setListnum(result[i][j]); }
+				if (j == 2) { devices.setFirm(result[i][j]); }
+				if (j == 3) { devices.setModel(result[i][j]); }
+				if (j == 4) { devices.setGenre(result[i][j]); }
+				if (j == 5) { devices.setRktime(result[i][j]); }
+				if (j == 6) { devices.setState(result[i][j]); }
+				if (j == 7) { devices.setFhtime(result[i][j]); }
+				if (j == 8) { devices.setLyr(result[i][j]); }
+				if (j == 9) { devices.setLytime(result[i][j]); }
+				if (j == 10) { 	devices.setTest(result[i][j]); }
+				if (j == 11) { devices.setPhone(result[i][j]); }
+				if (j == 12) { devices.setCstime(result[i][j]); }
+				if (j == 13) { devices.setTresult(result[i][j]); }
+				//-----
+				if (j == 14) { devices.setGpszj(result[i][j]); }
+				if (j == 15) { devices.setGpstx(result[i][j]); }
+				if (j == 16) { devices.setGsmtx(result[i][j]); }
+				if (j == 17) { devices.setDy(result[i][j]); }
+				if (j == 18) { devices.setFsd(result[i][j]); }
+				if (j == 19) { devices.setJsq(result[i][j]); }
+				if (j == 20) { devices.setSxy(result[i][j]); }
+				if (j == 21) { devices.setYsq(result[i][j]); }
+				if (j == 22) { devices.setMkf(result[i][j]); }
+//				if (j == 23) { devices.setTresult(result[i][j]); }
 			}
 			// System.out.println(devices.toString());
 			impl.insert(devices);

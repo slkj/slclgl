@@ -7,15 +7,17 @@ public class Devices {
 	private String model;
 	private String genre;
 	private String rktime;
+	private String rktime1;
 	private String state;
 	private String fhtime;
+	private String fhtime1;
 	private String lyr;
 	private String lytime;
+	private String lytime1;
 	private String test;
 	private String phone;
 	private String cstime;
 	private String tresult;
-	
 	private String gpszj;
 	private String gpstx;
 	private String gsmtx;
@@ -206,6 +208,30 @@ public class Devices {
 
 	public void setMkf(String mkf) {
 		this.mkf = mkf;
+	}
+
+	public String getRktime1() {
+		return rktime1;
+	}
+
+	public void setRktime1(String rktime1) {
+		this.rktime1 = rktime1;
+	}
+
+	public String getFhtime1() {
+		return fhtime1;
+	}
+
+	public void setFhtime1(String fhtime1) {
+		this.fhtime1 = fhtime1;
+	}
+
+	public String getLytime1() {
+		return lytime1;
+	}
+
+	public void setLytime1(String lytime1) {
+		this.lytime1 = lytime1;
 	}
 
 	@Override
