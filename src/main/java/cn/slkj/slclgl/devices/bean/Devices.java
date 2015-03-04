@@ -27,6 +27,7 @@ public class Devices {
 	private String sxy;
 	private String ysq;
 	private String mkf;
+	private String remark ;
 	public String getId() {
 		return id;
 	}
@@ -232,6 +233,14 @@ public class Devices {
 
 	public void setLytime1(String lytime1) {
 		this.lytime1 = lytime1;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	@Override

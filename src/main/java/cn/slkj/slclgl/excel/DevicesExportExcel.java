@@ -107,7 +107,7 @@ public class DevicesExportExcel {
 				if (j == 20) { devices.setSxy(result[i][j]); }
 				if (j == 21) { devices.setYsq(result[i][j]); }
 				if (j == 22) { devices.setMkf(result[i][j]); }
-//				if (j == 23) { devices.setTresult(result[i][j]); }
+				if (j == 23) { devices.setRemark(result[i][j]); }
 			}
 			// System.out.println(devices.toString());
 			impl.insert(devices);

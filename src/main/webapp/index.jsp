@@ -87,7 +87,16 @@
 		})
 	});
 </script>
+<style type="text/css">
+.tabs-tool {
+	border-top-width: 0; border-right-width: 0;
+}
 
+.tabs-tool table {
+	border-width: 0;
+	/* border-collapse: collapse; */ border-spacing: 0;
+}
+</style>
 </head>
 <body class="easyui-layout" style="overflow-y: hidden" fit="true"
 	scroll="no">
@@ -109,7 +118,7 @@
 	<div region="north" split="true" border="false"
 		style="overflow: hidden; height: 30px; background: url(images/layout-browser-hd-bg.gif) #7f99be repeat-x center 50%; line-height: 20px; color: #fff; font-family: Verdana, 微软雅黑, 黑体">
 		<span style="float: right; padding-right: 20px;" class="head">欢迎
-		ADMIN <a href="#" id="editpass">修改密码</a> <a href="#" id="loginOut">安全退出</a>
+			ADMIN <a href="#" id="editpass">修改密码</a> <a href="#" id="loginOut">安全退出</a>
 		</span> <span style="padding-left: 10px; font-size: 16px;"><img
 			src="images/blocks.gif" width="20" height="20" align="absmiddle" />
 			神龙OA管理系统</span>
@@ -128,15 +137,29 @@
 	</div>
 	<div id="mainPanle" region="center"
 		style="background: #eee; overflow-y: hidden">
-		<div id="tabs" class="easyui-tabs" fit="true" border="false">
-			<div title="欢迎使用"
+		<div id="tabs" class="easyui-tabs" fit="true" border="false"
+			tools="#mainTabs_tools">
+			<div title="欢迎使用" data-options="iconCls:'pic pic_17'"
 				style="padding: 20px; overflow: hidden; color: red;"></div>
 		</div>
 	</div>
-
+	<div id="mainTabs_tools" class="tabs-tool"
+		style="height: 27px; right: 0px;">
+		<table>
+			<tbody>
+				<tr>
+					<td><a id="mainTabs_jumpHome" class="easyui-linkbutton"
+						title="跳至首页" data-options="plain: true, iconCls: 'pic pic_17'"></a></td>
+					<td><div class="datagrid-btn-separator"></div></td>
+					<td><a id="mainTabs_toggleAll" class="easyui-linkbutton"
+						title="关闭所有页面"
+						data-options="plain: true, iconCls: 'pic pic_58'" onclick="closeAllTabs()"></a></td>
+			</tbody>
+		</table>
+	</div>
 
 	<!--修改密码窗口-->
-	<div id="w" class="easyui-window" title="修改密码" collapsible="false"
+	<div id="w" class="easyui-window" title="修改密码" collapsible="false" 
 		minimizable="false" maximizable="false" icon="icon-save"
 		style="width: 300px; height: 150px; padding: 5px; background: #fafafa;">
 		<div class="easyui-layout" fit="true">

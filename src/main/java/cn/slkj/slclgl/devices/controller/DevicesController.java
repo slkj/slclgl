@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.slkj.easyui.util.EPager;
@@ -51,5 +52,17 @@ public class DevicesController {
 		int total = impl.getAllCount(pageMap);
 		List<Devices> list = impl.getAll(pageMap);
 		return new EPager<Devices>(total, list);
+	}
+	
+	@RequestMapping(value = "/addDevices", method = { RequestMethod.POST })
+	@ResponseBody
+	public boolean addDevices(Devices devices) {
+		int i = impl.insert(devices);
+		if (i > 0) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 }

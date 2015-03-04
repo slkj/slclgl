@@ -9,23 +9,22 @@ $(function() {
 	tabClose();
 	tabCloseEven();
 	/* 选择TAB时刷新内容 */
-//	$('#tabs').tabs({
-//		onSelect : function(title) {
-//			var currTab = $('#tabs').tabs('getTab', title);
-//			var iframe = $(currTab.panel('options').content);
-//
-//			var src = iframe.attr('src');
-//			if (src)
-//				$('#tabs').tabs('update', {
-//					tab : currTab,
-//					options : {
-//						content : createFrame(src)
-//					}
-//				});
-//
-//		}
-//	});
-
+	// $('#tabs').tabs({
+	// onSelect : function(title) {
+	// var currTab = $('#tabs').tabs('getTab', title);
+	// var iframe = $(currTab.panel('options').content);
+	//
+	// var src = iframe.attr('src');
+	// if (src)
+	// $('#tabs').tabs('update', {
+	// tab : currTab,
+	// options : {
+	// content : createFrame(src)
+	// }
+	// });
+	//
+	// }
+	// });
 })
 function getMeuns() {
 	_menus = null;
@@ -51,22 +50,26 @@ function InitLeftMenu() {
 	$.each(_menus, function(i, n) {
 		var menulist = '';
 		menulist += '<ul class="navlist">';
-		 $.each(n.children, function(j, o) {
-				menulist += '<li><div><a ref="'+o.id+'" href="#" rel="' + o.url + '" ><span class="pic '+o.icon+'" >&nbsp;</span><span class="nav">' + o.name + '</span></a></div> ';
+		$.each(n.children, function(j, o) {
+			menulist += '<li><div><a ref="' + o.id + '" href="#" rel="' + o.url
+					+ '" ><span class="pic ' + o.icon + '" >&nbsp;</span><span class="nav">'
+					+ o.name + '</span></a></div> ';
 
-				if(o.children && o.children.length>0)
-				{
-					//li.find('div').addClass('icon-arrow');
-					menulist += '<ul class="third_ul">';
-					$.each(o.children,function(k,p){
-						menulist += '<li><div><a ref="'+p.id+'" href="#" rel="' + p.url + '" ><span class="pic '+p.icon+'" >&nbsp;</span><span class="nav">' + p.name + '</span></a></div> </li>'
-					});
-					menulist += '</ul>';
-				}
+			if (o.children && o.children.length > 0) {
+				// li.find('div').addClass('icon-arrow');
+				menulist += '<ul class="third_ul">';
+				$.each(o.children, function(k, p) {
+					menulist += '<li><div><a ref="' + p.id + '" href="#" rel="' + p.url
+							+ '" ><span class="pic ' + p.icon
+							+ '" >&nbsp;</span><span class="nav">' + p.name
+							+ '</span></a></div> </li>'
+				});
+				menulist += '</ul>';
+			}
 
-				menulist+='</li>';
-	        })
-			menulist += '</ul>';
+			menulist += '</li>';
+		})
+		menulist += '</ul>';
 		$('#nav').accordion('add', {
 			title : n.name,
 			content : menulist,
@@ -84,7 +87,7 @@ function InitLeftMenu() {
 		var tabTitle = $(this).children('.nav').text();
 		var url = $(this).attr("rel");
 		var menuid = $(this).attr("ref");
-		var icon = $(this).find('.icon').attr('class');
+		var icon = $(this).find('.pic').attr('class');
 		var third = find(menuid);
 		if (third && third.children && third.children.length > 0) {
 			$('.third_ul').slideUp();
@@ -267,8 +270,15 @@ function closeTab(action) {
 		break;
 	}
 }
-
-// 弹出信息窗口 title:标题 msgString:提示信息 msgType:信息类型 [error,info,question,warning]
+closeAllTabs = function () {
+    return closeTab("closeall");
+};
+/**
+ * 弹出信息窗口 
+ * title:标题 
+ * msgString:提示信息 
+ * msgType:信息类型 [error,info,question,warning]
+ */
 function msgShow(title, msgString, msgType) {
 	$.messager.alert(title, msgString, msgType);
 }

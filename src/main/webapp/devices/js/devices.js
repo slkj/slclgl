@@ -65,9 +65,9 @@ function loadDataGrid() {
 					{
 						field : 'model',
 						title : '厂牌型号'
-					}, {
-						field : 'genre',
-						title : '设备类别'
+//					}, {
+//						field : 'genre',
+//						title : '设备类别'
 					}, {
 						field : 'rktime',
 						title : '入库时间'
@@ -117,14 +117,17 @@ function loadDataGrid() {
 						title : '测试结果',
 						formatter : function(value, row, index) {
 							var s = "";
-							if (value == 1) {
+							if (row.test == 1 && value == 1) {
 								s = "<span style=\"color:green;\">定位</span>";
-							} else {
+							} else if (row.test == 1 && value == 0) {
 								s = "<span style=\"color:red;\">不定位</span>";
 							}
 							return s;
 						}
-					} ] ],
+					} , {
+						field : 'remark',
+						title : '备注'
+					}] ],
 			view : detailview,
 			detailFormatter : function(index, row) {
 				var s = '<div style="padding:2px;hight:100px;"><table class="grid">'
@@ -177,19 +180,42 @@ function loadDataGrid() {
 		displayMsg : '当前显示 {from} - {to} 条记录   共 {total} 条记录'
 	});
 }
+function myformatter(date){
+    var y = date.getFullYear();
+    var m = date.getMonth()+1;
+    var d = date.getDate();
+    return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+}
 
+function myparser(s){
+    if (!s) return new Date();
+    var ss = (s.split('-'));
+    var y = parseInt(ss[0],10);
+    var m = parseInt(ss[1],10);
+    var d = parseInt(ss[2],10);
+    if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+        return new Date(y,m-1,d);
+    } else {
+        return new Date();
+    }
+}
 function addNew() {
 	top.$('#dd').dialog({
 		title : 'GPS设备出入库信息',
 		iconCls : 'icon-add',
-		href : 'sim/simAdd.jsp',
+		href : 'devices/devicesAdd.jsp',
 		width : 550,
 		height : 400,
 		closed : false,
 		cache : false,
 		modal : true,
 		onLoad : function() {
-			top.$("#type").val("1");
+			var date = new Date();   
+			var y = date.getFullYear();
+		    var m = date.getMonth()+1;
+		    var d = date.getDate();
+		    var strDate =   y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+			top.$("#rktime").datebox("setValue", strDate);
 		},
 		buttons : [ {
 			text : '确定',
@@ -206,40 +232,50 @@ function addNew() {
 	});
 }
 function fCallback() {
-//	if (top.$("#uform").form('enableValidation').form('validate')) {
-//		var data = top.$("#uform").serialize();
-//		var url = "";
-//		$.ajax({
-//			cache : false,
-//			type : "POST",
-//			url : "../sim/addSim",
-//			data : data,
-//			async : false,
-//			success : function(data) {
-//				if (data) {
-//					top.$('#dd').dialog('close');
-//					grid.datagrid('reload');
-//				}
-//			}
-//		});
-//	}
+	if (top.$("#uform").form('enableValidation').form('validate')) {
+		var data = top.$("#uform").serialize();
+		var url = "";
+		$.ajax({
+			cache : false,
+			type : "POST",
+			url : "../devices/addDevices",
+			data : data,
+			async : false,
+			success : function(data) {
+				if (data) {
+					top.$('#dd').dialog('close');
+					grid.datagrid('reload');
+				}
+			}
+		});
+	}
 }
-
+//采用jquery easyui loading css效果 
+function ajaxLoading(){ 
+    $("<div class=\"datagrid-mask\"></div>").css({display:"block",width:"100%",height:$(window).height()}).appendTo("body"); 
+    $("<div class=\"datagrid-mask-msg\"></div>").html("正在处理，请稍候。。。").appendTo("body").css({display:"block",left:($(document.body).outerWidth(true) - 190) / 2,top:($(window).height() - 45) / 2}); 
+ } 
+ function ajaxLoadEnd(){ 
+     $(".datagrid-mask").remove(); 
+     $(".datagrid-mask-msg").remove();             
+} 
 // 导入客户,在页面中引入 js/swfupload/ajaxfileupload.js
 function ajaxFileUpload() {
 	$("#msg").empty();
-	if($("#myfile").val().length > 0){
+	if ($("#myfile").val().length > 0) {
 		$.ajaxFileUpload({
 			url : '../upload/excel', // 你处理上传文件的服务端
 			secureuri : false, // 是否启用安全提交,默认为false
 			fileElementId : 'myfile', // 文件选择框的id属性
 			dataType : 'text', // 服务器返回的格式,可以是json或xml等
+			beforeSend:ajaxLoading,//发送请求前打开进度条 
 			success : function(data, status) { // 服务器响应成功时的处理函数
+				ajaxLoadEnd();//任务执行成功，关闭进度条 
 				grid.datagrid('reload');
 				$("#myfile").val("");
 			}
 		});
-	}else{
+	} else {
 		$("#msg").append("请选择要导入的文件！");
 	}
 }
