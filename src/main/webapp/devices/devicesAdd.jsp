@@ -61,18 +61,18 @@
 					data-options="multiline:true" style="height: 60px; width: 100%"></input></td>
 			</tr>
 			<tr>
-				<th colspan="5" style="text-align: center;">出库信息</th>
-			</tr>
-			<tr>
-				<th>出库时间：</th>
-				<td><input name="lytime" class="easyui-datebox" editable="false"></td>
-				<th>领用人 ：</th>
-				<td><input name="lyr" class="easyui-textbox"></td>
-			</tr>
-			<tr>
-				<th>返回时间：</th>
-				<td><input name="fhtime" class="easyui-datebox" editable="false"></td>
-			</tr>
+<!-- 				<th colspan="5" style="text-align: center;">出库信息</th> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<th>出库时间：</th> -->
+<!-- 				<td><input name="lytime" class="easyui-datebox" editable="false"></td> -->
+<!-- 				<th>领用人 ：</th> -->
+<!-- 				<td><input name="lyr" class="easyui-textbox"></td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<th>返回时间：</th> -->
+<!-- 				<td><input name="fhtime" class="easyui-datebox" editable="false"></td> -->
+<!-- 			</tr> -->
 		</table>
 	</form>
 </body>
