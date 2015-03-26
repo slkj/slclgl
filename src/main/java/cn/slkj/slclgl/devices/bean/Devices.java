@@ -27,7 +27,7 @@ public class Devices {
 	private String sxy;
 	private String ysq;
 	private String mkf;
-	private String remark ;
+	private String remark;
 	public String getId() {
 		return id;
 	}
