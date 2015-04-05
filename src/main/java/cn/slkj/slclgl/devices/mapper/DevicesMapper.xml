@@ -14,6 +14,7 @@
 			<if test="lyr != null and lyr != ''"> and lyr like CONCAT('%',#{lyr},'%') </if>
 			<if test="firm != null and firm != ''">and firm like CONCAT('%',#{firm},'%')  </if>
 		</where>
+		ORDER BY LYTIME DESC
 		LIMIT #{startPage},#{endPage}
 	</select>
 
@@ -31,12 +32,13 @@
 			<if test="lyr != null and lyr != ''"> and lyr like CONCAT('%',#{lyr},'%') </if>
 			<if test="firm != null and firm != ''">and firm like CONCAT('%',#{firm},'%')  </if>
 		</where>
+		ORDER BY LYTIME DESC
 	</select>
 
 	<insert id="insert" parameterType="Devices">
 		INSERT INTO TB_DEVICES
 		(listnum,firm,model,genre,rktime,state,fhtime,lyr,lytime,test,phone,cstime,tresult,gpszj,gpstx,gsmtx,dy,fsd,jsq,sxy,ysq,mkf,remark)
-		VALUES(#{listnum},#{firm},#{model},#{genre},#{rktime},#{state},#{fhtime},#{lyr},#{lytime},#{test},#{phone},#{cstime},#{tresult},
+		VALUES(#{listnum},#{firm},#{model},#{genre},now() ,#{state},#{fhtime},#{lyr},#{lytime},#{test},#{phone},#{cstime},#{tresult},
 		#{gpszj},#{gpstx},#{gsmtx},#{dy},#{fsd},#{jsq},#{sxy},#{ysq},#{mkf},#{remark})
 	</insert>
 </mapper>

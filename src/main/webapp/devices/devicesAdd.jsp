@@ -15,18 +15,34 @@
 				<th colspan="5" style="text-align: center;">入库信息</th>
 			</tr>
 			<tr>
-				<th style="width: 80px">设   备 ID：</th>
+				<th style="width: 100px">设   备 ID：</th>
 				<td>
 					<input name="listnum" class="easyui-validatebox" data-options="required:'true'">
 				</td>
-				<th>入库时间：</th>
+				<th style="width: 100px">SIM 卡 号：</th>
 				<td>
-					<input id="rktime" name="rktime" class="easyui-datebox" required="true" editable="false"></input>
+					<input name="phone" class="easyui-validatebox">
+				</td>
+			</tr>
+			<tr>
+				<th>车牌号：</th>
+				<td>
+					<input id="rktime" name="carNumber" class="easyui-textbox" ></input>
+				</td>
+				<th>入网证明编号：</th>
+				<td>
+					<input id="rktime" name="syzmbh" class="easyui-textbox"></input>
+				</td>
+			</tr>
+			<tr>
+				<th>使用公司：</th>
+				<td colspan="3">
+					<input id="rktime" name="sygs" class="easyui-textbox" ></input>
 				</td>
 			</tr>
 			<tr>
 				<th>设备厂商：</th>
-				<td>
+				<td width="150px">
 					<select class="easyui-combobox"  name="firm" panelheight="auto" style="width: 100%">
 						<option value="珠海天琴">珠海天琴</option>
 						<option value="华宝">华宝</option>
@@ -54,6 +70,18 @@
 					<label><input name="sxy" type="checkbox" value="良好" />摄像头</label> 
 					<label><input name="ysq" type="checkbox" value="良好" />扬声器</label> 
 					<label><input name="mkf" type="checkbox" value="良好" />麦克风</label> 
+			</tr>
+			<tr>
+				<th>是否测试 ：</th>
+				<td>
+					<label><input name="test" type="radio" value="1" />是</label> 
+					<label><input name="test" type="radio" value="0" />否</label>
+				</td>
+				<th>测试结果：</th>
+				<td>
+					<label><input name="tresult" type="radio" value="1" />定位</label> 
+					<label><input name="tresult" type="radio" value="0" />不定位</label>
+				</td>
 			</tr>
 			<tr>
 				<th>备注：</th>
