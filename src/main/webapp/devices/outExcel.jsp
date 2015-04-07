@@ -13,38 +13,52 @@
 <meta content="">
 <title>gps设备清单</title>
 </head>
+
 <body>
 	<table border="1" cellspacing="0" cellpadding="0">
+<!-- 		<tr> -->
+<!-- 			<td colspan="17">①使用状态：1=已出库；2=未出库;3=退回;4=入网使用;②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳</td> -->
+<!-- 		</tr> -->
 		<tr>
-			<th nowrap="nowrap" style="text-align: center">设备编号</th>
-			<th nowrap="nowrap" style="text-align: center">设备厂商</th>
-			<th nowrap="nowrap" style="text-align: center">设备类别</th>
-			<th nowrap="nowrap" style="text-align: center">厂牌型号</th>
-			<th nowrap="nowrap" style="text-align: center">入库时间</th>
-			<th nowrap="nowrap" style="text-align: center">使用状态</th>
-			<th nowrap="nowrap" style="text-align: center">返还时间</th>
-			<th nowrap="nowrap" style="text-align: center">领用人</th>
-			<th nowrap="nowrap" style="text-align: center">领用时间</th>
-			<th nowrap="nowrap" style="text-align: center">测试</th>
-			<th nowrap="nowrap" style="text-align: center">卡号</th>
-			<th nowrap="nowrap" style="text-align: center">测试时间</th>
-			<th nowrap="nowrap" style="text-align: center">测试结果</th>
+			<th>使用状态</th>
+			<th>设备编号</th>
+			<th>SIM卡号</th>
+			<th>设备厂商</th>
+			<th>厂牌型号</th>
+			<th>入库时间</th>
+			<th>领用人</th>
+			<th>领用时间</th>
+			<th>返还时间</th>
+			<th>安装人</th>
+			<th>安装时间</th>
+			<th>车牌号</th>
+			<th>使用公司</th>
+			<th>入网证明编号</th>
+			<th>测试</th>
+			<th>测试时间</th>
+			<th>测试结果</th>
+			<th>所在地区</th>
 		</tr>
 		<tbody id="tb">
 			<tr height="30">
-				<td align="center" nowrap="nowrap">5121211018</td>
-				<td align="center" nowrap="nowrap">珠海天琴</td>
-				<td align="center" nowrap="nowrap"></td>
-				<td align="center" nowrap="nowrap"></td>
-				<td align="center" nowrap="nowrap">2011-02-02</td>
-				<td align="center" nowrap="nowrap">已出库</td>
-				<td align="center" nowrap="nowrap">2010-02-02</td>
-				<td align="center" nowrap="nowrap">maxh</td>
-				<td align="center" nowrap="nowrap">2010-02-02</td>
-				<td align="center" nowrap="nowrap">已测试</td>
-				<td align="center" nowrap="nowrap">15533071304</td>
-				<td align="center" nowrap="nowrap">2010-02-02</td>
-				<td align="center" nowrap="nowrap">定位</td>
+				<td>已出库</td>
+				<td>5121211018</td>
+				<td>18132242201</td>
+				<td>珠海天琴</td>
+				<td>SL-02</td>
+				<td>2011-02-02</td>
+				<td>马续辉</td>
+				<td>2010-02-02</td>
+				<td>2010-03-02</td>
+				<td>马续辉</td>
+				<td>2010-02-02</td>
+				<td>冀DSL104</td>
+				<td>神龙</td>
+				<td>XS0000001</td>
+				<td>已测试</td>
+				<td>2010-02-02</td>
+				<td>定位</td>
+				<td>沧州</td>
 			</tr>
 		</tbody>
 	</table>

@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.slkj.slclgl.devices.mapper.DevicesMapper">
+	<sql id="sql_temp">
+		id,listnum,firm,model,genre,rktime,state,fhtime,lyr,lytime,test,phone,cstime,
+		tresult,gpszj,gpstx,gsmtx,dy,fsd,jsq,sxy,ysq,mkf,remark,pack,installers,installtime,
+		carNumber,company,networkNo,area
+	</sql>
 	<select id="getAll" resultType="Devices" parameterType="hashmap">
-		SELECT * FROM TB_DEVICES
+		SELECT <include refid="sql_temp"></include> FROM TB_DEVICES
 		<where>
+			<if test="listnum != null and listnum != ''">and listnum like CONCAT('%',#{listnum},'%')</if>
+			<if test="phone != null and phone != ''">and phone like CONCAT('%',#{phone},'%')</if>
 			<if test="rktime != null and rktime != ''">and rktime >= #{rktime} </if>
 			<if test="rktime1 != null and rktime1 != ''"> and rktime &lt;= #{rktime1} </if>
 			<if test="lytime != null and lytime != ''">and lytime >= #{lytime} </if>
@@ -13,15 +20,20 @@
 			<if test="state != null and state != ''">and state =  #{state} </if>
 			<if test="lyr != null and lyr != ''"> and lyr like CONCAT('%',#{lyr},'%') </if>
 			<if test="firm != null and firm != ''">and firm like CONCAT('%',#{firm},'%')  </if>
+			<if test="area != null and area != ''">and area like CONCAT('%',#{area},'%')  </if>
 		</where>
-		ORDER BY LYTIME DESC
+		<if test="sort != null and sort != ''">
+			ORDER BY  ${sort}       ${order}
+		</if>
+		
 		LIMIT #{startPage},#{endPage}
 	</select>
 
 	<select id="getAllCount" resultType="int" parameterType="hashmap">
-		SELECT
-		COUNT(1) FROM TB_DEVICES
+		SELECT COUNT(1) FROM TB_DEVICES
 		<where>
+			<if test="listnum != null and listnum != ''">and listnum like CONCAT('%',#{listnum},'%')</if>
+			<if test="phone != null and phone != ''">and phone like CONCAT('%',#{phone},'%')</if>
 			<if test="rktime != null and rktime != ''">and rktime >= #{rktime} </if>
 			<if test="rktime1 != null and rktime1 != ''"> and rktime &lt;= #{rktime1} </if>
 			<if test="lytime != null and lytime != ''">and lytime >= #{lytime} </if>
@@ -31,14 +43,40 @@
 			<if test="state != null and state != ''">and state =  #{state} </if>
 			<if test="lyr != null and lyr != ''"> and lyr like CONCAT('%',#{lyr},'%') </if>
 			<if test="firm != null and firm != ''">and firm like CONCAT('%',#{firm},'%')  </if>
+			<if test="area != null and area != ''">and area like CONCAT('%',#{area},'%')  </if>
 		</where>
-		ORDER BY LYTIME DESC
+		<if test="sort != null and sort != ''">
+			ORDER BY  ${sort}  ${order}
+		</if>
 	</select>
 
 	<insert id="insert" parameterType="Devices">
 		INSERT INTO TB_DEVICES
-		(listnum,firm,model,genre,rktime,state,fhtime,lyr,lytime,test,phone,cstime,tresult,gpszj,gpstx,gsmtx,dy,fsd,jsq,sxy,ysq,mkf,remark)
-		VALUES(#{listnum},#{firm},#{model},#{genre},now() ,#{state},#{fhtime},#{lyr},#{lytime},#{test},#{phone},#{cstime},#{tresult},
-		#{gpszj},#{gpstx},#{gsmtx},#{dy},#{fsd},#{jsq},#{sxy},#{ysq},#{mkf},#{remark})
+		(listnum,firm,model,genre,rktime,state,fhtime,lyr,lytime,test,phone,cstime,tresult,gpszj,gpstx,gsmtx,
+		dy,fsd,jsq,sxy,ysq,mkf,remark,pack,installers,installtime,carNumber,company,networkNo,area)
+		VALUES(#{listnum},#{firm},#{model},#{genre},now() ,#{state},#{fhtime},#{lyr},#{lytime},#{test},#{phone},#{cstime},
+		#{tresult},#{gpszj},#{gpstx},#{gsmtx},#{dy},#{fsd},#{jsq},#{sxy},#{ysq},#{mkf},#{remark},#{pack},#{installers},
+		#{installtime},#{carNumber},#{company},#{networkNo},#{area})
 	</insert>
+	
+	<update id="netIn" parameterType="Devices">
+		UPDATE TB_DEVICES SET 
+			state=4 ,installers =#{installers},installtime=#{installtime},carNumber=#{carNumber},company=#{company},networkNo=#{networkNo}
+		WHERE ID=#{id}
+	</update>
+	<update id="testing" parameterType="Devices">
+		UPDATE TB_DEVICES SET 
+			test =#{test},phone=#{phone},tresult=#{tresult},cstime=now()
+		WHERE ID=#{id}
+	</update>
+	<update id="goBack" parameterType="Devices">
+		UPDATE TB_DEVICES SET 
+			state=3 ,fhtime =now()
+		WHERE ID=#{id}
+	</update>
+	<update id="outRepertory" parameterType="Devices">
+		UPDATE TB_DEVICES SET 
+			state=1 ,lyr =#{lyr},lytime=#{lytime},area=#{area}
+		WHERE ID=#{id}
+	</update>
 </mapper>

@@ -8,44 +8,43 @@
 </head>
 <body>
 
-	<form id="uform">
+	<form id="form">
 		<input name="state" value="2" type="hidden"/>
 		<table class="grid">
 			<tr>
-				<th colspan="5" style="text-align: center;">入库信息</th>
+				<th colspan="5" style="text-align: left;color: red;">*请检查设备ID、SIM卡号、入网证明编号是否已存在，已存在数据将重复无法保存。</th>
+			</tr>
+			<tr>
+				<th style="width: 100px">设   备 包  装：</th>
+				<td colspan="3">
+					<label><input name="pack" type="radio" value="0"  checked="checked"/>全新</label>
+					<label><input name="pack" type="radio" value="1" />返修</label> 
+				</td>
+				
 			</tr>
 			<tr>
 				<th style="width: 100px">设   备 ID：</th>
 				<td>
-					<input name="listnum" class="easyui-validatebox" data-options="required:'true'">
+					<input name="listnum" class="easyui-numberbox" data-options="required:'true'">
 				</td>
 				<th style="width: 100px">SIM 卡 号：</th>
 				<td>
-					<input name="phone" class="easyui-validatebox">
-				</td>
-			</tr>
-			<tr>
-				<th>车牌号：</th>
-				<td>
-					<input id="rktime" name="carNumber" class="easyui-textbox" ></input>
-				</td>
-				<th>入网证明编号：</th>
-				<td>
-					<input id="rktime" name="syzmbh" class="easyui-textbox"></input>
-				</td>
-			</tr>
-			<tr>
-				<th>使用公司：</th>
-				<td colspan="3">
-					<input id="rktime" name="sygs" class="easyui-textbox" ></input>
+					<input name="phone" class="easyui-numberbox">
 				</td>
 			</tr>
 			<tr>
 				<th>设备厂商：</th>
 				<td width="150px">
-					<select class="easyui-combobox"  name="firm" panelheight="auto" style="width: 100%">
-						<option value="珠海天琴">珠海天琴</option>
-						<option value="华宝">华宝</option>
+					<select class="easyui-combobox"  name="firm" panelheight="auto" style="width: 100%" data-options="required:'true'">
+								<option value="" selected="selected">请选择</option>
+								<option value="神龙">神龙</option>
+								<option value="珠海天琴">珠海天琴</option>
+								<option value="华宝">华宝</option>
+								<option value="博实结">博实结</option>
+								<option value="中斗">中斗</option>
+								<option value="赛格">赛格</option>
+								<option value="赛格">航天无线</option>
+								<option value="鸿泉">鸿泉</option>
 					</select>
 				</td>
 				<th>厂牌型号：</th>
@@ -89,18 +88,6 @@
 					data-options="multiline:true" style="height: 60px; width: 100%"></input></td>
 			</tr>
 			<tr>
-<!-- 				<th colspan="5" style="text-align: center;">出库信息</th> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<th>出库时间：</th> -->
-<!-- 				<td><input name="lytime" class="easyui-datebox" editable="false"></td> -->
-<!-- 				<th>领用人 ：</th> -->
-<!-- 				<td><input name="lyr" class="easyui-textbox"></td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<th>返回时间：</th> -->
-<!-- 				<td><input name="fhtime" class="easyui-datebox" editable="false"></td> -->
-<!-- 			</tr> -->
 		</table>
 	</form>
 </body>

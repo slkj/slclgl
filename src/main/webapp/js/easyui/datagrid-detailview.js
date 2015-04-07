@@ -111,7 +111,7 @@ var detailview = $.extend({}, $.fn.datagrid.defaults.view, {
 					cc.push('<input type="checkbox" name="' + field + '" value="' + (value!=undefined ? value : '') + '">');
 				} else if (col.expander) {
 					//cc.push('<div style="text-align:center;width:16px;height:16px;">');
-					cc.push('<span class="datagrid-row-expander datagrid-row-expand" style="display:inline-block;width:16px;height:16px;cursor:pointer;" />');
+					cc.push('<span class="datagrid-row-expander datagrid-row-expand" style="display:inline-block;width:26px;height:16px;cursor:pointer;" />');
 					//cc.push('</div>');
 				} else if (col.formatter){
 					cc.push(col.formatter(value, rowData, rowIndex));
@@ -241,13 +241,13 @@ var detailview = $.extend({}, $.fn.datagrid.defaults.view, {
 		}
 		if (!hasExpander){
 			if (opts.frozenColumns && opts.frozenColumns.length){
-				opts.frozenColumns[0].splice(0,0,{field:'_expander',expander:true,width:24,resizable:false,fixed:true});
+				opts.frozenColumns[0].splice(0,0,{field:'_expander',expander:true,width:34,resizable:false,fixed:true});
 			} else {
-				opts.frozenColumns = [[{field:'_expander',expander:true,width:24,resizable:false,fixed:true}]];
+				opts.frozenColumns = [[{field:'_expander',expander:true,width:34,resizable:false,fixed:true}]];
 			}
 			
 			var t = dc.view1.children('div.datagrid-header').find('table');
-			var td = $('<td rowspan="'+opts.frozenColumns.length+'"><div class="datagrid-header-expander" style="width:24px;"></div></td>');
+			var td = $('<td rowspan="'+opts.frozenColumns.length+'"><div class="datagrid-header-expander" style="width:34px;"></div></td>');
 			if ($('tr',t).length == 0){
 				td.wrap('<tr></tr>').parent().appendTo($('tbody',t));
 			} else if (opts.rownumbers){

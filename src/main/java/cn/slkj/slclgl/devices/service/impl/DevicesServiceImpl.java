@@ -30,4 +30,24 @@ public class DevicesServiceImpl implements DevicesService {
 		return mapper.insert(devices);
 	}
 
+	public int outRepertory(Devices devices) {
+		// TODO Auto-generated method stub
+		return mapper.outRepertory(devices);
+	}
+
+	public int goBack(Devices devices) {
+		// TODO Auto-generated method stub
+		return mapper.goBack(devices);
+	}
+
+	public int testing(Devices devices) {
+		// TODO Auto-generated method stub
+		return mapper.testing(devices);
+	}
+
+	public int netIn(Devices devices) {
+		// TODO Auto-generated method stub
+		return mapper.netIn(devices);
+	}
+
 }

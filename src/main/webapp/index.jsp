@@ -13,6 +13,7 @@
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src='js/SL.easyUI.js'></script>
 <script type="text/javascript" src='js/SL.index.js'></script>
 
 <script type="text/javascript">
@@ -187,7 +188,7 @@
 	</div>
 
 	<div id="mm" class="easyui-menu" style="width: 150px;">
-		<div id="tabupdate">刷新</div>
+		<div id="refresh">刷新</div>
 		<div class="menu-sep"></div>
 		<div id="close">关闭</div>
 		<div id="closeall">全部关闭</div>

@@ -1,4 +1,5 @@
 var grid;
+var basePath="";
 $(function() {
 	// 初始化页面
 	loadDataGrid();
@@ -9,6 +10,16 @@ $(function() {
 		// 清空表单
 		$('#searchform').form('clear');
 	});
+	$("#high_search_btn").click(function() {
+		var di = $('#highsearch').css("display");
+		if (di == "none") {
+			$('#highsearch').show();
+		} else {
+			$('#highsearch').hide();
+		}
+
+	});
+
 });
 // 将表单数据转为json
 function form2Json(id) {
@@ -29,7 +40,7 @@ function loadDataGrid() {
 			.datagrid(
 					{
 						method : 'post',
-						url : '../devices/list',
+						url : basePath+'list',
 						title : 'GPS设备列表',
 						fit : true,
 						nowrap : true, // false:折行
@@ -37,13 +48,44 @@ function loadDataGrid() {
 						striped : true, // 隔行变色
 						pagination : true,
 						fitColumns : true,
+						singleSelect : true,
 						pageSize : 15,
 						pageList : [ 1, 10, 15, 20, 30, 50 ],
 						loadMsg : '数据加载中,请稍后……',
-						columns : [ [
+						frozenColumns : [ [
 								{
-									field : 'ck',
-									checkbox : true
+									field : 'area',
+									title : '所在地区'
+								},
+								{
+									field : 'pack',
+									title : '包装',
+									align : 'center',
+									formatter : function(value, row, index) {
+										var s = "";
+										if (value == 0) {
+											s = "<div style='background-color:#008B00;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>全新</div>";
+										} else if (value == 1) {
+											s = "<div style='background-color:#525252;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>返修</div>"
+										}
+										return s;
+									}
+								},
+								{
+									field : 'opt',
+									title : '操作',
+									align : 'center',
+									formatter : function(value,row,index) {
+										var s = "";
+										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:outRepertory('" + index + "');\">出库</span></a>";
+										s += "&nbsp;|&nbsp;";
+										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:goBack('" + index + "');\">退回</span></a>";
+										s += "&nbsp;|&nbsp;";
+										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:testing('" + index + "');\">测试</span></a>";
+										s += "&nbsp;|&nbsp;";
+										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:netIn('" + index + "');\">入网</span></a>";
+										return s;
+									}
 								},
 								{
 									field : 'state',
@@ -61,150 +103,129 @@ function loadDataGrid() {
 										}
 										return s;
 									}
-								}, {
+								},
+								{
 									field : 'listnum',
 									title : '设备编号'
-								}, {
+								},
+								{
 									field : 'phone',
 									title : 'SIM卡号'
-								}, {
-									field : 'model',
+								},
+								{
+									field : 'firm',
 									title : '厂牌型号',
+									align : 'center',
 									formatter : function(value, row, index) {
-										return row.firm+"("+value+")";
+										var s = "<span style=\"font-weight:bold;\">" + row.firm+ "</span>";
+										if (row.model != "") {
+											s = "<span style=\"font-weight:bold;\">" + row.firm + "("+ row.model + ")</span>";
+										}
+										return s;
 									}
-								}, {
-									field : 'rktime',
-									title : '入库时间'
-								}, {
+								}, {field : 'rktime', title : '入库时间', sortable:true,
+										sorter:function(a,b){  
+										a = a.split('/');  
+											b = b.split('/');  
+											if (a[2] == b[2]){  
+												if (a[0] == b[0]){  
+													return (a[1]>b[1]?1:-1);  
+												} else {  
+													return (a[0]>b[0]?1:-1);  
+												}  
+											} else {  
+												return (a[2]>b[2]?1:-1);  
+											}  
+										}  
+								} ] ],
+						columns : [ [
+								{
 									field : 'lyr',
 									title : '领用人'
-								}, {
+								},
+								{
 									field : 'lytime',
 									title : '领用时间'
-								},{
+								},
+								{
 									field : 'fhtime',
 									title : '返还时间'
-								},{
-									field : 'b',
+								},
+								{
+									field : 'installers',
 									title : '安装人'
-								},{
-									field : 'c',
+								},
+								{
+									field : 'installtime',
 									title : '安装时间'
-								},{
-									field : 'd',
-									title : '车牌号'
-								},{
-									field : 'e',
+								},
+								{
+									field : 'carNumber',
+									title : '车牌号',
+									width : 100,
+									formatter : function(value, row, index) {
+										var str ="<a id=\"btn"+index+"\" href=\"#\" >"+value+"</a>";
+										var btn= row.carNumber == null ? "" : str;
+										return btn;
+									}
+								},
+								{
+									field : 'company',
 									title : '使用公司'
-								},{
-									field : 'a',
+								},
+								{
+									field : 'networkNo',
 									title : '入网证明编号'
-								},{
+								},
+								{
 									field : 'test',
 									title : '测试',
 									align : 'center',
 									formatter : function(value, row, index) {
 										var s = "";
 										if (value == 1) {
-											s = "<span style=\"color:green;\">已测试</span>";
-										} else {
-											s = "<span style=\"color:red;\">未测试</span>";
+//											s = "<span style=\"color:green;\">已测试</span>";
+											s = "已测试";
+										} else if (value == 0) {
+//											s = "<span style=\"color:red;\">未测试</span>";
+											s = "未测试";
 										}
 										return s;
 									}
-								}, {
+								},
+								{
 									field : 'cstime',
 									title : '测试时间'
-								}, {
+								},
+								{
 									field : 'tresult',
 									title : '测试结果',
 									align : 'center',
 									formatter : function(value, row, index) {
 										var s = "";
-										if (row.test == 1 && value == 1) {
-											s = "<span style=\"color:green;\">定位</span>";
-										} else if (row.test == 1 && value == 0) {
-											s = "<span style=\"color:red;\">不定位</span>";
+										if (row.test == 1) {
+											if (value == 1) {
+//												s = "<span style=\"color:green;\">定位</span>";
+												s = "定位";
+											} else if (value == 0) {
+												s = "<span style=\"color:red;\">不定位</span>";
+											}
 										}
 										return s;
 									}
-								}, {
+								},
+								{
 									field : 'remark',
 									title : '备注'
-								},{
-									field : 'opt',
-									title : '操作',
-									align : 'center',
-									formatter : function(value, row) {
-										var s = "";
-										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editRow('" + row.id + "');\">出库</span></a>";
-										s += "&nbsp;|&nbsp;";
-										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:deleteRow('" + row.id + "');\">删除</span></a>";
-										s += "&nbsp;|&nbsp;";
-										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:deleteRow('" + row.id + "');\">故障</span></a>";
-										return s;
-									}
-								} ] ],
-						view : detailview,
-						detailFormatter : function(index, row) {
-							var s = '<div style="padding:2px;hight:100px;"><table class="grid">'
-									+ '<tr><th style="width: 80px">Gps主机：</th>' + '<td>'
-									+ row.gpszj
-									+ '</td>'
-									+ '<th style="width: 80px">Gps天线：</th>'
-									+ '<td>'
-									+ row.gpstx
-									+ '</td>'
-									+ '<th style="width: 80px">Gsm天线：</th>'
-									+ '<td>'
-									+ row.gsmtx
-									+ '</td>'
-									+ '<th style="width: 80px">电源线：</th>'
-									+ '<td>'
-									+ row.dy
-									+ '</td>'
-									+ '<th style="width: 80px">防水袋：</th>'
-									+ '<td>'
-									+ row.fsd
-									+ '</td></tr>'
-									+ '<tr><th style="width: 80px">计算器：</th>'
-									+ '<td>'
-									+ row.jsq
-									+ '</td>'
-									+ '<th style="width: 80px">摄像仪：</th>'
-									+ '<td>'
-									+ row.sxy
-									+ '</td>'
-									+ '<th style="width: 80px">扬声器：</th>'
-									+ '<td>'
-									+ row.ysq
-									+ '</td>'
-									+ '<th style="width: 80px">麦克风：</th>'
-									+ '<td>'
-									+ row.mkf
-									+ '</td>'
-									+ '<th style="width: 80px"></th>'
-									+ '<td></td></tr>'
-									+ '</table></div>';
-							// return '<div
-							// style="padding:2px;hight:80px;"><table id="ddv-'
-							// + index + '"></table></div>';
-							return s;
-						},
-						// onExpandRow : function(index, row) {
-						// $('#ddv-' + index).empty();
-						// var s = '<tr>'
-						// + '<td rowspan=2 style="border:0"><img src="images/'
-						// + row.id + '.png" style="height:50px;"></td>'
-						// + '<td style="border:0">' + '<p>Attribute: ' + row.id
-						// + '</p>' + '<p>Status: ' + row.id + '</p>' + '</td>'
-						// + '</tr>';
-						// $('#ddv-' + index).append(s);
-						// },
+								}] ],
 						toolbar : '#tb',
-						getSelectedRow : function() {
-							return $('#dg').datagrid('getSelected');
+//						getSelectedRow : function() {
+//							return $('#dg').datagrid('getSelected');
+//						}
+						onLoadSuccess : function() {
+							grid.datagrid('clearSelections'); 
+	//						$('.roleCls').linkbutton({ text : '详细 ', plain : true, iconCls : 'icons icons_35' });
+							$.parser.parse();
 						}
 					});
 	// 设置分页控件
@@ -234,56 +255,113 @@ function myparser(s) {
 		return new Date();
 	}
 }
-function addNew() {
-	top.$('#dd').dialog({
-		title : 'GPS设备出入库信息',
-		iconCls : 'icon-add',
-		href : 'devices/devicesAdd.jsp',
-		width : 550,
-		height : 450,
-		closed : false,
-		cache : false,
-		modal : true,
+
+//出库
+function outRepertory(index) {
+	var data = grid.datagrid('getData').rows[index];
+	if(data.state == 1){
+		SL.msgShow("提示","设备已经出库！","warning");
+		return;
+	}else if(data.state == 4){
+		SL.msgShow("提示","设备已经入网使用！","warning");
+		return;
+	}else  if(data.test == 0){
+		SL.msgShow("提示","设备未经过测试，无法出库！","warning");
+		return;
+	}
+	SL.showWindow({
+		title : 'GPS设备出入库信息', iconCls : 'icon-add', width : 550, height : 450,
+		url : basePath+'outRepertory.jsp',
 		onLoad : function() {
-			var date = new Date();
-			var y = date.getFullYear();
-			var m = date.getMonth() + 1;
-			var d = date.getDate();
-			var strDate = y + '-' + (m < 10 ? ('0' + m) : m) + '-' + (d < 10 ? ('0' + d) : d);
-			top.$("#rktime").datebox("setValue", strDate);
+			$("#form").form('load', data);
 		},
-		buttons : [ {
-			text : '确定',
-			iconCls : 'icon-add',
-			handler : function() {
-				fCallback();
-			}
-		}, {
-			text : '关闭',
-			handler : function() {
-				top.$('#dd').dialog('close');
-			}
+		buttons : [ {text : '确定',iconCls : 'icon-add',handler : function() {fCallback("../devices/outRepertory");}}, {text : '关闭',handler : function() {SL.closeWindow();}
 		} ]
 	});
 }
-function fCallback() {
-	if (top.$("#uform").form('enableValidation').form('validate')) {
-		var data = top.$("#uform").serialize();
-		var url = "";
-		$.ajax({
-			cache : false,
-			type : "POST",
-			url : "../devices/addDevices",
-			data : data,
-			async : false,
+//退回
+function goBack(index) {
+	var data = grid.datagrid('getData').rows[index];
+	if(data.state == 1){
+		SL.msgShow("提示","设备已经出库！","warning");
+		return;
+	}
+	SL.showWindow({
+		title : 'GPS设备出入库信息', iconCls : 'icon-add', width : 550, height : 450,
+		url : basePath+'goBack.jsp',
+		onLoad : function() {
+			$("#form").form('load', data);
+		},
+		buttons : [ {text : '确定',iconCls : 'icon-add',handler : function() {fCallback("../devices/goBack");}}, {text : '关闭',handler : function() {SL.closeWindow();}
+		} ]
+	});
+}
+//测试
+function testing(index) {
+	var data = grid.datagrid('getData').rows[index];
+	if(data.state == 1){
+		SL.msgShow("提示","设备已经出库！","warning");
+		return;
+	}
+	SL.showWindow({
+		title : 'GPS设备测试', iconCls : 'icon-add', width : 550, height : 450,
+		url : basePath+'testing.jsp',
+		onLoad : function() {
+			$("#form").form('load', data);
+		},
+		buttons : [ {text : '确定',iconCls : 'icon-add',handler : function() {fCallback("../devices/testing");}}, {text : '关闭',handler : function() {SL.closeWindow();}
+		} ]
+	});
+}
+//入网
+function netIn(index) {
+	var data = grid.datagrid('getData').rows[index];
+	if(data.state == 2){
+		SL.msgShow("提示","设备未出库，不能使用该设备。","warning");
+		return;
+	}
+	SL.showWindow({
+		title : 'GPS设备入网', iconCls : 'icon-add', width : 550, height : 450,
+		url : basePath+'netIn.jsp',
+		onLoad : function() {
+			$("#form").form('load', data);
+		},
+		buttons : [ {text : '确定',iconCls : 'icon-add',handler : function() {fCallback("../devices/netIn");}}, {text : '关闭',handler : function() {SL.closeWindow();}
+		} ]
+	});
+}
+//入库
+function intoRepertory() {
+	SL.showWindow({
+		title : 'GPS设备出入库信息', iconCls : 'icon-add', width : 550, height : 450,
+		url : basePath+'devicesAdd.jsp',
+		onLoad : function() {},
+		buttons : [ {text : '确定',iconCls : 'icon-add',handler : function() {fCallback("../devices/addDevices");}}, {text : '关闭',handler : function() {SL.closeWindow();}
+		} ]
+	});
+}
+function fCallback(url) {
+	if ($("#form").form('enableValidation').form('validate')) {
+		var data = $("#form").serialize();
+		$.ajax({ cache : false, type : "POST", url : url, data : data, async : false, 
 			success : function(data) {
 				if (data) {
-					top.$('#dd').dialog('close');
 					grid.datagrid('reload');
+					SL.closeWindow();
 				}
 			}
 		});
 	}
+}
+//编辑
+function edit() {
+	SL.showWindow({
+		title : 'GPS设备出入库信息', iconCls : 'icon-add', width : 550, height : 450,
+		url : basePath+'devicesAdd.jsp',
+		onLoad : function() {},
+		buttons : [ {text : '确定',iconCls : 'icon-add',handler : function() {fCallback();}}, {text : '关闭',handler : function() {SL.closeWindow();}
+		} ]
+	});
 }
 // 采用jquery easyui loading css效果
 function ajaxLoading() {
@@ -297,6 +375,10 @@ function ajaxLoading() {
 		left : ($(document.body).outerWidth(true) - 190) / 2,
 		top : ($(window).height() - 45) / 2
 	});
+}
+
+function outExcel() {
+	 window.location.href="outExcel.jsp"; 
 }
 function ajaxLoadEnd() {
 	$(".datagrid-mask").remove();

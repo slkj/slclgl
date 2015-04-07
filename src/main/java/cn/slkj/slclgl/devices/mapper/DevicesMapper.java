@@ -11,4 +11,12 @@ public interface DevicesMapper {
 	int getAllCount(Map<String, Object> map);
 
 	int insert(Devices devices);
+
+	int netIn(Devices devices);
+
+	int testing(Devices devices);
+
+	int goBack(Devices devices);
+
+	int outRepertory(Devices devices);
 }

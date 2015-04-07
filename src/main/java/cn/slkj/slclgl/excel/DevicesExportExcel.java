@@ -81,35 +81,47 @@ public class DevicesExportExcel {
 		// 默认从1 开始 本来是为0 剔除掉
 		for (int i = 0; i < rowLength; i++) {
 			Devices devices = new Devices();
-			// id 设备编号 设备厂商 厂牌型号 设备类别 入库时间 使用状态 返还时间 领用人 领用时间 测试 卡号 测试时间 测试结果
-			for (int j = 1; j < result[i].length; j++) {// 默认从1开始添加
-				// System.out.print(result[i][j] + "\t\t");
-				if (j == 1) { devices.setListnum(result[i][j]); }
-				if (j == 2) { devices.setFirm(result[i][j]); }
-				if (j == 3) { devices.setModel(result[i][j]); }
-				if (j == 4) { devices.setGenre(result[i][j]); }
-				if (j == 5) { devices.setRktime(result[i][j]); }
-				if (j == 6) { devices.setState(result[i][j]); }
-				if (j == 7) { devices.setFhtime(result[i][j]); }
-				if (j == 8) { devices.setLyr(result[i][j]); }
-				if (j == 9) { devices.setLytime(result[i][j]); }
-				if (j == 10) { 	devices.setTest(result[i][j]); }
-				if (j == 11) { devices.setPhone(result[i][j]); }
-				if (j == 12) { devices.setCstime(result[i][j]); }
-				if (j == 13) { devices.setTresult(result[i][j]); }
-				//-----
-				if (j == 14) { devices.setGpszj(result[i][j]); }
-				if (j == 15) { devices.setGpstx(result[i][j]); }
-				if (j == 16) { devices.setGsmtx(result[i][j]); }
-				if (j == 17) { devices.setDy(result[i][j]); }
-				if (j == 18) { devices.setFsd(result[i][j]); }
-				if (j == 19) { devices.setJsq(result[i][j]); }
-				if (j == 20) { devices.setSxy(result[i][j]); }
-				if (j == 21) { devices.setYsq(result[i][j]); }
-				if (j == 22) { devices.setMkf(result[i][j]); }
-				if (j == 23) { devices.setRemark(result[i][j]); }
+			for (int j = 0; j < result[i].length; j++) {// 默认从1开始添加
+				switch (j) {
+				case 0:
+					String str = result[i][j].length() > 0 ? result[i][j] : "2";
+					if("已出库".equals(str)){str = "1";} 
+					if("未出库".equals(str)){str = "2";}
+					if("退回".equals(str)){str = "3";}
+					if("入网使用".equals(str)){str = "4";}
+					devices.setState(Integer.parseInt(str));
+					break;
+				case 1:devices.setListnum(result[i][j]);break;
+				case 2:devices.setPhone(result[i][j]);break;
+				case 3:devices.setFirm(result[i][j]);break;
+				case 4:devices.setModel(result[i][j]);break;
+				case 5:devices.setRktime(result[i][j]);break;
+				case 6:devices.setLyr(result[i][j]);break;
+				case 7:devices.setLytime(result[i][j]);break;
+				case 8:devices.setFhtime(result[i][j]);break;
+				case 9:devices.setInstallers(result[i][j]);break;
+				case 10:devices.setInstalltime(result[i][j]);break;
+				case 11:devices.setCarNumber(result[i][j]);break;
+				case 12:devices.setCompany(result[i][j]);break;
+				case 13:devices.setNetworkNo(result[i][j]);break;
+				case 14:
+					String test = result[i][j].length() > 0 ? result[i][j] : "0";
+					if("未测试".equals(test)){test = "0";} 
+					if("已测试".equals(test)){test = "1";}
+					devices.setTest(Integer.parseInt(test));
+					break;
+				case 15:devices.setCstime(result[i][j]); break;
+				case 16:
+					String tresult = result[i][j].length() > 0 ? result[i][j] : "0";
+					if("不定位".equals(tresult)){tresult = "0";} 
+					if("定位".equals(tresult)){tresult = "1";}
+					devices.setTresult(Integer.parseInt(tresult));
+					break;
+				case 17:devices.setArea(result[i][j]); break;
+				}
+				
+
 			}
-			// System.out.println(devices.toString());
 			impl.insert(devices);
 		}
 		return "ok";
@@ -269,7 +281,6 @@ public class DevicesExportExcel {
 						}
 
 					}
-
 					if (columnIndex == 0 && value.trim().equals("")) {
 
 						break;

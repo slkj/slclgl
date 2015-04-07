@@ -8,24 +8,7 @@ $(function() {
 	getMeuns();
 	tabClose();
 	tabCloseEven();
-	/* 选择TAB时刷新内容 */
-	// $('#tabs').tabs({
-	// onSelect : function(title) {
-	// var currTab = $('#tabs').tabs('getTab', title);
-	// var iframe = $(currTab.panel('options').content);
-	//
-	// var src = iframe.attr('src');
-	// if (src)
-	// $('#tabs').tabs('update', {
-	// tab : currTab,
-	// options : {
-	// content : createFrame(src)
-	// }
-	// });
-	//
-	// }
-	// });
-})
+});
 function getMeuns() {
 	_menus = null;
 	$.ajax({
@@ -270,15 +253,7 @@ function closeTab(action) {
 		break;
 	}
 }
-closeAllTabs = function () {
-    return closeTab("closeall");
+closeAllTabs = function() {
+	return closeTab("closeall");
 };
-/**
- * 弹出信息窗口 
- * title:标题 
- * msgString:提示信息 
- * msgType:信息类型 [error,info,question,warning]
- */
-function msgShow(title, msgString, msgType) {
-	$.messager.alert(title, msgString, msgType);
-}
+
