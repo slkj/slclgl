@@ -37,6 +37,7 @@ public class Devices {
 	private String  company;
 	private String networkNo;
 	private String area;
+	private String  areaName;
 	
 	public String getArea() {
 		return area;
@@ -241,6 +242,12 @@ public class Devices {
 	}
 	public void setInstallers(String installers) {
 		this.installers = installers;
+	}
+	public String getAreaName() {
+		return areaName;
+	}
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
 	}
 	@Override
 	public String toString() {

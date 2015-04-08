@@ -41,7 +41,7 @@ public class DevicesController {
 		pageMap.put("area", request.getParameter("area"));
 		pageMap.put("listnum", request.getParameter("listnum"));
 		pageMap.put("phone", request.getParameter("phone"));
-		
+		pageMap.put("carNumber", request.getParameter("carNumber"));
 		String sort =request.getParameter("sort");
 //		if(StringUtils.isNotBlank(sort)){
 			pageMap.put("sort", sort != null ? sort : "rktime");

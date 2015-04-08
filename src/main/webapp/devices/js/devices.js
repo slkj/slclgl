@@ -54,7 +54,7 @@ function loadDataGrid() {
 						loadMsg : '数据加载中,请稍后……',
 						frozenColumns : [ [
 								{
-									field : 'area',
+									field : 'areaName',
 									title : '所在地区'
 								},
 								{
@@ -64,9 +64,11 @@ function loadDataGrid() {
 									formatter : function(value, row, index) {
 										var s = "";
 										if (value == 0) {
-											s = "<div style='background-color:#008B00;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>全新</div>";
+//											s = "<div style='background-color:#008B00;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>全新</div>";
+											s = "<span style=\"color:green;\">全新</span>";
 										} else if (value == 1) {
-											s = "<div style='background-color:#525252;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>返修</div>"
+//											s = "<div style='background-color:#525252;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>返修</div>"
+											s = "<span style=\"color:#525252;\">返修</span>";
 										}
 										return s;
 									}

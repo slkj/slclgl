@@ -4,7 +4,7 @@
 	<sql id="sql_temp">
 		id,listnum,firm,model,genre,rktime,state,fhtime,lyr,lytime,test,phone,cstime,
 		tresult,gpszj,gpstx,gsmtx,dy,fsd,jsq,sxy,ysq,mkf,remark,pack,installers,installtime,
-		carNumber,company,networkNo,area
+		carNumber,company,networkNo,area, ( SELECT note FROM tb_xzqh where code =area) as areaName
 	</sql>
 	<select id="getAll" resultType="Devices" parameterType="hashmap">
 		SELECT <include refid="sql_temp"></include> FROM TB_DEVICES
@@ -21,6 +21,7 @@
 			<if test="lyr != null and lyr != ''"> and lyr like CONCAT('%',#{lyr},'%') </if>
 			<if test="firm != null and firm != ''">and firm like CONCAT('%',#{firm},'%')  </if>
 			<if test="area != null and area != ''">and area like CONCAT('%',#{area},'%')  </if>
+			<if test="carNumber != null and carNumber != ''">and carNumber like CONCAT('%',#{carNumber},'%')  </if>
 		</where>
 		<if test="sort != null and sort != ''">
 			ORDER BY  ${sort}       ${order}
@@ -44,6 +45,8 @@
 			<if test="lyr != null and lyr != ''"> and lyr like CONCAT('%',#{lyr},'%') </if>
 			<if test="firm != null and firm != ''">and firm like CONCAT('%',#{firm},'%')  </if>
 			<if test="area != null and area != ''">and area like CONCAT('%',#{area},'%')  </if>
+			<if test="carNumber != null and carNumber != ''">and carNumber like CONCAT('%',#{carNumber},'%')  </if>
+			
 		</where>
 		<if test="sort != null and sort != ''">
 			ORDER BY  ${sort}  ${order}

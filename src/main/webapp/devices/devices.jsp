@@ -25,8 +25,8 @@
 					<tr>
 						<td>
 							使用状态:
-							<select class="easyui-combobox" name="state" panelheight="auto" style="width: 100px">
-								<option value="" selected="selected">请选择</option>
+							<select id="state" name="state" class="easyui-combobox" style="width:100px;">   
+							   <option value="" selected="selected">请选择</option>
 								<option value="4">入网使用</option>
 								<option value="1">已出库</option>
 								<option value="2">未出库</option>
@@ -34,31 +34,22 @@
 							</select> 
 							设备编号:<input name="listnum" class="easyui-numberbox" style="width: 150px" />
 							SIM卡号:<input name="phone" class="easyui-numberbox" style="width: 150px" />
+							车牌号:<input name="carNumber" class="easyui-textbox" style="width: 150px" />
 						</td>
 					</tr>
 					<tr height="3px"></tr>
 					<tr>
 						<td>
 							领用人：<input name="lyr" class="easyui-textbox" style="width: 150px" /> 
-							所在地区：<select   class="easyui-combobox" name="area" style="width:200px;">
-										<option value="" selected="selected">请选择</option>   
-									    <option value="石家庄市">石家庄市</option>
-									    <option value="唐山市">唐山市</option>
-									    <option value="秦皇岛市">秦皇岛市</option>
-									    <option value="邯郸市">邯郸市</option>
-									    <option value="邢台市">邢台市</option>
-									    <option value="保定市">保定市</option>
-									    <option value="张家口市">张家口市</option>
-									    <option value="承德市">承德市</option>
-									    <option value="沧州市">沧州市</option>  
-									</select>
+							所在地区：
+							 <select class="easyui-combotree" url="../data/city_data.json" name="area" style="width:260px;" data-options="lines:'true'"></select>
 						</td>
 					</tr>
 					<tr height="3px"></tr>
 					<tr id="highsearch" style="display: none;">
 						<td>
 							设备厂商 : 	
-							<select class="easyui-combobox"  name="firm" panelheight="auto" style="width: 100px">
+							<select  id="firm"  class="easyui-combobox"  name="firm" panelheight="auto" style="width: 100px">
 								<option value="" selected="selected">请选择</option>
 								<option value="神龙">神龙</option>
 								<option value="珠海天琴">珠海天琴</option>

@@ -17,19 +17,8 @@
 			<tr>
 				<th>所在地区：</th>
 				<td colspan="3">
-					<select   class="easyui-combobox" name="area" style="width:200px;" data-options="required:'true'">
-						<option value="" selected="selected" >请选择</option>   
-					    <option value="石家庄市">石家庄市</option>
-					    <option value="唐山市">唐山市</option>
-					    <option value="秦皇岛市">秦皇岛市</option>
-					    <option value="邯郸市">邯郸市</option>
-					    <option value="邢台市">邢台市</option>
-					    <option value="保定市">保定市</option>
-					    <option value="张家口市">张家口市</option>
-					    <option value="承德市">承德市</option>
-					    <option value="沧州市">沧州市</option>  
-					</select>
-					<span style="color: red;">*请选择设备使用所在地区</span>
+					 <select class="easyui-combotree" url="../data/city_data.json" name="area" style="width:260px;" data-options="lines:'true',required:'true'"></select>
+					<span style="color: red;">*设备使用地区</span>
 				</td>
 			</tr>
 			<tr>

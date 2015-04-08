@@ -5,23 +5,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SIM卡管理</title>
-<link rel="stylesheet" type="text/css"
-	href="../js/easyui/themes/default/easyui.css" />
-<link rel="stylesheet" type="text/css"
-	href="../js/easyui/themes/icon.css" />
+<link rel="stylesheet" type="text/css" href="../js/easyui/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="../js/easyui/themes/icon.css" />
 <link rel="stylesheet" type="text/css" href="../css/default.css" />
 <link rel="stylesheet" type="text/css" href="../css/syscss.css" />
 <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="../js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src='../js/SL.easyUI.js'></script>
 
 <script type="text/javascript">
 	var grid;
+	var basePath="";
 	$(function() {
 		//初始化页面
 		initDataGrid();
 		//加载数据
-		loadData();
+// 		loadData();
 	});
 
 	function loadData() {
@@ -54,10 +54,22 @@
 										field : 'ck',
 										checkbox : true
 									},
-									// 									{
-									// 										field : 'id',
-									// 										title : '编码'
-									// 									},
+									{
+										field : 'telnum',
+										title : 'SIM号码'
+									},{
+										field : 'state',
+										title : '状态',
+										formatter : function(value, row) {
+											var s = "";
+											if (value == "1") {
+												s = "<span style=\"color:green;\">已用</span>";
+											} else {
+												s = "<span style=\"color:red;\">未用</span>";
+											}
+											return s;
+										}
+									},
 									{
 										field : 'gys',
 										title : '供应商'
@@ -72,46 +84,34 @@
 										title : '卡类型'
 									},
 									{
-										field : 'telnum',
-										title : '车载号码'
-									},
-									{
-										field : 'state',
-										title : '状态',
-										formatter : function(value, row) {
-											var s = "";
-											if (value == "1") {
-												s = "<span style=\"color:green;\">已用</span>";
-											} else {
-												s = "<span style=\"color:red;\">未用</span>";
-											}
-											return s;
-										}
-									},
-									{
-										field : 'intime',
-										title : '入库时间'
+										field : 'a',
+										title : '套餐业务'
 									},
 									{
 										field : 'kktime',
-										title : '开卡时间'
+										title : '开卡日期'
 									},
 									{
 										field : 'outtime',
-										title : '出库时间'
+										title : '续费日期'
 									},
+									// 									{
+									// 										field : 'lyr',
+									// 										title : '领用人'
+									// 									},
+									// 									{
+									// 										field : 'fhtime',
+									// 										title : '返回时间'
+									// 									},
 									{
-										field : 'lyr',
-										title : '领用人'
-									},
-									{
-										field : 'fhtime',
-										title : '返回时间'
+										field : 'intime',
+										title : '入库日期'
 									},
 									{
 										field : 'lrr',
 										title : '录入人'
 									},
+									
 									{
 										field : 'beizhu',
 										title : '备注'
@@ -146,46 +146,28 @@
 	}
 
 	function addNew() {
-		top.$('#dd').dialog({
-			title : '联通SIM卡出入库信息',
-			iconCls : 'icon-add',
-			href : 'sim/simAdd.jsp',
-			width : 550,
-			height : 400,
-			closed : false,
-			cache : false,
-			modal : true,
-			onLoad : function() {
-				top.$("#type").val("1");
-			},
-			buttons : [ {
-				text : '确定',
-				iconCls : 'icon-add',
-				handler : function() {
-					fCallback();
-				}
-			}, {
-				text : '关闭',
-				handler : function() {
-					top.$('#dd').dialog('close');
-				}
+		SL.showWindow({
+			title : '联通SIM卡出入库信息', iconCls : 'icon-add', width : 550, height : 450,
+			url : basePath+'simAdd.jsp',
+			onLoad : function() {},
+			buttons : [ {text : '确定',iconCls : 'icon-add',handler : function() {fCallback("../sim/addSim");}},
+			            {text : '关闭',handler : function() {SL.closeWindow();}
 			} ]
 		});
 	}
-	function fCallback() {
+	function fCallback(url) {
 		if (top.$("#uform").form('enableValidation').form('validate')) {
-			var data = top.$("#uform").serialize();
-			var url = "";
+			var data = $("#uform").serialize();
 			$.ajax({
 				cache : false,
 				type : "POST",
-				url : "../sim/addSim",
+				url : url,
 				data : data,
 				async : false,
 				success : function(data) {
 					if (data) {
-						top.$('#dd').dialog('close');
 						grid.datagrid('reload'); // 重新载入所有行
+						SL.closeWindow();
 					}
 				}
 			});
