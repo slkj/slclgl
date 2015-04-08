@@ -11,4 +11,6 @@ public interface SimService {
 	int getAllCount(Map<String, Object> map);
 
 	int insert(Sim sim);
+
+	List<Sim> getList(Map<String, Object> map);
 }

@@ -10,5 +10,7 @@ public interface SimMapper {
 
 	int getAllCount(Map<String, Object> map);
 
+	List<Sim> getList(Map<String, Object> map);
+
 	int insert(Sim sim);
 }

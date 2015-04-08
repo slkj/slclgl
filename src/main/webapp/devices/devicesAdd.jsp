@@ -12,7 +12,7 @@
 		<input name="state" value="2" type="hidden"/>
 		<table class="grid">
 			<tr>
-				<th colspan="5" style="text-align: left;color: red;">*请检查设备ID、SIM卡号、入网证明编号是否已存在，已存在数据将重复无法保存。</th>
+				<th colspan="4" style="text-align: left;color: red;">*请检查设备ID、SIM卡号、入网证明编号是否已存在，已存在数据将重复无法保存。</th>
 			</tr>
 			<tr>
 				<th style="width: 100px">设   备 包  装：</th>
@@ -29,7 +29,8 @@
 				</td>
 				<th style="width: 100px">SIM 卡 号：</th>
 				<td>
-					<input name="phone" class="easyui-numberbox">
+					<input id="phone" name="phone" class="easyui-combobox" 
+					data-options="loader: btsloader,mode: 'remote',valueField: 'id',textField: 'name'" />
 				</td>
 			</tr>
 			<tr>

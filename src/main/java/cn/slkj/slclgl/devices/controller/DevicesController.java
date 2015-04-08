@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +37,7 @@ public class DevicesController {
 		pageMap.put("state", request.getParameter("state"));
 		pageMap.put("lyr", request.getParameter("lyr"));
 		pageMap.put("firm", request.getParameter("firm"));
+		//TODO 处理地区代码，如果后面有0的要like
 		pageMap.put("area", request.getParameter("area"));
 		pageMap.put("listnum", request.getParameter("listnum"));
 		pageMap.put("phone", request.getParameter("phone"));

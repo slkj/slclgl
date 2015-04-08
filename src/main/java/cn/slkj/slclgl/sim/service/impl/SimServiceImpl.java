@@ -24,7 +24,10 @@ public class SimServiceImpl implements SimService {
 	public int getAllCount(Map<String, Object> map) {
 		return mapper.getAllCount(map);
 	}
-
+	@Override
+	public List<Sim> getList(Map<String, Object> map) {
+		return mapper.getList(map);
+	}
 	@Override
 	public int insert(Sim sim) {
 		return mapper.insert(sim);

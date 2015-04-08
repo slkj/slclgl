@@ -12,6 +12,8 @@ public class Sim {
 	private String outtime;
 	private String kktime;
 	private String fhtime;
+	private String renewtime;
+	private String business;
 	private String beizhu;
 	private String gys;
 	private String lyr;
@@ -100,12 +102,25 @@ public class Sim {
 	public void setLrr(String lrr) {
 		this.lrr = lrr;
 	}
+	public String getRenewtime() {
+		return renewtime;
+	}
+	public void setRenewtime(String renewtime) {
+		this.renewtime = renewtime;
+	}
+	public String getBusiness() {
+		return business;
+	}
+	public void setBusiness(String business) {
+		this.business = business;
+	}
 	@Override
 	public String toString() {
 		return "Sim [id=" + id + ", type=" + type + ", cardType=" + cardType + ", listnum="
 				+ listnum + ", telnum=" + telnum + ", state=" + state + ", intime=" + intime
 				+ ", outtime=" + outtime + ", kktime=" + kktime + ", fhtime=" + fhtime
-				+ ", beizhu=" + beizhu + ", gys=" + gys + ", lyr=" + lyr + ", lrr=" + lrr + "]";
+				+ ", renewtime=" + renewtime + ", business=" + business + ", beizhu=" + beizhu
+				+ ", gys=" + gys + ", lyr=" + lyr + ", lrr=" + lrr + "]";
 	}
 	
 }

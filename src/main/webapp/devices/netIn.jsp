@@ -21,7 +21,7 @@
 				</td>
 				<th style="width: 100px">SIM 卡 号：</th>
 				<td>
-					<input name="phone" class="easyui-numberbox" data-options="required:'true'">
+					<input name="phone" class="easyui-numberbox" data-options="required:'true'" disabled="ture">
 				</td>
 			</tr>
 			<tr>

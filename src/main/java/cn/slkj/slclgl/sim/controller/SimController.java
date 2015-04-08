@@ -27,16 +27,26 @@ public class SimController {
 	public EPager<Sim> getAllUsers(HttpServletRequest request) throws Exception {
 		int page = Integer.parseInt(request.getParameter("page"));
 		int rows = Integer.parseInt(request.getParameter("rows"));
-		int type = Integer.parseInt(request.getParameter("type"));
 		Map<String, Object> pageMap = new HashMap<String, Object>();
 		pageMap.put("startPage", (page - 1) * rows);
 		pageMap.put("endPage", rows);
-		pageMap.put("type", type);
+		pageMap.put("intime", request.getParameter("intime"));
+		pageMap.put("type", Integer.parseInt(request.getParameter("type")));
+		pageMap.put("state", request.getParameter("state"));
+		pageMap.put("cardType", request.getParameter("cardType"));
 		int total = impl.getAllCount(pageMap);
 		List<Sim> list = impl.getAll(pageMap);
 		return new EPager<Sim>(total, list);
 	}
-
+	
+	@RequestMapping("/getList")
+	@ResponseBody
+	public List<Sim> getList(HttpServletRequest request) throws Exception {
+		int telnum = Integer.parseInt(request.getParameter("telnum"));
+		Map<String, Object> pageMap = new HashMap<String, Object>();
+		pageMap.put("telnum", telnum);
+		return impl.getList(pageMap);
+	}
 	@RequestMapping(value = "/addSim", method = { RequestMethod.POST })
 	@ResponseBody
 	public boolean addModule(Sim sim) {

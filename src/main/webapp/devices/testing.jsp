@@ -29,7 +29,8 @@
 				</td>
 				<th style="width: 100px">SIM 卡 号：</th>
 				<td>
-					<input name="phone" class="easyui-numberbox" data-options="required:'true'">
+					<input id="phone" name="phone" class="easyui-combobox" 
+					data-options="loader: btsloader,mode: 'remote',valueField: 'id',textField: 'name'" />
 				</td>
 			</tr>
 			<tr>

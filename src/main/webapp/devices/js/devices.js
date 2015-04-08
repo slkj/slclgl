@@ -1,5 +1,5 @@
 var grid;
-var basePath="";
+var basePath = "";
 $(function() {
 	// 初始化页面
 	loadDataGrid();
@@ -40,7 +40,7 @@ function loadDataGrid() {
 			.datagrid(
 					{
 						method : 'post',
-						url : basePath+'list',
+						url : basePath + 'list',
 						title : 'GPS设备列表',
 						fit : true,
 						nowrap : true, // false:折行
@@ -64,10 +64,12 @@ function loadDataGrid() {
 									formatter : function(value, row, index) {
 										var s = "";
 										if (value == 0) {
-//											s = "<div style='background-color:#008B00;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>全新</div>";
+											// s = "<div
+											// style='background-color:#008B00;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>全新</div>";
 											s = "<span style=\"color:green;\">全新</span>";
 										} else if (value == 1) {
-//											s = "<div style='background-color:#525252;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>返修</div>"
+											// s = "<div
+											// style='background-color:#525252;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>返修</div>"
 											s = "<span style=\"color:#525252;\">返修</span>";
 										}
 										return s;
@@ -77,15 +79,19 @@ function loadDataGrid() {
 									field : 'opt',
 									title : '操作',
 									align : 'center',
-									formatter : function(value,row,index) {
+									formatter : function(value, row, index) {
 										var s = "";
-										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:outRepertory('" + index + "');\">出库</span></a>";
+										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:outRepertory('"
+												+ index + "');\">出库</span></a>";
 										s += "&nbsp;|&nbsp;";
-										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:goBack('" + index + "');\">退回</span></a>";
+										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:goBack('"
+												+ index + "');\">退回</span></a>";
 										s += "&nbsp;|&nbsp;";
-										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:testing('" + index + "');\">测试</span></a>";
+										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:testing('"
+												+ index + "');\">测试</span></a>";
 										s += "&nbsp;|&nbsp;";
-										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:netIn('" + index + "');\">入网</span></a>";
+										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:netIn('"
+												+ index + "');\">入网</span></a>";
 										return s;
 									}
 								},
@@ -105,42 +111,34 @@ function loadDataGrid() {
 										}
 										return s;
 									}
-								},
-								{
+								}, {
 									field : 'listnum',
 									title : '设备编号'
-								},
-								{
+								}, {
 									field : 'phone',
-									title : 'SIM卡号'
-								},
+									title : 'SIM卡号',
+									formatter : function(value, row, index) {
+										var str = "<a id=\"btn" + index + "\" href=\"#\" onclick=\"phone("+index+")\">" + value
+												+ "</a>";
+										var btn = row.phone == null ? "" : str;
+										return btn;
+									}
+								} ] ],
+						columns : [ [
 								{
 									field : 'firm',
 									title : '厂牌型号',
-									align : 'center',
-									formatter : function(value, row, index) {
-										var s = "<span style=\"font-weight:bold;\">" + row.firm+ "</span>";
-										if (row.model != "") {
-											s = "<span style=\"font-weight:bold;\">" + row.firm + "("+ row.model + ")</span>";
-										}
-										return s;
-									}
-								}, {field : 'rktime', title : '入库时间', sortable:true,
-										sorter:function(a,b){  
-										a = a.split('/');  
-											b = b.split('/');  
-											if (a[2] == b[2]){  
-												if (a[0] == b[0]){  
-													return (a[1]>b[1]?1:-1);  
-												} else {  
-													return (a[0]>b[0]?1:-1);  
-												}  
-											} else {  
-												return (a[2]>b[2]?1:-1);  
-											}  
-										}  
-								} ] ],
-						columns : [ [
+//									align : 'center',
+//									formatter : function(value, row, index) {
+//										var s = "<span style=\"font-weight:bold;\">" + row.firm
+//												+ "</span>";
+//										if (row.model != "") {
+//											s = "<span style=\"font-weight:bold;\">" + row.firm
+//													+ "(" + row.model + ")</span>";
+//										}
+//										return s;
+//									}
+								},
 								{
 									field : 'lyr',
 									title : '领用人'
@@ -166,40 +164,44 @@ function loadDataGrid() {
 									title : '车牌号',
 									width : 100,
 									formatter : function(value, row, index) {
-										var str ="<a id=\"btn"+index+"\" href=\"#\" >"+value+"</a>";
-										var btn= row.carNumber == null ? "" : str;
+										var str = "<a id=\"btn" + index + "\" href=\"#\" onclick=\"carNumber("+index+")\">" + value
+												+ "</a>";
+										var btn = row.carNumber == null ? "" : str;
 										return btn;
 									}
-								},
-								{
+								}, {
 									field : 'company',
 									title : '使用公司'
-								},
-								{
+								}, {
 									field : 'networkNo',
-									title : '入网证明编号'
-								},
-								{
+									title : '入网证明编号',
+									formatter : function(value, row, index) {
+										var str = "<a id=\"btn" + index + "\" href=\"#\"  onclick=\"networkNo("+index+")\">" + value
+												+ "</a>";
+										var btn = row.networkNo == null ? "" : str;
+										return btn;
+									}
+								}, {
 									field : 'test',
 									title : '测试',
 									align : 'center',
 									formatter : function(value, row, index) {
 										var s = "";
 										if (value == 1) {
-//											s = "<span style=\"color:green;\">已测试</span>";
+											// s = "<span
+											// style=\"color:green;\">已测试</span>";
 											s = "已测试";
 										} else if (value == 0) {
-//											s = "<span style=\"color:red;\">未测试</span>";
+											// s = "<span
+											// style=\"color:red;\">未测试</span>";
 											s = "未测试";
 										}
 										return s;
 									}
-								},
-								{
+								}, {
 									field : 'cstime',
 									title : '测试时间'
-								},
-								{
+								}, {
 									field : 'tresult',
 									title : '测试结果',
 									align : 'center',
@@ -207,7 +209,8 @@ function loadDataGrid() {
 										var s = "";
 										if (row.test == 1) {
 											if (value == 1) {
-//												s = "<span style=\"color:green;\">定位</span>";
+												// s = "<span
+												// style=\"color:green;\">定位</span>";
 												s = "定位";
 											} else if (value == 0) {
 												s = "<span style=\"color:red;\">不定位</span>";
@@ -215,18 +218,24 @@ function loadDataGrid() {
 										}
 										return s;
 									}
-								},
-								{
+								}, {
+									field : 's',
+									title : '安检员'
+								}, {
+									field : 'rktime',
+									title : '入库时间'
+								}, {
 									field : 'remark',
 									title : '备注'
-								}] ],
+								} ] ],
 						toolbar : '#tb',
-//						getSelectedRow : function() {
-//							return $('#dg').datagrid('getSelected');
-//						}
+						// getSelectedRow : function() {
+						// return $('#dg').datagrid('getSelected');
+						// }
 						onLoadSuccess : function() {
-							grid.datagrid('clearSelections'); 
-	//						$('.roleCls').linkbutton({ text : '详细 ', plain : true, iconCls : 'icons icons_35' });
+							grid.datagrid('clearSelections');
+							// $('.roleCls').linkbutton({ text : '详细 ', plain :
+							// true, iconCls : 'icons icons_35' });
 							$.parser.parse();
 						}
 					});
@@ -236,6 +245,18 @@ function loadDataGrid() {
 		afterPageText : '页    共 {pages} 页',
 		displayMsg : '当前显示 {from} - {to} 条记录   共 {total} 条记录'
 	});
+}
+function phone(index){
+	var data = grid.datagrid('getData').rows[index];
+	alert(data.phone);
+}
+function carNumber(index){
+	var data = grid.datagrid('getData').rows[index];
+	alert(data.carNumber);
+}
+function networkNo(index){
+	var data = grid.datagrid('getData').rows[index];
+	alert(data.networkNo);
 }
 function myformatter(date) {
 	var y = date.getFullYear();
@@ -258,94 +279,213 @@ function myparser(s) {
 	}
 }
 
-//出库
+// 出库
 function outRepertory(index) {
 	var data = grid.datagrid('getData').rows[index];
-	if(data.state == 1){
-		SL.msgShow("提示","设备已经出库！","warning");
+	if (data.state == 1) {
+		SL.msgShow("提示", "设备已经出库！", "warning");
 		return;
-	}else if(data.state == 4){
-		SL.msgShow("提示","设备已经入网使用！","warning");
+	} else if (data.state == 4) {
+		SL.msgShow("提示", "设备已经入网使用！", "warning");
 		return;
-	}else  if(data.test == 0){
-		SL.msgShow("提示","设备未经过测试，无法出库！","warning");
+	} else if (data.test == 0) {
+		SL.msgShow("提示", "设备未经过测试，无法出库！", "warning");
 		return;
 	}
 	SL.showWindow({
-		title : 'GPS设备出入库信息', iconCls : 'icon-add', width : 550, height : 450,
-		url : basePath+'outRepertory.jsp',
+		title : 'GPS设备出入库信息',
+		iconCls : 'icon-add',
+		width : 550,
+		height : 450,
+		url : basePath + 'outRepertory.jsp',
 		onLoad : function() {
 			$("#form").form('load', data);
 		},
-		buttons : [ {text : '确定',iconCls : 'icon-add',handler : function() {fCallback("../devices/outRepertory");}}, {text : '关闭',handler : function() {SL.closeWindow();}
+		buttons : [ {
+			text : '确定',
+			iconCls : 'icon-add',
+			handler : function() {
+				fCallback("../devices/outRepertory");
+			}
+		}, {
+			text : '关闭',
+			handler : function() {
+				SL.closeWindow();
+			}
 		} ]
 	});
 }
-//退回
+// 退回
 function goBack(index) {
 	var data = grid.datagrid('getData').rows[index];
-	if(data.state == 1){
-		SL.msgShow("提示","设备已经出库！","warning");
+	if (data.state == 1) {
+		SL.msgShow("提示", "设备已经出库！", "warning");
 		return;
 	}
 	SL.showWindow({
-		title : 'GPS设备出入库信息', iconCls : 'icon-add', width : 550, height : 450,
-		url : basePath+'goBack.jsp',
+		title : 'GPS设备出入库信息',
+		iconCls : 'icon-add',
+		width : 550,
+		height : 450,
+		url : basePath + 'goBack.jsp',
 		onLoad : function() {
 			$("#form").form('load', data);
 		},
-		buttons : [ {text : '确定',iconCls : 'icon-add',handler : function() {fCallback("../devices/goBack");}}, {text : '关闭',handler : function() {SL.closeWindow();}
+		buttons : [ {
+			text : '确定',
+			iconCls : 'icon-add',
+			handler : function() {
+				fCallback("../devices/goBack");
+			}
+		}, {
+			text : '关闭',
+			handler : function() {
+				SL.closeWindow();
+			}
 		} ]
 	});
 }
-//测试
+// 测试
 function testing(index) {
 	var data = grid.datagrid('getData').rows[index];
-	if(data.state == 1){
-		SL.msgShow("提示","设备已经出库！","warning");
+	if (data.state == 1) {
+		SL.msgShow("提示", "设备已经出库！", "warning");
 		return;
 	}
 	SL.showWindow({
-		title : 'GPS设备测试', iconCls : 'icon-add', width : 550, height : 450,
-		url : basePath+'testing.jsp',
+		title : 'GPS设备测试',
+		iconCls : 'icon-add',
+		width : 550,
+		height : 450,
+		url : basePath + 'testing.jsp',
 		onLoad : function() {
 			$("#form").form('load', data);
 		},
-		buttons : [ {text : '确定',iconCls : 'icon-add',handler : function() {fCallback("../devices/testing");}}, {text : '关闭',handler : function() {SL.closeWindow();}
+		buttons : [ {
+			text : '确定',
+			iconCls : 'icon-add',
+			handler : function() {
+				fCallback("../devices/testing");
+			}
+		}, {
+			text : '关闭',
+			handler : function() {
+				SL.closeWindow();
+			}
 		} ]
 	});
 }
-//入网
+// 入网
 function netIn(index) {
 	var data = grid.datagrid('getData').rows[index];
-	if(data.state == 2){
-		SL.msgShow("提示","设备未出库，不能使用该设备。","warning");
+	if (data.state == 2) {
+		SL.msgShow("提示", "设备未出库，不能使用该设备。", "warning");
 		return;
 	}
 	SL.showWindow({
-		title : 'GPS设备入网', iconCls : 'icon-add', width : 550, height : 450,
-		url : basePath+'netIn.jsp',
+		title : 'GPS设备入网',
+		iconCls : 'icon-add',
+		width : 550,
+		height : 450,
+		url : basePath + 'netIn.jsp',
 		onLoad : function() {
 			$("#form").form('load', data);
 		},
-		buttons : [ {text : '确定',iconCls : 'icon-add',handler : function() {fCallback("../devices/netIn");}}, {text : '关闭',handler : function() {SL.closeWindow();}
+		buttons : [ {
+			text : '确定',
+			iconCls : 'icon-add',
+			handler : function() {
+				fCallback("../devices/netIn");
+			}
+		}, {
+			text : '关闭',
+			handler : function() {
+				SL.closeWindow();
+			}
 		} ]
 	});
 }
-//入库
+//SIM卡号联想搜索
+var btsloader = function(param, success, error) {
+	// 获取输入的值
+	var q = param.q || "";
+	// 此处q的length代表输入多少个字符后开始查询
+	if (q.length < 3)
+		return false;
+	$.ajax({
+		url : "../sim/getList",
+//		type : "post",
+		data : {
+			// 传值，还是JSON数据
+			telnum : q
+		},
+		// 重要，如果写jsonp会报转换错误，此处不写都可以
+		dataType : "json",
+		success : function(data) {
+			// 关键步骤，遍历一个MAP对象
+			var items = $.map(data, function(item) {
+				return {
+					id : item.telnum,
+					name : item.telnum
+				};
+			});
+			// 执行loader的success方法
+			success(items);
+		}, // 异常处理
+		error : function(xml, text, msg) {
+			error.apply(this, arguments);
+		}
+	});
+};
+function autoSIM(vID){
+	 $('#' + vID).combobox({
+         valueField: 'telnum',
+         textField: 'telnum',
+         onChange: function (newValue, oldValue) {
+             if (newValue.length < 3 )   return false;
+             var telnum = encodeURIComponent($('#' + vID).combobox('getText')); //搜索词
+             var urlStr = "../sim/getList?telnum=" + telnum ;
+             $("#" + vID).combobox("reload", urlStr);
+         },
+         onSelect: function (obj) {
+             $('#' + vID).combobox('setValue', obj.telnum);
+         }
+     });
+}
+// 入库
 function intoRepertory() {
 	SL.showWindow({
-		title : 'GPS设备出入库信息', iconCls : 'icon-add', width : 550, height : 450,
-		url : basePath+'devicesAdd.jsp',
-		onLoad : function() {},
-		buttons : [ {text : '确定',iconCls : 'icon-add',handler : function() {fCallback("../devices/addDevices");}}, {text : '关闭',handler : function() {SL.closeWindow();}
+		title : 'GPS设备出入库信息',
+		iconCls : 'icon-add',
+		width : 550,
+		height : 450,
+		url : basePath + 'devicesAdd.jsp',
+		onLoad : function() {
+//			autoSIM("phone");
+		},
+		buttons : [ {
+			text : '确定',
+			iconCls : 'icon-add',
+			handler : function() {
+				fCallback("../devices/addDevices");
+			}
+		}, {
+			text : '关闭',
+			handler : function() {
+				SL.closeWindow();
+			}
 		} ]
 	});
 }
 function fCallback(url) {
 	if ($("#form").form('enableValidation').form('validate')) {
 		var data = $("#form").serialize();
-		$.ajax({ cache : false, type : "POST", url : url, data : data, async : false, 
+		$.ajax({
+			cache : false,
+			type : "POST",
+			url : url,
+			data : data,
+			async : false,
 			success : function(data) {
 				if (data) {
 					grid.datagrid('reload');
@@ -355,13 +495,27 @@ function fCallback(url) {
 		});
 	}
 }
-//编辑
+// 编辑
 function edit() {
 	SL.showWindow({
-		title : 'GPS设备出入库信息', iconCls : 'icon-add', width : 550, height : 450,
-		url : basePath+'devicesAdd.jsp',
-		onLoad : function() {},
-		buttons : [ {text : '确定',iconCls : 'icon-add',handler : function() {fCallback();}}, {text : '关闭',handler : function() {SL.closeWindow();}
+		title : 'GPS设备出入库信息',
+		iconCls : 'icon-add',
+		width : 550,
+		height : 450,
+		url : basePath + 'devicesAdd.jsp',
+		onLoad : function() {
+		},
+		buttons : [ {
+			text : '确定',
+			iconCls : 'icon-add',
+			handler : function() {
+				fCallback();
+			}
+		}, {
+			text : '关闭',
+			handler : function() {
+				SL.closeWindow();
+			}
 		} ]
 	});
 }
@@ -380,7 +534,7 @@ function ajaxLoading() {
 }
 
 function outExcel() {
-	 window.location.href="outExcel.jsp"; 
+	window.location.href = "outExcel.jsp";
 }
 function ajaxLoadEnd() {
 	$(".datagrid-mask").remove();
