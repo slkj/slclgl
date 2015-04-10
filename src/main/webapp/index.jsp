@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>神龙OA管理系统</title>
+<title>神龙企业位置服务平台</title>
 <link rel="stylesheet" type="text/css"
 	href="js/easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
@@ -122,7 +122,7 @@
 			ADMIN <a href="#" id="editpass">修改密码</a> <a href="#" id="loginOut">安全退出</a>
 		</span> <span style="padding-left: 10px; font-size: 16px;"><img
 			src="images/blocks.gif" width="20" height="20" align="absmiddle" />
-			神龙OA管理系统</span>
+			神龙企业位置服务平台</span>
 	</div>
 	<div region="south" split="true"
 		style="height: 30px; background: #D2E0F2;">

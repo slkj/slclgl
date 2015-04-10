@@ -5,18 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>设备统计报表</title>
-<link rel="stylesheet" type="text/css"
-	href="../js/easyui/themes/default/easyui.css" />
-<link rel="stylesheet" type="text/css"
-	href="../js/easyui/themes/icon.css" />
-<link rel="stylesheet" type="text/css" href="../css/default.css" />
-<link rel="stylesheet" type="text/css" href="../css/syscss.css" />
-<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="../js/easyui/jquery.easyui.min.js"></script>
-<!-- <script type="text/javascript" src="../js/easyui/datagrid-detailview.js"></script> -->
-<script type="text/javascript" src="../js/easyui/easyui-lang-zh_CN.js"></script>
+<%@ include file="/common/taglibs.jsp"%>
 <script type="text/javascript" src="../js/My97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript" src='../js/SL.easyUI.js'></script>
 <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
 <script type="text/javascript">
 	//路径配置

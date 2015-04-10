@@ -89,9 +89,9 @@ function loadDataGrid() {
 										s += "&nbsp;|&nbsp;";
 										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:testing('"
 												+ index + "');\">测试</span></a>";
-										s += "&nbsp;|&nbsp;";
-										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:netIn('"
-												+ index + "');\">入网</span></a>";
+//										s += "&nbsp;|&nbsp;";
+//										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:netIn('"
+//												+ index + "');\">入网</span></a>";
 										return s;
 									}
 								},
@@ -153,7 +153,7 @@ function loadDataGrid() {
 								},
 								{
 									field : 'installers',
-									title : '安装人'
+									title : '安检员'
 								},
 								{
 									field : 'installtime',
@@ -218,9 +218,6 @@ function loadDataGrid() {
 										}
 										return s;
 									}
-								}, {
-									field : 's',
-									title : '安检员'
 								}, {
 									field : 'rktime',
 									title : '入库时间'

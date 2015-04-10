@@ -7,8 +7,12 @@ body {
 }
 
 a {
-/* 	color: Black;  */
+	/* 	color: Black;  */
 	text-decoration: none;
+}
+
+th {
+	text-align: right;
 }
 
 a:hover {
@@ -16,8 +20,7 @@ a:hover {
 }
 
 .textbox03 {
-	border: #878787 1px solid; padding: 4px 3px; font: Verdana, Geneva, sans-serif, 宋体; line-height: 14px; background-color: #fff; height: auto; font-size: 14px;
-	font-weight: bold; width: 190px;
+	border: #878787 1px solid; padding: 4px 3px; font: Verdana, Geneva, sans-serif, 宋体; line-height: 14px; background-color: #fff; height: auto; font-size: 14px; font-weight: bold; width: 190px;
 }
 
 .txt01 {
@@ -45,7 +48,7 @@ a:hover {
 }
 
 .navlist li a {
-	color: Black; text-decoration: none;line-height: 24px;
+	color: Black; text-decoration: none; line-height: 24px;
 }
 
 .navlist li div {
@@ -75,6 +78,7 @@ a:hover {
 .third_ul li {
 	padding-left: 20px;
 }
+
 .icon-arrow {
 	background: url('../images/arrow.gif') no-repeat right;
 }

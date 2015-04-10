@@ -5,13 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>资源管理</title>
-<link rel="stylesheet" type="text/css"
-	href="../js/easyui/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css"
-	href="../js/easyui/themes/icon.css">
-<link rel="stylesheet" type="text/css" href="../css/default.css" />
-<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="../js/easyui/jquery.easyui.min.js"></script>
+<%@ include file="/common/taglibs.jsp"%>
 <script type="text/javascript">
 	var grid;
 	$(function() {
@@ -68,9 +62,9 @@
 											var s = "";
 											s += "<a class=\"editcls\" href=\"javascript:void(0)\" onclick=\"editRow('"
 													+ row.id + "');\">编辑</a>";
-											s += "|";
-											s += "<a href=\"javascript:void(0)\" onclick=\"javaScript:deleteRow('"
-													+ row.id + "');\"> 删除 </a>";
+// 											s += "|";
+// 											s += "<a href=\"javascript:void(0)\" onclick=\"javaScript:deleteRow('"
+// 													+ row.id + "');\"> 删除 </a>";
 											if (row.parent_id == "0") {
 												return "";
 											}
