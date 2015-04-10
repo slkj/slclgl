@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import cn.slkj.slclgl.devices.bean.Devices;
 import cn.slkj.slclgl.devices.mapper.DevicesMapper;
 import cn.slkj.slclgl.devices.service.DevicesService;
+import cn.slkj.slclgl.sim.bean.Sim;
 
 @Repository
 public class DevicesServiceImpl implements DevicesService {
@@ -48,6 +49,11 @@ public class DevicesServiceImpl implements DevicesService {
 	public int netIn(Devices devices) {
 		// TODO Auto-generated method stub
 		return mapper.netIn(devices);
+	}
+
+	public List<Devices> getList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.getList(map);
 	}
 
 }

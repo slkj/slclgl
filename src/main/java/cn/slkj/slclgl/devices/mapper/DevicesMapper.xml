@@ -52,7 +52,9 @@
 			ORDER BY  ${sort}  ${order}
 		</if>
 	</select>
-
+	<select id="getList" resultType="Devices" parameterType="hashmap">
+		SELECT * FROM TB_DEVICES  WHERE listnum like CONCAT('%',#{listnum},'%')  AND STATE = 2
+	</select>
 	<insert id="insert" parameterType="Devices">
 		INSERT INTO TB_DEVICES
 		(listnum,firm,model,genre,rktime,state,fhtime,lyr,lytime,test,phone,cstime,tresult,gpszj,gpstx,gsmtx,

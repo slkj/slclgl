@@ -32,3 +32,12 @@ SL.msgShow = function(title, msgString, msgType) {
 	
 	$.messager.alert(title == null ? "提示" : title, msgString, msgType == null ? "warning" : msgType);
 }
+
+SL.sysSlideShow = function(options) {
+	$.messager.show({
+		title : '提示',
+		msg : options.msg,
+		timeout : 1200,
+		showType : 'slide'
+	});
+};

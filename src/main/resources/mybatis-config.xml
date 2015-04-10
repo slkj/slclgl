@@ -12,6 +12,7 @@
 		<typeAlias type="cn.slkj.slclgl.sim.bean.Sim" alias="Sim" />
 		<typeAlias type="cn.slkj.slclgl.devices.bean.Devices" alias="Devices" />
 		<typeAlias type="cn.slkj.slclgl.company.bean.Company" alias="Company" />
+		<typeAlias type="cn.slkj.slclgl.vehicle.bean.Vehicle" alias="Vehicle" />
 	</typeAliases>
 	<!-- 设置数据库连接环境 -->
 	<!-- 映射文件 -->
@@ -21,5 +22,6 @@
 		<mapper resource="cn/slkj/slclgl/sim/mapper/SimMapper.xml" />
 		<mapper resource="cn/slkj/slclgl/devices/mapper/DevicesMapper.xml" />
 		<mapper resource="cn/slkj/slclgl/company/mapper/CompanyMapper.xml" />
+		<mapper resource="cn/slkj/slclgl/vehicle/mapper/VehicleMapper.xml" />
 	</mappers>
 </configuration>

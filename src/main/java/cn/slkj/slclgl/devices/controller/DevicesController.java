@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.slkj.easyui.util.EPager;
 import cn.slkj.slclgl.devices.bean.Devices;
 import cn.slkj.slclgl.devices.service.impl.DevicesServiceImpl;
+import cn.slkj.slclgl.sim.bean.Sim;
 
 @Controller
 @RequestMapping("/devices")
@@ -56,7 +57,14 @@ public class DevicesController {
 		List<Devices> list = impl.getAll(pageMap);
 		return new EPager<Devices>(total, list);
 	}
-	
+	@RequestMapping("/getList")
+	@ResponseBody
+	public List<Devices> getList(HttpServletRequest request) throws Exception {
+		int listnum = Integer.parseInt(request.getParameter("listnum"));
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("listnum", listnum);
+		return impl.getList(map);
+	}
 	@RequestMapping(value = "/addDevices", method = { RequestMethod.POST })
 	@ResponseBody
 	public boolean addDevices(Devices devices) {

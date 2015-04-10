@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.slkj.slclgl.vehicle.mapper.VehicleMapper">
+
+	<sql id="sql_temp">
+		id,companyId,(select compName from  tb_company where id = companyId) as companyName,carOwner,
+		carOwnersType,carOwnersCard,contacts,contactsTel,carNumber,carNumberG,plateColor,classify
+		,carType,carBrand,carModel,carColor,carVin,carProType,carOutLength,carOutWidth,carOutHeight,
+		carTotalmass,carEngNum,carEngModel,carFuelType,carDisplacement,carPower,carManuName,carModality,
+		carTreadBe,carTreadAfter,carTireNum,carTireSpe,carNumOfSpring,carAxleDist,carAxleNum,carContLength,
+		carContWidth,carContHeight,carApproved,carApprGuest,carTrac,carCabGuest,carUseNatu,carUseNatuName,
+		carObtWay,carFacDate,installers,attendants,installtime,installAddress,fees,feeseEnd,isNotice,
+		simPayer,payerTime,CTradingLine,CCatchMenbers,carImg,entryTime,entryId,entryName,depId,
+		simNumber,equitment,networkNo,remark
+	</sql>
+	<select id="queryList" resultType="Vehicle" parameterType="hashmap">
+			SELECT <include refid="sql_temp"/>  FROM TB_VEHICLE
+			LIMIT #{startPage},#{endPage}
+	</select>
+
+	<select id="queryListCount" resultType="int" parameterType="hashmap">
+		SELECT COUNT(0) FROM TB_VEHICLE
+	</select>
+	<select id="queryOne" parameterType="hashmap" resultType="vehicle">
+		SELECT <include refid="sql_temp"></include> FROM TB_VEHICLE
+			<where>
+				<if test="id != null and id != ''">
+					AND ID  = #{id}
+				</if>
+				<if test="carNumber != null and carNumber != ''">
+					AND CARNUMBER  LIKE  '%' + #{carNumber}  + '%'
+				</if>
+			</where>
+	</select>
+
+	<insert id="save" parameterType="Vehicle">
+		INSERT INTO TB_VEHICLE(
+			carOwner,carOwnersType,carOwnersCard,contacts,contactsTel,carNumber,carNumberG,plateColor,classify
+			,carType,carBrand,carModel,carColor,carVin,carProType,carOutLength,carOutWidth,carOutHeight,
+			carTotalmass,carEngNum,carEngModel,carFuelType,carDisplacement,carPower,carManuName,carModality,
+			carTreadBe,carTreadAfter,carTireNum,carTireSpe,carNumOfSpring,carAxleDist,carAxleNum,carContLength,
+			carContWidth,carContHeight,carApproved,carApprGuest,carTrac,carCabGuest,carUseNatu,carUseNatuName,
+			carObtWay,carFacDate,installers,attendants,installtime,installAddress,fees,feeseEnd,isNotice,
+			simPayer,payerTime,CTradingLine,CCatchMenbers,carImg,entryTime,entryId,entryName,depId,simNumber,equitment,networkNo,remark,companyId
+		)
+		VALUES(
+			#{carOwner},#{carOwnersType},#{carOwnersCard},#{contacts},#{contactsTel},#{carNumber},#{carNumberG},#{plateColor},#{classify},
+			#{carType},#{carBrand},#{carModel},#{carColor},#{carVin},#{carProType},#{carOutLength},#{carOutWidth},#{carOutHeight},
+			#{carTotalmass},#{carEngNum},#{carEngModel},#{carFuelType},#{carDisplacement},#{carPower},#{carManuName},#{carModality},
+			#{carTreadBe},#{carTreadAfter},#{carTireNum},#{carTireSpe},#{carNumOfSpring},#{carAxleDist},#{carAxleNum},#{carContLength},
+			#{carContWidth},#{carContHeight},#{carApproved},#{carApprGuest},#{carTrac},#{carCabGuest},#{carUseNatu},#{carUseNatuName}
+			,#{carObtWay},#{carFacDate},#{installers},#{attendants},#{installtime},#{installAddress},#{fees},#{feeseEnd},#{isNotice},
+			#{simPayer},#{payerTime},#{CTradingLine},#{CCatchMenbers},#{carImg},#{entryTime},#{entryId},#{entryName},#{depId},
+			#{simNumber},#{equitment},#{networkNo},#{remark},#{companyId}
+		)
+	</insert>
+
+	<update id="edit" parameterType="Vehicle">
+<!-- 		UPDATE TB_VEHICLE SET OWNEDID=#{ownedId},REGCOMPANYNAME=#{regCompanyName},REGNAME=#{regName},REGNUM=#{regNum},TXTCONTACTMENBER=#{txtContactMenber}, -->
+<!-- 		TXTCONTACTWAY=#{txtContactWay},REGAUTHORITY=#{regAuthority},REGDATE=#{regDate},CARNUMBER=#{carNumber},CARNUMBERTRAILER=#{carNumberTrailer},CARTYPE=#{carType}, -->
+<!-- 		CLASSIFY=#{classify},CARBRAND=#{carBrand},CARMODEL=#{carModel},CARCOLOR=#{carColor},CARVIN=#{carVin},CARPROTYPE=#{carProType},CARENGNUM=#{carEngNum}, -->
+<!-- 		CARENGMODEL=#{carEngModel},CARFUELTYPE=#{carFuelType},CARDISPLACEMENT=#{carDisplacement},CARPOWER=#{carPower},CARMANUNAME=#{carManuName},CARMODALITY=#{carModality}, -->
+<!-- 		CARTREADBE=#{carTreadBe},CARTREADAFTER=#{carTreadAfter},CARTIRENUM=#{carTireNum},CARTIRESPE=#{carTireSpe},CARNUMOFSPRING=#{carNumOfSpring},CARAXLEDIST=#{carAxleDist}, -->
+<!-- 		CARAXLENUM=#{carAxleNum},CAROUTLENGTH=#{carOutLength},CAROUTWIDTH=#{carOutWidth},CAROUTHEIGHT=#{carOutHeight},CARCONTLENGTH=#{carContLength}, -->
+<!-- 		CARCONTWIDTH=#{carAxleNum},CARCONTHEIGHT=#{carContHeight},CARTOTALMASS=#{carTotalmass},CARAPPROVED=#{carApproved},CARAPPRGUEST=#{carApprGuest},CARTRAC=#{carTrac}, -->
+<!-- 		CARCABGUEST=#{carCabGuest},CARUSENATU=#{carUseNatu},CARUSENATUNAME=#{carUseNatuName},CAROBTWAY=#{carObtWay},CARFACDATE=#{carFacDate}, -->
+<!-- 		CARIMG=#{carImg},CARIMG2=#{carImg2},CARIMG3=#{carImg3} ，operatorId=#{operatorId},operatorName=#{operatorName}, -->
+<!-- 		operatorTime=CONVERT(varchar(100), GETDATE(), 20),DEPID=#{depId} WHERE ID = #{id} -->
+	</update>
+	<delete id="delete" parameterType="string">
+		DELETE FROM TB_VEHICLE WHERE ID  = #{id}
+	</delete>
+</mapper>

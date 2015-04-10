@@ -1,5 +1,5 @@
 <%
-	String themeName = "metro-orange";
+	String themeName = "default";
 
 	Cookie cookies[] = request.getCookies();
 

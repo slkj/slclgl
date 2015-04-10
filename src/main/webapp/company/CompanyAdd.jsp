@@ -39,7 +39,10 @@
 			</tr>
 			<tr>
 				<th>上级公司：</th>
-				<td><input name="bCompany" class="easyui-validatebox" style="width: 200px"></td>
+				<td> 
+					<select name="bCompany" class="easyui-combotree" style="width:200px;"
+									data-options="url:'../company/getTreeList',required:true,lines:true"></select>  
+				</td>
 				<th>公司级别：</th>
 				<td>
 					<select id="level" name="level" class="easyui-combobox"  >

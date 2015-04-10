@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import cn.slkj.slclgl.devices.bean.Devices;
+import cn.slkj.slclgl.sim.bean.Sim;
 
 public interface DevicesMapper {
 	List<Devices> getAll(Map<String, Object> map);
@@ -19,4 +20,6 @@ public interface DevicesMapper {
 	int goBack(Devices devices);
 
 	int outRepertory(Devices devices);
+
+	List<Devices> getList(Map<String, Object> map);
 }
