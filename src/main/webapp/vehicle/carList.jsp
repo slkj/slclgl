@@ -26,6 +26,7 @@
 						{
 							method : 'post',
 							url : basePath + 'list',
+							 fitColumns:false,
 							title : '车辆列表',
 							fit : true,
 							nowrap : true, // false:折行
@@ -33,6 +34,7 @@
 							striped : true, // 隔行变色
 							pagination : true,
 							singleSelect : true,
+							autoRowHeight : false,//设置行的高度，根据该行的内容。设置为false可以提高负载性能。
 							pageSize : 15,
 							pageList : [ 1, 10, 15, 20, 30, 50 ],
 							loadMsg : '数据加载中,请稍后……',
@@ -47,6 +49,19 @@
 										width : 100
 									},
 									{
+										field : 'carOwner',
+										title : '车主',
+										width : 100
+									},
+									{
+										field : 'fhtime',
+										title : '车辆类型',
+										width : 110,
+										formatter : function(value, row, index) {
+											return row.classify + row.carType;
+										}
+									},
+									{
 										field : 'equitment',
 										title : '设备号',
 										width : 100
@@ -57,42 +72,41 @@
 										width : 100
 									},
 									{
-										field : 'installtime',
-										title : '安装日期'
+										field : 'networkNo',
+										title : '入网证明编号',
+										width : 100
 									},
 									{
-										field : 'fhtime',
-										title : '车辆类型',
-										formatter : function(value, row, index) {
-											return row.classify + row.carType;
-										}
+										field : 'installtime',
+										title : '安装日期',
+										width : 80,
 									},
 									{
 										field : 'companyName',
 										title : '所属公司'
 									},
 									{
-										field : 'networkNo',
-										title : '入网证明编号',
-										width : 150
-									},
-									{
 										title : '操作',
 										field : '_operate',
 										align : 'center',
+										width : 240,
 										formatter : function(value, row, index) {
 											var s = "";
 											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:detailCarInfo('"
 													+ index + "');\">详细</span></a>";
 											s += "&nbsp;|&nbsp;";
-											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:detailCarInfo('"
-													+ index + "');\">安装记录</span></a>";
+
+											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:inNet('"
+													+ index + "');\">入网</span></a>";
 											s += "&nbsp;|&nbsp;";
 											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:goBack('"
 													+ index + "');\">编辑</span></a>";
 											s += "&nbsp;|&nbsp;";
 											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:deleteRow('"
 													+ index + "');\">删除</span></a>";
+											s += "&nbsp;|&nbsp;";
+											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:detailCarInfo('"
+												+ index + "');\">安装记录</span></a>";
 											return s;
 										}
 									} ] ],
@@ -110,6 +124,57 @@
 	}
 	function addCar() {
 		parent.$("#cnIframe").attr("src", "hyAdd.jsp");
+	}
+	function inNet(index) {
+		var data = grid.datagrid('getData').rows[index];
+		if (data.state == 1) {
+			SL.msgShow("提示", "设备已经出库！", "warning");
+			return;
+		}
+		parent.SL.showWindow({
+			title : '车辆入网',
+			iconCls : 'icon-add',
+			width : 850,
+			height : 450,
+			url : basePath + 'inNet.jsp',
+			onLoad : function() {
+				$("#form").form('load', data);
+			},
+			buttons : [ {
+				text : '确定',
+				iconCls : 'icon-add',
+				handler : function() {
+					inNet2();
+				}
+			}, {
+				text : '关闭',
+				handler : function() {
+					parent.SL.closeWindow();
+				}
+			} ]
+		});
+// 		parent.$("#cnIframe").attr("src", "inNet.jsp");
+	}
+	
+	function inNet2(){
+		if (parent.$("#form").form('enableValidation').form('validate')) {
+			var data = parent.$("#form").serialize();
+			$.ajax({
+				cache : false,
+				type : 'POST',
+				url : basePath + 'activated',
+				data : data,
+				async : false,
+				success : function(data) {
+					if (data) {
+						parent.SL.closeWindow();
+						grid.datagrid('reload');
+					}else{
+						parent.SL.msgShow("提示", "入网失败！", "warning");
+					}
+				}
+			});
+		}
 	}
 	function detailCarInfo(index) {
 		var data = grid.datagrid('getData').rows[index];
@@ -130,12 +195,12 @@
 			} ]
 		});
 	}
-	function deleteRow(index){
+	function deleteRow(index) {
 		parent.$.messager.confirm('提示', '将删除该车辆所有信息，确认删除?', function(row) {
 			if (row) {
 				var data = grid.datagrid('getData').rows[index];
 				$.ajax({
-					url : basePath+'delete?id=' + data.id,
+					url : basePath + 'delete?id=' + data.id,
 					success : function(data) {
 						if (data) {
 							grid.datagrid('reload');

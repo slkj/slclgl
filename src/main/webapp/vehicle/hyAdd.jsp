@@ -37,70 +37,6 @@ function clearForm() {
 function backPage() {
 	parent.$("#cnIframe").attr("src", "carList.jsp");
 }
-//设备号联想搜索
-var sbloader = function(param, success, error) {
-	// 获取输入的值
-	var q = param.q || "";
-	// 此处q的length代表输入多少个字符后开始查询
-	if (q.length < 3)
-		return false;
-	$.ajax({
-		url : "../devices/getList",
-//		type : "post",
-		data : {
-			// 传值，还是JSON数据
-			listnum : q
-		},
-		// 重要，如果写jsonp会报转换错误，此处不写都可以
-		dataType : "json",
-		success : function(data) {
-			// 关键步骤，遍历一个MAP对象
-			var items = $.map(data, function(item) {
-				return {
-					id : item.listnum,
-					name : item.listnum+"("+item.firm+")"
-				};
-			});
-			// 执行loader的success方法
-			success(items);
-		}, // 异常处理
-		error : function(xml, text, msg) {
-			error.apply(this, arguments);
-		}
-	});
-};
-//SIM卡号联想搜索
-var btsloader = function(param, success, error) {
-	// 获取输入的值
-	var q = param.q || "";
-	// 此处q的length代表输入多少个字符后开始查询
-	if (q.length < 3)
-		return false;
-	$.ajax({
-		url : "../sim/getList",
-//		type : "post",
-		data : {
-			// 传值，还是JSON数据
-			telnum : q
-		},
-		// 重要，如果写jsonp会报转换错误，此处不写都可以
-		dataType : "json",
-		success : function(data) {
-			// 关键步骤，遍历一个MAP对象
-			var items = $.map(data, function(item) {
-				return {
-					id : item.telnum,
-					name : item.telnum
-				};
-			});
-			// 执行loader的success方法
-			success(items);
-		}, // 异常处理
-		error : function(xml, text, msg) {
-			error.apply(this, arguments);
-		}
-	});
-};
 </script>
 </head>
 <body class="easyui-layout">   
@@ -218,7 +154,7 @@ var btsloader = function(param, success, error) {
 						</tr>
 					</table>
 				</div>
-				<div title="车辆其他信息(选填项)" data-options="border:false" >
+				<div title="车辆其他信息(选填项)" data-options="collapsed:false,collapsible:false,border:false" >
 					<table >
 						<tr>
 							<th>发动机号:</th>
@@ -314,67 +250,6 @@ var btsloader = function(param, success, error) {
 							</select></td>
 							<th>车辆出厂日期:</th>
 							<td><input id="carFacDate" name="carFacDate" class="easyui-datebox" editable="false" style="width: 200px;" /></td>
-						</tr>
-					</table>
-				</div>
-				<div title="设备信息" data-options="collapsed:false,collapsible:false,border:false">
-					<table >
-						<tr>
-							<th>设备号:</th>
-							<td>
-								<input name="equitment" class="easyui-combobox" style="width: 200px;" 
-									data-options="loader: sbloader,mode: 'remote',valueField: 'id',textField: 'name',required:true"/></td>
-							<th>SIM卡号:</th>
-							<td>
-								<input name="simNumber" class="easyui-combobox"  style="width: 200px;" 
-									data-options="loader: btsloader,mode: 'remote',valueField: 'id',textField: 'name',required:true" />
-							</td>
-							<th>入网证明编号:</th>
-							<td><input name="networkNo" class="easyui-validatebox" style="width: 200px;" data-options="required:true"/></td>
-						</tr>
-						<tr>
-							<th>安装人:</th>
-							<td><input name="installers" class="easyui-validatebox" style="width: 200px;" data-options="required:true"/></td>
-							<th>安装日期:</th>
-							<td><input name="installtime" class="easyui-datebox" style="width: 200px;" data-options="required:true"/></td>
-							<th>安装地点:</th>
-							<td><input name="installAddress" class="easyui-validatebox" style="width: 200px;" /></td>
-						</tr>
-					</table>
-				</div>
-				<div title="服务信息" data-options="collapsed:false,collapsible:false,border:false">
-					<table >
-						<tr>
-							<th>服务费:</th>
-							<td><input name="fees" class="easyui-validatebox" style="width: 200px;" /> (元/月)</td>
-							<th>服务到期时间:</th>
-							<td><input name="feeseEnd" class="easyui-datebox" style="width: 150px;"/> 
-								<label><input id="ckISnotice" type="checkbox" name="ckISnotice">到期提醒</label>
-							</td>
-						</tr>
-						<tr>
-							<th>SIM卡缴费人 :</th>
-							<td><input name="simPayer" class="easyui-validatebox" style="width: 200px;" /></td>
-							<th>缴费时间:</th>
-							<td><input name="payerTime" class="easyui-datebox" style="width: 150px;" />  
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div title="行业信息" data-options="collapsed:false,collapsible:false,border:false">
-					<table >
-						<tr>
-							<th>营运线路:</th>
-							<td><input name="CTradingLine" class="easyui-validatebox"  style="width: 200px;" /></td>
-							<th>载客数:</th>
-							<td><input id="CCatchMenbers" name="regNum"
-								class="easyui-validatebox" style="width: 150px;" /></td>
-						</tr>
-					</table>
-					<table >
-						<tr>
-							<th>备注:</th>
-							<td colspan="3"><textarea rows="3" cols="30" name="remark" style="width:500px;"></textarea></td>
 						</tr>
 					</table>
 				</div>

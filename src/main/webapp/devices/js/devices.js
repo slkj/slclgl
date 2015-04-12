@@ -162,7 +162,6 @@ function loadDataGrid() {
 								{
 									field : 'carNumber',
 									title : '车牌号',
-									width : 100,
 									formatter : function(value, row, index) {
 										var str = "<a id=\"btn" + index
 												+ "\" href=\"#\" onclick=\"carNumber(" + index
@@ -177,14 +176,7 @@ function loadDataGrid() {
 								},
 								{
 									field : 'networkNo',
-									title : '入网证明编号',
-									formatter : function(value, row, index) {
-										var str = "<a id=\"btn" + index
-												+ "\" href=\"#\"  onclick=\"networkNo(" + index
-												+ ")\">" + value + "</a>";
-										var btn = row.networkNo == null ? "" : str;
-										return btn;
-									}
+									title : '入网证明编号'
 								},
 								// {
 								// field : 'test',
@@ -256,10 +248,6 @@ function phone(index) {
 function carNumber(index) {
 	var data = grid.datagrid('getData').rows[index];
 	alert(data.carNumber);
-}
-function networkNo(index) {
-	var data = grid.datagrid('getData').rows[index];
-	alert(data.networkNo);
 }
 function myformatter(date) {
 	var y = date.getFullYear();

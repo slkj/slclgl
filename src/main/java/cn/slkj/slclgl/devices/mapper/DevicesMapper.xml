@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.slkj.slclgl.devices.mapper.DevicesMapper">
 	<sql id="sql_base">
-		id,listnum,firm,model,genre,rktime,state,fhtime,lyr,lytime,test,phone,cstime,
-		tresult,gpszj,gpstx,gsmtx,dy,fsd,jsq,sxy,ysq,mkf,remark,pack,installers,installtime,
-		carNumber,company,networkNo,area, ( SELECT note FROM tb_xzqh where code =area) as areaName
+		id,listnum,firm,model,rktime,state,fhtime,lyr,lytime,test,cstime,
+		tresult,gpszj,gpstx,gsmtx,dy,fsd,jsq,sxy,ysq,mkf,remark,pack
+		area, ( SELECT note FROM tb_xzqh where code =area) as areaName
 	</sql>
 	<sql id="sql_onVehicle">
-		TBD.id,TBD.listnum,TBD.firm,TBD.model,TBD.genre,TBD.rktime,TBD.state,TBD.fhtime,TBD.lyr,
+		TBD.id,TBD.listnum,TBD.firm,TBD.model,TBD.rktime,TBD.state,TBD.fhtime,TBD.lyr,
 		TBD.lytime,TBD.test,TBV.simNumber as phone,TBD.cstime,TBD.tresult,TBD.gpszj,TBD.gpstx,TBD.gsmtx,TBD.dy,
 		TBD.fsd,TBD.jsq,TBD.sxy,TBD.ysq,TBD.mkf,TBD.remark,TBD.pack,
 		TBV.installers,TBV.installtime,TBV.carNumber,
@@ -19,7 +19,7 @@
 		ON TBD.LISTNUM = TBV.EQUITMENT
 		<where>
 			<if test="listnum != null and listnum != ''">AND TBD.LISTNUM like CONCAT('%',#{listnum},'%')</if>
-			<if test="phone != null and phone != ''">AND TBD.PHONE LIKE CONCAT('%',#{phone},'%')</if>
+			<if test="phone != null and phone != ''">AND TBV.SIMNUMBER LIKE CONCAT('%',#{phone},'%')</if>
 			<if test="rktime != null and rktime != ''">AND TBD.RKTIME >= #{rktime} </if>
 			<if test="rktime1 != null and rktime1 != ''"> TBD.AND RKTIME &lt;= #{rktime1} </if>
 			<if test="lytime != null and lytime != ''">AND TBD.LYTIME >= #{lytime} </if>
@@ -43,7 +43,7 @@
 		ON TBD.LISTNUM = TBV.EQUITMENT
 		<where>
 			<if test="listnum != null and listnum != ''">AND TBD.LISTNUM like CONCAT('%',#{listnum},'%')</if>
-			<if test="phone != null and phone != ''">AND TBD.PHONE LIKE CONCAT('%',#{phone},'%')</if>
+			<if test="phone != null and phone != ''">AND TBV.SIMNUMBER LIKE CONCAT('%',#{phone},'%')</if>
 			<if test="rktime != null and rktime != ''">AND TBD.RKTIME >= #{rktime} </if>
 			<if test="rktime1 != null and rktime1 != ''"> TBD.AND RKTIME &lt;= #{rktime1} </if>
 			<if test="lytime != null and lytime != ''">AND TBD.LYTIME >= #{lytime} </if>
