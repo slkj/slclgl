@@ -7,7 +7,7 @@
 <title>新增公司信息</title>
 </head>
 <body>
-
+wang
 	<form id="comForm">
 		<table class="grid">
 			<tr>
