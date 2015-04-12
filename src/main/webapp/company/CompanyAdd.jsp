@@ -12,7 +12,7 @@
 		<table class="grid">
 			<tr>
 				<th colspan="4" style="text-align: left; color: red;">*如实填写公司信息，联系人、联系电话要核实。</th>
-			</tr>sdfsf
+			</tr>
 			<tr>
 				<th style="width: 120px">公司名称：</th>
 				<td colspan="3">
