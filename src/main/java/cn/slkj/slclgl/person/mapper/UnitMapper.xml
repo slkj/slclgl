@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.slkj.clgl.person.dao.UnitDao">
+<sql id="sql_temp">
+UNIT_ID,IDCARD_NO,UNIT_NAME,UNIT_TEL,UNIT_ADDRESS,UNIT_TIME
+	</sql>
+<select id="list"  resultType="server_unit"  parameterType="hashmap">
+	SELECT<include refid="sql_temp" />
+		FROM(SELECT A.*,ROW_NUMBER() OVER (ORDER BY
+		UNIT_ID DESC) ROWNUM
+		FROM(
+		SELECT * FROM SYS_SERVER_UNIT
+		<where>
+			<if test="idcard_no != null and idcard_no != ''">
+				AND idcard_no = #{idcard_no}
+			</if>
+			</where>
+		) A )B
+		<!-- WHERE ROWNUM BETWEEN #{startNum} AND #{endNum} -->
+		WHERE ROWNUM &gt; #{startNum} AND ROWNUM &lt;=#{endNum}
+	</select>
+	<select id="one" parameterType="hashmap" resultType="server_unit">
+		SELECT
+		<include refid="sql_temp" />
+		FROM SYS_SERVER_UNIT WHERE UNIT_ID = #{unit_id}
+	</select>
+	
+	<select id="onebycard" parameterType="hashmap" resultType="server_unit">
+		SELECT TOP 1
+		<include refid="sql_temp" />
+		FROM SYS_SERVER_UNIT 
+		<where>
+			<if test="idcard_no != null and idcard_no != ''">
+				AND idcard_no = #{idcard_no}
+			</if>
+			</where>
+			ORDER BY UNIT_TIME DESC
+	</select>
+	
+<select id="total"  resultType="int" parameterType="hashmap" >
+	SELECT COUNT(*)FROM SYS_SERVER_UNIT 
+		<where>
+			<if test="idcard_no != null and idcard_no != ''">
+				AND idcard_no = #{idcard_no}
+			</if>
+			</where>
+</select>
+	
+<insert id="insert"  parameterType="server_unit">
+		INSERT INTO SYS_SERVER_UNIT (UNIT_ID,IDCARD_NO,UNIT_NAME,UNIT_TEL,UNIT_ADDRESS,UNIT_TIME)
+	 	VALUES(#{unit_id},#{idcard_no},#{unit_name},#{unit_tel},#{unit_address},#{unit_time})
+</insert>
+	<delete id="delete" parameterType="list">
+		DELETE FROM SYS_SERVER_UNIT WHERE UNIT_ID in
+		<foreach item="ids" collection="array" open="(" separator=","
+			close=")">
+			#{ids}
+		</foreach>
+	</delete>
+<update id="update"  parameterType="server_unit">
+	UPDATE SYS_SERVER_UNIT SET  UNIT_NAME =#{unit_name},UNIT_TEL=#{unit_tel},UNIT_ADDRESS=#{unit_address},UNIT_TIME=#{unit_time}
+	 WHERE UNIT_ID = #{unit_id}
+</update>
+</mapper>
+

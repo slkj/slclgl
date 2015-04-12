@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.slkj.clgl.person.dao.DriverDao">
+<sql id="sql_temp">
+DRIVER_RECORD_ID,IDCARD_NO,CARNUMBER,DRIVER_INFO,DRIVER_RECORD_TIME,RESULT
+	</sql>
+<select id="list"  resultType="driver_record"  parameterType="hashmap">
+	SELECT<include refid="sql_temp" />
+		FROM(SELECT A.*,ROW_NUMBER() OVER (ORDER BY
+		DRIVER_RECORD_ID DESC) ROWNUM
+		FROM(
+		SELECT * FROM SYS_DRIVER_RECORD
+		<where>
+			<if test="idcard_no != null and idcard_no != ''">
+				AND idcard_no = #{idcard_no}
+			</if>
+			</where>
+		) A )B
+		<!-- WHERE ROWNUM BETWEEN #{startNum} AND #{endNum} -->
+		WHERE ROWNUM &gt; #{startNum} AND ROWNUM &lt;=#{endNum}
+	</select>
+<select id="one" parameterType="hashmap" resultType="driver_record">
+		SELECT
+		<include refid="sql_temp" />
+		FROM SYS_DRIVER_RECORD WHERE driver_record_id = #{driver_record_id}
+	</select>
+<select id="total"  resultType="int" parameterType="hashmap" >
+	SELECT COUNT(*)FROM SYS_DRIVER_RECORD
+		<where>
+			<if test="idcard_no != null and idcard_no != ''">
+				AND idcard_no = #{idcard_no}
+			</if>
+			</where>
+</select>
+	
+<insert id="insert"  parameterType="driver_record">
+		INSERT INTO SYS_DRIVER_RECORD (DRIVER_RECORD_ID,IDCARD_NO,CARNUMBER,DRIVER_INFO,DRIVER_RECORD_TIME,RESULT)
+	 	VALUES(#{driver_record_id},#{idcard_no},#{carnumber},#{driver_info},#{driver_record_time},#{result})
+</insert>
+	<delete id="delete" parameterType="list">
+		DELETE FROM SYS_DRIVER_RECORD WHERE DRIVER_RECORD_ID in
+		<foreach item="ids" collection="array" open="(" separator=","
+			close=")">
+			#{ids}
+		</foreach>
+	</delete>
+<update id="update"  parameterType="driver_record">
+	UPDATE SYS_DRIVER_RECORD SET CARNUMBER=#{carnumber}, DRIVER_RECORD_TIME=#{driver_record_time},
+	DRIVER_INFO=#{driver_info},RESULT=#{result} WHERE driver_record_id = #{driver_record_id}
+</update>
+</mapper>
+

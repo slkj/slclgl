@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.slkj.clgl.person.dao.PersonDao">
+	<sql id="sql_temp">
+		PER_ID,NAME,IDCARD_NO,NATION,SEX,BIRTH,HOME,TELEPHONE,EMAIL,POLITICAL,EDUCATION,WORK_STATUS,PHOTO,DRIVER_AUTHORITY,
+		DRIVER_NO,DRIVER_CAR_TYPE,DRIVER_RECORD_NO,DRIVER_CERTIFY_TIME,DRIVER_BEGIN_TIME,DRIVER_END_TIME,DRIVER_YEARS,
+		ADDRESS,BUSSINESS_NO,QUALI_RECORD_NO,QUALI_AUTHORITY,QUALIFICATION_NO,QUALI_CERTIFY_TIME,QUALI_BEGIN_TIME,
+		QUALI_END_TIME,QUALIFICATION_TYPE,FWCL,QUALI_KIND,UID,RIQI,DEPID
+		
+	</sql>
+	<select id="one" resultType="person" parameterType="person">
+		SELECT
+		<include refid="sql_temp" />,
+		(SELECT TOP 1 UNIT_NAME FROM SYS_SERVER_UNIT WHERE IDCARD_NO=SYS_PERSON.IDCARD_NO ORDER BY UNIT_TIME DESC)UNIT_NAME,
+		(SELECT TOP 1 UNIT_TEL FROM SYS_SERVER_UNIT WHERE SYS_SERVER_UNIT.IDCARD_NO=SYS_PERSON.IDCARD_NO ORDER BY UNIT_TIME DESC)UNIT_TEL,
+		(SELECT TOP 1 UNIT_ADDRESS FROM SYS_SERVER_UNIT WHERE SYS_SERVER_UNIT.IDCARD_NO=SYS_PERSON.IDCARD_NO ORDER BY UNIT_TIME DESC)UNIT_ADDRESS,
+		(SELECT TOP 1 UNIT_TIME FROM SYS_SERVER_UNIT WHERE SYS_SERVER_UNIT.IDCARD_NO=SYS_PERSON.IDCARD_NO ORDER BY UNIT_TIME DESC)UNIT_TIME
+		FROM SYS_PERSON WHERE PER_ID = #{per_id}
+
+	</select>
+	<select id="list" resultType="person" parameterType="hashmap">
+		SELECT
+		<include refid="sql_temp" />,
+		(SELECT TOP 1 UNIT_NAME FROM SYS_SERVER_UNIT WHERE IDCARD_NO=B.IDCARD_NO ORDER BY UNIT_TIME DESC)UNIT_NAME,
+		(SELECT TOP 1 UNIT_TEL FROM SYS_SERVER_UNIT WHERE SYS_SERVER_UNIT.IDCARD_NO=B.IDCARD_NO ORDER BY UNIT_TIME DESC)UNIT_TEL,
+		(SELECT TOP 1 UNIT_ADDRESS FROM SYS_SERVER_UNIT WHERE SYS_SERVER_UNIT.IDCARD_NO=B.IDCARD_NO ORDER BY UNIT_TIME DESC)UNIT_ADDRESS,
+		(SELECT TOP 1 UNIT_TIME FROM SYS_SERVER_UNIT WHERE SYS_SERVER_UNIT.IDCARD_NO=B.IDCARD_NO ORDER BY UNIT_TIME DESC)UNIT_TIME
+		FROM(SELECT A.*,ROW_NUMBER() OVER (ORDER BY
+		PER_ID DESC) ROWNUM
+		FROM(
+		SELECT * FROM SYS_PERSON
+		<where>
+			<if test="idcard_no != null and idcard_no != ''">
+				AND idcard_no  Like '%'+ #{idcard_no}+'%'
+			</if>
+			<if test="qualification_no != null and qualification_no != ''">
+				AND qualification_no  Like '%'+#{qualification_no}+'%'
+			</if>
+			<if test="qualification_type != null and qualification_type != ''">
+				AND qualification_type = #{qualification_type}
+			</if>
+			<if test="fwcl != null and fwcl != ''">
+				AND fwcl  Like '%'+#{fwcl}+'%'
+			</if>
+			<if test="depid != null and depid != ''">
+					AND DEPID=#{depid}
+				</if>
+		</where>
+		) A )B
+		<!-- WHERE ROWNUM BETWEEN #{startNum} AND #{endNum} -->
+		WHERE ROWNUM &gt; #{startNum} AND ROWNUM &lt;=#{endNum}
+	</select>
+	<select id="total" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*)FROM SYS_PERSON
+		<where>
+				<if test="idcard_no != null and idcard_no != ''">
+				AND idcard_no  Like '%'+ #{idcard_no}+'%'
+			</if>
+			<if test="qualification_no != null and qualification_no != ''">
+				AND qualification_no  Like '%'+#{qualification_no}+'%'
+			</if>
+			<if test="qualification_type != null and qualification_type != ''">
+				AND qualification_type = #{qualification_type}
+			</if>
+			<if test="fwcl != null and fwcl != ''">
+				AND fwcl  Like '%'+#{fwcl}+'%'
+			</if>
+			<if test="depid != null and depid != ''">
+					AND DEPID=#{depid}
+				</if>
+		</where>
+	</select>
+	<insert id="insert" parameterType="person">
+		INSERT INTO SYS_PERSON (
+		<include refid="sql_temp" />
+		)
+		VALUES(
+		#{per_id},#{name},#{idcard_no},#{nation},#{sex},#{birth},#{home},#{telephone},#{email},#{political},#{education},
+		#{work_status},#{photo},#{driver_authority},#{driver_no},#{driver_car_type},#{driver_record_no},#{driver_certify_time},
+		#{driver_begin_time},#{driver_end_time},#{driver_years},#{address},#{bussiness_no},#{quali_record_no},#{quali_authority},
+		#{qualification_no},#{quali_certify_time},#{quali_begin_time},#{quali_end_time},#{qualification_type},#{fwcl},#{quali_kind},
+		#{uid},convert(varchar(20),getdate(),120),#{depid})
+	</insert>
+	<delete id="deletes" parameterType="list">
+		DELETE FROM SYS_PERSON WHERE PER_ID in
+		<foreach item="ids" collection="array" open="(" separator=","
+			close=")">
+			#{ids}
+		</foreach>
+	</delete>
+	<delete id="delete" parameterType="string">
+		DELETE FROM SYS_PERSON WHERE PER_ID = #{id}
+	</delete>
+	<update id="update" parameterType="person">
+		UPDATE SYS_PERSON SET name
+		=#{name},idcard_no=#{idcard_no},nation=#{nation},sex=#{sex},birth=#{birth},home=#{home},telephone=#{telephone},
+		email=#{email},political=#{political},education=#{education},work_status=#{work_status},photo=#{photo},driver_authority=#{driver_authority},
+		driver_no=#{driver_no},driver_car_type=#{driver_car_type},driver_record_no=#{driver_record_no},driver_certify_time=#{driver_certify_time},
+		driver_begin_time=#{driver_begin_time},driver_end_time=#{driver_end_time},driver_years=#{driver_years},address=#{address},bussiness_no=#{bussiness_no},quali_record_no=#{quali_record_no},
+		quali_authority=#{quali_authority},qualification_no=#{qualification_no},quali_certify_time=#{quali_certify_time},quali_begin_time=#{quali_begin_time},quali_end_time=#{quali_end_time},
+		qualification_type=#{qualification_type},fwcl=#{fwcl},quali_kind=#{quali_kind} WHERE per_id =
+		#{per_id}
+	</update>
+</mapper>
+

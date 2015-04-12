@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.slkj.clgl.person.dao.ExzmDao">
+<sql id="sql_temp">
+EXZM_ID,IDCARD_NO,EXZM_INFO,EXZM_TIME
+	</sql>
+<select id="list"  resultType="driver_exzm"  parameterType="hashmap">
+	SELECT<include refid="sql_temp" />
+		FROM(SELECT A.*,ROW_NUMBER() OVER (ORDER BY
+		EXZM_ID DESC) ROWNUM
+		FROM(
+		SELECT * FROM SYS_DRIVER_EXZM
+		<where>
+			<if test="idcard_no != null and idcard_no != ''">
+				AND idcard_no = #{idcard_no}
+			</if>
+			</where>
+		) A )B
+		<!-- WHERE ROWNUM BETWEEN #{startNum} AND #{endNum} -->
+		WHERE ROWNUM &gt; #{startNum} AND ROWNUM &lt;=#{endNum}
+	</select>
+<select id="one" parameterType="hashmap" resultType="driver_exzm">
+		SELECT
+		<include refid="sql_temp" />
+		FROM SYS_DRIVER_EXZM WHERE EXZM_ID = #{exzm_id}
+	</select>
+<select id="total"  resultType="int" parameterType="hashmap" >
+	SELECT COUNT(*)FROM SYS_DRIVER_EXZM
+		<where>
+			<if test="idcard_no != null and idcard_no != ''">
+				AND idcard_no = #{idcard_no}
+			</if>
+			</where>
+</select>
+	
+<insert id="insert"  parameterType="driver_exzm">
+		INSERT INTO SYS_DRIVER_EXZM (EXZM_ID,IDCARD_NO,EXZM_INFO,EXZM_TIME)
+	 	VALUES(#{exzm_id},#{idcard_no},#{exzm_info},#{exzm_time})
+</insert>
+	<delete id="delete" parameterType="list">
+		DELETE FROM SYS_DRIVER_EXZM WHERE EXZM_ID in
+		<foreach item="ids" collection="array" open="(" separator=","
+			close=")">
+			#{ids}
+		</foreach>
+	</delete>
+<update id="update"  parameterType="driver_exzm">
+	UPDATE SYS_DRIVER_EXZM SET  EXZM_INFO =#{exzm_info},EXZM_TIME=#{exzm_time} WHERE EXZM_ID = #{exzm_id}
+</update>
+</mapper>
+
