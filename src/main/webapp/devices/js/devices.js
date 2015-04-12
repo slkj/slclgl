@@ -52,7 +52,7 @@ function loadDataGrid() {
 						pageSize : 15,
 						pageList : [ 1, 10, 15, 20, 30, 50 ],
 						loadMsg : '数据加载中,请稍后……',
-						frozenColumns : [ [
+						columns : [ [
 								{
 									field : 'areaName',
 									title : '所在地区'
@@ -76,6 +76,20 @@ function loadDataGrid() {
 									}
 								},
 								{
+									field : 'firm',
+									title : '厂牌型号',
+									align : 'center',
+									formatter : function(value, row, index) {
+										var s = "<span style=\"font-weight:bold;\">" + row.firm
+												+ "</span>";
+										if (row.model != "") {
+											s = "<span style=\"font-weight:bold;\">" + row.firm
+													+ "(" + row.model + ")</span>";
+										}
+										return s;
+									}
+								},
+								{
 									field : 'opt',
 									title : '操作',
 									align : 'center',
@@ -86,12 +100,6 @@ function loadDataGrid() {
 										s += "&nbsp;|&nbsp;";
 										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:goBack('"
 												+ index + "');\">退回</span></a>";
-										s += "&nbsp;|&nbsp;";
-										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:testing('"
-												+ index + "');\">测试</span></a>";
-//										s += "&nbsp;|&nbsp;";
-//										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:netIn('"
-//												+ index + "');\">入网</span></a>";
 										return s;
 									}
 								},
@@ -111,33 +119,23 @@ function loadDataGrid() {
 										}
 										return s;
 									}
-								}, {
+								},
+								{
 									field : 'listnum',
 									title : '设备编号'
-								}, {
+								},
+								{
 									field : 'phone',
 									title : 'SIM卡号',
+									sortable : true,
+									order : 'desc',
 									formatter : function(value, row, index) {
-										var str = "<a id=\"btn" + index + "\" href=\"#\" onclick=\"phone("+index+")\">" + value
-												+ "</a>";
+										var str = "<a id=\"btn" + index
+												+ "\" href=\"#\" onclick=\"phone(" + index + ")\">"
+												+ value + "</a>";
 										var btn = row.phone == null ? "" : str;
 										return btn;
 									}
-								} ] ],
-						columns : [ [
-								{
-									field : 'firm',
-									title : '厂牌型号',
-//									align : 'center',
-//									formatter : function(value, row, index) {
-//										var s = "<span style=\"font-weight:bold;\">" + row.firm
-//												+ "</span>";
-//										if (row.model != "") {
-//											s = "<span style=\"font-weight:bold;\">" + row.firm
-//													+ "(" + row.model + ")</span>";
-//										}
-//										return s;
-//									}
 								},
 								{
 									field : 'lyr',
@@ -145,7 +143,9 @@ function loadDataGrid() {
 								},
 								{
 									field : 'lytime',
-									title : '领用时间'
+									title : '领用时间',
+									sortable : true,
+									order : 'desc',
 								},
 								{
 									field : 'fhtime',
@@ -153,7 +153,7 @@ function loadDataGrid() {
 								},
 								{
 									field : 'installers',
-									title : '安检员'
+									title : '安装人'
 								},
 								{
 									field : 'installtime',
@@ -164,61 +164,67 @@ function loadDataGrid() {
 									title : '车牌号',
 									width : 100,
 									formatter : function(value, row, index) {
-										var str = "<a id=\"btn" + index + "\" href=\"#\" onclick=\"carNumber("+index+")\">" + value
-												+ "</a>";
+										var str = "<a id=\"btn" + index
+												+ "\" href=\"#\" onclick=\"carNumber(" + index
+												+ ")\">" + value + "</a>";
 										var btn = row.carNumber == null ? "" : str;
 										return btn;
 									}
-								}, {
+								},
+								{
 									field : 'company',
 									title : '使用公司'
-								}, {
+								},
+								{
 									field : 'networkNo',
 									title : '入网证明编号',
 									formatter : function(value, row, index) {
-										var str = "<a id=\"btn" + index + "\" href=\"#\"  onclick=\"networkNo("+index+")\">" + value
-												+ "</a>";
+										var str = "<a id=\"btn" + index
+												+ "\" href=\"#\"  onclick=\"networkNo(" + index
+												+ ")\">" + value + "</a>";
 										var btn = row.networkNo == null ? "" : str;
 										return btn;
 									}
-								}, {
-									field : 'test',
-									title : '测试',
-									align : 'center',
-									formatter : function(value, row, index) {
-										var s = "";
-										if (value == 1) {
-											// s = "<span
-											// style=\"color:green;\">已测试</span>";
-											s = "已测试";
-										} else if (value == 0) {
-											// s = "<span
-											// style=\"color:red;\">未测试</span>";
-											s = "未测试";
-										}
-										return s;
-									}
-								}, {
-									field : 'cstime',
-									title : '测试时间'
-								}, {
-									field : 'tresult',
-									title : '测试结果',
-									align : 'center',
-									formatter : function(value, row, index) {
-										var s = "";
-										if (row.test == 1) {
-											if (value == 1) {
-												// s = "<span
-												// style=\"color:green;\">定位</span>";
-												s = "定位";
-											} else if (value == 0) {
-												s = "<span style=\"color:red;\">不定位</span>";
-											}
-										}
-										return s;
-									}
-								}, {
+								},
+								// {
+								// field : 'test',
+								// title : '测试',
+								// align : 'center',
+								// formatter : function(value, row, index) {
+								// var s = "";
+								// if (value == 1) {
+								// // s = "<span
+								// // style=\"color:green;\">已测试</span>";
+								// s = "已测试";
+								// } else if (value == 0) {
+								// // s = "<span
+								// // style=\"color:red;\">未测试</span>";
+								// s = "未测试";
+								// }
+								// return s;
+								// }
+								// }, {
+								// field : 'cstime',
+								// title : '测试时间'
+								// }, {
+								// field : 'tresult',
+								// title : '测试结果',
+								// align : 'center',
+								// formatter : function(value, row, index) {
+								// var s = "";
+								// if (row.test == 1) {
+								// if (value == 1) {
+								// // s = "<span
+								// // style=\"color:green;\">定位</span>";
+								// s = "定位";
+								// } else if (value == 0) {
+								// s = "<span style=\"color:red;\">不定位</span>";
+								// }
+								// }
+								// return s;
+								// }
+								// },
+								{
 									field : 'rktime',
 									title : '入库时间'
 								}, {
@@ -233,7 +239,7 @@ function loadDataGrid() {
 							grid.datagrid('clearSelections');
 							// $('.roleCls').linkbutton({ text : '详细 ', plain :
 							// true, iconCls : 'icons icons_35' });
-							$.parser.parse();
+							// $.parser.parse();
 						}
 					});
 	// 设置分页控件
@@ -243,15 +249,15 @@ function loadDataGrid() {
 		displayMsg : '当前显示 {from} - {to} 条记录   共 {total} 条记录'
 	});
 }
-function phone(index){
+function phone(index) {
 	var data = grid.datagrid('getData').rows[index];
 	alert(data.phone);
 }
-function carNumber(index){
+function carNumber(index) {
 	var data = grid.datagrid('getData').rows[index];
 	alert(data.carNumber);
 }
-function networkNo(index){
+function networkNo(index) {
 	var data = grid.datagrid('getData').rows[index];
 	alert(data.networkNo);
 }
@@ -402,7 +408,7 @@ function netIn(index) {
 		} ]
 	});
 }
-//SIM卡号联想搜索
+// SIM卡号联想搜索
 var btsloader = function(param, success, error) {
 	// 获取输入的值
 	var q = param.q || "";
@@ -411,7 +417,7 @@ var btsloader = function(param, success, error) {
 		return false;
 	$.ajax({
 		url : "../sim/getList",
-//		type : "post",
+		// type : "post",
 		data : {
 			// 传值，还是JSON数据
 			telnum : q
@@ -434,20 +440,21 @@ var btsloader = function(param, success, error) {
 		}
 	});
 };
-function autoSIM(vID){
-	 $('#' + vID).combobox({
-         valueField: 'telnum',
-         textField: 'telnum',
-         onChange: function (newValue, oldValue) {
-             if (newValue.length < 3 )   return false;
-             var telnum = encodeURIComponent($('#' + vID).combobox('getText')); //搜索词
-             var urlStr = "../sim/getList?telnum=" + telnum ;
-             $("#" + vID).combobox("reload", urlStr);
-         },
-         onSelect: function (obj) {
-             $('#' + vID).combobox('setValue', obj.telnum);
-         }
-     });
+function autoSIM(vID) {
+	$('#' + vID).combobox({
+		valueField : 'telnum',
+		textField : 'telnum',
+		onChange : function(newValue, oldValue) {
+			if (newValue.length < 3)
+				return false;
+			var telnum = encodeURIComponent($('#' + vID).combobox('getText')); // 搜索词
+			var urlStr = "../sim/getList?telnum=" + telnum;
+			$("#" + vID).combobox("reload", urlStr);
+		},
+		onSelect : function(obj) {
+			$('#' + vID).combobox('setValue', obj.telnum);
+		}
+	});
 }
 // 入库
 function intoRepertory() {
@@ -458,7 +465,7 @@ function intoRepertory() {
 		height : 450,
 		url : basePath + 'devicesAdd.jsp',
 		onLoad : function() {
-//			autoSIM("phone");
+			// autoSIM("phone");
 		},
 		buttons : [ {
 			text : '确定',

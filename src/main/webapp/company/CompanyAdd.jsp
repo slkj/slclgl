@@ -58,7 +58,7 @@
 				<th>营业执照号：</th>
 				<td><input name="businessLicense" class="easyui-validatebox" style="width: 200px"></td>
 				<th>注册资金：</th>
-				<td><input name="registeredCapital" class="easyui-validatebox" style="width: 200px"></td>
+				<td><input name="registeredCapital" class="easyui-validatebox" style="width: 200px">万元</td>
 			</tr>
 			<tr>
 				<th>公司地址：</th>

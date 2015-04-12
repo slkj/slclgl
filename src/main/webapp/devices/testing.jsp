@@ -14,25 +14,28 @@
 			<tr>
 				<th colspan="5" style="text-align: left;color: red;">*如有特殊情况请备注。</th>
 			</tr>
-			<tr>
-				<th style="width: 100px">设   备 包  装：</th>
-				<td colspan="3">
-					<label><input name="pack" type="radio" value="0"  disabled="ture"/>全新</label>
-					<label><input name="pack" type="radio" value="1" disabled="ture"/>返修</label> 
-				</td>
+<!-- 			<tr> -->
+<!-- 				<th style="width: 100px">设   备 包  装：</th> -->
+<!-- 				<td colspan="3"> -->
+<!-- 					<label><input name="pack" type="radio" value="0"  disabled="ture"/>全新</label> -->
+<!-- 					<label><input name="pack" type="radio" value="1" disabled="ture"/>返修</label>  -->
+<!-- 				</td> -->
 				
-			</tr>
+<!-- 			</tr> -->
 			<tr>
 				<th style="width: 100px">设   备 ID：</th>
-				<td>
-					<input name="listnum" class="easyui-numberbox" data-options="required:'true'" disabled="ture">
-				</td>
-				<th style="width: 100px">SIM 卡 号：</th>
-				<td>
-					<input id="phone" name="phone" class="easyui-combobox" 
-					data-options="loader: btsloader,mode: 'remote',valueField: 'id',textField: 'name'" />
+				<td colspan="3">
+					<input name="listnum" class="easyui-numberbox" data-options="required:'true'" disabled="ture" style="width: 200px"/>
 				</td>
 			</tr>
+<!-- 			<tr> -->
+<!-- 				<th style="width: 100px">SIM 卡 号：</th> -->
+<!-- 				<td colspan="3"> -->
+<!-- 					<input id="phone" name="phone" class="easyui-combobox"  -->
+<!-- 					data-options="loader: btsloader,mode: 'remote',valueField: 'id',textField: 'name'"  style="width: 150px"/> -->
+<!-- 					*输入连续3位数以上，开启智能搜索。 -->
+<!-- 				</td> -->
+<!-- 			</tr> -->
 			<tr>
 				<th>设备厂商：</th>
 				<td width="150px">

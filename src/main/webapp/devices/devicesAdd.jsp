@@ -15,29 +15,33 @@
 				<th colspan="4" style="text-align: left;color: red;">*请检查设备ID、SIM卡号、入网证明编号是否已存在，已存在数据将重复无法保存。</th>
 			</tr>
 			<tr>
-				<th style="width: 100px">设   备 包  装：</th>
+				<th style="width: 100px">设备包装：</th>
 				<td colspan="3">
 					<label><input name="pack" type="radio" value="0"  checked="checked"/>全新</label>
 					<label><input name="pack" type="radio" value="1" />返修</label> 
 				</td>
-				
 			</tr>
 			<tr>
-				<th style="width: 100px">设   备 ID：</th>
-				<td>
-					<input name="listnum" class="easyui-numberbox" data-options="required:'true'">
-				</td>
-				<th style="width: 100px">SIM 卡 号：</th>
-				<td>
-					<input id="phone" name="phone" class="easyui-combobox" 
-					data-options="loader: btsloader,mode: 'remote',valueField: 'id',textField: 'name'" />
+				<th style="width: 100px">设备ID：</th>
+				<td  colspan="3">
+					<input name="listnum" class="easyui-numberbox" data-options="required:'true'" style="width: 300px">
 				</td>
 			</tr>
+<!-- 			<tr> -->
+<!-- 				<th style="width: 100px">设   备 ID：</th> -->
+<!-- 				<td> -->
+<!-- 					<input name="listnum" class="easyui-numberbox" data-options="required:'true'"> -->
+<!-- 				</td> -->
+<!-- 				<th style="width: 100px">SIM 卡 号：</th> -->
+<!-- 				<td> -->
+<!-- 					<input id="phone" name="phone" class="easyui-combobox"  -->
+<!-- 					data-options="loader: btsloader,mode: 'remote',valueField: 'id',textField: 'name'" /> -->
+<!-- 				</td> -->
+<!-- 			</tr> -->
 			<tr>
 				<th>设备厂商：</th>
 				<td width="150px">
-					<select class="easyui-combobox"  name="firm" panelheight="auto" style="width: 100%" data-options="required:'true'">
-								<option value="" selected="selected">请选择</option>
+					<select class="easyui-combobox"  name="firm"  style="width: 100%" data-options="required:'true'">
 								<option value="神龙">神龙</option>
 								<option value="珠海天琴">珠海天琴</option>
 								<option value="华宝">华宝</option>
@@ -71,18 +75,18 @@
 					<label><input name="ysq" type="checkbox" value="良好" />扬声器</label> 
 					<label><input name="mkf" type="checkbox" value="良好" />麦克风</label> 
 			</tr>
-			<tr>
-				<th>是否测试 ：</th>
-				<td>
-					<label><input name="test" type="radio" value="1" />是</label> 
-					<label><input name="test" type="radio" value="0" />否</label>
-				</td>
-				<th>测试结果：</th>
-				<td>
-					<label><input name="tresult" type="radio" value="1" />定位</label> 
-					<label><input name="tresult" type="radio" value="0" />不定位</label>
-				</td>
-			</tr>
+<!-- 			<tr> -->
+<!-- 				<th>是否测试 ：</th> -->
+<!-- 				<td> -->
+<!-- 					<label><input name="test" type="radio" value="1" />是</label>  -->
+<!-- 					<label><input name="test" type="radio" value="0" />否</label> -->
+<!-- 				</td> -->
+<!-- 				<th>测试结果：</th> -->
+<!-- 				<td> -->
+<!-- 					<label><input name="tresult" type="radio" value="1" />定位</label>  -->
+<!-- 					<label><input name="tresult" type="radio" value="0" />不定位</label> -->
+<!-- 				</td> -->
+<!-- 			</tr> -->
 			<tr>
 				<th>备注：</th>
 				<td colspan="3"><input class="easyui-textbox" name="remark"

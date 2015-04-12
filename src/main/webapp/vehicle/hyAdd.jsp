@@ -171,7 +171,7 @@ var btsloader = function(param, success, error) {
 									<option value="轻型">轻型</option>
 							</select> <select id="carType" name="carType" class="easyui-combotree"
 								style="width: 150px;"
-								data-options="url:'..//data/carcalss_data.json',required:true,lines:true,panelHeight:300,panelWidth:200"></select>
+								data-options="url:'../data/carcalss_data.json',required:true,lines:true,panelHeight:300,panelWidth:200"></select>
 							</td>
 							<th>车辆品牌:</th>
 							<td><input id="carBrand" name="carBrand"
@@ -303,7 +303,7 @@ var btsloader = function(param, success, error) {
 						<tr>
 							<th>车辆获取方式:</th>
 							<td><select class="easyui-combobox" id="carObtWay"  name="carObtWay"
-								style="width: 200px;" data-options="required:true">
+								style="width: 200px;">
 									<option value="购买" selected="selected">购买</option>
 									<option value="仲裁裁决">仲裁裁决</option>
 									<option value="继承">继承</option>

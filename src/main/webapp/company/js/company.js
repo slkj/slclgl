@@ -50,7 +50,7 @@ function loadCompany(id) {
 				$("#contactWay").text(data.contactWay);
 				$('#level').combobox('setValue', data.level);
 				$("#businessLicense").text(data.businessLicense);
-				$("#registeredCapital").text(data.registeredCapital);
+				$("#registeredCapital").text(data.registeredCapital+"万元");
 				$("#email").text(data.email);
 				$("#compAddress").text(data.compAddress);
 				$("#introduction").text(data.introduction);
