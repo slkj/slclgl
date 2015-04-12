@@ -56,16 +56,28 @@
 	</insert>
 
 	<update id="edit" parameterType="Vehicle">
-<!-- 		UPDATE TB_VEHICLE SET OWNEDID=#{ownedId},REGCOMPANYNAME=#{regCompanyName},REGNAME=#{regName},REGNUM=#{regNum},TXTCONTACTMENBER=#{txtContactMenber}, -->
-<!-- 		TXTCONTACTWAY=#{txtContactWay},REGAUTHORITY=#{regAuthority},REGDATE=#{regDate},CARNUMBER=#{carNumber},CARNUMBERTRAILER=#{carNumberTrailer},CARTYPE=#{carType}, -->
-<!-- 		CLASSIFY=#{classify},CARBRAND=#{carBrand},CARMODEL=#{carModel},CARCOLOR=#{carColor},CARVIN=#{carVin},CARPROTYPE=#{carProType},CARENGNUM=#{carEngNum}, -->
-<!-- 		CARENGMODEL=#{carEngModel},CARFUELTYPE=#{carFuelType},CARDISPLACEMENT=#{carDisplacement},CARPOWER=#{carPower},CARMANUNAME=#{carManuName},CARMODALITY=#{carModality}, -->
-<!-- 		CARTREADBE=#{carTreadBe},CARTREADAFTER=#{carTreadAfter},CARTIRENUM=#{carTireNum},CARTIRESPE=#{carTireSpe},CARNUMOFSPRING=#{carNumOfSpring},CARAXLEDIST=#{carAxleDist}, -->
-<!-- 		CARAXLENUM=#{carAxleNum},CAROUTLENGTH=#{carOutLength},CAROUTWIDTH=#{carOutWidth},CAROUTHEIGHT=#{carOutHeight},CARCONTLENGTH=#{carContLength}, -->
-<!-- 		CARCONTWIDTH=#{carAxleNum},CARCONTHEIGHT=#{carContHeight},CARTOTALMASS=#{carTotalmass},CARAPPROVED=#{carApproved},CARAPPRGUEST=#{carApprGuest},CARTRAC=#{carTrac}, -->
-<!-- 		CARCABGUEST=#{carCabGuest},CARUSENATU=#{carUseNatu},CARUSENATUNAME=#{carUseNatuName},CAROBTWAY=#{carObtWay},CARFACDATE=#{carFacDate}, -->
-<!-- 		CARIMG=#{carImg},CARIMG2=#{carImg2},CARIMG3=#{carImg3} ，operatorId=#{operatorId},operatorName=#{operatorName}, -->
-<!-- 		operatorTime=CONVERT(varchar(100), GETDATE(), 20),DEPID=#{depId} WHERE ID = #{id} -->
+		UPDATE TB_VEHICLE SET  
+		carOwner=#{carOwner},carOwnersType=#{carOwnersType},carOwnersCard=#{carOwnersCard},contacts=#{contacts},
+		contactsTel=#{contactsTel},carNumber=#{carNumber},carNumberG=#{carNumberG},plateColor=#{plateColor},classify=#{classify},
+		carType=#{carType},carBrand=#{carBrand},carModel=#{carModel},carColor=#{carColor},carVin=#{carVin},carProType=#{carProType},
+		carOutLength=#{carOutLength},carOutWidth=#{carOutWidth},carOutHeight=#{carOutHeight},carTotalmass=#{carTotalmass},
+		carEngNum=#{carEngNum},carEngModel=#{carEngModel},carFuelType=#{carFuelType},carDisplacement=#{carDisplacement},carPower=#{carPower},
+		carManuName=#{carManuName},carModality=#{carModality},carTreadBe=#{carTreadBe},carTreadAfter=#{carTreadAfter},carTireNum=#{carTireNum},
+		carTireSpe=#{carTireSpe},carNumOfSpring=#{carNumOfSpring},carAxleDist=#{carAxleDist},carAxleNum=#{carAxleNum},carContLength=#{carContLength},
+		carContWidth=#{carContWidth},carContHeight=#{carContHeight},carApproved=#{carApproved},carApprGuest=#{carApprGuest},carTrac=#{carTrac},
+		carCabGuest=#{carCabGuest},carUseNatu=#{carUseNatu},carUseNatuName=#{carUseNatuName},carObtWay=#{carObtWay},carFacDate=#{carFacDate},
+		installers=#{installers},attendants=#{attendants},installtime=#{installtime},installAddress=#{installAddress},fees=#{fees},
+		feeseEnd=#{feeseEnd},isNotice=#{isNotice},simPayer=#{simPayer},payerTime=#{payerTime},CTradingLine=#{CTradingLine},
+		CCatchMenbers=#{CCatchMenbers},carImg=#{carImg},entryTime=#{entryTime},entryId=#{entryId},entryName=#{entryName},depId=#{depId},simNumber=#{simNumber},
+		equitment=#{equitment},networkNo=#{networkNo},remark=#{remark},companyId=#{companyId}
+		WHERE ID = #{id}
+	</update>
+	<update id="activated" parameterType="Vehicle">
+		UPDATE TB_VEHICLE SET
+			simNumber=#{simNumber},equitment=#{equitment},networkNo=#{networkNo},
+			installers=#{installers},installtime=#{installtime},installAddress=#{installAddress},fees=#{fees},feeseEnd=#{feeseEnd},
+			simPayer=#{simPayer},payerTime=#{payerTime},CTradingLine=#{CTradingLine},CCatchMenbers=#{CCatchMenbers},remark=#{remark} 
+		WHERE ID = #{id}
 	</update>
 	<delete id="delete" parameterType="string">
 		DELETE FROM TB_VEHICLE WHERE ID  = #{id}

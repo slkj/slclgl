@@ -2,15 +2,12 @@ package cn.slkj.slclgl.vehicle.service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cn.slkj.easyui.util.EPager;
-import cn.slkj.slclgl.devices.bean.Devices;
 import cn.slkj.slclgl.vehicle.bean.Vehicle;
 import cn.slkj.slclgl.vehicle.mapper.VehicleMapper;
 
@@ -86,6 +83,19 @@ public class VehicleService {
 		}
 	}
 
+	/**
+	 * 入网
+	 * @param vehicle
+	 * @return
+	 */
+	public int activated(Vehicle vehicle) {
+		try {
+			log.info("参数: {}", vehicle.toString());
+			return mapper.activated(vehicle);
+		} catch (Exception e) {
+			return -1;
+		}
+	}
 	/**
 	 * 根据ids批量删除车辆管理记录
 	 * 

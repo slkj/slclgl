@@ -75,7 +75,21 @@ public class VehicleController {
 		}
 		return false;
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value = "/activated", method = { RequestMethod.POST })
+	public boolean activated(Vehicle vehicle) {
+		try {
+			int i = vehicleService.activated(vehicle);
+			if (i > 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return false;
+	}
 	/** 编辑保存 */
 	@ResponseBody
 	@RequestMapping(value = "/editVehicle", method = { RequestMethod.POST })

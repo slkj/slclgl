@@ -52,6 +52,12 @@ public interface VehicleMapper {
 	 * @param vehicle
 	 */
 	public int edit(Vehicle vehicle);
+	/**
+	 * 入网
+	 * @param vehicle
+	 * @return
+	 */
+	public int activated(Vehicle vehicle);
 
 	/**
 	 * 根据ids批量删除车辆管理记录

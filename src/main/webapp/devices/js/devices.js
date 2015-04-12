@@ -125,19 +125,6 @@ function loadDataGrid() {
 									title : '设备编号'
 								},
 								{
-									field : 'phone',
-									title : 'SIM卡号',
-									sortable : true,
-									order : 'desc',
-									formatter : function(value, row, index) {
-										var str = "<a id=\"btn" + index
-												+ "\" href=\"#\" onclick=\"phone(" + index + ")\">"
-												+ value + "</a>";
-										var btn = row.phone == null ? "" : str;
-										return btn;
-									}
-								},
-								{
 									field : 'lyr',
 									title : '领用人'
 								},
@@ -152,17 +139,21 @@ function loadDataGrid() {
 									title : '返还时间'
 								},
 								{
-									field : 'installers',
-									title : '安装人'
-								},
-								{
-									field : 'installtime',
-									title : '安装时间'
+									field : 'phone',
+									title : 'SIM卡号',
+									sortable : true,
+									order : 'desc',
+									formatter : function(value, row, index) {
+										var str = "<a id=\"btn" + index
+												+ "\" href=\"#\" onclick=\"phone(" + index + ")\">"
+												+ value + "</a>";
+										var btn = row.phone == null ? "" : str;
+										return btn;
+									}
 								},
 								{
 									field : 'carNumber',
 									title : '车牌号',
-									width : 100,
 									formatter : function(value, row, index) {
 										var str = "<a id=\"btn" + index
 												+ "\" href=\"#\" onclick=\"carNumber(" + index
@@ -170,21 +161,18 @@ function loadDataGrid() {
 										var btn = row.carNumber == null ? "" : str;
 										return btn;
 									}
-								},
-								{
+								}, {
+									field : 'installers',
+									title : '安装人'
+								}, {
+									field : 'installtime',
+									title : '安装时间'
+								}, {
 									field : 'company',
 									title : '使用公司'
-								},
-								{
+								}, {
 									field : 'networkNo',
-									title : '入网证明编号',
-									formatter : function(value, row, index) {
-										var str = "<a id=\"btn" + index
-												+ "\" href=\"#\"  onclick=\"networkNo(" + index
-												+ ")\">" + value + "</a>";
-										var btn = row.networkNo == null ? "" : str;
-										return btn;
-									}
+									title : '入网证明编号'
 								},
 								// {
 								// field : 'test',
@@ -256,10 +244,6 @@ function phone(index) {
 function carNumber(index) {
 	var data = grid.datagrid('getData').rows[index];
 	alert(data.carNumber);
-}
-function networkNo(index) {
-	var data = grid.datagrid('getData').rows[index];
-	alert(data.networkNo);
 }
 function myformatter(date) {
 	var y = date.getFullYear();
@@ -369,36 +353,6 @@ function testing(index) {
 			iconCls : 'icon-add',
 			handler : function() {
 				fCallback("../devices/testing");
-			}
-		}, {
-			text : '关闭',
-			handler : function() {
-				SL.closeWindow();
-			}
-		} ]
-	});
-}
-// 入网
-function netIn(index) {
-	var data = grid.datagrid('getData').rows[index];
-	if (data.state == 2) {
-		SL.msgShow("提示", "设备未出库，不能使用该设备。", "warning");
-		return;
-	}
-	SL.showWindow({
-		title : 'GPS设备入网',
-		iconCls : 'icon-add',
-		width : 550,
-		height : 450,
-		url : basePath + 'netIn.jsp',
-		onLoad : function() {
-			$("#form").form('load', data);
-		},
-		buttons : [ {
-			text : '确定',
-			iconCls : 'icon-add',
-			handler : function() {
-				fCallback("../devices/netIn");
 			}
 		}, {
 			text : '关闭',

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import cn.slkj.slclgl.devices.bean.Devices;
-import cn.slkj.slclgl.sim.bean.Sim;
 
 public interface DevicesMapper {
 	List<Devices> getAll(Map<String, Object> map);
@@ -12,8 +11,6 @@ public interface DevicesMapper {
 	int getAllCount(Map<String, Object> map);
 
 	int insert(Devices devices);
-
-	int netIn(Devices devices);
 
 	int testing(Devices devices);
 
