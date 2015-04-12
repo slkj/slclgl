@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>新增公司信息</title>
 </head>
-<body>ssssss
+<body>
 	<form id="comForm">
 		<table class="grid">
 			<tr>
