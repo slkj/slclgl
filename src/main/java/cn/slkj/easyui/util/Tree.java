@@ -9,7 +9,7 @@ public class Tree {
 	private boolean checked;// Indicate whether the node is checked selected.
 	private Object attributes;// 节点中其他属性的集合
 	private List<Tree> children;// 子节点集合
-	public String getId() {
+	public String getId() {  
 		return id;
 	}
 	public void setId(String id) {
