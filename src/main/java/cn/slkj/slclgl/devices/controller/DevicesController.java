@@ -105,14 +105,4 @@ public class DevicesController {
 			return false;
 		}
 	}
-	@RequestMapping(value = "/netIn", method = { RequestMethod.POST })
-	@ResponseBody
-	public boolean netIn(Devices devices) {
-		int i = impl.netIn(devices);
-		if (i > 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 }

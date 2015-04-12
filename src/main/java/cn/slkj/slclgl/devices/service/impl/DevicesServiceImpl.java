@@ -46,11 +46,6 @@ public class DevicesServiceImpl implements DevicesService {
 		return mapper.testing(devices);
 	}
 
-	public int netIn(Devices devices) {
-		// TODO Auto-generated method stub
-		return mapper.netIn(devices);
-	}
-
 	public List<Devices> getList(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return mapper.getList(map);

@@ -62,18 +62,10 @@
 	</select>
 	<insert id="insert" parameterType="Devices">
 		INSERT INTO TB_DEVICES
-		(listnum,firm,model,genre,rktime,state,fhtime,lyr,lytime,test,phone,cstime,tresult,gpszj,gpstx,gsmtx,
-		dy,fsd,jsq,sxy,ysq,mkf,remark,pack,installers,installtime,carNumber,company,networkNo,area)
-		VALUES(#{listnum},#{firm},#{model},#{genre},now() ,#{state},#{fhtime},#{lyr},#{lytime},#{test},#{phone},#{cstime},
-		#{tresult},#{gpszj},#{gpstx},#{gsmtx},#{dy},#{fsd},#{jsq},#{sxy},#{ysq},#{mkf},#{remark},#{pack},#{installers},
-		#{installtime},#{carNumber},#{company},#{networkNo},#{area})
+		(listnum,firm,model,rktime,state,fhtime,lyr,lytime,test,cstime,tresult,gpszj,gpstx,gsmtx,dy,fsd,jsq,sxy,ysq,mkf,remark,pack,area)
+		VALUES(#{listnum},#{firm},#{model},curdate() ,#{state},#{fhtime},#{lyr},#{lytime},#{test},#{cstime},
+		#{tresult},#{gpszj},#{gpstx},#{gsmtx},#{dy},#{fsd},#{jsq},#{sxy},#{ysq},#{mkf},#{remark},#{pack},#{area})
 	</insert>
-	
-	<update id="netIn" parameterType="Devices">
-		UPDATE TB_DEVICES SET 
-			state=4 ,installers =#{installers},installtime=#{installtime},carNumber=#{carNumber},company=#{company},networkNo=#{networkNo}
-		WHERE ID=#{id}
-	</update>
 	<update id="testing" parameterType="Devices">
 		UPDATE TB_DEVICES SET 
 			test =#{test},phone=#{phone},tresult=#{tresult},cstime=now()
