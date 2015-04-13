@@ -26,7 +26,7 @@
 						{
 							method : 'post',
 							url : basePath + 'list',
-							 fitColumns:false,
+							fitColumns : false,
 							title : '车辆列表',
 							fit : true,
 							nowrap : true, // false:折行
@@ -39,6 +39,17 @@
 							pageList : [ 1, 10, 15, 20, 30, 50 ],
 							loadMsg : '数据加载中,请稍后……',
 							columns : [ [
+									{
+										field : '_state',
+										title : '使用状态',
+										formatter : function(value, row, index) {
+											var s = "";
+											if (typeof(row.networkNo)!="undefined" && row.networkNo !="" && row.networkNo != null ) {
+												s = "<div style='background-color:#008B00;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>入网使用</div>";
+											}
+											return s;
+										}
+									},
 									{
 										field : 'id',
 										title : '车号'
@@ -106,7 +117,7 @@
 													+ index + "');\">删除</span></a>";
 											s += "&nbsp;|&nbsp;";
 											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:detailCarInfo('"
-												+ index + "');\">安装记录</span></a>";
+													+ index + "');\">安装记录</span></a>";
 											return s;
 										}
 									} ] ],
@@ -153,10 +164,10 @@
 				}
 			} ]
 		});
-// 		parent.$("#cnIframe").attr("src", "inNet.jsp");
+		// 		parent.$("#cnIframe").attr("src", "inNet.jsp");
 	}
-	
-	function inNet2(){
+
+	function inNet2() {
 		if (parent.$("#form").form('enableValidation').form('validate')) {
 			var data = parent.$("#form").serialize();
 			$.ajax({
@@ -169,7 +180,7 @@
 					if (data) {
 						parent.SL.closeWindow();
 						grid.datagrid('reload');
-					}else{
+					} else {
 						parent.SL.msgShow("提示", "入网失败！", "warning");
 					}
 				}
@@ -232,43 +243,37 @@
 </head>
 <body>
 	<div id="tb" style="padding: 5px; height: auto">
-		<div>
-			<form name="searchform" method="post" action="" id="searchform">
-				<table cellspacing="0" cellpadding="0">
-					<tr>
-						<td>车号：<input name="lyr" class="easyui-textbox"
-							style="width: 150px" /> 车牌号:<input name="carNumber"
-							class="easyui-textbox" style="width: 150px" />
-						</td>
-					</tr>
-					<tr height="3px"></tr>
-					<tr>
-						<td>设备编号:<input name="listnum" class="easyui-textbox"
-							style="width: 150px" /> SIM卡号:<input name="phone"
-							class="easyui-numberbox" style="width: 150px" /> <a
-							id="search_btn" href="#" class="easyui-linkbutton"
-							data-options="iconCls:'icon-search',plain:'true'">查询</a>
-						</td>
-					</tr>
-				</table>
-			</form>
-		</div>
-		<div>
+		<form name="searchform" method="post" action="" id="searchform">
 			<table cellspacing="0" cellpadding="0">
 				<tr>
-					<td><a href="#" class="easyui-linkbutton"
-						data-options="iconCls:'icon-add',plain:true"
-						onClick="javascript:addCar();">新加车辆</a></td>
-					<td><div class="datagrid-btn-separator"></div></td>
-					<td><a href="#" onclick="outExcel()" class="easyui-linkbutton"
-						data-options="iconCls:'pic pic_157',plain:true">导出</a></td>
-					<td><div class="datagrid-btn-separator"></div></td>
-					<td><a href="#" class="easyui-linkbutton"
-						data-options="iconCls:'pic pic_154',plain:true"
-						onclick="return ajaxFileUpload();">导入</a></td>
+					<td>车牌号:<input name="carNumber" class="easyui-textbox"
+						style="width: 150px" /> 所属公司：<input name="companyName"
+						class="easyui-textbox" style="width: 150px" />
+					</td>
+				<tr>
+					<td>设备编号:<input name="listnum" class="easyui-textbox"
+						style="width: 150px" /> SIM卡号:<input name="phone"
+						class="easyui-numberbox" style="width: 150px" /> <a
+						id="search_btn" href="#" class="easyui-linkbutton"
+						data-options="iconCls:'icon-search',plain:'true'">查询</a>
+					</td>
 				</tr>
 			</table>
-		</div>
+		</form>
+		<table cellspacing="0" cellpadding="0">
+			<tr>
+				<td><a href="#" class="easyui-linkbutton"
+					data-options="iconCls:'icon-add',plain:true"
+					onClick="javascript:addCar();">新加车辆</a></td>
+				<td><div class="datagrid-btn-separator"></div></td>
+				<td><a href="#" onclick="outExcel()" class="easyui-linkbutton"
+					data-options="iconCls:'pic pic_157',plain:true">导出</a></td>
+				<td><div class="datagrid-btn-separator"></div></td>
+				<td><a href="#" class="easyui-linkbutton"
+					data-options="iconCls:'pic pic_154',plain:true"
+					onclick="return ajaxFileUpload();">导入</a></td>
+			</tr>
+		</table>
 	</div>
 	<table id="dg"></table>
 </body>

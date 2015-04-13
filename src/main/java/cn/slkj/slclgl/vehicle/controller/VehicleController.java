@@ -46,6 +46,14 @@ public class VehicleController {
 		HashMap<String, Object> pageMap = new HashMap<String, Object>();
 		int page = Integer.parseInt(request.getParameter("page"));
 		int rows = Integer.parseInt(request.getParameter("rows"));
+		pageMap.put("companyName", request.getParameter("companyName"));
+		pageMap.put("listnum", request.getParameter("listnum"));
+		pageMap.put("phone", request.getParameter("phone"));
+		pageMap.put("carNumber", request.getParameter("carNumber"));
+		String sort =request.getParameter("sort");
+		pageMap.put("sort", sort != null ? sort : "id");
+		String order =request.getParameter("order");
+		pageMap.put("order", order != null  ? order : "desc");
 		pageMap.put("startPage", (page - 1) * rows);
 		pageMap.put("endPage", rows);
 		int total = vehicleService.getAllCount(pageMap);
