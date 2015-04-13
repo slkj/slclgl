@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.slkj.clgl.person.dao.ExzmDao">
+<mapper namespace="cn.slkj.slclgl.person.mapper.ExzmMapper">
 <sql id="sql_temp">
 EXZM_ID,IDCARD_NO,EXZM_INFO,EXZM_TIME
 	</sql>

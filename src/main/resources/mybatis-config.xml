@@ -13,6 +13,10 @@
 		<typeAlias type="cn.slkj.slclgl.devices.bean.Devices" alias="Devices" />
 		<typeAlias type="cn.slkj.slclgl.company.bean.Company" alias="Company" />
 		<typeAlias type="cn.slkj.slclgl.vehicle.bean.Vehicle" alias="Vehicle" />
+		<typeAlias type="cn.slkj.slclgl.person.bean.Person" alias="person" />
+		<typeAlias type="cn.slkj.slclgl.person.bean.Driver_record" alias="driver_record"/>
+		<typeAlias type="cn.slkj.slclgl.person.bean.Server_unit" alias="server_unit"/>
+		<typeAlias type="cn.slkj.slclgl.person.bean.Driver_exzm" alias="driver_exzm"/>
 	</typeAliases>
 	<!-- 设置数据库连接环境 -->
 	<!-- 映射文件 -->
@@ -23,5 +27,9 @@
 		<mapper resource="cn/slkj/slclgl/devices/mapper/DevicesMapper.xml" />
 		<mapper resource="cn/slkj/slclgl/company/mapper/CompanyMapper.xml" />
 		<mapper resource="cn/slkj/slclgl/vehicle/mapper/VehicleMapper.xml" />
+		<mapper resource="cn/slkj/slclgl/person/mapper/PersonMapper.xml"/>
+		<mapper resource="cn/slkj/slclgl/person/mapper/DriverMapper.xml"/>
+		<mapper resource="cn/slkj/slclgl/person/mapper/ExzmMapper.xml"/>
+		<mapper resource="cn/slkj/slclgl/person/mapper/UnitMapper.xml"/>
 	</mappers>
 </configuration>

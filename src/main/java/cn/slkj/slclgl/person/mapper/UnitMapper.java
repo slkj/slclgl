@@ -21,7 +21,7 @@ import org.springframework.stereotype.Repository;
 
 import cn.slkj.slclgl.person.bean.Server_unit;
 @Repository
-public interface UnitDao{
+public interface UnitMapper{
 	List<Server_unit> list(HashMap<String,Object> map);
 	Server_unit one(Server_unit obj);
 	Server_unit onebycard(HashMap<String,Object> map);

@@ -21,7 +21,7 @@ import org.springframework.stereotype.Repository;
 
 import cn.slkj.slclgl.person.bean.Driver_record;
 @Repository
-public interface DriverDao{
+public interface DriverMapper{
 	List<Driver_record> list(HashMap<String,Object> map);
 	Driver_record one(Driver_record obj);
 	int total(HashMap<String,Object> map);

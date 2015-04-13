@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 
 import cn.slkj.slclgl.company.bean.Company;
 import cn.slkj.slclgl.person.bean.Driver_exzm;
-import cn.slkj.slclgl.person.mapper.ExzmDao;
+import cn.slkj.slclgl.person.mapper.ExzmMapper;
 @Service
 public class ExzmService {
 	@Autowired
-	private ExzmDao dao;
+	private ExzmMapper dao;
 	public List<Driver_exzm> search(HashMap<String, Object> map){
 		
 		return dao.list(map);

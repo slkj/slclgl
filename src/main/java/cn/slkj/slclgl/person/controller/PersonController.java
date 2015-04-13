@@ -83,7 +83,7 @@ public class PersonController {
 			Person p = new Person();
 			p.setId(id);
 			return service.One(p);
-		} catch (Exception e) {
+		} catch (Exception e) {e.printStackTrace();
 			throw new Exception("this is the detail of ajax exception information");
 		}
 	}
@@ -93,7 +93,7 @@ public class PersonController {
 	@RequestMapping(value = "/add", method = { RequestMethod.POST })
 	public boolean save(Person p) throws Exception {
 		try {
-			p.setId(UUID.randomUUID().toString());
+			//p.setId(UUID.randomUUID().toString());
 
 			if (!StringUtils.isNotBlank(p.getPhoto())) {
 				p.setPhoto("default.jpg");
@@ -104,22 +104,22 @@ public class PersonController {
 						+Integer.parseInt(p.getDriver_years())+begin.substring(4));
 				
 			}	
-			if(StringUtils.isNotBlank(p.getUnit_name())){
-			Server_unit unit=new Server_unit();
-			unit.setUnit_id(UUID.randomUUID().toString());
-			unit.setIdcard_no(p.getIdcard_no());
-			unit.setUnit_address(p.getUnit_address());
-			unit.setUnit_name(p.getUnit_name());
-			unit.setUnit_tel(p.getUnit_tel());
-			unit.setUnit_time(p.getUnit_time());
-			unitservice.add(unit);
-			}
+//			if(StringUtils.isNotBlank(p.getUnit_name())){
+//			Server_unit unit=new Server_unit();
+//			unit.setUnit_id(UUID.randomUUID().toString());
+//			unit.setIdcard_no(p.getIdcard_no());
+//			unit.setUnit_address(p.getUnit_address());
+//			unit.setUnit_name(p.getUnit_name());
+//			unit.setUnit_tel(p.getUnit_tel());
+//			unit.setUnit_time(p.getUnit_time());
+//			unitservice.add(unit);
+//			}
 			int i = service.add(p);
 			
 			if (i != -1) {
 				return true;
 			}
-		} catch (Exception e) {
+		} catch (Exception e) {e.printStackTrace();
 			throw new Exception("this is the detail of ajax exception information");
 		}
 		return false;
@@ -136,7 +136,7 @@ public class PersonController {
 						+Integer.parseInt(p.getDriver_years())+begin.substring(4));
 				
 			}	
-			if(StringUtils.isNotBlank(p.getUnit_name())){
+			/*if(StringUtils.isNotBlank(p.getUnit_name())){
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				map.put("idcard_no", p.getIdcard_no());
 			Server_unit unit=unitservice.OneByCard(map);
@@ -158,7 +158,7 @@ public class PersonController {
 				unit.setUnit_time(p.getUnit_time());
 				unitservice.edit(unit);
 			}
-			}
+			}*/
 			int i = service.edit(p);
 			if (i != -1) {
 				return true;

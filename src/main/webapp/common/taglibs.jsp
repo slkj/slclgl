@@ -26,7 +26,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/easyui/jquery.easyui.min.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/easyui/easyui-lang-zh_CN.js" type="text/javascript"></script>
-<script type="text/javascript" src='${pageContext.request.contextPath}/js/SL.easyUI.js'></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/ajaxfileupload.js"></script>
-
+<script src='${pageContext.request.contextPath}/js/SL.easyUI.js' type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/ajaxfileupload.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/mEasyUI.js" type="text/javascript"></script>
 

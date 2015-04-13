@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import cn.slkj.slclgl.person.bean.Driver_exzm;
 
 @Repository
-public interface ExzmDao {
+public interface ExzmMapper {
 	List<Driver_exzm> list(HashMap<String,Object> map);
 	Driver_exzm one(Driver_exzm obj);
 	int total(HashMap<String,Object> map);

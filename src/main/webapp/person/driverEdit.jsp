@@ -8,13 +8,33 @@
 <%@ include file="/common/taglibs.jsp"%>
 <script type="text/javascript">
 	var basePath = "../person/";
+	$(function() {
+		var Request = new Object();
+		Request = GetRequest();
+		id = Request['id'];
+		$.ajax({
+			url : basePath + 'one',
+			type : "POST",
+			data : "id=" + id,
+			async : false,
+			dataType : "json",
+			cache : false,
+	        success: function(data) { 
+	         	/* var photo = '<img  src="../showPicture/load?imgPath='+data.photo+'" width="222" height="122"/>';
+	         	$('#photo').html(photo); */
+	        	$("#carForm").form('load', data);
+	        	$("#car_type").combobox('setValue',data.driver_car_type);
+	        }  
+			
+		});
+	});
 	function submitForm() {
 		if ($("#carForm").form('enableValidation').form('validate')) {
 			var data = $("#carForm").serialize();
 			$.ajax({
 				cache : false,
 				type : 'POST',
-				url : basePath + 'add',
+				url : basePath + 'save',
 				data : data,
 				async : false,
 				success : function(data) {
@@ -25,6 +45,7 @@
 			});
 		}
 	}
+	
 	function clearForm() {
 		$('#carForm').form('clear');
 	}
@@ -48,6 +69,7 @@
 	<input name="companyid" type="hidden" value="2" />
 		<input hidden="true" id="qualification_type" name="qualification_type"
 			value="" />
+			<input hidden="hidden" name="id"/>
 		<div id="aa" class="easyui-accordion" data-options="border:false">
 			<div title="驾驶员基本信息"
 				data-options="collapsed:false,collapsible:false,border:false"

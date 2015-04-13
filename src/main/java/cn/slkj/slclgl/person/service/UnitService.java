@@ -22,11 +22,11 @@ import org.springframework.stereotype.Service;
 
 import cn.slkj.slclgl.company.bean.Company;
 import cn.slkj.slclgl.person.bean.Server_unit;
-import cn.slkj.slclgl.person.mapper.UnitDao;
+import cn.slkj.slclgl.person.mapper.UnitMapper;
 @Service
 public class UnitService{
 	@Autowired
-	private UnitDao dao;
+	private UnitMapper dao;
 	
 	public List<Server_unit> search(HashMap<String,Object> map){
 

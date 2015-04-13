@@ -22,12 +22,12 @@ import org.springframework.stereotype.Service;
 
 import cn.slkj.slclgl.company.bean.Company;
 import cn.slkj.slclgl.person.bean.Person;
-import cn.slkj.slclgl.person.mapper.PersonDao;
+import cn.slkj.slclgl.person.mapper.PersonMapper;
 
 @Service
 public class PersonService {
 	@Autowired
-	private PersonDao dao;
+	private PersonMapper dao;
 
 	public List<Person> search(HashMap<String, Object> map) {
 		

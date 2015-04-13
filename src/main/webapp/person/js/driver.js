@@ -1,5 +1,5 @@
 var grid;
-var basePath = "";
+var basePath = "../person/";
 $(function() {
 	// 初始化页面
 	loadDataGrid();
@@ -30,7 +30,7 @@ function loadDataGrid() {
 			.datagrid(
 					{
 						method : 'post',
-//						url : basePath + 'list',
+						url : basePath + 'list',
 						title : '司机列表',
 						fit : true,
 						nowrap : true, // false:折行
@@ -43,50 +43,43 @@ function loadDataGrid() {
 						pageList : [ 1, 10, 15, 20, 30, 50 ],
 						loadMsg : '数据加载中,请稍后……',
 						columns : [ [
-								{
-									field : 'areaName',
-									title : '档案号'
-								},{
-									field : 'pack',
-									title : '姓名'
-								},
-								{
-									field : 'firm',
-									title : '联系方式'
-								},
-								{
-									field : 'state',
-									title : '身份证号'
-								},
-								{
-									field : 'listnum',
-									title : '驾驶证号'
-								},
-								{
-									field : 'rktime',
-									title : '发证日期 '
-								}, 
-								{
-									field : 'test',
-									title : '车牌号',
-								}, {
-									field : 'cstime',
-									title : '所属公司',
-									sortable : true,
-									order : 'desc'
-								},{
+								 {
+								title : '姓名',
+								field : 'name'
+							}, {
+								title : '联系电话',
+								field : 'telephone'
+							}, {
+								title : '身份证号',
+								field : 'idcard_no'
+							}, {
+								title : '驾驶证发证日期',
+								field : 'driver_certify_time'
+							}, {
+								title : '从业资格证号',
+								field : 'qualification_no'
+							}, {
+								title : '从业资格证发证日期',
+								field : 'quali_certify_time'
+							}, {
+								title : '现服务车辆',
+								field : 'fwcl'
+							}, {
+								title : '服务单位',
+								field : 'unit_name'
+							},{
 									field : 'opt',
 									title : '操作',
 									align : 'center',
 									formatter : function(value, row, index) {
 										var s = "";
-										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:testing('"
-												+ index + "');\">详细</span></a>";
+										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:view('"
+												+ row.id + "');\">详细</span></a>";
 										s += "&nbsp;|&nbsp;";
-										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:testing('"
-											+ index + "');\">编辑</span></a>";
+										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:edit('"
+											+ row.id + "');\">编辑</span></a>";
 										s += "&nbsp;|&nbsp;";
-										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:testing('"
+										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:del('"+row.id+"','"
 											+ index + "');\">删除</span></a>";
 										return s;
 									}
@@ -105,4 +98,27 @@ function loadDataGrid() {
 }
 function add() {
 	window.location.href='driverAdd.jsp';
+}
+function edit(id){
+	window.location.href='driverEdit.jsp?id='+id;
+}
+function del(id, index) { // 删除操作
+	$.messager.confirm('确认', '确认删除?', function(row) {
+		if (row) {
+			$.ajax({
+				url : basePath + 'delete?id=' + id,
+				success : function(data) {
+					var msg = "成功删除。";
+					if (data) {
+						$('#dg').datagrid('load');;
+					} else {
+						msg = "删除失败了。";
+					}
+					max.sysSlideShow({
+						msg : msg
+					});
+				}
+			});
+		}
+	})
 }

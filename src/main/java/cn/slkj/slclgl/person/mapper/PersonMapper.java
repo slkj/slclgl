@@ -21,7 +21,7 @@ import org.springframework.stereotype.Repository;
 
 import cn.slkj.slclgl.person.bean.Person;
 @Repository
-public interface PersonDao{
+public interface PersonMapper{
 	List<Person> list(HashMap<String,Object> map);
 	Person one(Person obj);
 	int total(HashMap<String,Object> map);

@@ -22,11 +22,11 @@ import org.springframework.stereotype.Service;
 
 import cn.slkj.slclgl.company.bean.Company;
 import cn.slkj.slclgl.person.bean.Driver_record;
-import cn.slkj.slclgl.person.mapper.DriverDao;
+import cn.slkj.slclgl.person.mapper.DriverMapper;
 @Service
 public class DriverService{
 	@Autowired
-	private DriverDao dao;
+	private DriverMapper dao;
 	
 	public List<Driver_record> search(HashMap<String, Object> map){
 		
