@@ -15,11 +15,42 @@
 	</sql>
 	<select id="queryList" resultType="Vehicle" parameterType="hashmap">
 			SELECT <include refid="sql_temp"/>  FROM TB_VEHICLE
+			<where>
+				<if test="listnum != null and listnum != ''">
+					AND listnum  LIKE  '%' + #{listnum}  + '%'
+				</if>
+				<if test="phone != null and phone != ''">
+					AND simNumber  LIKE  '%' + #{phone}  + '%'
+				</if>
+				<if test="companyName != null and companyName != ''">
+					AND company  LIKE  '%' + #{companyName}  + '%'
+				</if>
+				<if test="carNumber != null and carNumber != ''">
+					AND carNumber  LIKE  '%' + #{carNumber}  + '%'
+				</if>
+			</where>
+			<if test="sort != null and sort != ''">
+				ORDER BY  ${sort}       ${order}
+			</if>
 			LIMIT #{startPage},#{endPage}
 	</select>
 
 	<select id="queryListCount" resultType="int" parameterType="hashmap">
 		SELECT COUNT(0) FROM TB_VEHICLE
+		<where>
+				<if test="listnum != null and listnum != ''">
+					AND listnum  LIKE  '%' + #{listnum}  + '%'
+				</if>
+				<if test="phone != null and phone != ''">
+					AND simNumber  LIKE  '%' + #{phone}  + '%'
+				</if>
+				<if test="companyName != null and companyName != ''">
+					AND company  LIKE  '%' + #{companyName}  + '%'
+				</if>
+				<if test="carNumber != null and carNumber != ''">
+					AND carNumber  LIKE  '%' + #{carNumber}  + '%'
+				</if>
+			</where>
 	</select>
 	<select id="queryOne" parameterType="hashmap" resultType="vehicle">
 		SELECT <include refid="sql_temp"></include> FROM TB_VEHICLE

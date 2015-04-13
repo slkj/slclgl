@@ -62,9 +62,9 @@
 											var s = "";
 											s += "<a class=\"editcls\" href=\"javascript:void(0)\" onclick=\"editRow('"
 													+ row.id + "');\">编辑</a>";
-// 											s += "|";
-// 											s += "<a href=\"javascript:void(0)\" onclick=\"javaScript:deleteRow('"
-// 													+ row.id + "');\"> 删除 </a>";
+											s += "|";
+											s += "<a href=\"javascript:void(0)\" onclick=\"javaScript:deleteRow('"
+													+ row.id + "');\"> 删除 </a>";
 											if (row.parent_id == "0") {
 												return "";
 											}

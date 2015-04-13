@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.slkj.slclgl.user.mapper.UserMapper">
+	<sql id="sql_base">
+		ID,USERNAME,PASSWORD,STATUS,EMAIL,REALNAME,SEX,PHONE,COMPANY,SALT,CREATE_TIME,LASTTIME,REMARK,TYPE
+	</sql>
 	<select id="login" resultType="User" parameterType="hashmap">
-		SELECT * FROM TB_USER
-		WHERE NAME=#{name} AND PWD=#{password}
+		SELECT <include refid="sql_base"></include> FROM TB_USER WHERE USERNAME=#{username} AND PASSWORD=#{password}
 	</select>
 	<select id="getAllUsers" resultType="User" parameterType="hashmap">
-		SELECT * FROM TB_USER limit  #{startPage},#{endPage}
+		SELECT <include refid="sql_base"></include> FROM TB_USER limit  #{startPage},#{endPage}
 	</select>
 	
 	<select id="getAllUsersCount" resultType="int" parameterType="hashmap">
 		SELECT COUNT(1) FROM TB_USER
 	</select>
+	
+	<select id="queryOne" parameterType="hashmap" resultType="User">
+		SELECT <include refid="sql_base"></include>  FROM TB_USER
+		<where>
+			<if test="username != null and   username != ''">
+				AND USERNAME = #{username}
+			</if>
+			<if test="password != null and   password != ''">
+				AND PASSWORD = #{password}
+			</if>
+		</where>
+	</select>
+	
+	<insert id="save" parameterType="User">
+		INSERT INTO TB_USER(USERNAME,PASSWORD,STATUS,EMAIL,REALNAME,SEX,PHONE,COMPANY,SALT,CREATE_TIME,LASTTIME,REMARK,TYPE )
+		VALUES(#{username},#{password},#{status} ,#{email},#{realname},#{sex},#{phone},#{company},#{salt},now(),#{lastTime},#{remark},#{type})
+	</insert>
 </mapper>

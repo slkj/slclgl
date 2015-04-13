@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>围场县客货、出租车车辆管理系统平台</title>
+<title>神龙车辆管理服务平台</title>
 <link href="css/login.css" rel="stylesheet" type="text/css" />
 <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
 <!-- <script type="text/javascript" src="js/login.js"></script> -->
@@ -12,48 +12,64 @@
 	if (window != top) {
 		top.location.href = location.href;
 	}
-
+	function login() {
+		var user = {
+			username : $("#username").val(),
+			password : $("#password").val(),
+			vcode : $("#vcode").val()
+		};
+// 		if (user.vcode == "") {
+// 			alert("验证码不能为空，请重新输入！");
+// 			return;
+// 		}
+		if (user.username == "" || user.password == "") {
+			alert("用户名或密码为空，请重新输入！");
+			$("#password").val("");
+			$("#vcode").val("");
+			$("#username").focus();
+			return;
+		} else {
+			$.ajax({
+				url : "user/login",
+				type : "post",
+				data : user,
+				success : function(data) {
+					if (data.success) {
+						window.location.href= "index.jsp";
+					} else {
+						$("#password").val("");
+						$("#vcode").val("");
+						alert(data.msg);
+					}
+				}
+			});
+		}
+	}
+	
+	function openWLSH() {
+		window.open('http://wlsh.cn');
+	}
 	//加入收藏
-
 	function AddFavorite(sURL, sTitle) {
-
 		sURL = encodeURI(sURL);
 		try {
-
 			window.external.addFavorite(sURL, sTitle);
-
 		} catch (e) {
-
 			try {
-
 				window.sidebar.addPanel(sTitle, sURL, "");
-
 			} catch (e) {
-
 				alert("加入收藏失败，请使用Ctrl+D进行添加,或手动在浏览器里进行设置.");
-
 			}
-
 		}
-
 	}
-
 	//设为首页
-
 	function SetHome(url) {
-
 		if (document.all) {
-
 			document.body.style.behavior = 'url(#default#homepage)';
-
 			document.body.setHomePage(url);
-
 		} else {
-
 			alert("您好,您的浏览器不支持自动设置页面为首页功能,请您手动在浏览器里设置该页面为首页!");
-
 		}
-
 	}
 </script>
 </head>
@@ -71,8 +87,8 @@
 							href="javascript:void(0)">设为首页</a></li>
 						<li><a onclick="AddFavorite(window.location,document.title)"
 							href="javascript:void(0)">加入收藏</a></li>|
-						<li><a href="#">反馈</a></li>
-						<li><a href="#">帮助</a></li>
+						<li><a href="javascript:void(0)" onclick="openWLSH()">反馈</a></li>
+						<li><a href="javascript:void(0)" onclick="openWLSH()">帮助</a></li>
 					</ul>
 				</div>
 				<h2 class="login_title">
@@ -109,7 +125,7 @@
 					<li><a href="#">为什么登录失败？</a></li>
 				</ul>
 				<div class="login_inner">
-					<p>使用方便、自动提醒、扩展性强、节省成本、安全性高
+					<p>使用方便、自动提醒、节省成本、安全性高
 				</div>
 			</div>
 		</div>
