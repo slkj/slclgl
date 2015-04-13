@@ -102,6 +102,9 @@ function add() {
 function edit(id){
 	window.location.href='driverEdit.jsp?id='+id;
 }
+function view(id){
+	window.location.href='driverView.jsp?id='+id;
+}
 function del(id, index) { // 删除操作
 	$.messager.confirm('确认', '确认删除?', function(row) {
 		if (row) {
