@@ -47,26 +47,26 @@ function loadDataGrid() {
 								title : '姓名',
 								field : 'name'
 							}, {
-								title : '联系电话',
+								title : '性别',
+								field : 'sex'
+							}, {
+								title : '联系方式',
 								field : 'telephone'
 							}, {
 								title : '身份证号',
 								field : 'idcard_no'
 							}, {
-								title : '驾驶证发证日期',
-								field : 'driver_certify_time'
-							}, {
-								title : '从业资格证号',
-								field : 'qualification_no'
-							}, {
-								title : '从业资格证发证日期',
-								field : 'quali_certify_time'
+								title : '驾驶证号',
+								field : 'driver_no'
 							}, {
 								title : '现服务车辆',
 								field : 'fwcl'
 							}, {
-								title : '服务单位',
-								field : 'unit_name'
+								title : '所属单位',
+								field : 'companyname'
+							}, {
+								title : '从业资格证号',
+								field : 'qualification_no'
 							},{
 									field : 'opt',
 									title : '操作',
@@ -95,6 +95,7 @@ function loadDataGrid() {
 		afterPageText : '页    共 {pages} 页',
 		displayMsg : '当前显示 {from} - {to} 条记录   共 {total} 条记录'
 	});
+	
 }
 function add() {
 	window.location.href='driverAdd.jsp';
@@ -117,7 +118,7 @@ function del(id, index) { // 删除操作
 					} else {
 						msg = "删除失败了。";
 					}
-					max.sysSlideShow({
+					SL.sysSlideShow({
 						msg : msg
 					});
 				}

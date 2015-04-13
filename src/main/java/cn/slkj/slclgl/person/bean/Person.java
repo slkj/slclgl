@@ -66,6 +66,7 @@ public class Person{
 	 private String uid;//操作人
 	 private String riqi;//操作时间
 	 private String companyid;//所属公司
+	 private String companyname;//所属公司
 	 
 
 	
@@ -398,6 +399,14 @@ public class Person{
 
 	public void setCompanyid(String companyid) {
 		this.companyid = companyid;
+	}
+
+	public String getCompanyname() {
+		return companyname;
+	}
+
+	public void setCompanyname(String companyname) {
+		this.companyname = companyname;
 	}
 	
 

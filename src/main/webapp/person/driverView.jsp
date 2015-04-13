@@ -41,18 +41,12 @@
 			onclick="javascript:backPage()">返回</a>
 	</div>
 	<form id="carForm" metdod="post">
-	<%-- <input name="uid" type="hidden" value="${userSession.u_id }" /> --%>
-		<%-- <input name="companyid" type="hidden" value="${userSession.companyid }" /> --%>
-		<input name="uid" type="hidden" value="1" />
-	<input name="companyid" type="hidden" value="2" />
-		<input hidden="true" id="qualification_type" name="qualification_type"
-			value="" />
-			<input hidden="hidden" name="id"/>
+	
 		<div id="aa" class="easyui-accordion" data-options="border:false">
 			<div title="驾驶员基本信息"
 				data-options="collapsed:false,collapsible:false,border:false"
 				style="overflow: auto;">
-				<table class="grid">
+				<table>
 					<tr>
 						<th>姓名：</th>
 						<td><input class="easyui-validatebox" name="name" style="width: 200px;"
@@ -66,8 +60,8 @@
 						<th>民族：</th>
 						<td><input name="nation"  style="width: 200px;"/></td>
 						<th>性别：</th>
-						<td><input name="sex" type="radio" value="1"
-							checked="checked" />男 <input name="sex" type="radio" value="2" />女</td>
+						<td><input name="sex" type="radio" value="男"
+							checked="checked" />男 <input name="sex" type="radio" value="女" />女</td>
 					</tr>
 					<tr>
 						<th>出生年月日：</th>
@@ -113,11 +107,14 @@
 							 text-transform: uppercase;" name="fwcl" /></td>
 							
 					</tr>
+					<tr><th>所属公司：</th>
+						<td colspan="3"><select id="companyid" name="companyid" class="easyui-combotree" style="width:200px;"
+									data-options="url:'../company/getTreeList',required:true,lines:true"></select></td></tr>
 				</table>
 			</div>
 			<div title="驾驶证信息"
 				data-options="collapsed:false,collapsible:false,border:false">
-				<table class="grid">
+				<table>
 					<tr>
 						<th>档案编号：</th>
 						<td><input name="driver_record_no" type="text" style="width: 200px;"></td>
@@ -150,18 +147,18 @@
 					</tr>
 					<tr>
 						<th>联系地址：</th>
-						<td colspan="4"><input name="address" type="text"
+						<td colspan="3"><input name="address" type="text"
 							style="width: 400px;"></td>
 					</tr>
 				</table>
 			</div>
 			<div title="从业资格信息"
 				data-options="collapsed:false,collapsible:false,border:false">
-				<table class="grid">
+				<table>
 					<tr>
 						<th>从业资格证号：</th>
 						<td><input class="easyui-validatebox" style="width: 200px;"
-							data-options="required:true" name="qualification_no" type="text"></td>
+							 name="qualification_no" type="text"></td>
 						<th>从业资格证类别：</th>
 						<td><select class="easyui-combobox" id="quali_kind" style="width: 200px;"
 							name="quali_kind" editable="false">
@@ -175,14 +172,14 @@
 					<tr>
 						<th>初次领证时间：</th>
 						<td><input name="quali_certify_time" style="width: 200px;"
-							data-options="required:true" class="easyui-datebox" type="text"></td>
+							 class="easyui-datebox" type="text"></td>
 
 
 						<th>有效期限：</th>
 						<td><input name="quali_begin_time" style="width: 200px;"
-							data-options="required:true" class="easyui-datebox" type="text"
+							 class="easyui-datebox" type="text"
 							style="width: 100px;">至 <input name="quali_end_time" style="width: 200px;"
-							data-options="required:true" class="easyui-datebox" type="text"
+							class="easyui-datebox" type="text"
 							style="width: 100px;"></td>
 					</tr>
 					<tr>
@@ -191,7 +188,7 @@
 							type="text"></td>
 						<th>发证机关：</th>
 						<td><input name="quali_authority" style="width: 200px;"
-							data-options="required:true" class="easyui-validatebox"
+							 class="easyui-validatebox"
 							type="text"></td>
 
 					</tr>
