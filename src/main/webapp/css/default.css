@@ -113,7 +113,7 @@ a:hover {
 }
 
 .grid {
-	width: 100%; border-collapse: collapse
+	width: auto; border-collapse: collapse
 }
 
 .grid th {

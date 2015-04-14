@@ -48,10 +48,8 @@ public class PersonController {
 	@RequestMapping(value = "/list")
 	public EPager<Person> list(@RequestParam(required = false, defaultValue = "1") Integer page,
 			@RequestParam(required = false, defaultValue = "10") Integer rows,
-			@RequestParam(required = false, defaultValue = "") String idcard_no,
-			@RequestParam(required = false, defaultValue = "") String qualification_no,
-			@RequestParam(required = false, defaultValue = "") String qualification_type,
-			@RequestParam(required = false, defaultValue = "") String fwcl,HttpSession session) {
+			@RequestParam(required = false, defaultValue = "") String name,
+			@RequestParam(required = false, defaultValue = "") String companyid,HttpSession session) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("endNum", page * rows);
 		map.put("startNum", (page - 1) * rows);
@@ -64,13 +62,13 @@ public class PersonController {
 		}		
 		if (StringUtils.isNotEmpty(qualification_no)) {
 			map.put("qualification_no", qualification_no);
-		}
-		if (StringUtils.isNotEmpty(qualification_type)) {
-			map.put("qualification_type", qualification_type);
-		}
-		if (StringUtils.isNotEmpty(fwcl)) {
-			map.put("fwcl", fwcl);
 		}*/
+		if (StringUtils.isNotEmpty(name)) {
+			map.put("name", name);
+		}
+		if (StringUtils.isNotEmpty(companyid)) {
+			map.put("companyid", companyid);
+		}
 		int total = service.getCount(map);
 		List<Person> list = service.search(map);
 		return new EPager<Person>(total, list);

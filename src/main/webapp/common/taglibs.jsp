@@ -27,6 +27,4 @@
 <script src="${pageContext.request.contextPath}/js/easyui/jquery.easyui.min.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/easyui/easyui-lang-zh_CN.js" type="text/javascript"></script>
 <script src='${pageContext.request.contextPath}/js/SL.easyUI.js' type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/js/ajaxfileupload.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/js/mEasyUI.js" type="text/javascript"></script>
 

@@ -46,7 +46,7 @@
 			<div title="驾驶员基本信息"
 				data-options="collapsed:false,collapsible:false,border:false"
 				style="overflow: auto;">
-				<table>
+				<table class="grid">
 					<tr>
 						<th>姓名：</th>
 						<td><input class="easyui-validatebox" name="name" style="width: 200px;"
@@ -55,6 +55,9 @@
 						<td><input class="easyui-validatebox" id="idcard_no" style="width: 200px;"
 							name="idcard_no" data-options="required:true,validType:'idcard'"
 							type="text"></td>
+							<td rowspan="7"><div id="photo"><img id="userheadimg"
+							onerror="noheadimg()" class="userheadimg" 
+							src="images/icons/function_icon_set/user_48.png" /></div></td>
 					</tr>
 					<tr>
 						<th>民族：</th>
@@ -108,13 +111,15 @@
 							
 					</tr>
 					<tr><th>所属公司：</th>
-						<td colspan="3"><select id="companyid" name="companyid" class="easyui-combotree" style="width:200px;"
-									data-options="url:'../company/getTreeList',required:true,lines:true"></select></td></tr>
+						<td><select id="companyid" name="companyid" class="easyui-combotree" style="width:200px;"
+									data-options="url:'../company/getTreeList',required:true,lines:true"></select></td>
+					<th></th><td></td>
+									</tr>
 				</table>
 			</div>
 			<div title="驾驶证信息"
 				data-options="collapsed:false,collapsible:false,border:false">
-				<table>
+				<table class="grid">
 					<tr>
 						<th>档案编号：</th>
 						<td><input name="driver_record_no" type="text" style="width: 200px;"></td>
@@ -154,7 +159,7 @@
 			</div>
 			<div title="从业资格信息"
 				data-options="collapsed:false,collapsible:false,border:false">
-				<table>
+				<table class="grid">
 					<tr>
 						<th>从业资格证号：</th>
 						<td><input class="easyui-validatebox" style="width: 200px;"

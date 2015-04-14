@@ -16,7 +16,7 @@
 					<tr>
 						<td>司机姓名: <input name="name" class="easyui-numberbox" style="width: 150px" />
 							所属公司:<select id="companyid" name="companyid" class="easyui-combotree" style="width:200px;"
-									data-options="url:'../company/getTreeList',required:true,lines:true"></select> 
+									data-options="url:'../company/getTreeList',lines:true"></select> 
 							<a id="search_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:'true'">查询</a> 
 						</td>
 					</tr>

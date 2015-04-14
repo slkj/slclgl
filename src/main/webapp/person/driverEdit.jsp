@@ -74,7 +74,7 @@
 			<div title="驾驶员基本信息"
 				data-options="collapsed:false,collapsible:false,border:false"
 				style="overflow: auto;">
-				<table>
+				<table class="grid">
 					<tr>
 						<th>姓名：</th>
 						<td><input class="easyui-validatebox" name="name" style="width: 200px;"
@@ -83,6 +83,9 @@
 						<td><input class="easyui-validatebox" id="idcard_no" style="width: 200px;"
 							name="idcard_no" data-options="required:true,validType:'idcard'"
 							type="text"></td>
+							<td rowspan="5"><img id="userheadimg"
+							onerror="noheadimg()" class="userheadimg" 
+							src="images/icons/function_icon_set/user_48.png" /></td>
 					</tr>
 					<tr>
 						<th>民族：</th>
@@ -133,16 +136,23 @@
 						<th>现服务车辆：</th>
 						<td><input type="text" style="width: 200px;"
 							 text-transform: uppercase;" name="fwcl" /></td>
-							
+							<td rowspan="2">
+							<div style="text-align: center">
+									<input id="pic" type="file" name="picFile"  style="width: 150px"/>
+						<input id="upbtn" type="button" value="上传" onclick="upload()" />
+						<input  id="img"  type="hidden" name="photo">
+							</div></td>
 					</tr>
 					<tr><th>所属公司：</th>
-						<td colspan="3"><select id="companyid" name="companyid" class="easyui-combotree" style="width:200px;"
-									data-options="url:'../company/getTreeList',required:true,lines:true"></select></td></tr>
+						<td><select id="companyid" name="companyid" class="easyui-combotree" style="width:200px;"
+									data-options="url:'../company/getTreeList',required:true,lines:true"></select></td>
+					<th></th><td></td>
+									</tr>
 				</table>
 			</div>
 			<div title="驾驶证信息"
 				data-options="collapsed:false,collapsible:false,border:false">
-				<table>
+				<table class="grid">
 					<tr>
 						<th>档案编号：</th>
 						<td><input name="driver_record_no" type="text" style="width: 200px;"></td>
@@ -182,7 +192,7 @@
 			</div>
 			<div title="从业资格信息"
 				data-options="collapsed:false,collapsible:false,border:false">
-				<table>
+				<table class="grid">
 					<tr>
 						<th>从业资格证号：</th>
 						<td><input class="easyui-validatebox" style="width: 200px;"

@@ -6,6 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>添加货运车辆</title>
 <%@ include file="/common/taglibs.jsp"%>
+<script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/ajaxfileupload.js" type="text/javascript"></script>
 <script type="text/javascript">
 	var basePath = "../person/";
 	function submitForm() {
@@ -31,6 +33,36 @@
 	function backPage() {
 		window.location.href = 'driver.jsp';
 	}
+	function upload(){alert("js");
+	if($("#pic").val().length > 0){alert("1");
+	$.ajaxFileUpload(  
+            {  
+         cache : false,
+         url:'../common/upload',            //需要链接到服务器地址  
+         secureuri:false,  
+         fileElementId:'pic',                        //文件选择框的id属性  
+         dataType: 'json',                                     //服务器返回的格式，可以是json  
+         async : false,
+         success: function (data, status)            //相当于java中try语句块的用法  
+         {      alert(data);
+        	 data  =   data.replace(/^\s+|\s+$/g,"");
+         	$('#img').val(data);
+         	$('#photo').html('');
+         		var photo = '<img  src="../showPicture/load?imgPath='+data+'" width="222" height="122"/>';
+         		$('#photo').html(photo);
+         	
+         },  
+         error: function (data, status, e)            //相当于java中catch语句块的用法  
+         {  
+        	 alert('图片上传失败');
+         }  
+     }  
+)
+	}else{
+		alert('请选择图片');
+	}
+	alert("jss");
+}
 </script>
 </head>
 <body class="easyui-layout">
@@ -52,7 +84,7 @@
 			<div title="驾驶员基本信息"
 				data-options="collapsed:false,collapsible:false,border:false"
 				style="overflow: auto;">
-				<table>
+				<table class="grid">
 					<tr>
 						<th>姓名：</th>
 						<td><input class="easyui-validatebox" name="name" style="width: 200px;"
@@ -61,6 +93,9 @@
 						<td><input class="easyui-validatebox" id="idcard_no" style="width: 200px;"
 							name="idcard_no" data-options="required:true,validType:'idcard'"
 							type="text"></td>
+							<td rowspan="5"><img id="userheadimg"
+							onerror="noheadimg()" class="userheadimg" 
+							src="images/icons/function_icon_set/user_48.png" /></td>
 					</tr>
 					<tr>
 						<th>民族：</th>
@@ -111,16 +146,23 @@
 						<th>现服务车辆：</th>
 						<td><input type="text" style="width: 200px;"
 							 text-transform: uppercase;" name="fwcl" /></td>
-							
+							<td rowspan="2">
+							<div style="text-align: center">
+									<input id="pic" type="file" name="picFile"  style="width: 150px"/>
+						<input id="upbtn" type="button" value="上传" onclick="upload()" />
+						<input  id="img"  type="hidden" name="photo">
+							</div></td>
 					</tr>
 					<tr><th>所属公司：</th>
-						<td colspan="3"><select id="companyid" name="companyid" class="easyui-combotree" style="width:200px;"
-									data-options="url:'../company/getTreeList',required:true,lines:true"></select></td></tr>
+						<td><select id="companyid" name="companyid" class="easyui-combotree" style="width:200px;"
+									data-options="url:'../company/getTreeList',required:true,lines:true"></select></td>
+									<th></th><td></td>
+									</tr>
 				</table>
 			</div>
 			<div title="驾驶证信息"
 				data-options="collapsed:false,collapsible:false,border:false">
-				<table>
+				<table class="grid">
 					<tr>
 						<th>档案编号：</th>
 						<td><input name="driver_record_no" type="text" style="width: 200px;"></td>
@@ -160,7 +202,7 @@
 			</div>
 			<div title="从业资格信息"
 				data-options="collapsed:false,collapsible:false,border:false">
-				<table>
+				<table class="grid">
 					<tr>
 						<th>从业资格证号：</th>
 						<td><input class="easyui-validatebox" style="width: 200px;"
