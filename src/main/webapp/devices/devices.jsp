@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GPS设备管理</title>
 <%@ include file="/common/taglibs.jsp"%>
+<script type="text/javascript" src="../js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="js/devices.js"></script>
 </head>
 <body>
