@@ -91,8 +91,26 @@ function loadDataGrid() {
 									}
 								},
 								{
+									title : '派单时间',
+									field : 'qualification_no'
+								},
+								{
 									title : '服务人员',
 									field : 'qualification_no'
+								},
+								{
+									field : 'pack',
+									title : '服务结果',
+									align : 'center',
+									formatter : function(value, row, index) {
+										var s = "";
+//										if (value == 0) {
+											s = "<span style=\"color:green;\">解决</span>";
+//										} else if (value == 1) {
+//											s = "<span style=\"color:#525252;\">解决</span>";
+//										}
+										return s;
+									}
 								},
 								{
 									field : 'opt',

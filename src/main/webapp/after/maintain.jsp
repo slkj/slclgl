@@ -71,6 +71,9 @@ function loadDataGrid() {
 								{
 									title : '联系方式',
 									field : 'telephone'
+								},{
+									title : '地址',
+									field : 'idcard_no'
 								},
 								{
 									title : '服务类型',
