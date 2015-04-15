@@ -111,7 +111,7 @@ function loadDataGrid() {
 
 								},
 								{
-									title : '服务安装师',
+									title : '服务安装人员',
 									field : 'qualification_no'
 								},
 								{

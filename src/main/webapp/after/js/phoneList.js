@@ -1,5 +1,5 @@
 var grid;
-var basePath = "../person/";
+var basePath = "../phone/";
 $(function() {
 	// 初始化页面
 	loadDataGrid();
@@ -31,7 +31,7 @@ function loadDataGrid() {
 					{
 						method : 'post',
 						url : basePath + 'list',
-						title : '司机列表',
+						title : '电话记录列表',
 						fit : true,
 						nowrap : true, // false:折行
 						rownumbers : true, // 行号
@@ -45,19 +45,19 @@ function loadDataGrid() {
 						columns : [ [
 								{
 									title : '接听时间',
-									field : '_name',
-									formatter : function(value, row, index) {
+									field : 'riqi',
+									/*formatter : function(value, row, index) {
 										// 装机 维修 回访 其他
 										return "2015-02-02 12:02:11";
-									}
+									}*/
 								},
 								{
 									title : '客户单位',
-									field : 'name'
+									field : 'company'
 								},
 								{
 									title : '联系人 ',
-									field : 'name'
+									field : 'linkman'
 								},
 								{
 									title : '联系方式',
@@ -65,44 +65,44 @@ function loadDataGrid() {
 								},
 								{
 									title : '地址',
-									field : 'idcard_no'
+									field : 'address'
 								},
 								{
 									title : '服务类型',
-									field : 'idcard_no',
-									formatter : function(value, row, index) {
+									field : 'serviceType',
+									/*formatter : function(value, row, index) {
 										// 装机 维修 回访 其他
 										return "装机";
-									}
+									}*/
 								},
 								{
 									title : '服务状态',
-									field : 'driver_no',
-									formatter : function(value, row, index) {
+									field : 'serviceStatus',
+									/*formatter : function(value, row, index) {
 										// 保内 保外 其他
 										return "保内";
-									}
+									}*/
 								},
 								{
 									title : '设备故障及原因',
-									field : 'fwcl',
-									formatter : function(value, row, index) {
+									field : 'error',
+									/*formatter : function(value, row, index) {
 										return "不定位";
-									}
+									}*/
 								},
 								{
 									title : '派单时间',
-									field : 'qualification_no'
+									field : 'serviceRiqi'
 								},
 								{
 									title : '服务人员',
-									field : 'qualification_no'
+									field : 'serviceMan'
 								},
 								{
-									field : 'pack',
+									field : 'result',
 									title : '服务结果',
 									align : 'center',
-									formatter : function(value, row, index) {
+									/*formatter : function(value, row, index) {
 										var s = "";
 //										if (value == 0) {
 											s = "<span style=\"color:green;\">解决</span>";
@@ -110,7 +110,7 @@ function loadDataGrid() {
 //											s = "<span style=\"color:#525252;\">解决</span>";
 //										}
 										return s;
-									}
+									}*/
 								},
 								{
 									field : 'opt',
@@ -147,13 +147,13 @@ function loadDataGrid() {
 
 }
 function add() {
-	window.location.href = 'driverAdd.jsp';
+	window.location.href = 'phoneAdd.jsp';
 }
 function edit(id) {
-	window.location.href = 'driverEdit.jsp?id=' + id;
+	window.location.href = 'phoneEdit.jsp?id=' + id;
 }
 function view(id) {
-	window.location.href = 'driverView.jsp?id=' + id;
+	window.location.href = 'phoneView.jsp?id=' + id;
 }
 function del(id, index) { // 删除操作
 	$.messager.confirm('确认', '确认删除?', function(row) {
