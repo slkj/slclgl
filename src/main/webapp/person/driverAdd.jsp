@@ -6,8 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>添加货运车辆</title>
 <%@ include file="/common/taglibs.jsp"%>
-<script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/js/ajaxfileupload.js" type="text/javascript"></script>
+<%-- <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/ajaxfileupload.js" type="text/javascript"></script> --%>
 <script type="text/javascript">
 	var basePath = "../person/";
 	function submitForm() {
@@ -41,7 +41,7 @@
          url:'../common/upload',            //需要链接到服务器地址  
          secureuri:false,  
          fileElementId:'pic',                        //文件选择框的id属性  
-         dataType: 'json',                                     //服务器返回的格式，可以是json  
+         //dataType: 'json',                                     //服务器返回的格式，可以是json  
          async : false,
          success: function (data, status)            //相当于java中try语句块的用法  
          {      alert(data);
