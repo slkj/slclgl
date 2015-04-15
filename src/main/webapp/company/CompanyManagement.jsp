@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>G公司信息管理</title>
 <%@ include file="/common/taglibs.jsp"%>
-<script type="text/javascript" src="js/company.js"></script>
+<script type="text/javascript" src="js/CompanyManagement.js"></script>
 </head>
 <body class="easyui-layout">
 	<div data-options="region:'north',split:false" style="height: 35px;">
