@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>添加货运车辆</title>
+<title>添加驾驶员</title>
 <%@ include file="/common/taglibs.jsp"%>
 <%-- <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/ajaxfileupload.js" type="text/javascript"></script> --%>
