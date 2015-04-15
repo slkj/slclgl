@@ -50,7 +50,7 @@ function loadCompany(id) {
 				$("#contactWay").text(data.contactWay);
 				$('#level').combobox('setValue', data.level);
 				$("#businessLicense").text(data.businessLicense);
-				$("#registeredCapital").text(data.registeredCapital+"万元");
+				$("#registeredCapital").text(data.registeredCapital + "万元");
 				$("#email").text(data.email);
 				$("#compAddress").text(data.compAddress);
 				$("#introduction").text(data.introduction);
@@ -83,6 +83,46 @@ function addCompany() {
 		} ]
 	});
 }
+function editCompany() {
+	var node = $('#comtree').tree('getSelected');
+	if(node == null){
+		top.SL.msgShow("提示", "请选择要编辑的公司！", "warning");
+		return;
+	}
+	SL.showWindow({
+		title : '编辑公司',
+		iconCls : 'icon-add',
+		width : 700,
+		height : 550,
+		url : basePath + 'CompanyEdit.jsp',
+		onLoad : function() {
+			loadCompanyData(node.id);
+		},
+		buttons : [ {
+			text : '确定',
+			iconCls : 'icon-add',
+			handler : function() {
+				fCallback("editCompany");
+			}
+		}, {
+			text : '关闭',
+			handler : function() {
+				SL.closeWindow();
+			}
+		} ]
+	});
+}
+function loadCompanyData(id){
+	$.ajax({
+		url : basePath + "queryOne?id="+id,
+		success : function(data) {
+			if (data) {
+				$("#comForm").form('load', data);
+				$("#level").combobox('setValue',data.level);
+			}
+		}
+	});
+}
 function fCallback(url) {
 	if ($("#comForm").form('enableValidation').form('validate')) {
 		var data = $("#comForm").serialize();
@@ -103,30 +143,32 @@ function fCallback(url) {
 }
 function delCompany() {
 	var node = $('#comtree').tree('getSelected');
-	// 判断是否是叶子节点
-	if ($('#comtree').tree('isLeaf', node.target)) {
-		$.messager.confirm('确认', '您确认想要删除记录吗？', function(r) {
-			if (r) {
-				$.ajax({
-					url : basePath + "delete?id=" + node.id,
-					success : function(data) {
-						if (data) {
-							$('#comtree').tree('reload');
-							top.max.sysSlideShow({
-								msg : '成功删除!'
-							});
-						} else {
-							top.$.messager.alert('提示', '删除失败，请联系管理员。');
-						}
-					}
-				});
-			}
-		});
-	} else {
-		SL.msgShow("提示", "检测到该公司含有下属公司，无法删除！", "warning");
+	if(node == null){
+		top.SL.msgShow("提示", "请选择要删除的公司！", "warning");
+		return;
 	}
-}
-function editCompany() {
+	// 判断是否是叶子节点
+	if (!$('#comtree').tree('isLeaf', node.target)) {
+		top.SL.msgShow("提示", "检测到该公司含有下属公司，无法删除！", "warning");
+		return;
+	}
+	top.$.messager.confirm('确认', '您确认想要删除记录吗？', function(r) {
+		if (r) {
+			$.ajax({
+				url : basePath + "delete?id=" + node.id,
+				success : function(data) {
+					if (data) {
+						$('#comtree').tree('reload');
+						top.max.sysSlideShow({
+							msg : '成功删除!'
+						});
+					} else {
+						top.$.messager.alert('提示', '删除失败，请联系管理员。');
+					}
+				}
+			});
+		}
+	});
 }
 function collapseAll() {
 	$('#comtree').tree('collapseAll');

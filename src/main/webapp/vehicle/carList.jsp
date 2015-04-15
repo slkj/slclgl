@@ -40,6 +40,15 @@
 							loadMsg : '数据加载中,请稍后……',
 							columns : [ [
 									{
+										field : 'id',
+										title : '车号'
+									},{
+										field : 'dw',
+										title : '定位',
+										formatter : function(value, row, index) {
+											return "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:pos('"+ index + "');\">定位</span></a>";
+										}
+									},{
 										field : '_state',
 										title : '使用状态',
 										formatter : function(value, row, index) {
@@ -49,10 +58,6 @@
 											}
 											return s;
 										}
-									},
-									{
-										field : 'id',
-										title : '车号'
 									},
 									{
 										field : 'carNumber',
@@ -132,6 +137,10 @@
 			afterPageText : '页    共 {pages} 页',
 			displayMsg : '当前显示 {from} - {to} 条记录   共 {total} 条记录'
 		});
+	}
+	function pos(index) {
+		var data = grid.datagrid('getData').rows[index];
+		window.open('../location.jsp') 
 	}
 	function addCar() {
 		parent.$("#cnIframe").attr("src", "hyAdd.jsp");
