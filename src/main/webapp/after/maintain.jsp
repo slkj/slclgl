@@ -1,3 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>司机管理</title>
+<%@ include file="/common/taglibs.jsp"%>
+<script type="text/javascript" >
 var grid;
 var basePath = "../person/";
 $(function() {
@@ -44,7 +53,7 @@ function loadDataGrid() {
 						loadMsg : '数据加载中,请稍后……',
 						columns : [ [
 								{
-									title : '接听时间',
+									title : '服务时间',
 									field : '_name',
 									formatter : function(value, row, index) {
 										// 装机 维修 回访 其他
@@ -56,16 +65,12 @@ function loadDataGrid() {
 									field : 'name'
 								},
 								{
-									title : '联系人 ',
+									title : '联系人',
 									field : 'name'
 								},
 								{
 									title : '联系方式',
 									field : 'telephone'
-								},
-								{
-									title : '地址',
-									field : 'idcard_no'
 								},
 								{
 									title : '服务类型',
@@ -91,7 +96,19 @@ function loadDataGrid() {
 									}
 								},
 								{
-									title : '服务人员',
+									title : '维修过程及结果',
+									field : 'companyname',
+									formatter : function(value, row, index) {
+										return "更换天线";
+									}
+								},
+								{
+									title : '配件更换记录',
+									field : 'qualification_no'
+
+								},
+								{
+									title : '服务安装师',
 									field : 'qualification_no'
 								},
 								{
@@ -100,9 +117,6 @@ function loadDataGrid() {
 									align : 'center',
 									formatter : function(value, row, index) {
 										var s = "";
-										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:del('"
-											+ row.id + "','" + index + "');\">服务记录</span></a>";
-										s += "&nbsp;|&nbsp;";
 										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:view('"
 												+ row.id + "');\">详细</span></a>";
 										s += "&nbsp;|&nbsp;";
@@ -111,7 +125,6 @@ function loadDataGrid() {
 										s += "&nbsp;|&nbsp;";
 										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:del('"
 												+ row.id + "','" + index + "');\">删除</span></a>";
-									
 										return s;
 									}
 								} ] ],
@@ -158,3 +171,37 @@ function del(id, index) { // 删除操作
 		}
 	})
 }
+</script>
+</head>
+<body>
+	<div id="tb" style="padding: 5px; height: auto">
+		<div>
+			<form name="searchform" method="post" action="" id="searchform">
+				<table cellspacing="0" cellpadding="0">
+					<tr>
+						<td>司机姓名: <input name="name" class="easyui-numberbox" style="width: 150px" />
+							所属公司:<select id="companyid" name="companyid" class="easyui-combotree" style="width:200px;"
+									data-options="url:'../company/getTreeList',lines:true"></select> 
+							<a id="search_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:'true'">查询</a> 
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div>
+			<table cellspacing="0" cellpadding="0">
+				<tr>
+					<td>
+						<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onClick="javascript:add();">添加</a>
+					</td>
+					<td><div class="datagrid-btn-separator"></div></td>
+					<td align="right">
+						<a href="#"  onclick="outExcel()" class="easyui-linkbutton" data-options="iconCls:'pic pic_157',plain:true">导出</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<table id="dg"></table>
+</body>
+</html>
