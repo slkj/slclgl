@@ -8,7 +8,7 @@
 <%@ include file="/common/taglibs.jsp"%>
 <script type="text/javascript" >
 var grid;
-var basePath = "../person/";
+var basePath = "../maintain/";
 $(function() {
 	// 初始化页面
 	loadDataGrid();
@@ -40,7 +40,7 @@ function loadDataGrid() {
 					{
 						method : 'post',
 						url : basePath + 'list',
-						title : '司机列表',
+						title : '安装维修列表',
 						fit : true,
 						nowrap : true, // false:折行
 						rownumbers : true, // 行号
@@ -54,65 +54,65 @@ function loadDataGrid() {
 						columns : [ [
 								{
 									title : '服务时间',
-									field : '_name',
-									formatter : function(value, row, index) {
+									field : 'riqi',
+									/* formatter : function(value, row, index) {
 										// 装机 维修 回访 其他
 										return "2015-02-02 12:02:11";
-									}
+									} */
 								},
 								{
 									title : '客户单位',
-									field : 'name'
+									field : 'company'
 								},
 								{
 									title : '联系人',
-									field : 'name'
+									field : 'linkman'
 								},
 								{
 									title : '联系方式',
 									field : 'telephone'
 								},{
 									title : '地址',
-									field : 'idcard_no'
+									field : 'address'
 								},
 								{
 									title : '服务类型',
-									field : 'idcard_no',
-									formatter : function(value, row, index) {
+									field : 'serviceType',
+									/* formatter : function(value, row, index) {
 										// 装机 维修 回访 其他
 										return "装机";
-									}
+									} */
 								},
 								{
 									title : '服务状态',
-									field : 'driver_no',
-									formatter : function(value, row, index) {
+									field : 'serviceStatus',
+									/* formatter : function(value, row, index) {
 										// 保内 保外 其他
 										return "保内";
-									}
+									} */
 								},
 								{
 									title : '设备故障及原因',
-									field : 'fwcl',
-									formatter : function(value, row, index) {
+									field : 'error',
+									/* formatter : function(value, row, index) {
 										return "不定位";
-									}
+									} */
 								},
 								{
 									title : '维修过程及结果',
-									field : 'companyname',
-									formatter : function(value, row, index) {
+									field : 'result',
+									/* formatter : function(value, row, index) {
 										return "更换天线";
-									}
+									} */
 								},
 								{
 									title : '配件更换记录',
-									field : 'qualification_no'
+									field : 'instead'
 
 								},
 								{
 									title : '服务安装人员',
-									field : 'qualification_no'
+									field : 'serviceMan'
 								},
 								{
 									field : 'opt',
@@ -145,13 +145,13 @@ function loadDataGrid() {
 
 }
 function add() {
-	window.location.href = 'driverAdd.jsp';
+	window.location.href = 'maintainAdd.jsp';
 }
 function edit(id) {
-	window.location.href = 'driverEdit.jsp?id=' + id;
+	window.location.href = 'maintainEdit.jsp?id=' + id;
 }
 function view(id) {
-	window.location.href = 'driverView.jsp?id=' + id;
+	window.location.href = 'maintainView.jsp?id=' + id;
 }
 function del(id, index) { // 删除操作
 	$.messager.confirm('确认', '确认删除?', function(row) {
