@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>司机管理</title>
+<title>安装维修管理</title>
 <%@ include file="/common/taglibs.jsp"%>
 <script type="text/javascript" >
 var grid;
@@ -182,8 +182,8 @@ function del(id, index) { // 删除操作
 			<form name="searchform" method="post" action="" id="searchform">
 				<table cellspacing="0" cellpadding="0">
 					<tr>
-						<td>司机姓名: <input name="name" class="easyui-numberbox" style="width: 150px" />
-							所属公司:<select id="companyid" name="companyid" class="easyui-combotree" style="width:200px;"
+						<td>服务人员: <input name="serviceMan" style="width: 150px" />
+							客户公司:<select id="company" name="company" class="easyui-combotree" style="width:200px;"
 									data-options="url:'../company/getTreeList',lines:true"></select> 
 							<a id="search_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:'true'">查询</a> 
 						</td>

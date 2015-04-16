@@ -7,7 +7,7 @@
 <title>添加驾驶员</title>
 <%@ include file="/common/taglibs.jsp"%>
 <script type="text/javascript">
-	var basePath = "../phone/";
+	var basePath = "../maintain/";
 	$(function() {
 		var Request = new Object();
 		Request = GetRequest();
@@ -22,32 +22,14 @@
 	        success: function(data) { 
 	         
 	        	$("#carForm").form('load', data);
+	        	$('#carForm input').attr("disabled", "disabled");
 	        }  
 			
 		});
 	});
-	function submitForm() {
-		if ($("#carForm").form('enableValidation').form('validate')) {
-			var data = $("#carForm").serialize();
-			$.ajax({
-				cache : false,
-				type : 'POST',
-				url : basePath + 'save',
-				data : data,
-				async : false,
-				success : function(data) {
-					if (data) {
-						backPage();
-					}
-				}
-			});
-		}
-	}
-	function clearForm() {
-		$('#carForm').form('clear');
-	}
+
 	function backPage() {
-		window.location.href = 'phoneList.jsp';
+		window.location.href = 'maintain.jsp';
 	}
 	
 </script>
@@ -55,16 +37,13 @@
 <body class="easyui-layout">
 	<div style="text-align: left; padding: 5px">
 		<a href="javascript:void(0)" class="easyui-linkbutton"
-			onclick="javascript:submitForm()">保存</a> <a href="javascript:void(0)"
-			class="easyui-linkbutton" onclick="javascript:clearForm()">重置</a> <a
-			href="javascript:void(0)" class="easyui-linkbutton"
 			onclick="javascript:backPage()">返回</a>
 	</div>
 	<form id="carForm" metdod="post">
 	<%-- <input name="uid" type="hidden" value="${userSession.u_id }" /> --%>
 		<%-- <input name="companyid" type="hidden" value="${userSession.companyid }" /> --%>
 		<input name="uid" type="hidden" value="1" />
-	<input hidden="hidden" name="id"/>
+		<input hidden="hidden" name="id"/>
 		<div id="aa" class="easyui-accordion" data-options="border:false">
 			<div title="售后基本信息"
 				data-options="collapsed:false,collapsible:false,border:false"
@@ -75,7 +54,7 @@
 						<td><select id="company" name="company" class="easyui-combotree" style="width:200px;"
 									data-options="url:'../company/getTreeList',required:true,lines:true"></select></td>
 						<th>联系人：</th>
-						<td><input class="easyui-validatebox" name="linkman" style="width: 200px;"
+						<td><input id="linkman" class="easyui-validatebox" name="linkman" style="width: 200px;"
 							data-options="required:true" type="text"></td>
 						
 							
@@ -100,10 +79,10 @@
 							<input name="serviceStatus" type="radio" value="其他" />其他</td>
 					</tr>
 					<tr>
-						<th>接听时间：</th>
-						<td><input name="riqi" class="easyui-datebox" type="text" style="width: 200px;"></td>
-						<th>派单时间：</th>
-						<td><input name="serviceRiqi" class="easyui-datebox" style="width: 200px;" type="text"></td>
+						<th>服务时间：</th>
+						<td><input id="riqi" name="riqi" class="easyui-datebox" type="text" style="width: 200px;"></td>
+						<th>配件更换：</th>
+						<td><input id="instead" name="instead" style="width: 200px;" type="text"></td>
 					</tr>
 					<tr>
 						<th>设备故障及原因：</th>
@@ -112,10 +91,9 @@
 					</tr>
 					<tr>
 						<th>服务人员：</th>
-						<td><input type="text" style="width: 200px;" name="serviceMan" /></td>
-						<th>服务结果：</th>
-						<td><input name="result" type="radio" value="未解决"	checked="checked" />未解决 
-							<input name="result" type="radio" value="已解决" />已解决</td>
+						<td><input id="serviceMan" type="text" style="width: 200px;" name="serviceMan" /></td>
+						<th>服务过程及结果：</th>
+						<td><input id="result" name="result" style="width: 200px;" type="text"></td>
 							
 					</tr>
 					

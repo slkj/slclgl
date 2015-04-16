@@ -118,8 +118,8 @@ function loadDataGrid() {
 									align : 'center',
 									formatter : function(value, row, index) {
 										var s = "";
-										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:del('"
-											+ row.id + "','" + index + "');\">服务记录</span></a>";
+										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:ser('"
+											+ row.id + "');\">服务记录</span></a>";
 										s += "&nbsp;|&nbsp;";
 										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:view('"
 												+ row.id + "');\">详细</span></a>";
@@ -151,6 +151,9 @@ function add() {
 }
 function edit(id) {
 	window.location.href = 'phoneEdit.jsp?id=' + id;
+}
+function ser(id) {
+	window.location.href = 'maintainAdd.jsp?pid=' + id;
 }
 function view(id) {
 	window.location.href = 'phoneView.jsp?id=' + id;
