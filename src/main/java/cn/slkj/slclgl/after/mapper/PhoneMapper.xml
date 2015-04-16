@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.slkj.slclgl.after.mapper.PhoneMapper">
 	<sql id="sql_temp">
-		id,company,linkman,telephone,address,serviceType,serviceStatus,error,serviceRiqi,serviceMan,result,riqi,remark
+		id,company,linkman,telephone,address,serviceType,serviceStatus,error,serviceRiqi,serviceMan,result,riqi,remark,
+		(select compName from  tb_company where id = company) as companyName
 	</sql>
 	<select id="one" resultType="phone" parameterType="phone">
 		SELECT

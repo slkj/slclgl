@@ -62,7 +62,7 @@ function loadDataGrid() {
 								},
 								{
 									title : '客户单位',
-									field : 'company'
+									field : 'companyName'
 								},
 								{
 									title : '联系人',
