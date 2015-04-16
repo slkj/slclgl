@@ -8,30 +8,30 @@
 <%@ include file="/common/taglibs.jsp"%>
 <script type="text/javascript" src="js/user.js"></script>
 </head>
-<body>
-	<div id="tb" style="padding: 5px; height: auto">
-		<div>
-			<form name="searchform" method="post" action="" id="searchform">
-				<table cellspacing="0" cellpadding="0">
-					<tr>
-						<td>
-							使用状态:
-							<select id="state" name="state" class="easyui-combobox" style="width:100px;">   
-							   <option value="" selected="selected">请选择</option>
-								<option value="enabled">启用</option>
-								<option value="disabled">禁用</option>
-							</select> 
-							用户名:<input name="listnum" class="easyui-numberbox" style="width: 150px" />
-							所在地区：
-							 <select class="easyui-combotree" url="../data/city_data.json" name="area" style="width:260px;" data-options="lines:'true'"></select>
-							 <a id="search_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
-							 <a href="#"  onclick="outExcel()" class="easyui-linkbutton" data-options="iconCls:'pic_157'">导出</a>
-						</td>
-					</tr>
-				</table>
-			</form>
-		</div>
+<body class="easyui-layout">
+	<div data-options="region:'north'" >
+		<form name="searchform" method="post" action="" id="searchform">
+			<table cellspacing="0" cellpadding="0" style="padpadding: 5px">
+				<tr>
+					<td>使用状态: <select name="status" class="easyui-combobox"
+						style="width: 100px;">
+							<option value="" selected="selected">请选择</option>
+							<option value="enabled">启用</option>
+							<option value="disabled">禁用</option>
+					</select> 用户名:<input name="username" type="text" style="width: 150px" /> <a
+						id="search_btn" href="#" class="easyui-linkbutton"
+						data-options="iconCls:'icon-search'">查询</a> <a href="#"
+						onclick="outExcel()" class="easyui-linkbutton"
+						data-options="iconCls:'pic_157'">导出</a>
+					</td>
+				</tr>
+			</table>
+		</form>
 	</div>
-	<table id="tt"></table>
+	<div data-options="region:'center',border:false">
+		<table id="gird"></table>
+	</div>
+
+
 </body>
 </html>

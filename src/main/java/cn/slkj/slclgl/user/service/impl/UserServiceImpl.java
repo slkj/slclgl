@@ -34,4 +34,23 @@ public class UserServiceImpl{
 		return usermapper.save(user);
 	}
 
+	public int delete(String id) {
+		return usermapper.delete(id);
+	}
+
+	public int edit(User user) {
+		// TODO Auto-generated method stub
+		return usermapper.edit(user);
+	}
+
+	public int resetPwd(String[] ids) {
+		// TODO Auto-generated method stub
+		return usermapper.resetPwd(ids);
+	}
+
+	public int valid(HashMap<String, Object> hashMap) {
+		// TODO Auto-generated method stub
+		return usermapper.valid(hashMap);
+	}
+
 }

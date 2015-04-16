@@ -216,7 +216,7 @@ function delCompany(index) {
 				success : function(data) {
 					if (data) {
 						grid.datagrid('reload');
-						top.max.sysSlideShow({
+						top.SL.sysSlideShow({
 							msg : '成功删除!'
 						});
 					} else {

@@ -24,6 +24,9 @@
 			<if test="password != null and   password != ''">
 				AND PASSWORD = #{password}
 			</if>
+			<if test="id != null and   id != ''">
+				AND ID = #{id}
+			</if>
 		</where>
 	</select>
 	
@@ -31,4 +34,29 @@
 		INSERT INTO TB_USER(USERNAME,PASSWORD,STATUS,EMAIL,REALNAME,SEX,PHONE,COMPANY,SALT,CREATE_TIME,LASTTIME,REMARK,TYPE )
 		VALUES(#{username},#{password},#{status} ,#{email},#{realname},#{sex},#{phone},#{company},#{salt},now(),#{lastTime},#{remark},#{type})
 	</insert>
+	
+	<delete id="delete" parameterType="string">
+		DELETE FROM TB_USER WHERE ID  =#{id}
+	</delete>
+	
+	<update id="edit" parameterType="User">
+		UPDATE TB_USER SET PASSWORD=#{password},STATUS=#{status} ,EMAIL=#{email},REALNAME=#{realname},
+		SEX=#{sex},PHONE=#{phone},COMPANY=#{company},SALT=#{salt},REMARK=#{remark},TYPE=#{type}
+		WHERE ID = #{id}
+	</update>
+	
+	<update id="valid" parameterType="hashmap">
+		UPDATE TB_USER SET STATUS=#{status} WHERE ID IN 
+		<foreach  collection="ids"  item="id" index="index" open="(" separator="," close=")">
+			 #{id}
+		</foreach>
+	</update>
+	
+	<delete id="resetPwd" parameterType="list">
+		UPDATE TB_USER SET PASSWORD='000000' WHERE ID IN 
+		<foreach item="ids" collection="array" open="(" separator=","
+			close=")">
+			 #{ids}
+		</foreach>
+	</delete>
 </mapper>

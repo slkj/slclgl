@@ -17,4 +17,12 @@ public interface UserMapper {
 	User queryOne(HashMap<String, Object> hashMap);
 
 	int save(User user);
+
+	int delete(String id);
+
+	int edit(User user);
+
+	int resetPwd(String[] ids);
+
+	int valid(HashMap<String, Object> hashMap);
 }

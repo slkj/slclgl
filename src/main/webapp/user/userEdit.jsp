@@ -8,13 +8,26 @@
 <%@ include file="/common/taglibs.jsp"%>
 <script type="text/javascript">
 	var basePath = "../user/";
+	var Request = new Object();
+	$(function() {
+		Request = GetRequest();
+		uid = Request['id'];
+		$.ajax({
+			url : basePath + "queryOne?id="+uid,
+			success : function(data) {
+				if (data) {
+					$("#userForm").form('load', data);
+				}
+			}
+		});
+	});
 	function submitForm() {
 		if ($("#userForm").form('enableValidation').form('validate')) {
 			var data = $("#userForm").serialize();
 			$.ajax({
 				cache : false,
 				type : 'POST',
-				url : basePath + 'save',
+				url : basePath + 'editUser',
 				data : data,
 				async : false,
 				success : function(data) {
@@ -48,6 +61,7 @@
 			onclick="javascript:backPage()">返回</a>
 	</div>
 	<form id="userForm" metdod="post">
+	<input name="id" type="hidden"/>
 		<div class="easyui-accordion" data-options="border:false">
 			<div title="用户基本信息"
 				data-options="collapsed:false,collapsible:false,border:false"
