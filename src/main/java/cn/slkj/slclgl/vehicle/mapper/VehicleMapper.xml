@@ -13,20 +13,33 @@
 		simPayer,payerTime,CTradingLine,CCatchMenbers,carImg,entryTime,entryId,entryName,depId,
 		simNumber,equitment,networkNo,remark
 	</sql>
+	
+	<sql id="sql_car">
+		TBV.ID,COMPANYID, TBC.COMPNAME AS COMPANYNAME,CAROWNER,
+		CAROWNERSTYPE,CAROWNERSCARD,CONTACTS,CONTACTSTEL,CARNUMBER,CARNUMBERG,PLATECOLOR,CLASSIFY
+		,CARTYPE,CARBRAND,CARMODEL,CARCOLOR,CARVIN,CARPROTYPE,CAROUTLENGTH,CAROUTWIDTH,CAROUTHEIGHT,
+		CARTOTALMASS,CARENGNUM,CARENGMODEL,CARFUELTYPE,CARDISPLACEMENT,CARPOWER,CARMANUNAME,CARMODALITY,
+		CARTREADBE,CARTREADAFTER,CARTIRENUM,CARTIRESPE,CARNUMOFSPRING,CARAXLEDIST,CARAXLENUM,CARCONTLENGTH,
+		CARCONTWIDTH,CARCONTHEIGHT,CARAPPROVED,CARAPPRGUEST,CARTRAC,CARCABGUEST,CARUSENATU,CARUSENATUNAME,
+		CAROBTWAY,CARFACDATE,INSTALLERS,ATTENDANTS,INSTALLTIME,INSTALLADDRESS,FEES,FEESEEND,ISNOTICE,
+		SIMPAYER,PAYERTIME,CTRADINGLINE,CCATCHMENBERS,CARIMG,ENTRYTIME,ENTRYID,ENTRYNAME,DEPID,
+		SIMNUMBER,EQUITMENT,NETWORKNO,REMARK
+	</sql>
 	<select id="queryList" resultType="Vehicle" parameterType="hashmap">
-			SELECT <include refid="sql_temp"/>  FROM TB_VEHICLE
+			SELECT <include refid="sql_car"/>  FROM TB_VEHICLE TBV
+			LEFT JOIN TB_COMPANY TBC ON TBV.COMPANYID = TBC.ID
 			<where>
 				<if test="listnum != null and listnum != ''">
-					AND listnum  LIKE  '%' + #{listnum}  + '%'
+					AND TBV.LISTNUM  LIKE  CONCAT('%',#{listnum},'%')   
 				</if>
 				<if test="phone != null and phone != ''">
-					AND simNumber  LIKE  '%' + #{phone}  + '%'
+					AND TBV.SIMNUMBER  LIKE   CONCAT('%',#{phone},'%')   
 				</if>
 				<if test="companyName != null and companyName != ''">
-					AND company  LIKE  '%' + #{companyName}  + '%'
+					AND TBC.COMPNAME  LIKE   CONCAT('%',#{companyName},'%')   
 				</if>
 				<if test="carNumber != null and carNumber != ''">
-					AND carNumber  LIKE  '%' + #{carNumber}  + '%'
+					AND TBV.CARNUMBER  LIKE   CONCAT('%',#{carNumber},'%')   
 				</if>
 			</where>
 			<if test="sort != null and sort != ''">
@@ -36,19 +49,20 @@
 	</select>
 
 	<select id="queryListCount" resultType="int" parameterType="hashmap">
-		SELECT COUNT(0) FROM TB_VEHICLE
-		<where>
+		SELECT COUNT(tbv.id)   FROM TB_VEHICLE TBV
+			LEFT JOIN TB_COMPANY TBC ON TBV.COMPANYID = TBC.ID
+			<where>
 				<if test="listnum != null and listnum != ''">
-					AND listnum  LIKE  '%' + #{listnum}  + '%'
+					AND TBV.LISTNUM  LIKE  CONCAT('%',#{listnum},'%')   
 				</if>
 				<if test="phone != null and phone != ''">
-					AND simNumber  LIKE  '%' + #{phone}  + '%'
+					AND TBV.SIMNUMBER  LIKE   CONCAT('%',#{phone},'%')   
 				</if>
 				<if test="companyName != null and companyName != ''">
-					AND company  LIKE  '%' + #{companyName}  + '%'
+					AND TBC.COMPNAME  LIKE   CONCAT('%',#{companyName},'%')   
 				</if>
 				<if test="carNumber != null and carNumber != ''">
-					AND carNumber  LIKE  '%' + #{carNumber}  + '%'
+					AND TBV.CARNUMBER  LIKE   CONCAT('%',#{carNumber},'%')   
 				</if>
 			</where>
 	</select>

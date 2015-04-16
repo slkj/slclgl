@@ -46,8 +46,12 @@ public class CompanyController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		int page = Integer.parseInt(request.getParameter("page"));
 		int rows = Integer.parseInt(request.getParameter("rows"));
-		map.put("endNum", page * rows);
-		map.put("startNum", (page - 1) * rows);
+		map.put("startPage", (page - 1) * rows);
+		map.put("endPage", rows);
+		
+		map.put("compName", request.getParameter("compName"));
+		map.put("organizationCode", request.getParameter("organizationCode"));
+		
 		int total = companyService.getAllCount(map);
 		List<Company> list = companyService.getAll(map);
 		return new EPager<Company>(total, list);

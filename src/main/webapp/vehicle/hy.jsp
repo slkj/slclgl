@@ -9,13 +9,17 @@
 <script type="text/javascript" src="js/hycl.js"></script>
 </head>
 <body class="easyui-layout">
-	<div data-options="region:'west',title:'公司列表',split:true"
-		style="width: 220px">
-		<ul class="easyui-tree" id="comtree">
-		</ul>
+	<div data-options="region:'west'" style="width: 220px">
+		<div id="tt" class="easyui-tabs" data-options="fit:true,border:false">
+			<div title="按公司">
+				<ul class="easyui-tree" id="comtree"></ul>
+			</div>
+			<div title="按运管单位"></div>
+		</div>
 	</div>
-	<div id= "center" data-options="region:'center'" >
-		<iframe id="cnIframe" scrolling="auto" frameborder="0" style="width: 100%; height: 100%"></iframe>
+	<div id="center" data-options="region:'center'">
+		<iframe id="cnIframe" scrolling="auto" frameborder="0"
+			style="width: 100%; height: 100%"></iframe>
 	</div>
 </body>
 </html>
