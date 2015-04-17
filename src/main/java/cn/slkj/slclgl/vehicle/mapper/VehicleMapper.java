@@ -37,7 +37,7 @@ public interface VehicleMapper {
 	 * @param vehicle
 	 * @return
 	 */
-	public Vehicle queryOne(Vehicle vehicle);
+	public Vehicle queryOne(HashMap<String, Object> map);
 
 	/**
 	 * 添加车辆管理

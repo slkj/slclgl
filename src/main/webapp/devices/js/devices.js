@@ -143,24 +143,24 @@ function loadDataGrid() {
 									title : 'SIM卡号',
 									sortable : true,
 									order : 'desc',
-									formatter : function(value, row, index) {
-										var str = "<a id=\"btn" + index
-												+ "\" href=\"#\" onclick=\"phone(" + index + ")\">"
-												+ value + "</a>";
-										var btn = row.phone == null ? "" : str;
-										return btn;
-									}
+//									formatter : function(value, row, index) {
+//										var str = "<a id=\"btn" + index
+//												+ "\" href=\"#\" onclick=\"phone(" + index + ")\">"
+//												+ value + "</a>";
+//										var btn = row.phone == null ? "" : str;
+//										return btn;
+//									}
 								},
 								{
 									field : 'carNumber',
 									title : '车牌号',
-									formatter : function(value, row, index) {
-										var str = "<a id=\"btn" + index
-												+ "\" href=\"#\" onclick=\"carNumber(" + index
-												+ ")\">" + value + "</a>";
-										var btn = row.carNumber == null ? "" : str;
-										return btn;
-									}
+//									formatter : function(value, row, index) {
+//										var str = "<a id=\"btn" + index
+//												+ "\" href=\"#\" onclick=\"carNumber(" + index
+//												+ ")\">" + value + "</a>";
+//										var btn = row.carNumber == null ? "" : str;
+//										return btn;
+//									}
 								}, {
 									field : 'installers',
 									title : '安装人'

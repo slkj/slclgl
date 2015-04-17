@@ -4,49 +4,43 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>添加货运车辆</title>
+<title>车辆详细信息</title>
 <%@ include file="/common/taglibs.jsp"%>
 <script type="text/javascript">
 	var basePath = "../vehicle/";
-	function submitForm() {
-		if ($("#carForm").form('enableValidation').form('validate')) {
-			var data = $("#carForm").serialize();
-			$.ajax({
-				cache : false,
-				type : 'POST',
-				url : basePath + 'save',
-				data : data,
-				async : false,
-				success : function(data) {
-					if (data) {
-						backPage();
-					}
-				}
-			});
-		}
-	}
-	function clearForm() {
-		$('#ff').form('clear');
-		$("#regName").combobox("setValue", "3");
-		$("#selCarType").combobox("setValue", "黄牌");
-		$("#classify").combobox("setValue", "大型");
-		$("#carObtWay").combobox("setValue", "购买");
-
-		$('input:radio[name=carProType]')[0].checked = true;
-	}
+	var id;
+	var Request = new Object();
+	$(function() {
+		Request = GetRequest();
+		id = Request['id'];
+		$.ajax({
+			url : basePath + 'queryOne',
+			success : function(data) {
+				if (data) {
+					$("#carForm").form('load', data);
+					$("input").attr("readOnly",true);
+// 					$("input").attr("disabled","disabled");
+					$('#companyId').combobox('disable');
+					$('#carOwnersType').combobox('disable');
+					$('#plateColor').combobox('disable');
+					$('#classify').combobox('disable');
+					$('#carFuelType').combobox('disable');
+					$('#carUseNatu').combobox('disable');
+					$('#carObtWay').combobox('disable');
+					$('#carType').combotree('disable');
+					
+				} 
+			}
+		});
+	});
 	function backPage() {
-// 		parent.$("#cnIframe").attr("src", "carList.jsp");
 		window.location.href = 'vehicleList.jsp';
 	}
 </script>
 </head>
 <body>
-	<div style="text-align: left; padding: 5px">
-		<a href="javascript:void(0)" class="easyui-linkbutton"
-			onclick="javascript:submitForm()">保存</a> <a href="javascript:void(0)"
-			class="easyui-linkbutton" onclick="javascript:clearForm()">重置</a> <a
-			href="javascript:void(0)" class="easyui-linkbutton"
-			onclick="javascript:backPage()">返回</a>
+	<div style="text-align: left; padding: 5px"> 
+		  <a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:backPage()">返回</a>
 	</div>
 	<form id="carForm" metdod="post">
 		<div id="aa" class="easyui-accordion" data-options="border:false">
@@ -56,11 +50,12 @@
 				<table class="grid">
 					<tr>
 						<th style="width: 120px">业户/车主:</th>
-						<td style="width: 290px"><input name="carOwner" class="easyui-validatebox"
-							data-options="required:true" style="width: 200px;" /></td>
+						<td style="width: 290px"><input name="carOwner"
+							class="easyui-validatebox" data-options="required:true"
+							style="width: 200px;" /></td>
 						<th style="width: 120px">身份证明名称/号码:</th>
-						<td style="width: 290px"><select class="easyui-combobox" id="carOwnersType"
-							name="carOwnersType" editable="false">
+						<td style="width: 290px"><select class="easyui-combobox"
+							id="carOwnersType" name="carOwnersType" editable="false">
 								<option value="1">组织机构代码</option>
 								<option value="2">营业执照</option>
 								<option value="3" selected="selected">身份证</option>
@@ -81,16 +76,13 @@
 							class="easyui-validatebox" data-options="required:true"
 							style="width: 200px;" /></td>
 						<th>所属公司:</th>
-						<td>
-						<input id="companyId" class="easyui-combobox" name="companyId"
-							style="width: 200px;"
-							data-options="required:true,valueField:'id',textField:'compName',url:'../company/queryComList'" />  
-<!-- 							<select id="companyId" name="companyId" -->
-<!-- 							class="easyui-combotree" style="width: 200px;" -->
-<!-- 							data-options="url:'../company/getTreeList',required:true,lines:true"></select> -->
-<!-- 							<a id="btn" href="#" class="easyui-linkbutton" -->
-<!-- 							data-options="iconCls:'icon-reload',plain:true"></a> -->
-							
+						<td><input id="companyId" class="easyui-combobox"
+							name="companyId" style="width: 200px;"
+							data-options="required:true,valueField:'id',textField:'compName',url:'../company/queryComList'" />
+							<!-- 							<select id="companyId" name="companyId" --> <!-- 							class="easyui-combotree" style="width: 200px;" -->
+							<!-- 							data-options="url:'../company/getTreeList',required:true,lines:true"></select> -->
+							<!-- 							<a id="btn" href="#" class="easyui-linkbutton" --> <!-- 							data-options="iconCls:'icon-reload',plain:true"></a> -->
+
 						</td>
 					</tr>
 					<tr>
@@ -98,7 +90,7 @@
 						<td><input id="carNumberG" name="carNumberG"
 							style="width: 200px;" data-options="required:true" /></td>
 						<th>车牌颜色:</th>
-						<td><select name="plateColor" class="easyui-combobox"
+						<td><select id="plateColor" name="plateColor" class="easyui-combobox"
 							data-options="required:true" style="width: 100px;">
 								<option selected="selected" value="黄牌">黄牌</option>
 								<option value="蓝牌">蓝牌</option>
@@ -152,8 +144,7 @@
 							class="easyui-numberbox" style="width: 70px;" /> 宽<input
 							id="carOutWidth" name="carOutWidth" class="easyui-numberbox"
 							style="width: 70px;" /> 高<input id="carOutHeight"
-							name="carOutHeight" class="easyui-numberbox"
-							style="width: 70px;" />mm
+							name="carOutHeight" class="easyui-numberbox" style="width: 70px;" />mm
 						</td>
 						<th>总质量:</th>
 						<td><input id="carTotalmass" name="carTotalmass"
@@ -166,11 +157,12 @@
 				<table class="grid">
 					<tr>
 						<th style="width: 120px">发动机型号:</th>
-						<td style="width: 290px"><input id="carEngModel" name="carEngModel"
-							class="easyui-validatebox" style="width: 200px;" /></td>
+						<td style="width: 290px"><input id="carEngModel"
+							name="carEngModel" class="easyui-validatebox"
+							style="width: 200px;" /></td>
 						<th style="width: 120px">发动机号:</th>
-						<td style="width: 290px"><input id="carEngNum" name="carEngNum"
-							class="easyui-validatebox" style="width: 200px;" /></td>
+						<td style="width: 290px"><input id="carEngNum"
+							name="carEngNum" class="easyui-validatebox" style="width: 200px;" /></td>
 					</tr>
 
 					<tr>
@@ -285,11 +277,6 @@
 			</div>
 		</div>
 	</form>
-	<!-- 		<div style="text-align: left; padding: 5px"> -->
-	<!-- 			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:submitForm()">保存</a>  -->
-	<!-- 			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:clearForm()">重置</a> -->
-	<!-- 			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:clearForm()">返回</a> -->
-	<!-- 		</div> -->
 	<div style="height: 30px"></div>
 </body>
 </html>

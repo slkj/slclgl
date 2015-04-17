@@ -43,13 +43,10 @@ public class VehicleService {
 	 * @param vehicle
 	 * @return
 	 */
-	public Vehicle queryOne(Vehicle vehicle) {
-		log.info("查询单个信息，参数: {}", vehicle.toString());
-		if (vehicle == null) {
-			return null;
-		}
+	public Vehicle queryOne(HashMap<String, Object> map) {
+		log.info("查询单个信息，参数: {}", map.toString());
 		try {
-			return mapper.queryOne(vehicle);
+			return mapper.queryOne(map);
 		} catch (Exception e) {
 			return null;
 		}

@@ -14,30 +14,33 @@
 			<table cellspacing="0" cellpadding="0">
 				<tr>
 					<td>车牌号:<input name="carNumber" class="easyui-textbox"
-						style="width: 150px" /> 所属公司：<input name="companyName"
-						class="easyui-textbox" style="width: 150px" />
-					</td>
-					<td>设备编号:<input name="listnum" class="easyui-textbox"
+						style="width: 150px" />
+					 设备编号:<input name="listnum" class="easyui-textbox"
 						style="width: 150px" /> SIM卡号:<input name="phone"
-						class="easyui-numberbox" style="width: 150px" /> <a
-						id="search_btn" href="#" class="easyui-linkbutton"
-						data-options="iconCls:'icon-search'">查询</a>
+						class="easyui-numberbox" style="width: 150px" />
 					</td>
 				</tr>
+				<tr>
+					<td> 所属公司：<input name="companyName" class="easyui-textbox" style="width: 150px" />
+						使用状态：<select id="cc" class="easyui-combobox" name="dept" style="width:200px;">   
+								    <option value="1">入网</option>   
+								    <option value="2">报停</option>   
+								</select> 
+						 <a id="search_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
+					</td>
+				</tr>
+				
 			</table>
 		</form>
 		<table cellspacing="0" cellpadding="0">
 			<tr>
-				<td><a href="#" class="easyui-linkbutton"
-					data-options="iconCls:'icon-add',plain:true"
-					onClick="javascript:addCar();">新加车辆</a></td>
+				<td><a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onClick="javascript:addCar();">新加车辆</a></td>
 				<td><div class="datagrid-btn-separator"></div></td>
-				<td><a href="#" onclick="outExcel()" class="easyui-linkbutton"
-					data-options="iconCls:'pic pic_157',plain:true">导出</a></td>
+				<td><a href="#" class="easyui-linkbutton" data-options="iconCls:'pic_stop',plain:true" onClick="">批量报停</a></td>
 				<td><div class="datagrid-btn-separator"></div></td>
-				<td><a href="#" class="easyui-linkbutton"
-					data-options="iconCls:'pic pic_154',plain:true"
-					onclick="return ajaxFileUpload();">导入</a></td>
+				<td><a href="#" onclick="outExcel()" class="easyui-linkbutton" data-options="iconCls:'pic pic_157',plain:true">导出</a></td>
+				<td><div class="datagrid-btn-separator"></div></td>
+				<td><a href="#" class="easyui-linkbutton" data-options="iconCls:'pic pic_154',plain:true" onclick="return ajaxFileUpload();">导入</a></td>
 			</tr>
 		</table>
 	</div>

@@ -133,7 +133,9 @@ public class VehicleController {
 
 	@ResponseBody
 	@RequestMapping(value = "/queryOne")
-	public Vehicle queryOne(Vehicle vehicle) {
-		return vehicleService.queryOne(vehicle);
+	public Vehicle queryOne(String id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id",id);
+		return vehicleService.queryOne(map);
 	}
 }

@@ -45,7 +45,7 @@
 										formatter : function(value, row, index) {
 											var s = "";
 											if (typeof(row.networkNo)!="undefined" && row.networkNo !="" && row.networkNo != null ) {
-												s = "<div style='background-color:#008B00;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>入网使用</div>";
+												s = "<div style='background-color:#008B00;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>入网</div>";
 											}
 											return s;
 										}
@@ -65,7 +65,9 @@
 										title : '车辆类型',
 										width : 110,
 										formatter : function(value, row, index) {
-											return row.classify + row.carType;
+											var calss = row.classify == null ? "" : row.classify;
+											var carType = row.carType == null ? "" : row.carType;
+											return calss + carType;
 										}
 									},
 									{
@@ -99,8 +101,8 @@
 										width : 240,
 										formatter : function(value, row, index) {
 											var s = "";
-											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:detailCarInfo('"
-													+ index + "');\">详细</span></a>";
+											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:vehicleInfo('"
+													+ row.id + "');\">详细</span></a>";
 											s += "&nbsp;|&nbsp;";
 
 											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:inNet('"
@@ -139,24 +141,8 @@
 	function inNet(id) {
 		window.location.href = 'inNet.jsp?id='+id;
 	}
-	function detailCarInfo(index) {
-		var data = grid.datagrid('getData').rows[index];
-		SL.showWindow({
-			title : '车辆详细信息',
-			iconCls : 'icon-add',
-			width : 800,
-			height : 500,
-			url : 'detailCarInfo.jsp',
-			onLoad : function() {
-				// autoSIM("phone");
-			},
-			buttons : [ {
-				text : '关闭',
-				handler : function() {
-					SL.closeWindow();
-				}
-			} ]
-		});
+	function vehicleInfo(id) {
+		window.location.href = 'vehicleInfo.jsp?id='+id;		
 	}
 	function deleteRow(index) {
 		$.messager.confirm('提示', '将删除该车辆所有信息，确认删除?', function(row) {

@@ -148,8 +148,8 @@
 					<tr>
 						<th>安装日期:</th>
 						<td>
-							<input id="installtime" name="installtime" class="easyui-validatebox" style="width: 200px;" data-options="required:true"/>
 							<img onclick="WdatePicker({el:'installtime',dateFmt:'yyyy-MM-dd HH:mm:ss'})" src="../js/My97DatePicker/skin/datePicker.gif" width="16" height="22" align="absmiddle"/>
+							<input id="installtime" name="installtime" class="easyui-validatebox" style="width: 200px;" data-options="required:true"/>
 						</td>
 						<th>安装地点:</th>
 						<td><input name="installAddress" class="easyui-validatebox"
@@ -171,9 +171,10 @@
 							class="easyui-numberbox" style="width: 170px;"
 							data-options="min:0,precision:2,prefix:'￥'" /> (元/月)</td>
 						<th>缴费时间:</th>
-						<td><input id="payerTime" name="payerTime" class="easyui-validatebox" 
-							style="width: 150px;"   data-options="required:true"/> 
-							<img onclick="WdatePicker({el:'payerTime'})" src="../js/My97DatePicker/skin/datePicker.gif" width="16" height="22" align="absmiddle"/></td>
+						<td>
+							<img onclick="WdatePicker({el:'payerTime'})" src="../js/My97DatePicker/skin/datePicker.gif" width="16" height="22" align="absmiddle"/>
+							<input id="payerTime" name="payerTime" class="easyui-validatebox" style="width: 150px;"   data-options="required:true"/> 
+						</td>
 					</tr>
 					<tr>
 						<th>SIM卡缴费人 :</th>
@@ -181,8 +182,8 @@
 							style="width: 200px;" /></td>
 						<th style="width: 120px">安检到期时间:</th>
 						<td style="width: 280px">
-							<input id="feeseEnd" name="feeseEnd" class="easyui-validatebox" 	style="width: 150px;" data-options="required:true" />
 							<img onclick="WdatePicker({el:'feeseEnd',dateFmt:'yyyy-MM'})" src="../js/My97DatePicker/skin/datePicker.gif" width="16" height="22" align="absmiddle"/>
+							<input id="feeseEnd" name="feeseEnd" class="easyui-validatebox" 	style="width: 150px;" data-options="required:true" />
 							<label><input id="ckISnotice" type="checkbox"
 								name="ckISnotice">到期提醒</label></td>
 					</tr>
