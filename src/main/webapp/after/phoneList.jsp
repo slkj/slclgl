@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>司机管理</title>
+<title>售后电话记录管理</title>
 <%@ include file="/common/taglibs.jsp"%>
 <script type="text/javascript" src="js/phoneList.js"></script>
 </head>
@@ -14,7 +14,7 @@
 			<form name="searchform" method="post" action="" id="searchform">
 				<table cellspacing="0" cellpadding="0">
 					<tr>
-						<td>服务人员: <input name="serviceMan" class="easyui-numberbox" style="width: 150px" />
+						<td>服务人员: <input name="serviceMan"  style="width: 150px" />
 							客户公司:<select id="company" name="company" class="easyui-combotree" style="width:200px;"
 									data-options="url:'../company/getTreeList',lines:true"></select> 
 							<a id="search_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:'true'">查询</a> 

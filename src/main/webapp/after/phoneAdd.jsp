@@ -95,7 +95,9 @@
 						<th>服务人员：</th>
 						<td><input type="text" style="width: 200px;" name="serviceMan" /></td>
 						<th>服务结果：</th>
-						<td><input type="text" style="width: 200px;" name="result" /></td>
+						<td>
+						<input name="result" type="radio" value="未解决"	checked="checked" />未解决 
+							<input name="result" type="radio" value="已解决" />已解决</td>
 							
 					</tr>
 					

@@ -53,7 +53,7 @@ function loadDataGrid() {
 								},
 								{
 									title : '客户单位',
-									field : 'company'
+									field : 'companyName'
 								},
 								{
 									title : '联系人 ',
@@ -102,15 +102,15 @@ function loadDataGrid() {
 									field : 'result',
 									title : '服务结果',
 									align : 'center',
-									/*formatter : function(value, row, index) {
+									formatter : function(value, row, index) {
 										var s = "";
-//										if (value == 0) {
-											s = "<span style=\"color:green;\">解决</span>";
-//										} else if (value == 1) {
-//											s = "<span style=\"color:#525252;\">解决</span>";
-//										}
+										if (value =="已解决") {
+											s = "<span style=\"color:green;\">已解决</span>";
+										} else if (value == "未解决") {
+											s = "<span style=\"color:red;\">未解决</span>";
+										}
 										return s;
-									}*/
+									}
 								},
 								{
 									field : 'opt',
@@ -118,8 +118,8 @@ function loadDataGrid() {
 									align : 'center',
 									formatter : function(value, row, index) {
 										var s = "";
-										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:del('"
-											+ row.id + "','" + index + "');\">服务记录</span></a>";
+										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:ser('"
+											+ row.id + "');\">服务记录</span></a>";
 										s += "&nbsp;|&nbsp;";
 										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:view('"
 												+ row.id + "');\">详细</span></a>";
@@ -151,6 +151,9 @@ function add() {
 }
 function edit(id) {
 	window.location.href = 'phoneEdit.jsp?id=' + id;
+}
+function ser(id) {
+	window.location.href = 'maintainAdd.jsp?pid=' + id;
 }
 function view(id) {
 	window.location.href = 'phoneView.jsp?id=' + id;
