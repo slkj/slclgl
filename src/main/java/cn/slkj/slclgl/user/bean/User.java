@@ -10,18 +10,37 @@ public class User implements Serializable {
 	private Integer id;
 	private String username;
 	private String password;
-	private String status ="enabled";
+	private String status = "enabled";
 	private String email;
 	private String realname;
 	private String sex;
 	private String phone;
 	private String company;
+	private String companyName;
 	private String salt;
 	private String create_time;
 	private String remark;
 	private String lastTime;
+	private String validTime;
+
+	public String getValidTime() {
+		return validTime;
+	}
+
+	public void setValidTime(String validTime) {
+		this.validTime = validTime;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 
 	private String type;
+
 	public String getType() {
 		return type;
 	}

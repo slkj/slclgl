@@ -3,7 +3,8 @@
 }
 
 body {
-/* 	background: #D2E0F2; */
+	/* 	background: #D2E0F2; */
+	margin: 0
 }
 
 a {
@@ -30,6 +31,7 @@ a:hover {
 .txt {
 	border: #878787 1px solid; padding: 4px 3px; font: Verdana, Geneva, sans-serif, 宋体; line-height: 14px; background-color: #fff; height: auto; font-size: 14px;
 }
+
 .tabs-tool {
 	border-top-width: 0; border-right-width: 0;
 }
@@ -42,6 +44,7 @@ a:hover {
 .footer {
 	text-align: center; color: #15428B; margin: 0; padding: 0; line-height: 23px; font-weight: bold
 }
+
 .header {
 	position: relative; height: 68px; background: url(../images/master_header.png) no-repeat;
 }
@@ -49,6 +52,7 @@ a:hover {
 .header_cont {
 	width: 100%; float: right;
 }
+
 .system {
 	float: right; margin: 10px 20px 0 0;
 }
@@ -56,6 +60,7 @@ a:hover {
 .system a {
 	margin: 0 5px 0 5px;
 }
+
 .footer {
 	text-align: center; color: #15428B; margin: 0px; padding: 0px; line-height: 23px; font-weight: bold;
 }

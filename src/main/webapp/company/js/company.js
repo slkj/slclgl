@@ -31,28 +31,34 @@ function loadDataGrid() {
 						columns : [ [
 								{
 									field : 'compName',
-									title : '公司名称'
+									title : '公司名称',
+									width : 200
 								},
 								{
 									field : 'contactMenber',
-									title : '联系人'
+									title : '联系人',
+									width : 50
 								},
 								{
 									field : 'contactWay',
-									title : '联系电话'
+									title : '联系电话',
+									width : 70
 								},
 								{
 									field : 'email',
-									title : '邮箱'
+									title : '邮箱',
+									width : 100
 								},
 								{
 									field : 'organizationCode',
-									title : '组织机构代码'
+									title : '组织机构代码',
+									width : 100
 								},
 								{
 									field : 'opt',
 									title : '操作',
 									align : 'center',
+									width : 100,
 									formatter : function(value, row, index) {
 										var s = "";
 										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:comInfo('"

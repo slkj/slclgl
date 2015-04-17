@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.slkj.easyui.util.EPager;
 import cn.slkj.slclgl.devices.bean.Devices;
 import cn.slkj.slclgl.devices.service.impl.DevicesServiceImpl;
-import cn.slkj.slclgl.sim.bean.Sim;
+import cn.slkj.slclgl.util.LocationUtil;
 
 @Controller
 @RequestMapping("/devices")
@@ -39,7 +39,8 @@ public class DevicesController {
 		pageMap.put("lyr", request.getParameter("lyr"));
 		pageMap.put("firm", request.getParameter("firm"));
 		//TODO 处理地区代码，如果后面有0的要like
-		pageMap.put("area", request.getParameter("area"));
+		String area = request.getParameter("area");
+		pageMap.put("area", area != null ? LocationUtil.toLocation(area) : area);
 		pageMap.put("listnum", request.getParameter("listnum"));
 		pageMap.put("phone", request.getParameter("phone"));
 		pageMap.put("carNumber", request.getParameter("carNumber"));

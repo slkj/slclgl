@@ -1,12 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<%@ include file="/common/taglibs.jsp"%>
-<script type="text/javascript">
 	var basePath = "../vehicle/";
 	var grid;
 	$(function() {
@@ -27,7 +18,7 @@
 							method : 'post',
 							url : basePath + 'list',
 							fitColumns : false,
-							title : '车辆列表',
+// 							title : '车辆列表',
 							fit : true,
 							nowrap : true, // false:折行
 							rownumbers : true, // 行号
@@ -113,7 +104,7 @@
 											s += "&nbsp;|&nbsp;";
 
 											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:inNet('"
-													+ index + "');\">入网</span></a>";
+													+ row.id + "');\">入网</span></a>";
 											s += "&nbsp;|&nbsp;";
 											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:goBack('"
 													+ index + "');\">编辑</span></a>";
@@ -143,62 +134,14 @@
 		window.open('../location.jsp') 
 	}
 	function addCar() {
-		parent.$("#cnIframe").attr("src", "hyAdd.jsp");
+		window.location.href = 'vehicleAdd.jsp';
 	}
-	function inNet(index) {
-		var data = grid.datagrid('getData').rows[index];
-		if (data.state == 1) {
-			SL.msgShow("提示", "设备已经出库！", "warning");
-			return;
-		}
-		parent.SL.showWindow({
-			title : '车辆入网',
-			iconCls : 'icon-add',
-			width : 850,
-			height : 450,
-			url : basePath + 'inNet.jsp',
-			onLoad : function() {
-				$("#form").form('load', data);
-			},
-			buttons : [ {
-				text : '确定',
-				iconCls : 'icon-add',
-				handler : function() {
-					inNet2();
-				}
-			}, {
-				text : '关闭',
-				handler : function() {
-					parent.SL.closeWindow();
-				}
-			} ]
-		});
-		// 		parent.$("#cnIframe").attr("src", "inNet.jsp");
-	}
-
-	function inNet2() {
-		if (parent.$("#form").form('enableValidation').form('validate')) {
-			var data = parent.$("#form").serialize();
-			$.ajax({
-				cache : false,
-				type : 'POST',
-				url : basePath + 'activated',
-				data : data,
-				async : false,
-				success : function(data) {
-					if (data) {
-						parent.SL.closeWindow();
-						grid.datagrid('reload');
-					} else {
-						parent.SL.msgShow("提示", "入网失败！", "warning");
-					}
-				}
-			});
-		}
+	function inNet(id) {
+		window.location.href = 'inNet.jsp?id='+id;
 	}
 	function detailCarInfo(index) {
 		var data = grid.datagrid('getData').rows[index];
-		parent.SL.showWindow({
+		SL.showWindow({
 			title : '车辆详细信息',
 			iconCls : 'icon-add',
 			width : 800,
@@ -216,7 +159,7 @@
 		});
 	}
 	function deleteRow(index) {
-		parent.$.messager.confirm('提示', '将删除该车辆所有信息，确认删除?', function(row) {
+		$.messager.confirm('提示', '将删除该车辆所有信息，确认删除?', function(row) {
 			if (row) {
 				var data = grid.datagrid('getData').rows[index];
 				$.ajax({
@@ -224,11 +167,11 @@
 					success : function(data) {
 						if (data) {
 							grid.datagrid('reload');
-							parent.SL.sysSlideShow({
+							top.SL.sysSlideShow({
 								msg : '成功删除!'
 							});
 						} else {
-							parent.SL.msgShow("提示", "操作错误，请联系管理员", "error");
+							SL.msgShow("提示", "操作错误，请联系管理员", "error");
 						}
 					}
 				});
@@ -248,42 +191,3 @@
 		var json = JSON.parse(jsonStr)
 		return json
 	}
-</script>
-</head>
-<body>
-	<div id="tb" style="padding: 5px; height: auto">
-		<form name="searchform" method="post" action="" id="searchform">
-			<table cellspacing="0" cellpadding="0">
-				<tr>
-					<td>车牌号:<input name="carNumber" class="easyui-textbox"
-						style="width: 150px" /> 所属公司：<input name="companyName"
-						class="easyui-textbox" style="width: 150px" />
-					</td>
-				<tr>
-					<td>设备编号:<input name="listnum" class="easyui-textbox"
-						style="width: 150px" /> SIM卡号:<input name="phone"
-						class="easyui-numberbox" style="width: 150px" /> <a
-						id="search_btn" href="#" class="easyui-linkbutton"
-						data-options="iconCls:'icon-search',plain:'true'">查询</a>
-					</td>
-				</tr>
-			</table>
-		</form>
-		<table cellspacing="0" cellpadding="0">
-			<tr>
-				<td><a href="#" class="easyui-linkbutton"
-					data-options="iconCls:'icon-add',plain:true"
-					onClick="javascript:addCar();">新加车辆</a></td>
-				<td><div class="datagrid-btn-separator"></div></td>
-				<td><a href="#" onclick="outExcel()" class="easyui-linkbutton"
-					data-options="iconCls:'pic pic_157',plain:true">导出</a></td>
-				<td><div class="datagrid-btn-separator"></div></td>
-				<td><a href="#" class="easyui-linkbutton"
-					data-options="iconCls:'pic pic_154',plain:true"
-					onclick="return ajaxFileUpload();">导入</a></td>
-			</tr>
-		</table>
-	</div>
-	<table id="dg"></table>
-</body>
-</html>

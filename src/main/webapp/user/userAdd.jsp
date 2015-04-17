@@ -52,18 +52,18 @@
 			<div title="用户基本信息"
 				data-options="collapsed:false,collapsible:false,border:false"
 				style="overflow: auto;">
-				<table>
+				<table class="grid">
 					<tr>
-						<th>用户类型 ：</th>
+						<th style="width: 100px">用户类型 ：</th>
 						<td colspan="3"><select name="type" class="easyui-combobox">
-								<option selected="selected" value="1">个人用户</option>
-								<option value="2">公司用户</option>
+								<option value="1">个人用户</option>
+								<option value="2" selected="selected">公司用户</option>
 						</select></td>
 					</tr>
 					<tr>
-						<th>账号：</th>
+						<th style="width: 100px">账号：</th>
 						<td><input class="easyui-validatebox" name="username" data-options="required:true" /></td>
-						<th>密码：</th>
+						<th style="width: 100px">密码：</th>
 						<td><input class="easyui-validatebox" name="password" data-options="required:true"  /></td>
 					</tr>
 					<tr>
@@ -76,18 +76,18 @@
 						</td>
 					</tr>
 					<tr>
-						<th>电子邮件：</th>
-						<td><input name="email" class="easyui-validatebox" /></td>
 						<th>联系电话：</th>
 						<td><input name="phone" class="easyui-validatebox" data-options="required:true" /></td>
+						<th>电子邮件：</th>
+						<td><input name="email" class="easyui-validatebox" /></td>
 					</tr>
 					<tr>
 						<th>有效期：</th>
-						<td><input id="dd" type="text" class="easyui-datebox"
+						<td><input name="validTime" class="easyui-datebox"
 							required="required"></input></td>
 						<th>所属公司：</th>
 						<td><select id="companyid" name="companyid" class="easyui-combotree" style="width:200px;"
-									data-options="url:'../company/getTreeList',lines:true"></select> </td>
+									data-options="url:'../company/getTreeList',lines:true,required:true"></select> </td>
 					</tr>
 					<tr>
 						<th>备注：</th>

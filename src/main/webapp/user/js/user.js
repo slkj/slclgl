@@ -36,19 +36,22 @@ function loadDataGrid() {
 								[
 										{
 											title : '基本信息',
-											colspan : 7
+											colspan : 8
 										},
 										{
 											field : 'opt',
 											title : '操作',
-											width : 100,
+											width : 150,
 											align : 'center',
 											rowspan : 2,
 											formatter : function(value, row, index) {
 												var s = "";
 												s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editRow('"
+													+ index + "');\">权限设置</span></a>";
+												s += "&nbsp;|&nbsp;";
+												s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editRow('"
 														+ index + "');\">编辑</span></a>";
-												s += "|";
+												s += "&nbsp;|&nbsp;";
 												s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:deleteRow('"
 														+ index + "');\">删除</span>&nbsp;&nbsp;</a>";
 												return s;
@@ -76,7 +79,7 @@ function loadDataGrid() {
 											title : '联系方式',
 											width : 90
 										}, {
-											field : 'company',
+											field : 'companyName',
 											title : '所属公司',
 											width : 150
 										}, {
@@ -87,7 +90,13 @@ function loadDataGrid() {
 											field : 'create_time',
 											title : '创建时间',
 											width : 150
-										} ] ],
+										}, {
+											field : 'validTime',
+											title : '有效时间',
+											formatter : function(value, rec) {
+												return value == null ? '长期有效': value;
+											}
+										}] ],
 
 						toolbar : [ {
 							id : 'btnadd',
@@ -115,7 +124,7 @@ function loadDataGrid() {
 							text : '密码重置',
 							iconCls : 'icon-reload',
 							handler : function() {
-								reastPwd('reast');
+								batch('reast');
 							}
 						}, ],
 						onLoadSuccess : function() {
@@ -173,9 +182,6 @@ function batch(key) {
 			ids.push(id); // 然后把单个id循环放到ids的数组中
 
 		});
-		var param = {
-			ids : ids
-		};
 		if (data) {
 			switch (key) {
 			case 'reast':

@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.slkj.slclgl.user.mapper.UserMapper">
 	<sql id="sql_base">
-		ID,USERNAME,PASSWORD,STATUS,EMAIL,REALNAME,SEX,PHONE,COMPANY,SALT,CREATE_TIME,LASTTIME,REMARK,TYPE
+		ID,USERNAME,PASSWORD,STATUS,EMAIL,REALNAME,SEX,PHONE,COMPANY,
+		(SELECT COMPNAME FROM TB_COMPANY WHERE ID= COMPANY) as COMPANYNAME,SALT,CREATE_TIME,LASTTIME,REMARK,TYPE,VALIDTIME
 	</sql>
 	<select id="login" resultType="User" parameterType="hashmap">
 		SELECT <include refid="sql_base"></include> FROM TB_USER WHERE USERNAME=#{username} AND PASSWORD=#{password}
@@ -31,8 +32,8 @@
 	</select>
 	
 	<insert id="save" parameterType="User">
-		INSERT INTO TB_USER(USERNAME,PASSWORD,STATUS,EMAIL,REALNAME,SEX,PHONE,COMPANY,SALT,CREATE_TIME,LASTTIME,REMARK,TYPE )
-		VALUES(#{username},#{password},#{status} ,#{email},#{realname},#{sex},#{phone},#{company},#{salt},now(),#{lastTime},#{remark},#{type})
+		INSERT INTO TB_USER(USERNAME,PASSWORD,STATUS,EMAIL,REALNAME,SEX,PHONE,COMPANY,SALT,CREATE_TIME,LASTTIME,REMARK,TYPE,VALIDTIME )
+		VALUES(#{username},#{password},#{status} ,#{email},#{realname},#{sex},#{phone},#{company},#{salt},now(),#{lastTime},#{remark},#{type},#{validTime})
 	</insert>
 	
 	<delete id="delete" parameterType="string">
@@ -41,7 +42,7 @@
 	
 	<update id="edit" parameterType="User">
 		UPDATE TB_USER SET PASSWORD=#{password},STATUS=#{status} ,EMAIL=#{email},REALNAME=#{realname},
-		SEX=#{sex},PHONE=#{phone},COMPANY=#{company},SALT=#{salt},REMARK=#{remark},TYPE=#{type}
+		SEX=#{sex},PHONE=#{phone},COMPANY=#{company},SALT=#{salt},REMARK=#{remark},TYPE=#{type},VALIDTIME=#{validTime}
 		WHERE ID = #{id}
 	</update>
 	

@@ -15,7 +15,7 @@
 				AND ORGANIZATIONCODE LIKE CONCAT('%',#{organizationCode},'%') 
 			</if>
 			<if test="compName != null and compName != ''">
-				AND COMPNAME = LIKE CONCAT('%',#{compName},'%')  
+				AND COMPNAME  LIKE CONCAT('%',#{compName},'%')  
 			</if>
 		</where>
 		LIMIT #{startPage},#{endPage}
@@ -27,7 +27,7 @@
 				AND ORGANIZATIONCODE LIKE CONCAT('%',#{organizationCode},'%') 
 			</if>
 			<if test="compName != null and compName != ''">
-				AND COMPNAME = LIKE CONCAT('%',#{compName},'%')  
+				AND COMPNAME  LIKE CONCAT('%',#{compName},'%')  
 			</if>
 		</where>
 	</select>

@@ -4,7 +4,7 @@
 	<sql id="sql_base">
 		id,listnum,firm,model,rktime,state,fhtime,lyr,lytime,test,cstime,
 		tresult,gpszj,gpstx,gsmtx,dy,fsd,jsq,sxy,ysq,mkf,remark,pack
-		area, ( SELECT note FROM tb_xzqh where code =area) as areaName
+		area,areaName
 	</sql>
 	<sql id="sql_onVehicle">
 		TBD.id,TBD.listnum,TBD.firm,TBD.model,TBD.rktime,TBD.state,TBD.fhtime,TBD.lyr,
@@ -12,7 +12,7 @@
 		TBD.fsd,TBD.jsq,TBD.sxy,TBD.ysq,TBD.mkf,TBD.remark,TBD.pack,
 		TBV.installers,TBV.installtime,TBV.carNumber,
 		(select compName from  tb_company where id =  TBV.companyId) AS company,TBV.networkNo,
-		TBD.area,( SELECT note FROM tb_xzqh where code =area) as areaName
+		TBD.area, TBD.areaName
 	</sql>
 	<select id="getAll" resultType="Devices" parameterType="hashmap">
 		SELECT <include refid="sql_onVehicle"></include> FROM TB_DEVICES TBD left join TB_VEHICLE TBV
@@ -78,7 +78,7 @@
 	</update>
 	<update id="outRepertory" parameterType="Devices">
 		UPDATE TB_DEVICES SET 
-			state=1 ,lyr =#{lyr},lytime=#{lytime},area=#{area}
+			state=1 ,lyr =#{lyr},lytime=#{lytime},area=#{area},areaName= (select note from tb_xzqh where code = #{area})
 		WHERE ID=#{id}
 	</update>
 </mapper>
