@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.slkj.slclgl.role.mapper.RoleMapper">
+
+	<sql id="sql_temp">
+		ID,NAME,DSCRIPT,SORT
+	</sql>
+	<select id="getAll" resultType="Role" parameterType="hashmap">
+		SELECT <include refid="sql_temp" /> FROM TB_ROLE
+		LIMIT #{startPage},#{endPage}
+	</select>
+
+	<select id="getAllCount" resultType="int" parameterType="hashmap">
+		SELECT COUNT(0) FROM TB_ROLE
+	</select>
+
+	<delete id="deleteRole" parameterType="list">
+		DELETE FROM TB_ROLE WHERE ID  = #{id} AND ID != '1'
+	</delete>
+
+	<insert id="saveRole" parameterType="Role">
+		INSERT INTO TB_ROLE(NAME,DSCRIPT,SORT )
+		VALUES(#{name}, #{dscript},#{sort} )
+	</insert>
+
+	<update id="editRole" parameterType="Role">
+		UPDATE TB_ROLE SET NAME = #{name} ,DSCRIPT =#{dscript},SORT=#{sort}
+		WHERE ID = #{id}
+	</update>
+
+	<select id="queryByid" resultType="Role" parameterType="string">
+		SELECT <include refid="sql_temp" /> FROM TB_ROLE WHERE ID= #{id}
+	</select>
+</mapper>
