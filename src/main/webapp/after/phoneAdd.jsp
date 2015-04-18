@@ -81,20 +81,20 @@
 				<table class="grid">
 					<tr>
 						<th>接听时间：</th>
-						<td colspan="3">
+						<td>
 							<!-- 						<input name="riqi" class="easyui-datebox" type="text" style="width: 200px;"> -->
 							<input id="riqi" type="text" name="riqi"
 							onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
 							class="Wdate" style="width: 200px" />
 						</td>
-						<!-- 						<th>派单时间：</th> -->
-						<!-- 						<td><input name="serviceRiqi" class="easyui-datebox" style="width: 200px;" type="text"></td> -->
+						<th>客服人员：</th>
+						<td><input class="easyui-validatebox" name="customer" style="width: 200px;"   ></td>
 					</tr>
 					<tr>
 						<th>客户公司：</th>
 						<td><input id="company" class="easyui-validatebox" name="company" style="width: 200px;"></input></td>
 						<th>车牌号：</th>
-						<td><input class="easyui-validatebox" name="carnumber" style="width: 200px;"   ></td>
+						<td><input class="easyui-validatebox" name="carNo" style="width: 200px;"   ></td>
 
 
 					</tr>
@@ -129,15 +129,7 @@
 							name="error" /></td>
 
 					</tr>
-					<!-- 					<tr> -->
-					<!-- 						<th>服务人员：</th> -->
-					<!-- 						<td><input type="text" style="width: 200px;" name="serviceMan" /></td> -->
-					<!-- 						<th>服务结果：</th> -->
-					<!-- 						<td> -->
-					<!-- 						<input name="result" type="radio" value="未解决"	checked="checked" />未解决  -->
-					<!-- 							<input name="result" type="radio" value="已解决" />已解决</td> -->
-
-					<!-- 					</tr> -->
+				
 
 				</table>
 			</div>

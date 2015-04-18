@@ -20,7 +20,6 @@ public class Phone{
 	//基本信息
 	 private String id;
 	 private String company;//客户公司
-	 private String companyName;//公司名称
 	 private String linkman;//联系人
 	 private String telephone;//联系方式
 	 private String address;//地址
@@ -44,14 +43,6 @@ public class Phone{
 	}
 	public void setCompany(String company) {
 		this.company = company;
-	}
-	
-	
-	public String getCompanyName() {
-		return companyName;
-	}
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
 	}
 	public String getLinkman() {
 		return linkman;

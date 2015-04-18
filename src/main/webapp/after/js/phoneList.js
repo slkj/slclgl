@@ -53,11 +53,11 @@ function loadDataGrid() {
 								},
 								{
 									title : '服务车辆',
-									field : '-aa'
+									field : 'carNo'
 								},
 								{
 									title : '客户单位',
-									field : 'companyName'
+									field : 'company'
 								},
 								{
 									title : '联系人 ',
@@ -93,6 +93,10 @@ function loadDataGrid() {
 									/*formatter : function(value, row, index) {
 										return "不定位";
 									}*/
+								},
+								{
+									title : '客服人员',
+									field : 'customer'
 								},
 								{
 									title : '派单时间',
@@ -154,7 +158,7 @@ function loadDataGrid() {
 
 }
 function pd(id) {
-	window.location.href = 'phoneEdit.jsp?id=' + id;
+	window.location.href = 'phoneService.jsp?id=' + id;
 }
 function add() {
 	window.location.href = 'phoneAdd.jsp';
@@ -163,7 +167,7 @@ function edit(id) {
 	window.location.href = 'phoneEdit.jsp?id=' + id;
 }
 function ser(id) {
-	window.location.href = 'maintainAdd.jsp?pid=' + id;
+	window.location.href = 'maintainView.jsp?id=' + id;
 }
 function view(id) {
 	window.location.href = 'phoneView.jsp?id=' + id;
