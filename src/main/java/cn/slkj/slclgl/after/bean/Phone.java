@@ -19,17 +19,21 @@ import java.util.List;
 public class Phone{
 	//基本信息
 	 private String id;
+	 private String carNo;//车牌号
 	 private String company;//客户公司
+	 private String companyName;//公司名称
 	 private String linkman;//联系人
 	 private String telephone;//联系方式
 	 private String address;//地址
 	 private String serviceType;//服务类型
 	 private String serviceStatus;//服务状态
 	 private String error;//故障
+	 private String customer;//客服
+	 private String riqi;//接听时间
 	 private String serviceRiqi;//派单时间
 	 private String serviceMan;//服务人员
-	 private String result;//处理结果
-	 private String riqi;//接听时间
+	 private String instead;//更换零件
+	private String result;//处理结果
 	 private String remark;//备注
 	
 	public String getId() {
@@ -43,6 +47,14 @@ public class Phone{
 	}
 	public void setCompany(String company) {
 		this.company = company;
+	}
+	
+	
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 	public String getLinkman() {
 		return linkman;
@@ -109,6 +121,24 @@ public class Phone{
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	 public String getCarNo() {
+		return carNo;
+	}
+	public void setCarNo(String carNo) {
+		this.carNo = carNo;
+	}
+	public String getCustomer() {
+		return customer;
+	}
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+	public String getInstead() {
+		return instead;
+	}
+	public void setInstead(String instead) {
+		this.instead = instead;
 	}
 	 
 

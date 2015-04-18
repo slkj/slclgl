@@ -64,10 +64,34 @@ public class PhoneService {
 			return -1;
 		}
 	}
-
-	public int edit(Phone obj) {
+	public int delService(String id) {
 		try {
-			return dao.update(obj);
+			return dao.delService(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
+
+	public int updPhone(Phone obj) {
+		try {
+			return dao.updPhone(obj);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	public int updService(Phone obj) {
+		try {
+			return dao.updService(obj);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	public int updMaintain(Phone obj) {
+		try {
+			return dao.updMaintain(obj);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return -1;
