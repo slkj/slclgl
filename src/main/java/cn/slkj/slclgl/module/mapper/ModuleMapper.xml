@@ -26,4 +26,13 @@
 	<delete id="delete" parameterType="string">
 		DELETE FROM TB_MODULE WHERE ID = #{id}
 	</delete>
+		
+	<select id="getModuleByRoleId" parameterType="hashmap" resultType="Module">
+		SELECT DISTINCT TBR.* FROM TB_MODULE TBR ,TB_ROLE_RES TBRR
+		WHERE TBR.ID = TBRR.MODULE_ID
+		<if test="roleid != null and roleid != ''">
+			AND TBRR.ROLE_ID = #{roleid}
+		</if> 
+    	AND ID != '1'  
+	</select>
 </mapper>

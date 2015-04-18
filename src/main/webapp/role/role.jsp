@@ -28,7 +28,8 @@
 			<div class="easyui-layout" fit="true">
 				<div region="center" style="padding: 1px;">
 					<div class="easyui-panel" data-options="fit:true,border:false,title:'菜单列表',tools:'#tt'">
-						<table id="reslist"></table>
+<!-- 						<table id="reslist"></table> -->
+						<ul id="reslist"></ul>  
 					</div>
 					<div id="tt">
 						<a href="#" class="icon-save" onclick="javascript:alert('add')"></a>

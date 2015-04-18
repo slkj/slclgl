@@ -15,4 +15,6 @@ public interface ModuleMapper {
 	int delete(String id);
 
 	Module queryOne(String id);
+
+	List<Module> getModuleByRoleId(HashMap<String, Object> map);
 }
