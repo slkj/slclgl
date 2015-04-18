@@ -58,7 +58,7 @@
 			$.ajax({
 				cache : false,
 				type : 'POST',
-				url : basePath + 'savePhone',
+				url : basePath + 'saveService',
 				data : data,
 				async : false,
 				success : function(data) {
@@ -146,8 +146,26 @@
 							name="error" /></td>
 
 					</tr>
-				
-
+					<tr>
+						
+						<th>派单时间：</th>
+						<td>
+						<input id="serviceRiqi" type="text" name="serviceRiqi"
+							onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+							class="Wdate" style="width: 200px" /></td>
+							<th>服务人员：</th>
+						<td><input type="text" style="width: 200px;" name="serviceMan" /></td>
+					</tr>
+					
+					<tr>
+						<th>更换零件：</th>
+						<td><input type="text" style="width: 200px;" name="instead" /></td>
+						<th>服务结果：</th>
+						<td><input name="result" type="radio" value="未解决"	checked="checked" />未解决 
+							<input name="result" type="radio" value="已解决" />已解决</td>
+							
+					</tr>
+					
 				</table>
 			</div>
 			

@@ -43,6 +43,7 @@ public class PhoneController {
 	public EPager<Phone> list(@RequestParam(required = false, defaultValue = "1") Integer page,
 			@RequestParam(required = false, defaultValue = "10") Integer rows,
 			@RequestParam(required = false, defaultValue = "") String serviceMan,
+			@RequestParam(required = false, defaultValue = "") String result,
 			@RequestParam(required = false, defaultValue = "") String company,HttpSession session) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("endNum", page * rows);
@@ -53,6 +54,12 @@ public class PhoneController {
 		}
 		if (StringUtils.isNotEmpty(company)) {
 			map.put("company", company);
+		}
+		if (StringUtils.isNotEmpty(result)) {
+			if(result.equals("0"))
+				map.put("result", "未解决");
+			if(result.equals("1"))
+				map.put("result", "已解决");
 		}
 		int total = service.getCount(map);
 		List<Phone> list = service.search(map);
@@ -90,11 +97,41 @@ public class PhoneController {
 
 	/** 编辑 */
 	@ResponseBody
-	@RequestMapping(value = "/save", method = { RequestMethod.POST })
-	public boolean editSave(Phone p) throws Exception {
+	@RequestMapping(value = "/savePhone", method = { RequestMethod.POST })
+	public boolean savePhone(Phone p) throws Exception {
 		try {
 			
-			int i = service.edit(p);
+			int i = service.updPhone(p);
+			if (i != -1) {
+				return true;
+			}
+		} catch (Exception e) {e.printStackTrace();
+			throw new Exception("this is the detail of ajax exception information");
+		}
+		return false;
+	}
+	/** 编辑 */
+	@ResponseBody
+	@RequestMapping(value = "/saveService", method = { RequestMethod.POST })
+	public boolean saveService(Phone p) throws Exception {
+		try {
+			
+			int i = service.updService(p);
+			if (i != -1) {
+				return true;
+			}
+		} catch (Exception e) {e.printStackTrace();
+			throw new Exception("this is the detail of ajax exception information");
+		}
+		return false;
+	}
+	/** 编辑 */
+	@ResponseBody
+	@RequestMapping(value = "/saveMaintain", method = { RequestMethod.POST })
+	public boolean saveMaintain(Phone p) throws Exception {
+		try {
+			
+			int i = service.updMaintain(p);
 			if (i != -1) {
 				return true;
 			}
@@ -119,6 +156,16 @@ public class PhoneController {
 	@RequestMapping(value = "/delete")
 	public boolean deletes(String id) {
 		int i = service.delete(id);
+		if (i > 0) {
+			return true;
+		}
+		return false;
+	}
+	/** 单条删除 */
+	@ResponseBody
+	@RequestMapping(value = "/delService")
+	public boolean delService(String id) {
+		int i = service.delService(id);
 		if (i > 0) {
 			return true;
 		}

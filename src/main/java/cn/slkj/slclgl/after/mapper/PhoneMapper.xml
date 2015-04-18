@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.slkj.slclgl.after.mapper.PhoneMapper">
 	<sql id="sql_temp">
-		id,company,linkman,telephone,address,serviceType,serviceStatus,error,serviceRiqi,serviceMan,result,riqi,remark,
-		(select compName from  tb_company where id = company) as companyName
+		id,carNo,company,linkman,telephone,address,serviceType,serviceStatus,error,customer,result,
+		riqi,serviceRiqi,serviceMan,instead,remark
 	</sql>
 	<select id="one" resultType="phone" parameterType="phone">
 		SELECT
@@ -19,6 +19,9 @@
 			<if test="company != null and company != ''">
 				AND company = #{company}
 			</if>
+			<if test="result != null and result != ''">
+				AND result = #{result}
+			</if>
 		</where>
 			LIMIT #{startNum},#{endNum}
 			
@@ -26,24 +29,47 @@
 
 	<select id="total" resultType="int" parameterType="hashmap">
 		SELECT COUNT(0) FROM TB_PHONE
+		<where>
+			<if test="serviceMan != null and serviceMan != ''">
+				AND serviceMan  Like CONCAT('%',#{serviceMan},'%')
+			</if>
+			<if test="company != null and company != ''">
+				AND company = #{company}
+			</if>
+			<if test="result != null and result != ''">
+				AND result = #{result}
+			</if>
+		</where>
 	</select>
 	<insert id="insert" parameterType="phone">
 		INSERT INTO TB_PHONE (
-		company,linkman,telephone,address,serviceType,serviceStatus,error,serviceRiqi,serviceMan,result,riqi,remark
+		carNo,company,linkman,telephone,address,serviceType,serviceStatus,error,customer,result,riqi,serviceRiqi,serviceMan,instead,remark
 		)
 		VALUES(
-		#{company},#{linkman},#{telephone},#{address},#{serviceType},#{serviceStatus},#{error},
-		#{serviceRiqi},#{serviceMan},#{result},#{riqi},#{remark})
+		#{carNo},#{company},#{linkman},#{telephone},#{address},#{serviceType},#{serviceStatus},#{error},#{customer},
+		#{result},#{riqi},#{serviceRiqi},#{serviceMan},#{instead},#{remark})
 	</insert>
-	<update id="update" parameterType="phone">
-		UPDATE TB_PHONE SET company=#{company},linkman=#{linkman},telephone=#{telephone},
+	<update id="updPhone" parameterType="phone">
+		UPDATE TB_PHONE SET carNo=#{carNo},company=#{company},linkman=#{linkman},telephone=#{telephone},
 		address=#{address},serviceType=#{serviceType},serviceStatus=#{serviceStatus},error=#{error},
-		serviceRiqi=#{serviceRiqi},serviceMan=#{serviceMan},result=#{result},riqi=#{riqi},remark=#{remark} 
-		WHERE id =#{id}
+		customer=#{customer},riqi=#{riqi} WHERE id =#{id}
+	</update>
+	<update id="updService" parameterType="phone">
+		UPDATE TB_PHONE SET result=#{result},serviceRiqi=#{serviceRiqi},serviceMan=#{serviceMan},
+		instead=#{instead},remark=#{remark} WHERE id =#{id}
+	</update>
+	<update id="updMaintain" parameterType="phone">
+		UPDATE TB_PHONE SET carNo=#{carNo},company=#{company},linkman=#{linkman},telephone=#{telephone},
+		address=#{address},serviceType=#{serviceType},serviceStatus=#{serviceStatus},error=#{error},
+		customer=#{customer},result=#{result},riqi=#{riqi},serviceRiqi=#{serviceRiqi},serviceMan=#{serviceMan},
+		instead=#{instead},remark=#{remark} WHERE id =#{id}
 	</update>
 	<delete id="delete" parameterType="string">
 		DELETE FROM TB_PHONE WHERE ID = #{id}
 	</delete>
-	
+	<delete id="delService" parameterType="string">
+		UPDATE TB_PHONE SET result='未解决',serviceRiqi='',serviceMan='',
+		instead='' WHERE id =#{id}
+	</delete>
 </mapper>
 

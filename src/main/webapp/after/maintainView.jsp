@@ -7,7 +7,7 @@
 <title>添加驾驶员</title>
 <%@ include file="/common/taglibs.jsp"%>
 <script type="text/javascript">
-	var basePath = "../maintain/";
+	var basePath = "../phone/";
 	$(function() {
 		var Request = new Object();
 		Request = GetRequest();
@@ -29,7 +29,8 @@
 	});
 
 	function backPage() {
-		window.location.href = 'maintain.jsp';
+		//window.location.href = 'maintain.jsp';
+		history.back();
 	}
 	
 </script>
@@ -50,50 +51,72 @@
 				style="overflow: auto;">
 				<table class="grid">
 					<tr>
-					<th>客户公司：</th>
-						<td><select id="company" name="company" class="easyui-combotree" style="width:200px;"
-									data-options="url:'../company/getTreeList',required:true,lines:true"></select></td>
-						<th>联系人：</th>
-						<td><input id="linkman" class="easyui-validatebox" name="linkman" style="width: 200px;"
-							data-options="required:true" type="text"></td>
-						
-							
+						<th>接听时间：</th>
+						<td>
+							<!-- 						<input name="riqi" class="easyui-datebox" type="text" style="width: 200px;"> -->
+							<input id="riqi" type="text" name="riqi"
+							onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+							class="Wdate" style="width: 200px" />
+						</td>
+						<th>客服人员：</th>
+						<td><input class="easyui-validatebox" name="customer" style="width: 200px;"   ></td>
 					</tr>
 					<tr>
+						<th>客户公司：</th>
+						<td><input id="company" class="easyui-validatebox" name="company" style="width: 200px;"></input></td>
+						<th>车牌号：</th>
+						<td><input class="easyui-validatebox" name="carNo" style="width: 200px;"   ></td>
+
+
+					</tr>
+					<tr>
+						<th>联系人：</th>
+						<td><input class="easyui-validatebox" name="linkman"
+							style="width: 200px;" data-options="required:true" type="text"></td>
 						<th>联系方式：</th>
-						<td><input name="telephone"  style="width: 200px;"/></td>
+						<td><input name="telephone" class="easyui-validatebox"  style="width: 200px;"  data-options="required:true" /></td>
+					</tr>
+					<tr>
 						<th>地址：</th>
-						<td><input name="address" type="text" style="width: 200px;"></td>
+						<td colspan="3"><input name="address" type="text"
+							style="width: 300px;"></td>
 					</tr>
 					<tr>
 						<th>服务类型：</th>
-						<td>
-						<input name="serviceType" type="radio" value="装机"	checked="checked" />装机 
-							<input name="serviceType" type="radio" value="维修" />维修
-							<input name="serviceType" type="radio" value="回访" />回访
-							<input name="serviceType" type="radio" value="其他" />其他</td>
+						<td><input name="serviceType" type="radio" value="装机"
+							checked="checked" />装机 <input name="serviceType" type="radio"
+							value="维修" />维修 <input name="serviceType" type="radio"
+							value="回访" />回访 <input name="serviceType" type="radio"
+							value="其他" />其他</td>
 						<th>服务状态：</th>
-						<td>
-						<input name="serviceStatus" type="radio" value="保内"	checked="checked" />保内
-							<input name="serviceStatus" type="radio" value="保外" />保外
-							<input name="serviceStatus" type="radio" value="其他" />其他</td>
-					</tr>
-					<tr>
-						<th>服务时间：</th>
-						<td><input id="riqi" name="riqi" class="easyui-datebox" type="text" style="width: 200px;"></td>
-						<th>配件更换：</th>
-						<td><input id="instead" name="instead" style="width: 200px;" type="text"></td>
+						<td><input name="serviceStatus" type="radio" value="保内"
+							checked="checked" />保内 <input name="serviceStatus" type="radio"
+							value="保外" />保外 <input name="serviceStatus" type="radio"
+							value="其他" />其他</td>
 					</tr>
 					<tr>
 						<th>设备故障及原因：</th>
-						<td colspan="3"><input type="text" style="width: 400px;" name="error" /></td>
-						
+						<td colspan="3"><input type="text" style="width: 400px;"
+							name="error" /></td>
+
 					</tr>
 					<tr>
-						<th>服务人员：</th>
-						<td><input id="serviceMan" type="text" style="width: 200px;" name="serviceMan" /></td>
-						<th>服务过程及结果：</th>
-						<td><input id="result" name="result" style="width: 200px;" type="text"></td>
+						
+						<th>派单时间：</th>
+						<td>
+						<input id="serviceRiqi" type="text" name="serviceRiqi"
+							onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+							class="Wdate" style="width: 200px" /></td>
+							<th>服务人员：</th>
+						<td><input type="text" style="width: 200px;" name="serviceMan" /></td>
+					</tr>
+					
+					<tr>
+						<th>更换零件：</th>
+						<td><input type="text" style="width: 200px;" name="instead" /></td>
+						<th>服务结果：</th>
+						<td><input name="result" type="radio" value="未解决"	checked="checked" />未解决 
+							<input name="result" type="radio" value="已解决" />已解决</td>
 							
 					</tr>
 					

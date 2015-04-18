@@ -28,5 +28,8 @@ public interface PhoneMapper{
 	int insert(Phone obj);
 	int deletes(String ids[]);
 	int delete(String id);
-	int update(Phone obj);
+	int delService(String id);
+	int updPhone(Phone obj);
+	int updService(Phone obj);
+	int updMaintain(Phone obj);
 }

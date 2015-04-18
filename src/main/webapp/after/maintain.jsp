@@ -8,7 +8,7 @@
 <%@ include file="/common/taglibs.jsp"%>
 <script type="text/javascript" >
 var grid;
-var basePath = "../maintain/";
+var basePath = "../phone/";
 $(function() {
 	// 初始化页面
 	loadDataGrid();
@@ -39,7 +39,7 @@ function loadDataGrid() {
 			.datagrid(
 					{
 						method : 'post',
-						url : basePath + 'list',
+						url : basePath + 'list?result=1',
 						title : '安装维修列表',
 						fit : true,
 						nowrap : true, // false:折行
@@ -53,8 +53,8 @@ function loadDataGrid() {
 						loadMsg : '数据加载中,请稍后……',
 						columns : [ [
 								{
-									title : '服务时间',
-									field : 'riqi',
+									title : '派单时间',
+									field : 'serviceRiqi',
 									/* formatter : function(value, row, index) {
 										// 装机 维修 回访 其他
 										return "2015-02-02 12:02:11";
@@ -62,7 +62,7 @@ function loadDataGrid() {
 								},
 								{
 									title : '客户单位',
-									field : 'companyName'
+									field : 'company'
 								},
 								{
 									title : '联系人',
@@ -99,20 +99,28 @@ function loadDataGrid() {
 									} */
 								},
 								{
-									title : '维修过程及结果',
-									field : 'result',
-									/* formatter : function(value, row, index) {
-										return "更换天线";
-									} */
+									title : '服务安装人员',
+									field : 'serviceMan'
 								},
+								
 								{
 									title : '配件更换记录',
 									field : 'instead'
 
 								},
 								{
-									title : '服务安装人员',
-									field : 'serviceMan'
+									title : '服务结果',
+									field : 'result',
+									align : 'center',
+									formatter : function(value, row, index) {
+										var s = "";
+										if (value =="已解决") {
+											s = "<span style=\"color:green;\">已解决</span>";
+										} else if (value == "未解决") {
+											s = "<span style=\"color:red;\">未解决</span>";
+										}
+										return s;
+									}
 								},
 								{
 									field : 'opt',
@@ -157,7 +165,7 @@ function del(id, index) { // 删除操作
 	$.messager.confirm('确认', '确认删除?', function(row) {
 		if (row) {
 			$.ajax({
-				url : basePath + 'delete?id=' + id,
+				url : basePath + 'delService?id=' + id,
 				success : function(data) {
 					var msg = "成功删除。";
 					if (data) {
