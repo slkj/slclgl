@@ -52,6 +52,10 @@ function loadDataGrid() {
 									}*/
 								},
 								{
+									title : '服务车辆',
+									field : '-aa'
+								},
+								{
 									title : '客户单位',
 									field : 'companyName'
 								},
@@ -118,11 +122,14 @@ function loadDataGrid() {
 									align : 'center',
 									formatter : function(value, row, index) {
 										var s = "";
+										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:pd('"
+											+ row.id + "');\">派单</span></a>";
+										s += "&nbsp;|&nbsp;";
 										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:ser('"
 											+ row.id + "');\">服务记录</span></a>";
-										s += "&nbsp;|&nbsp;";
-										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:view('"
-												+ row.id + "');\">详细</span></a>";
+//										s += "&nbsp;|&nbsp;";
+//										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:view('"
+//												+ row.id + "');\">详细</span></a>";
 										s += "&nbsp;|&nbsp;";
 										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:edit('"
 												+ row.id + "');\">编辑</span></a>";
@@ -145,6 +152,9 @@ function loadDataGrid() {
 		displayMsg : '当前显示 {from} - {to} 条记录   共 {total} 条记录'
 	});
 
+}
+function pd(id) {
+	window.location.href = 'phoneEdit.jsp?id=' + id;
 }
 function add() {
 	window.location.href = 'phoneAdd.jsp';
