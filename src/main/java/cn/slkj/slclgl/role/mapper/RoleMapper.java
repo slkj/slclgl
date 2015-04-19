@@ -1,5 +1,6 @@
 package cn.slkj.slclgl.role.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,5 +27,8 @@ public interface RoleMapper {
 	List<Role> getAll(Map<String, Object> map);
 
 	int getAllCount(Map<String, Object> map);
+
+	int saveRoleRes(HashMap<String, Object> map);
+	int deleteRoleRes(HashMap<String, Object> map);
  
 }

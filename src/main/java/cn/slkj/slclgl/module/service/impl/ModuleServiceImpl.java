@@ -79,4 +79,9 @@ public class ModuleServiceImpl {
 	public List<Module> getModuleByRoleId(HashMap<String, Object> map) {
 		return mapper.getModuleByRoleId(map);
 	}
+
+	public List<Module> listByUser(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.listByUser(map);
+	}
 }

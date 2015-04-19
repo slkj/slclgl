@@ -1,5 +1,7 @@
 var grid;
 var basePath = "../role/";
+var roleid;
+
 $(function() {
 	loadData();
 });
@@ -146,37 +148,51 @@ function loadTree(name, id) {
 	$('#right-panel').panel({
 		title : "[" + name + "]:当前权限"
 	});
-//	$('#reslist').treegrid({
-//		url : '../module/list',
-//		loadMsg : '数据加载中....',
-//		nowrap : true, // false:折行
-//		idField : 'id',
-//		treeField : 'name',
-//		animate : true,
-//		fitColumns : true,
-//		lines : true,
-//		singleSelect : false,
-//		columns : [ [ {
-//			field : 'ck',
-//			title : '选择',
-//			checkbox : true
-//		}, {
-//			field : 'name',
-//			title : '模块名称'
-//		} ] ],
-//		onClickRow : function(row) {
-//			loadBtnTree(row.id);
-//		}
-//	});
-	$('#reslist').tree({    
-	    url:'../module/role2Module?roleId='+id,
-	    loadMsg : '数据加载中....',
-	    lines : true,
-	    checkbox:true
-	}); 
+	$('#reslist').tree({
+		url : '../module/role2Module?roleId=' + id,
+		loadMsg : '数据加载中....',
+		lines : true,
+		checkbox : true
+	});
+	roleid = id;
 }
-function loadBtnTree() {
+function roleModule() {
 
+	var nodes = $('#reslist').tree('getChecked', [ 'checked', 'indeterminate' ]);
+	var ids = [];
+	for (var i = 0; i < nodes.length; i++) {
+		ids.push(nodes[i].id);
+	}
+	if (ids.length > 0) {
+		saveInfo(ids);
+	} else {
+		top.SL.msgShow('提示', '请选择分配资源!', 'warning');
+	}
+}
+function saveInfo(ids) {
+	var param = {
+		roleid : roleid,
+		ids : ids
+	};
+	$.ajax({
+		url : basePath + "saveRoleRes",
+		type : "POST",
+		data : param,
+		async : false,
+		dataType : "json",
+		cache : false,
+		success : function(data) {
+			if (data) {
+				top.SL.sysSlideShow({
+					msg : '授权成功!'
+				});
+			} else {
+				top.SL.sysSlideShow({
+					msg : '授权失败!'
+				});
+			}
+		}
+	});
 }
 function delRow(index) {
 	var data = grid.datagrid('getData').rows[index];

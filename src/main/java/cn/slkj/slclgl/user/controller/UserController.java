@@ -5,14 +5,16 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import cn.slkj.easyui.util.EPager;
 import cn.slkj.easyui.util.JsonResult;
@@ -21,13 +23,14 @@ import cn.slkj.slclgl.user.service.impl.UserServiceImpl;
 
 @Controller
 @RequestMapping("/user")
+@SessionAttributes("userSession")
 public class UserController {
 	@Autowired
 	private UserServiceImpl userServiceImpl;
 
 	@RequestMapping("/login")
 	@ResponseBody
-	public JsonResult login(HttpServletRequest request, Model model) {
+	public JsonResult login(HttpServletRequest request, ModelMap modelMap, HttpSession session) {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		HashMap<String, Object> hashMap = new HashMap<String, Object>();
@@ -37,7 +40,7 @@ public class UserController {
 		if (user_login == null) {
 			return new JsonResult(false, "用户名称或密码错误！");
 		} else {
-			model.addAttribute("user", user_login);
+			modelMap.addAttribute("userSession", user_login);
 			return new JsonResult(true, "登录成功。");
 		}
 	}
@@ -102,6 +105,7 @@ public class UserController {
 		}
 		return new JsonResult(false, "操作失败！");
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "/resetPwd", method = RequestMethod.POST)
 	public JsonResult resetPwd(@RequestParam(value = "ids[]") String[] ids) {
@@ -116,12 +120,13 @@ public class UserController {
 		}
 		return new JsonResult(false, "操作失败！");
 	}
+
 	@ResponseBody
-	@RequestMapping(value = "/valid",method = RequestMethod.POST)
-	public boolean valid(@RequestParam(value = "ids[]") String[] ids,String status) {
-		HashMap<String,Object> map = new HashMap<String,Object>(); 
-		map.put("ids", ids);  
-	    map.put("status", status);  
+	@RequestMapping(value = "/valid", method = RequestMethod.POST)
+	public boolean valid(@RequestParam(value = "ids[]") String[] ids, String status) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ids", ids);
+		map.put("status", status);
 		int i = userServiceImpl.valid(map);
 		try {
 			if (i > 0) {
@@ -135,6 +140,7 @@ public class UserController {
 
 		return false;
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "/delete")
 	public boolean deletes(String id) {

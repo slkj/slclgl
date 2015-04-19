@@ -12,7 +12,13 @@
 		SELECT * FROM TB_MODULE WHERE ID =#{id}
 	</select>
 	
-	
+	<select id="listByUser" resultType="Module" parameterType="hashmap">
+			SELECT DISTINCT TBM.* FROM TB_MODULE TBM ,TB_ROLE_RES TBRR WHERE TBM.ID = TBRR.MODULE_ID
+		<if test="id != null and id != ''">
+			AND TBRR.ROLE_ID =  (select role_id from tb_user_role where 1 = 1 and  user_id = #{id} ) 
+		</if>
+    	 ORDER BY PARENT_ID
+	</select>
 	<insert id="insert" parameterType="Module">
 		INSERT INTO TB_MODULE
 		(NAME,PRIORITY,URL,PARENT_ID,ICON,DESCRIPTION)

@@ -12,7 +12,7 @@ $(function() {
 function getMeuns() {
 	_menus = null;
 	$.ajax({
-		url : "module/list",
+		url : "module/list/user?id=1",
 		async : false,
 		dataType : "json",
 		cache : false,

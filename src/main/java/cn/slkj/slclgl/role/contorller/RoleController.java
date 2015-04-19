@@ -7,11 +7,13 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.slkj.easyui.util.EPager;
@@ -69,6 +71,7 @@ public class RoleController {
 		}
 		return false;
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "/edit")
 	public boolean edit(Role role) throws Exception {
@@ -84,6 +87,7 @@ public class RoleController {
 		}
 		return false;
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "/delete")
 	public boolean deletes(String id) {
@@ -98,6 +102,27 @@ public class RoleController {
 			e.printStackTrace();
 		}
 
+		return false;
+	}
+
+	/**
+	 * 保存角色和资源之间的关系
+	 * 
+	 * @param member
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/saveRoleRes", method = RequestMethod.POST)
+	private boolean intoRole(@RequestParam(required = false, defaultValue = "") String roleid,
+			@RequestParam(value = "ids[]") String[] ids) {
+		if (StringUtils.isNotBlank(roleid)) {
+			service.deleteRoleRes(roleid, ids);
+			int i = service.saveRoleRes(roleid, ids);
+			if (i != -1) {
+				return true;
+			}
+		}
+		log.debug("{}，角色id为空");
 		return false;
 	}
 }

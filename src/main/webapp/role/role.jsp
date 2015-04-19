@@ -32,7 +32,7 @@
 						<ul id="reslist"></ul>  
 					</div>
 					<div id="tt">
-						<a href="#" class="icon-save" onclick="javascript:alert('add')"></a>
+						<a href="#" class="icon-save" onclick="roleModule()"></a>
 					</div>
 				</div>
 				<div data-options="region:'east',split:true" style="width: 240px;">

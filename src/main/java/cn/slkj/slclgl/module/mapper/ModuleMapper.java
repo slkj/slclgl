@@ -17,4 +17,6 @@ public interface ModuleMapper {
 	Module queryOne(String id);
 
 	List<Module> getModuleByRoleId(HashMap<String, Object> map);
+
+	List<Module> listByUser(HashMap<String, Object> map);
 }

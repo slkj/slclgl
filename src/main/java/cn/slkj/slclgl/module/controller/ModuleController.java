@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.slkj.easyui.util.Tree;
 import cn.slkj.slclgl.module.bean.Module;
 import cn.slkj.slclgl.module.service.impl.ModuleServiceImpl;
+import cn.slkj.slclgl.user.bean.User;
 
 @Controller
 @RequestMapping("/module")
@@ -32,6 +36,22 @@ public class ModuleController {
 	public List<Module> list() {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		List<Module> list = moduleServiceImpl.getAll(map);
+		return makeTree(list);
+	}
+
+	@RequestMapping(value = "/list/user")
+	@ResponseBody
+	public List<Module> listByUser(String id,HttpSession session) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		if(StringUtils.isNotBlank(id)){
+			map.put("id",id);
+		}else{
+			User user = (User)session.getAttribute("userSession");	
+			map.put("id",user.getId());
+		}
+		
+		List<Module> list = moduleServiceImpl.listByUser(map);
 		return makeTree(list);
 	}
 
@@ -88,26 +108,30 @@ public class ModuleController {
 	}
 
 	// 将list转换为需要的json格式
-	private List<Tree> initCheckBoxTree(List<Module> list, String code, List<Module> list1) {
+	private List<Tree> initCheckBoxTree(List<Module> list, String id, List<Module> list1) {
 		List<Tree> trees = new ArrayList<Tree>();
-		for (Module m : list) {
-			Tree t = new Tree();
-			t.setId(m.getId());
-			t.setText(m.getName());
-			t.setChecked(false);
+		for (Module menus : list) {
+			Tree node = new Tree();
+			node.setId(menus.getId());
+			node.setText(menus.getName());
+			// node.setIconCls(menus.getRes_icon());
 			if (list1 != null) {
 				// 循环判断该角色拥有的资源，如果拥有的话，设置为选择中
 				for (int i = 0; i < list1.size(); i++) {
 					String oid = list1.get(i).getId();
-					String nid = m.getId();
+					String nid = menus.getId();
 					if (oid.equals(nid)) {
-						t.setChecked(true);
+						node.setChecked(true);
 					}
 				}
 			}
-			if (code.equals(m.getParent_id())) {
-				t.setChildren(initCheckBoxTree(list, m.getId(), list1));
-				trees.add(t);
+			if (id.equals(menus.getParent_id())) {
+				node.setChildren(initCheckBoxTree(list, node.getId(), list1));
+				if (!node.getChildren().isEmpty()) {
+					node.setChecked(false);
+				}
+
+				trees.add(node);
 			}
 		}
 		return trees;

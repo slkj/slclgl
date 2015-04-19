@@ -1,5 +1,6 @@
 package cn.slkj.slclgl.role.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,6 +62,18 @@ public class RoleService {
 	 */
 	public int deleteRole(String id) {
 		return mapper.deleteRole(id);
+	}
+	public int saveRoleRes(String roleid, String[] ids) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("roleid", roleid);
+		map.put("ids", ids);
+		return mapper.saveRoleRes(map);
+	}
+	public int deleteRoleRes(String roleid, String[] ids) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("roleid", roleid);
+		map.put("ids", ids);
+		return mapper.deleteRoleRes(map);
 	}
 
 }

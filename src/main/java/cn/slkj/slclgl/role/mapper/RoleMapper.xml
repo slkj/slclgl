@@ -31,4 +31,22 @@
 	<select id="queryByid" resultType="Role" parameterType="string">
 		SELECT <include refid="sql_temp" /> FROM TB_ROLE WHERE ID= #{id}
 	</select>
+	
+	<insert id="saveRoleRes" parameterType="hashmap" >
+		INSERT INTO TB_ROLE_RES(ROLE_ID,MODULE_ID)
+		VALUES
+		<foreach collection="ids" item="item" index="index" separator=",">
+			(#{roleid}, #{item} )
+		</foreach>
+<!-- 		<foreach collection="ids" item="item" index="index" separator=";"> -->
+<!-- 		  INSERT INTO TB_ROLE_RES(ROLE_ID,MODULE_ID) -->
+<!-- 			SELECT #{roleid} , #{item} FROM TB_ROLE_RES   -->
+<!-- 			WHERE NOT EXISTS(   -->
+<!-- 			      SELECT ROLE_ID,MODULE_ID FROM TB_ROLE_RES    WHERE ROLE_ID = #{roleid} AND MODULE_ID=#{item}   -->
+<!-- 			) -->
+<!-- 		  </foreach> -->
+	</insert>
+	<delete id="deleteRoleRes" parameterType="hashmap">
+		DELETE FROM TB_ROLE_RES WHERE  ROLE_ID = #{roleid}
+	</delete>
 </mapper>
