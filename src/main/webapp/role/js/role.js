@@ -146,28 +146,34 @@ function loadTree(name, id) {
 	$('#right-panel').panel({
 		title : "[" + name + "]:当前权限"
 	});
-	$('#reslist').treegrid({
-		url : '../module/list',
-		loadMsg : '数据加载中....',
-		nowrap : true, // false:折行
-		idField : 'id',
-		treeField : 'name',
-		animate : true,
-		fitColumns : true,
-		lines : true,
-		singleSelect : false,
-		columns : [ [ {
-			field : 'ck',
-			title : '选择',
-			checkbox : true
-		}, {
-			field : 'name',
-			title : '模块名称'
-		} ] ],
-		onClickRow : function(row) {
-			loadBtnTree(row.id);
-		}
-	});
+//	$('#reslist').treegrid({
+//		url : '../module/list',
+//		loadMsg : '数据加载中....',
+//		nowrap : true, // false:折行
+//		idField : 'id',
+//		treeField : 'name',
+//		animate : true,
+//		fitColumns : true,
+//		lines : true,
+//		singleSelect : false,
+//		columns : [ [ {
+//			field : 'ck',
+//			title : '选择',
+//			checkbox : true
+//		}, {
+//			field : 'name',
+//			title : '模块名称'
+//		} ] ],
+//		onClickRow : function(row) {
+//			loadBtnTree(row.id);
+//		}
+//	});
+	$('#reslist').tree({    
+	    url:'../module/role2Module?roleId='+id,
+	    loadMsg : '数据加载中....',
+	    lines : true,
+	    checkbox:true
+	}); 
 }
 function loadBtnTree() {
 
