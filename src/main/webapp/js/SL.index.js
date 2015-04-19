@@ -12,13 +12,15 @@ $(function() {
 function getMeuns() {
 	_menus = null;
 	$.ajax({
-		url : "module/list/user?id=1",
+		url : "module/list/user",
 		async : false,
 		dataType : "json",
 		cache : false,
 		success : function(data) {
-			_menus = data[0].children;
-			InitLeftMenu();
+			if(data.length > 0){
+				_menus = data[0].children;
+				InitLeftMenu();
+			}
 		}
 	});
 }

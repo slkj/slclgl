@@ -15,7 +15,6 @@
 <script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src='js/SL.easyUI.js'></script>
 <script type="text/javascript" src='js/SL.index.js'></script>
-
 <script type="text/javascript">
 	//设置登录窗口
 	function openPwd() {
@@ -101,28 +100,74 @@
 			<img src="images/loading.gif" align="absmiddle" /> 正在加载中,请稍候...
 		</div>
 	</div>
-	<div data-options="region:'north'" style="border: 0px">
-		<div class="header">
-			<div class="header_cont">
-				<div id="topMenus" class="hea_nav"></div>
-				<div class="system">
-					<a id="editpass" href="javascript:void(0)" title="修改密码"> 
-						<img border="0" src="images/btn_hd_support.gif" title="修改密码" alt="修改密码">
-					</a> <a href="javascript:void(0)"  title="帮助"> 
-						<img border="0" src="images/btn_hd_help.gif" title="帮助" alt="帮助">
-					</a> <a id="loginOut" href="javascript:void(0)"  title="安全退出"> 
-						<img border="0" src="images/btn_hd_exit.gif" title="安全退出" alt="安全退出">
-					</a>
-				</div>
-			</div>
-		</div>
+<!-- 	<div data-options="region:'north'" style="border: 0px"> -->
+<!-- 		<div class="header"> -->
+<!-- 			<div class="header_cont"> -->
+<!-- 				<div id="topMenus" class="hea_nav"></div> -->
+<!-- 				<div class="system"> -->
+<!-- 					<a id="editpass" href="javascript:void(0)" title="修改密码">  -->
+<!-- 						<img border="0" src="images/btn_hd_support.gif" title="修改密码" alt="修改密码"> -->
+<!-- 					</a> <a href="javascript:void(0)"  title="帮助">  -->
+<!-- 						<img border="0" src="images/btn_hd_help.gif" title="帮助" alt="帮助"> -->
+<!-- 					</a> <a id="loginOut" href="javascript:void(0)"  title="安全退出">  -->
+<!-- 						<img border="0" src="images/btn_hd_exit.gif" title="安全退出" alt="安全退出"> -->
+<!-- 					</a> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+	<div data-options="region:'north'"
+		style="height: 60px; padding: 1px; overflow: hidden; width: 1438px; background: rgb(168, 215, 233);">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td align="left" style="vertical-align: text-bottom">
+<!-- 					<img src="images/index/logo.jpg"> -->
+<!-- 					<div style="position: absolute; top: 75px; left: 33px;"> -->
+<!-- 						JEECG sdfsd <span style="letter-spacing: -1px;">3.4.3 GA</span> -->
+<!-- 					</div> -->
+				</td>
+				<td align="right" nowrap>
+					<table border="0" cellpadding="0" cellspacing="0">
+						<tr style="height: 25px;" align="right">
+							<td style="" colspan="2">
+								<div
+									style="background: url(images/index/top_bg.jpg) no-repeat right center; float: right;">
+									<div style="float: left; line-height: 25px; margin-left: 70px;">
+										<span style="color: #386780">用户:</span>&nbsp;&nbsp;<span
+											style="color: #FFFFFF">${userSession.username }</span>&nbsp;&nbsp;&nbsp;&nbsp;
+									</div>
+									<div style="float: left; margin-left: 18px;">
+										<div style="right: 0px; bottom: 0px;">
+											<a id="editpass" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-comturn',plain:true">修改密码</a>  
+											<a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-tip',plain:true">帮助</a>  
+											<a id="loginOut" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-exit',plain:true">注销</a>  
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+<!-- 						<tr style="height: 80px;"> -->
+<!-- 							<td colspan="2"> -->
+<!-- 								<ul class="shortcut"> -->
+<!-- 									<li style="position: relative;"><img class="imag1" -->
+<!-- 										src="images/index/default.png" style="display: none;" /> <img -->
+<!-- 										class="imag2" src="images/index/default_up.png" style="" /> -->
+<!-- 										<div -->
+<!-- 											style="width: 67px; position: absolute; top: 40px; text-align: center; color: #909090; font-size: 12px;">业务申请</div> -->
+<!-- 									</li> -->
+<!-- 								</ul> -->
+<!-- 							</td> -->
+<!-- 						</tr> -->
+					</table>
+				</td>
+			</tr>
+		</table>
 	</div>
-	<div region="south" split="true"
-		style="height: 30px; background: #D2E0F2;">
+	<div region="south" split="true" border="false" style="height: 30px; overflow: hidden; width: 1440px;">
 		<div class="footer">By 北京神龙天地网络科技有限公司 河北神龙物流信息科技有限公司</div>
 	</div>
-	<div region="west" split="true" title="导航菜单" style="width: 180px;"
-		id="west">
+	<div region="west" split="true" title="导航菜单"
+		style="left: 0px; top: 100px; width: 195px;" id="west">
 		<div id="nav">
 			<!--  导航内容 -->
 

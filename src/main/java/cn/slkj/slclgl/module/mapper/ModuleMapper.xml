@@ -15,9 +15,9 @@
 	<select id="listByUser" resultType="Module" parameterType="hashmap">
 			SELECT DISTINCT TBM.* FROM TB_MODULE TBM ,TB_ROLE_RES TBRR WHERE TBM.ID = TBRR.MODULE_ID
 		<if test="id != null and id != ''">
-			AND TBRR.ROLE_ID =  (select role_id from tb_user_role where 1 = 1 and  user_id = #{id} ) 
+			AND TBRR.ROLE_ID =  (SELECT ROLE_ID FROM TB_USER_ROLE WHERE 1 = 1 AND  USER_ID = #{id} ) 
 		</if>
-    	 ORDER BY PARENT_ID
+    	 ORDER BY PRIORITY
 	</select>
 	<insert id="insert" parameterType="Module">
 		INSERT INTO TB_MODULE
