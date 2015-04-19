@@ -13,14 +13,23 @@
 	<select id="list" resultType="phone" parameterType="hashmap">
 			SELECT <include refid="sql_temp"/>  FROM TB_PHONE
 			<where>
+			<if test="carNo != null and carNo != ''">
+				AND carNo like  CONCAT('%',#{carNo},'%')
+			</if>
+			<if test="serviceType != null and serviceType != ''">
+				AND serviceType = #{serviceType}
+			</if>
+			<if test="customer != null and customer != ''">
+				AND customer Like CONCAT('%',#{customer},'%') 
+			</if>
 			<if test="serviceMan != null and serviceMan != ''">
 				AND serviceMan  Like CONCAT('%',#{serviceMan},'%')
 			</if>
-			<if test="company != null and company != ''">
-				AND company = #{company}
-			</if>
 			<if test="result != null and result != ''">
 				AND result = #{result}
+			</if>
+			<if test="ser != null and ser != ''">
+				AND serviceMan != ''
 			</if>
 		</where>
 			LIMIT #{startNum},#{endNum}
@@ -30,14 +39,23 @@
 	<select id="total" resultType="int" parameterType="hashmap">
 		SELECT COUNT(0) FROM TB_PHONE
 		<where>
+			<if test="carNo != null and carNo != ''">
+				AND carNo like  CONCAT('%',#{carNo},'%')
+			</if>
+			<if test="serviceType != null and serviceType != ''">
+				AND serviceType = #{serviceType}
+			</if>
+			<if test="customer != null and customer != ''">
+				AND customer Like CONCAT('%',#{customer},'%') 
+			</if>
 			<if test="serviceMan != null and serviceMan != ''">
 				AND serviceMan  Like CONCAT('%',#{serviceMan},'%')
 			</if>
-			<if test="company != null and company != ''">
-				AND company = #{company}
-			</if>
 			<if test="result != null and result != ''">
 				AND result = #{result}
+			</if>
+			<if test="ser != null and ser != ''">
+				AND serviceMan != ''
 			</if>
 		</where>
 	</select>
@@ -55,14 +73,11 @@
 		customer=#{customer},riqi=#{riqi} WHERE id =#{id}
 	</update>
 	<update id="updService" parameterType="phone">
-		UPDATE TB_PHONE SET result=#{result},serviceRiqi=#{serviceRiqi},serviceMan=#{serviceMan},
-		instead=#{instead},remark=#{remark} WHERE id =#{id}
+		UPDATE TB_PHONE SET serviceRiqi=#{serviceRiqi},serviceMan=#{serviceMan},
+		remark=#{remark} WHERE id =#{id}
 	</update>
 	<update id="updMaintain" parameterType="phone">
-		UPDATE TB_PHONE SET carNo=#{carNo},company=#{company},linkman=#{linkman},telephone=#{telephone},
-		address=#{address},serviceType=#{serviceType},serviceStatus=#{serviceStatus},error=#{error},
-		customer=#{customer},result=#{result},riqi=#{riqi},serviceRiqi=#{serviceRiqi},serviceMan=#{serviceMan},
-		instead=#{instead},remark=#{remark} WHERE id =#{id}
+		UPDATE TB_PHONE SET result=#{result},instead=#{instead} WHERE id =#{id}
 	</update>
 	<delete id="delete" parameterType="string">
 		DELETE FROM TB_PHONE WHERE ID = #{id}

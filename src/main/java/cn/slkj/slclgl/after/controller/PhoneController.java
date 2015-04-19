@@ -42,24 +42,33 @@ public class PhoneController {
 	@RequestMapping(value = "/list")
 	public EPager<Phone> list(@RequestParam(required = false, defaultValue = "1") Integer page,
 			@RequestParam(required = false, defaultValue = "10") Integer rows,
+			@RequestParam(required = false, defaultValue = "") String carNo,
+			@RequestParam(required = false, defaultValue = "") String serviceType,
+			@RequestParam(required = false, defaultValue = "") String customer,
 			@RequestParam(required = false, defaultValue = "") String serviceMan,
 			@RequestParam(required = false, defaultValue = "") String result,
-			@RequestParam(required = false, defaultValue = "") String company,HttpSession session) {
+			@RequestParam(required = false, defaultValue = "") String ser,HttpSession session) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("endNum", page * rows);
 		map.put("startNum", (page - 1) * rows);
-		
+		if (StringUtils.isNotEmpty(carNo)) {
+			map.put("carNo", carNo);
+		}
+		if (StringUtils.isNotEmpty(serviceType)) {
+			map.put("serviceType", serviceType);
+		}
+		if (StringUtils.isNotEmpty(customer)) {
+			map.put("customer", customer);
+		}
 		if (StringUtils.isNotEmpty(serviceMan)) {
 			map.put("serviceMan", serviceMan);
 		}
-		if (StringUtils.isNotEmpty(company)) {
-			map.put("company", company);
-		}
+		
 		if (StringUtils.isNotEmpty(result)) {
-			if(result.equals("0"))
-				map.put("result", "未解决");
-			if(result.equals("1"))
-				map.put("result", "已解决");
+			map.put("result", result);
+		}
+		if (StringUtils.isNotEmpty(ser)) {
+			map.put("ser", ser);
 		}
 		int total = service.getCount(map);
 		List<Phone> list = service.search(map);

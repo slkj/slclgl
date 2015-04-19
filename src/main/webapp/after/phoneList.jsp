@@ -14,9 +14,24 @@
 			<form name="searchform" method="post" action="" id="searchform">
 				<table cellspacing="0" cellpadding="0">
 					<tr>
-						<td>服务人员: <input name="serviceMan"  style="width: 150px" />
-							客户公司:<select id="company" name="company" class="easyui-combotree" style="width:200px;"
-									data-options="url:'../company/getTreeList',lines:true"></select> 
+						<td>
+						服务车辆: <input name="carNo" style="width: 100px" />
+						服务类型<select class="easyui-combobox" id="serviceType" style="width: 100px;"
+							name="serviceType" editable="false">
+								<option value=""></option>
+								<option value="装机">装机</option>
+								<option value="维修">维修</option>
+								<option value="回访">回访</option>
+								<option value="其他">其他</option>
+						</select>
+						客服人员: <input name="customer" style="width: 100px" />
+						服务人员: <input name="serviceMan" style="width: 100px" />
+						服务结果: <select class="easyui-combobox" id="result" style="width: 100px;"
+							name="result" editable="false">
+								<option value=""></option>
+								<option value="已解决">已解决</option>
+								<option value="未解决">未解决</option>
+						</select>
 							<a id="search_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:'true'">查询</a> 
 						</td>
 					</tr>

@@ -23,6 +23,10 @@
 	        success: function(data) { 
 	         
 	        	$("#carForm").form('load', data);
+	        	$('#carForm input').attr("disabled", "disabled");
+	        	$('#pid').removeAttr("disabled"); 
+	        	$('#serviceRiqi').removeAttr("disabled"); 
+	        	$('#serviceMan').removeAttr("disabled"); 
 	        }  
 			
 		});
@@ -90,7 +94,7 @@
 	<%-- <input name="uid" type="hidden" value="${userSession.u_id }" /> --%>
 		<%-- <input name="companyid" type="hidden" value="${userSession.companyid }" /> --%>
 		<input name="uid" type="hidden" value="1" />
-	<input hidden="hidden" name="id"/>
+	<input id="pid" hidden="hidden" name="id"/>
 		<div id="aa" class="easyui-accordion" data-options="border:false">
 			<div title="售后基本信息"
 				data-options="collapsed:false,collapsible:false,border:false"
@@ -154,17 +158,17 @@
 							onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
 							class="Wdate" style="width: 200px" /></td>
 							<th>服务人员：</th>
-						<td><input type="text" style="width: 200px;" name="serviceMan" /></td>
+						<td><input id="serviceMan" type="text" style="width: 200px;" name="serviceMan" /></td>
 					</tr>
 					
-					<tr>
+					<!-- <tr>
 						<th>更换零件：</th>
 						<td><input type="text" style="width: 200px;" name="instead" /></td>
 						<th>服务结果：</th>
 						<td><input name="result" type="radio" value="未解决"	checked="checked" />未解决 
 							<input name="result" type="radio" value="已解决" />已解决</td>
 							
-					</tr>
+					</tr> -->
 					
 				</table>
 			</div>

@@ -20,8 +20,11 @@
 			dataType : "json",
 			cache : false,
 	        success: function(data) { 
-	         
 	        	$("#carForm").form('load', data);
+	        	$('#carForm input').attr("disabled", "disabled");
+	        	$('#mid').removeAttr("disabled"); 
+	        	$("input[name='instead']").removeAttr("disabled"); 
+	        	$("input[name='result']").removeAttr("disabled");
 	        }  
 			
 		});
@@ -64,7 +67,7 @@
 	<%-- <input name="uid" type="hidden" value="${userSession.u_id }" /> --%>
 		<%-- <input name="companyid" type="hidden" value="${userSession.companyid }" /> --%>
 		<input name="uid" type="hidden" value="1" />
-		<input hidden="hidden" name="id"/>
+		<input id="mid" hidden="hidden" name="id"/>
 		<div id="aa" class="easyui-accordion" data-options="border:false">
 			<div title="售后基本信息"
 				data-options="collapsed:false,collapsible:false,border:false"
@@ -135,8 +138,8 @@
 						<th>更换零件：</th>
 						<td><input type="text" style="width: 200px;" name="instead" /></td>
 						<th>服务结果：</th>
-						<td><input name="result" type="radio" value="未解决"	checked="checked" />未解决 
-							<input name="result" type="radio" value="已解决" />已解决</td>
+						<td><input id="" name="result" type="radio" value="未解决" />未解决 
+							<input name="result" type="radio" value="已解决" checked="checked"/>已解决</td>
 							
 					</tr>
 					

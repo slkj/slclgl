@@ -127,7 +127,7 @@ function loadDataGrid() {
 									formatter : function(value, row, index) {
 										var s = "";
 										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:pd('"
-											+ row.id + "');\">派单</span></a>";
+											+ row.serviceMan + "','" + row.id + "');\">派单</span></a>";
 										s += "&nbsp;|&nbsp;";
 										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:ser('"
 											+ row.id + "');\">服务记录</span></a>";
@@ -157,8 +157,14 @@ function loadDataGrid() {
 	});
 
 }
-function pd(id) {
-	window.location.href = 'phoneService.jsp?id=' + id;
+function pd(name,id) {
+	if(name==null||name==""||name=="null"){
+		window.location.href = 'phoneService.jsp?id=' + id;
+	
+	}
+	else{
+		$.messager.alert('提示', '已派单，不能重复派单！');
+	}
 }
 function add() {
 	window.location.href = 'phoneAdd.jsp';

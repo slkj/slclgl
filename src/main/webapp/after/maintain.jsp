@@ -39,7 +39,7 @@ function loadDataGrid() {
 			.datagrid(
 					{
 						method : 'post',
-						url : basePath + 'list?result=1',
+						url : basePath + 'list?ser=1',
 						title : '安装维修列表',
 						fit : true,
 						nowrap : true, // false:折行
@@ -128,14 +128,14 @@ function loadDataGrid() {
 									align : 'center',
 									formatter : function(value, row, index) {
 										var s = "";
-										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:view('"
+										/* s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:view('"
 												+ row.id + "');\">详细</span></a>";
-										s += "&nbsp;|&nbsp;";
+										s += "&nbsp;|&nbsp;"; */
 										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:edit('"
-												+ row.id + "');\">编辑</span></a>";
-										s += "&nbsp;|&nbsp;";
+												+ row.id + "');\">执行</span></a>";
+												/*s += "&nbsp;|&nbsp;";
 										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:del('"
-												+ row.id + "','" + index + "');\">删除</span></a>";
+												+ row.id + "','" + index + "');\">删除</span></a>"; */
 										return s;
 									}
 								} ] ],
@@ -190,9 +190,24 @@ function del(id, index) { // 删除操作
 			<form name="searchform" method="post" action="" id="searchform">
 				<table cellspacing="0" cellpadding="0">
 					<tr>
-						<td>服务人员: <input name="serviceMan" style="width: 150px" />
-							客户公司:<select id="company" name="company" class="easyui-combotree" style="width:200px;"
-									data-options="url:'../company/getTreeList',lines:true"></select> 
+						<td>
+						服务车辆: <input name="carNo" style="width: 100px" />
+						服务类型<select class="easyui-combobox" id="serviceType" style="width: 100px;"
+							name="serviceType" editable="false">
+							    <option value=""></option>
+								<option value="装机">装机</option>
+								<option value="维修">维修</option>
+								<option value="回访">回访</option>
+								<option value="其他">其他</option>
+						</select>
+						客服人员: <input name="customer" style="width: 100px" />
+						服务人员: <input name="serviceMan" style="width: 100px" />
+						服务结果: <select class="easyui-combobox" id="result" style="width: 100px;"
+							name="result" editable="false">
+								<option value=""></option>
+								<option value="已解决">已解决</option>
+								<option value="未解决">未解决</option>
+						</select> 
 							<a id="search_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:'true'">查询</a> 
 						</td>
 					</tr>
@@ -202,10 +217,10 @@ function del(id, index) { // 删除操作
 		<div>
 			<table cellspacing="0" cellpadding="0">
 				<tr>
-					<td>
+					<!-- <td>
 						<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onClick="javascript:add();">添加</a>
 					</td>
-					<td><div class="datagrid-btn-separator"></div></td>
+					<td><div class="datagrid-btn-separator"></div></td> -->
 					<td align="right">
 						<a href="#"  onclick="outExcel()" class="easyui-linkbutton" data-options="iconCls:'pic pic_157',plain:true">导出</a>
 					</td>
