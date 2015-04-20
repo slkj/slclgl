@@ -17,7 +17,9 @@
 			<tr>
 				<th>所在地区：</th>
 				<td colspan="3">
-					 <select class="easyui-combotree" url="../data/city_data.json" name="area" style="width:260px;" data-options="lines:'true',required:'true'"></select>
+<!-- 					 <select class="easyui-combotree" url="../data/city_data.json" -->
+<!-- 					  name="area" style="width:260px;" data-options="lines:'true',required:'true'"></select> -->
+					<input id="txtarea" name="area"/>  
 					<span style="color: red;">*设备使用地区</span>
 				</td>
 			</tr>

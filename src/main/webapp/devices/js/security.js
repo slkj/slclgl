@@ -44,9 +44,6 @@ function loadDataGrid() {
 						loadMsg : '数据加载中,请稍后……',
 						columns : [ [
 								{
-									field : 'areaName',
-									title : '所在地区'
-								},{
 									field : 'pack',
 									title : '包装',
 									align : 'center',
@@ -94,24 +91,28 @@ function loadDataGrid() {
 										}
 										return s;
 									}
+								},{
+									field : 'areaName',
+									title : '所在地区'
 								},
 								{
 									field : 'listnum',
 									title : '设备编号'
 								},
+								{
+									field : 'phone',
+									title : 'SIM卡号',
+									sortable : true,
+									order : 'desc',
+									formatter : function(value, row, index) {
+										var str = "<a id=\"btn" + index
+												+ "\" href=\"#\" onclick=\"phone(" + index + ")\">"
+												+ value + "</a>";
+										var btn = row.phone == null ? "" : str;
+										return btn;
+									}
+								}, 
 //								{
-//									field : 'phone',
-//									title : 'SIM卡号',
-//									sortable : true,
-//									order : 'desc',
-//									formatter : function(value, row, index) {
-//										var str = "<a id=\"btn" + index
-//												+ "\" href=\"#\" onclick=\"phone(" + index + ")\">"
-//												+ value + "</a>";
-//										var btn = row.phone == null ? "" : str;
-//										return btn;
-//									}
-//								}, {
 //									field : 'rktime',
 //									title : '入库时间'
 //								}, 
@@ -215,6 +216,24 @@ function testing(index) {
 			}
 		} ]
 	});
+}
+function fCallback(url) {
+	if ($("#form").form('enableValidation').form('validate')) {
+		var data = $("#form").serialize();
+		$.ajax({
+			cache : false,
+			type : "POST",
+			url : url,
+			data : data,
+			async : false,
+			success : function(data) {
+				if (data) {
+					grid.datagrid('reload');
+					SL.closeWindow();
+				}
+			}
+		});
+	}
 }
 // SIM卡号联想搜索
 var btsloader = function(param, success, error) {

@@ -19,6 +19,7 @@
 		<typeAlias type="cn.slkj.slclgl.person.bean.Server_unit" alias="server_unit" />
 		<typeAlias type="cn.slkj.slclgl.person.bean.Driver_exzm" alias="driver_exzm" />
 		<typeAlias type="cn.slkj.slclgl.after.bean.Phone" alias="phone" />
+		<typeAlias type="cn.slkj.slclgl.devices.bean.Devices_record" alias="Devices_record" />
 	</typeAliases>
 	<!-- 设置数据库连接环境 -->
 	<!-- 映射文件 -->

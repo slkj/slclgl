@@ -9,7 +9,7 @@
 <body>
 
 	<form id="uform">
-		<input name="lrr" type="hidden" value="admin" />
+		<input name="lrr" type="hidden" value="${userSession.username }" />
 		<input name="state" type="hidden" value="0" />
 		<input id="type" name="type" type="hidden"  />
 		<table class="grid">
@@ -44,7 +44,7 @@
 			</tr>
 			<tr>
 				<th>开卡日期：</th>
-				<td><input name="kktime" class="easyui-datebox" editable="false" data-options="required:'true'"></td>
+				<td><input name="kktime" class="easyui-datebox" editable="false" ></td>
 				<th>续费日期：</th>
 				<td><input name="renewtime" class="easyui-datebox" editable="false" data-options="required:'true'"></td>
 			</tr>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import cn.slkj.slclgl.devices.bean.Devices;
+import cn.slkj.slclgl.devices.bean.Devices_record;
 import cn.slkj.slclgl.devices.mapper.DevicesMapper;
 import cn.slkj.slclgl.devices.service.DevicesService;
 import cn.slkj.slclgl.sim.bean.Sim;
@@ -49,6 +50,20 @@ public class DevicesServiceImpl implements DevicesService {
 	public List<Devices> getList(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return mapper.getList(map);
+	}
+	
+	public int insert_record(Devices devices) {
+		return mapper.insert_record(devices);
+	}
+
+	public int getAllRecordCount(Map<String, Object> pageMap) {
+		// TODO Auto-generated method stub
+		return mapper.getAllRecordCount(pageMap);
+	}
+
+	public List<Devices_record> getAllRecord(Map<String, Object> pageMap) {
+		// TODO Auto-generated method stub
+		return mapper.getAllRecord(pageMap);
 	}
 
 }

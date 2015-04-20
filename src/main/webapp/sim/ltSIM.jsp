@@ -36,100 +36,85 @@
 		return json
 	}
 	function initDataGrid() {
-		grid = $('#dg')
-				.datagrid(
-						{
-							method : 'post',
-							url : '../sim/list?type=1',
-							title : '联通卡列表',
-							fit : true,
-							nowrap : true, //false:折行
-							rownumbers : true, //行号
-							striped : true, //隔行变色
-							pagination : true,
-							pageSize : 15,
-							pageList : [ 1, 10, 15, 20, 30, 50 ],
-							loadMsg : '数据加载中,请稍后……',
-							columns : [ [
-									{
-										field : 'ck',
-										checkbox : true
-									},
-									{
-										field : 'telnum',
-										title : 'SIM号码'
-									},
-									{
-										field : 'state',
-										title : '状态',
-										formatter : function(value, row) {
-											var s = "";
-											if (value == "1") {
-												s = "<span style=\"color:green;\">已用</span>";
-											} else {
-												s = "<span style=\"color:red;\">未用</span>";
-											}
-											return s;
-										}
-									},
-									{
-										field : 'cardType',
-										title : '卡类型'
-									},
-									{
-										field : 'business',
-										title : '套餐业务'
-									},
-									{
-										field : 'kktime',
-										title : '开卡日期'
-									},
-									{
-										field : 'renewtime',
-										title : '续费日期'
-									},
-									{
-										field : 'intime',
-										title : '录入日期'
-									},
-									{
-										field : 'lrr',
-										title : '录入人'
-									},
-									{
-										field : 'gys',
-										title : '供应商'
-									},
-									{
-										field : 'listnum',
-										title : '序列号'
-									},
-									{
-										field : 'beizhu',
-										title : '备注'
-									},
-									{
-										field : 'opt',
-										title : '操作',
-										align : 'center',
-										formatter : function(value, row) {
-											var s = "";
-											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editRow('"
-													+ row.id + "');\">修改</span></a>";
-											s += "|";
-											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:deleteRow('"
-													+ row.id + "');\">删除</span>&nbsp;&nbsp;</a>";
-											s += "|";
-											s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:deleteRow('"
-													+ row.id + "');\">缴费记录</span>&nbsp;&nbsp;</a>";
-											return s;
-										}
-									} ] ],
-							toolbar : '#tb',
-							getSelectedRow : function() {
-								return $('#dg').datagrid('getSelected');
-							}
-						});
+		grid = $('#dg').datagrid({
+			method : 'post',
+			url : '../sim/list?type=1',
+// 			title : '联通卡列表',
+			fit : true,
+			nowrap : true, //false:折行
+			rownumbers : true, //行号
+			striped : true, //隔行变色
+			pagination : true,
+			pageSize : 15,
+			pageList : [ 1, 10, 15, 20, 30, 50 ],
+			loadMsg : '数据加载中,请稍后……',
+			columns : [ [ {
+				field : 'ck',
+				checkbox : true
+			}, {
+				field : 'telnum',
+				title : 'SIM号码'
+			}, {
+				field : 'state',
+				title : '状态',
+				formatter : function(value, row) {
+					var s = "";
+					if (value == "1") {
+						s = "<span style=\"color:green;\">已用</span>";
+					} else {
+						s = "<span style=\"color:red;\">未用</span>";
+					}
+					return s;
+				}
+			}, {
+				field : 'cardType',
+				title : '卡类型'
+			}, {
+				field : 'business',
+				title : '套餐业务'
+			}, {
+				field : 'kktime',
+				title : '开卡日期'
+			}, {
+				field : 'renewtime',
+				title : '续费日期'
+			}, {
+				field : 'intime',
+				title : '录入日期'
+			}, {
+				field : 'lrr',
+				title : '录入人'
+			}, {
+				field : 'gys',
+				title : '供应商'
+			}, {
+				field : 'listnum',
+				title : '序列号'
+			}, {
+				field : 'beizhu',
+				title : '备注'
+			}, {
+				field : 'opt',
+				title : '操作',
+				align : 'center',
+				formatter : function(value, row) {
+					var s = "";
+					s += "&nbsp;";
+					s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editRow('" + row.id + "');\">缴费</span></a>";
+					s += "&nbsp;|&nbsp;";
+					s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editRow('" + row.id + "');\">编辑</span></a>";
+					s += "&nbsp;|&nbsp;";
+					s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:deleteRow('" + row.id + "');\">删除</span></a>";
+					s += "&nbsp;|&nbsp;";
+					s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:deleteRow('" + row.id + "');\">缴费记录</span></a>";
+					return s;
+				}
+			} ] ],
+			toolbar : '#tb',
+			getSelectedRow : function() {
+				return $('#dg').datagrid('getSelected');
+			}
+		});
 		// 设置分页控件
 		var p = grid.datagrid('getPager');
 		$(p).pagination({
@@ -239,10 +224,10 @@
 				<td><a href="#" class="easyui-linkbutton"
 					data-options="iconCls:'pic pic_221',plain:true"
 					onClick="javascript:addNew();">开卡</a></td>
-				<td><div class="datagrid-btn-separator"></div></td>
-				<td><a href="#" class="easyui-linkbutton"
-					data-options="iconCls:'pic_22',plain:true"
-					onClick="javascript:addNew();">缴费</a></td>
+<!-- 				<td><div class="datagrid-btn-separator"></div></td> -->
+<!-- 				<td><a href="#" class="easyui-linkbutton" -->
+<!-- 					data-options="iconCls:'pic_22',plain:true" -->
+<!-- 					onClick="javascript:addNew();">缴费</a></td> -->
 				<td><div class="datagrid-btn-separator"></div></td>
 				<td><a href="#" class="easyui-linkbutton"
 					data-options="iconCls:'pic pic_48',plain:true"

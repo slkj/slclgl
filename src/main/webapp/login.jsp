@@ -9,6 +9,16 @@
 <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
 <!-- <script type="text/javascript" src="js/login.js"></script> -->
 <script type="text/javascript">
+	document.onkeydown = function(e) {
+		if ($("#password").val() == "") {
+			return;
+		}
+		var event = e || window.event;
+		var code = event.keyCode || event.which || event.charCode;
+		if (code == 13) {
+			login();
+		}
+	}
 	if (window != top) {
 		top.location.href = location.href;
 	}
@@ -18,10 +28,10 @@
 			password : $("#password").val(),
 			vcode : $("#vcode").val()
 		};
-// 		if (user.vcode == "") {
-// 			alert("验证码不能为空，请重新输入！");
-// 			return;
-// 		}
+		// 		if (user.vcode == "") {
+		// 			alert("验证码不能为空，请重新输入！");
+		// 			return;
+		// 		}
 		if (user.username == "" || user.password == "") {
 			alert("用户名或密码为空，请重新输入！");
 			$("#password").val("");
@@ -35,7 +45,7 @@
 				data : user,
 				success : function(data) {
 					if (data.success) {
-						window.location.href= "index.jsp";
+						window.location.href = "index.jsp";
 					} else {
 						$("#password").val("");
 						$("#vcode").val("");
@@ -45,7 +55,7 @@
 			});
 		}
 	}
-	
+
 	function openWLSH() {
 		window.open('http://wlsh.cn');
 	}

@@ -35,14 +35,14 @@
 								<option value="鸿泉">鸿泉</option>
 							</select>
 						</td>
-					</tr>
-					<tr height="3px"></tr>
-					<tr>
+<!-- 					</tr> -->
+<!-- 					<tr height="3px"></tr> -->
+<!-- 					<tr> -->
 						<td>
 							所在地区：
 							 <select class="easyui-combotree" url="../data/city_data.json" name="area" style="width:260px;" data-options="lines:'true'"></select>
 							<a id="search_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:'true'">查询</a>
-							<a href="#"  onclick="outExcel()" class="easyui-linkbutton" data-options="iconCls:'pic pic_157',plain:true">导出</a>
+<!-- 							<a href="#"  onclick="outExcel()" class="easyui-linkbutton" data-options="iconCls:'pic pic_157',plain:true">导出</a> -->
 						</td>
 					</tr>
 				</table>

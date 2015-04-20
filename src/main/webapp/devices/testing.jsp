@@ -28,14 +28,14 @@
 					<input name="listnum" class="easyui-numberbox" data-options="required:'true'" disabled="ture" style="width: 200px"/>
 				</td>
 			</tr>
-<!-- 			<tr> -->
-<!-- 				<th style="width: 100px">SIM 卡 号：</th> -->
-<!-- 				<td colspan="3"> -->
-<!-- 					<input id="phone" name="phone" class="easyui-combobox"  -->
-<!-- 					data-options="loader: btsloader,mode: 'remote',valueField: 'id',textField: 'name'"  style="width: 150px"/> -->
-<!-- 					*输入连续3位数以上，开启智能搜索。 -->
-<!-- 				</td> -->
-<!-- 			</tr> -->
+			<tr>
+				<th style="width: 100px">SIM 卡 号：</th>
+				<td colspan="3">
+					<input id="phone" name="phone" class="easyui-combobox" 
+					data-options="loader: btsloader,mode: 'remote',valueField: 'id',textField: 'name'"  style="width: 150px"/>
+					*输入连续3位数以上，开启智能搜索。
+				</td>
+			</tr>
 			<tr>
 				<th>设备厂商：</th>
 				<td width="150px">
@@ -71,12 +71,12 @@
 			<tr>
 				<th>是否测试 ：</th>
 				<td>
-					<label><input name="test" type="radio" value="1" />是</label> 
+					<label><input name="test" type="radio" value="1"  checked="checked"/>是</label> 
 					<label><input name="test" type="radio" value="0" />否</label>
 				</td>
 				<th>测试结果：</th>
 				<td>
-					<label><input name="tresult" type="radio" value="1"  />定位</label> 
+					<label><input name="tresult" type="radio" value="1"  checked="checked"/>定位</label> 
 					<label><input name="tresult" type="radio" value="0" />不定位</label>
 				</td>
 			</tr>
