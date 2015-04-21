@@ -27,4 +27,5 @@
 <script src="${pageContext.request.contextPath}/js/easyui/jquery.easyui.min.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/easyui/easyui-lang-zh_CN.js" type="text/javascript"></script>
 <script src='${pageContext.request.contextPath}/js/SL.easyUI.js' type="text/javascript"></script>
+<script src='${pageContext.request.contextPath}/js/DateUtil.js' type="text/javascript"></script>
 

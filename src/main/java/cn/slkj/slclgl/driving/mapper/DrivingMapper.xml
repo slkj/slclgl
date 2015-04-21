@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.slkj.slclgl.driving.mapper.DrivingMapper">
+	<sql id="sql_temp">
+		ID, VID, DRIREGDATE, DRICERTDATE, BAOFEIDATE, REMARK,(SELECT CARNUMBER FROM TB_VEHICLE WHERE ID= VID) AS CARNUMBER,testOrgan,endDate,fileNumber
+	</sql>
+
+	<select id="queryOne" parameterType="Driving" resultType="Driving">
+		SELECT <include refid="sql_temp" /> FROM TB_DRIVING B
+		<where>
+			<if test="id != null and id != ''">
+				AND id = #{id}
+			</if>
+		</where>
+	</select>
+
+	<insert id="save" parameterType="Driving">
+		INSERT INTO TB_DRIVING ( vId, driRegDate, driCertDate, baoFeiDate, remark,testOrgan,endDate,fileNumber, createTime)
+		VALUES ( #{vId}, #{driRegDate}, #{driCertDate}, #{baoFeiDate}, #{remark},#{testOrgan},#{endDate},#{fileNumber},now())
+	</insert>
+
+	<update id="edit" parameterType="Driving">
+		UPDATE TB_DRIVING SET testOrgan = #{testOrgan},endDate=#{endDate}, remark = #{remark}  
+		where id = #{id}
+	</update>
+
+
+	<delete id="deletes" parameterType="string">
+		DELETE FROM TB_DRIVING WHERE ID  = #{id}
+	</delete>
+
+	<select id="queryList" resultType="Driving" parameterType="hashmap">
+		SELECT <include refid="sql_temp" /> FROM(SELECT A.* FROM(
+			SELECT  C.ID, TV.ID AS VID,TV.CARNUMBER, 
+				 C.DRIREGDATE, C.DRICERTDATE, C.BAOFEIDATE, C.REMARK,  C.TESTORGAN,C.ENDDATE,C.FILENUMBER,C.CREATETIME
+			 FROM TB_VEHICLE TV  LEFT JOIN (
+				SELECT A.* FROM  TB_DRIVING A 
+				JOIN (SELECT MAX(ENDDATE) AS ENDDATE,VID  FROM TB_DRIVING  GROUP BY VID ) B 
+				ON A.VID =B.VID AND A.ENDDATE=B.ENDDATE  
+			) C ON TV.ID = C.VID  
+			<where>
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+				<if test="carNumber != null and carNumber != ''">
+					AND TV.CARNUMBER LIKE '%' + #{carNumber}  + '%'
+				</if>
+				<if test="regCompanyId != null and regCompanyId != ''">
+					AND TV.OWNEDID IN  (SELECT ID FROM TB_COMPANY WHERE GSMC LIKE '%' +#{regCompanyId} + '%')
+				</if>
+				<if test="depId != null and depId != ''">
+					AND TV.depId  LIKE   #{depId}  + '%'
+				</if>
+				<if test="companyId != null and companyId != ''">
+					AND TV.OWNEDID =#{companyId}
+				</if>
+				
+				<if test="endDate != null and endDate != ''">
+					<![CDATA[ AND C.ENDDATE  >= #{endDate} AND C.ENDDATE  <= #{endDate1} ]]> 
+				</if>
+			</where>
+			) A )B
+			LIMIT #{startNum},#{endNum}
+	</select>
+
+	<select id="queryListCount" resultType="int" parameterType="hashmap">
+		SELECT COUNT(0)  FROM TB_VEHICLE TV  LEFT JOIN (
+				SELECT A.* FROM  TB_DRIVING A 
+				JOIN (SELECT MAX(ENDDATE) AS ENDDATE,VID  FROM TB_DRIVING  GROUP BY VID ) B 
+				ON A.VID =B.VID AND A.ENDDATE=B.ENDDATE  
+			) C ON TV.ID = C.VID  
+			<where>
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+				<if test="carNumber != null and carNumber != ''">
+					AND TV.CARNUMBER LIKE '%' + #{carNumber}  + '%'
+				</if>
+				<if test="regCompanyId != null and regCompanyId != ''">
+					AND TV.OWNEDID IN  (SELECT ID FROM TB_COMPANY WHERE GSMC LIKE '%' +#{regCompanyId} + '%')
+				</if>
+				<if test="depId != null and depId != ''">
+					AND TV.depId  LIKE   #{depId}  + '%'
+				</if>
+				<if test="companyId != null and companyId != ''">
+					AND TV.OWNEDID =#{companyId}
+				</if>
+				
+				<if test="endDate != null and endDate != ''">
+					<![CDATA[ AND C.ENDDATE  >= #{endDate} AND C.ENDDATE  <= #{endDate1} ]]> 
+				</if>
+			</where>
+	</select>
+	<select id="listByVid" resultType="Driving" parameterType="hashmap">
+		SELECT <include refid="sql_temp" /> FROM(SELECT A.* FROM(
+			SELECT  TD.ID, TV.ID AS VID,TV.CARNUMBER,TD.DRIREGDATE, TD.DRICERTDATE, TD.BAOFEIDATE, 
+				TD.remark,  TD.TESTORGAN,TD.ENDDATE,TD.FILENUMBER,TD.CREATETIME
+				FROM TB_VEHICLE TV  JOIN TB_DRIVING TD ON TD.VID =TV.ID 
+			<where>
+				<if test="vId != null and vId != ''">
+					AND TD.vId =#{vId}
+				</if>
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+			</where>
+			) A )B
+		LIMIT #{startNum},#{endNum}
+	</select>
+	<select id="listByVidCount" resultType="int" parameterType="hashmap">
+		SELECT  COUNT(0)
+				FROM TB_VEHICLE TV  JOIN TB_DRIVING TD ON TD.VID =TV.ID 
+			<where>
+				<if test="vId != null and vId != ''">
+					AND TD.vId =#{vId}
+				</if>
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+			</where>
+	</select>
+	
+		<select id="getExpires" resultType="Driving" parameterType="hashmap">
+	SELECT VID,CARNUMBER,ENDDATE FROM(SELECT A.* FROM(
+		SELECT TV.ID AS VID, TV.CARNUMBER,C.ENDDATE
+			FROM TB_VEHICLE TV   JOIN( SELECT MAX (ENDDATE) AS ENDDATE, VID FROM TB_DRIVING GROUP BY VID )C ON TV.ID = C.VID
+			where <![CDATA[ ENDDATE<dateadd(DAY,20,getdate())]]> 
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+				<if test="depId != null and depId != ''">
+					AND TV.depId  LIKE   #{depId}  + '%'
+				</if>
+				<if test="companyId != null and companyId != ''">
+					AND TV.OWNEDID =#{companyId}
+				</if>
+		) A)B
+		LIMIT #{startNum},#{endNum}
+	</select>
+	<select id="getExpiresCount" resultType="int" parameterType="hashmap">
+		SELECT  COUNT(0) FROM TB_VEHICLE TV   JOIN( SELECT MAX (ENDDATE) AS ENDDATE, VID FROM TB_DRIVING GROUP BY VID )C ON TV.ID = C.VID
+			where <![CDATA[ ENDDATE<dateadd(DAY,20,getdate())]]> 
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+				<if test="depId != null and depId != ''">
+					AND TV.depId  LIKE   #{depId}  + '%'
+				</if>
+				<if test="companyId != null and companyId != ''">
+					AND TV.OWNEDID =#{companyId}
+				</if>
+	</select>
+</mapper>
