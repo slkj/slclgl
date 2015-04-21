@@ -31,7 +31,7 @@ function loadDataGrid() {
 					{
 						method : 'post',
 						url : basePath + 'list',
-						title : 'GPS设备列表',
+//						title : 'GPS设备列表',
 						fit : true,
 						nowrap : true, // false:折行
 						rownumbers : true, // 行号
@@ -104,13 +104,13 @@ function loadDataGrid() {
 									title : 'SIM卡号',
 									sortable : true,
 									order : 'desc',
-									formatter : function(value, row, index) {
-										var str = "<a id=\"btn" + index
-												+ "\" href=\"#\" onclick=\"phone(" + index + ")\">"
-												+ value + "</a>";
-										var btn = row.phone == null ? "" : str;
-										return btn;
-									}
+//									formatter : function(value, row, index) {
+//										var str = "<a id=\"btn" + index
+//												+ "\" href=\"#\" onclick=\"phone(" + index + ")\">"
+//												+ value + "</a>";
+//										var btn = row.phone == null ? "" : str;
+//										return btn;
+//									}
 								}, 
 //								{
 //									field : 'rktime',
@@ -190,8 +190,12 @@ function loadDataGrid() {
 // 测试
 function testing(index) {
 	var data = grid.datagrid('getData').rows[index];
-	if (data.state == 1) {
+	if (data.state == "1") {
 		SL.msgShow("提示", "设备已经出库！", "warning");
+		return;
+	}
+	if ( data.state == "4") {
+		SL.msgShow("提示", "设备已经使用！", "warning");
 		return;
 	}
 	SL.showWindow({

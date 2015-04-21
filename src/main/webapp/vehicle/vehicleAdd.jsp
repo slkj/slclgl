@@ -6,8 +6,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>添加货运车辆</title>
 <%@ include file="/common/taglibs.jsp"%>
+<script type="text/javascript" src="../js/city.js"></script>
 <script type="text/javascript">
 	var basePath = "../vehicle/";
+	var carType;
+	var Request = new Object();
+	$(function() {
+		Request = GetRequest();
+		carType = Request['ct'];
+		$("#carUseNatu").combobox('readonly');
+		$("#carUseNatu").combobox("setValue", carType);
+	});
 	function submitForm() {
 		if ($("#carForm").form('enableValidation').form('validate')) {
 			var data = $("#carForm").serialize();
@@ -35,8 +44,9 @@
 		$('input:radio[name=carProType]')[0].checked = true;
 	}
 	function backPage() {
-// 		parent.$("#cnIframe").attr("src", "carList.jsp");
-		window.location.href = 'vehicleList.jsp';
+		// 		parent.$("#cnIframe").attr("src", "carList.jsp");
+		// 		window.location.href = 'vehicleList.jsp';
+		history.go(-1);
 	}
 </script>
 </head>
@@ -55,12 +65,19 @@
 				style="overflow: auto;">
 				<table class="grid">
 					<tr>
+						<th style="width: 120px">所属地区：</th>
+						<td colspan="3"><input name="areaCode" id="areaCode" /> <span
+							id="areaName"></span> <input name="cityId" id="cityId" /> <input
+							name="county" id="county" /></td>
+					</tr>
+					<tr>
 						<th style="width: 120px">业户/车主:</th>
-						<td style="width: 290px"><input name="carOwner" class="easyui-validatebox"
-							data-options="required:true" style="width: 200px;" /></td>
+						<td style="width: 290px"><input name="carOwner"
+							class="easyui-validatebox" data-options="required:true"
+							style="width: 200px;" /></td>
 						<th style="width: 120px">身份证明名称/号码:</th>
-						<td style="width: 290px"><select class="easyui-combobox" id="carOwnersType"
-							name="carOwnersType" editable="false">
+						<td style="width: 290px"><select class="easyui-combobox"
+							id="carOwnersType" name="carOwnersType" editable="false">
 								<option value="1">组织机构代码</option>
 								<option value="2">营业执照</option>
 								<option value="3" selected="selected">身份证</option>
@@ -81,16 +98,13 @@
 							class="easyui-validatebox" data-options="required:true"
 							style="width: 200px;" /></td>
 						<th>所属公司:</th>
-						<td>
-						<input id="companyId" class="easyui-combobox" name="companyId"
-							style="width: 200px;"
-							data-options="required:true,valueField:'id',textField:'compName',url:'../company/queryComList'" />  
-<!-- 							<select id="companyId" name="companyId" -->
-<!-- 							class="easyui-combotree" style="width: 200px;" -->
-<!-- 							data-options="url:'../company/getTreeList',required:true,lines:true"></select> -->
-<!-- 							<a id="btn" href="#" class="easyui-linkbutton" -->
-<!-- 							data-options="iconCls:'icon-reload',plain:true"></a> -->
-							
+						<td><input id="companyId" class="easyui-combobox"
+							name="companyId" style="width: 200px;"
+							data-options="required:true,valueField:'id',textField:'compName',url:'../company/queryComList'" />
+							<!-- 							<select id="companyId" name="companyId" --> <!-- 							class="easyui-combotree" style="width: 200px;" -->
+							<!-- 							data-options="url:'../company/getTreeList',required:true,lines:true"></select> -->
+							<!-- 							<a id="btn" href="#" class="easyui-linkbutton" --> <!-- 							data-options="iconCls:'icon-reload',plain:true"></a> -->
+
 						</td>
 					</tr>
 					<tr>
@@ -110,7 +124,8 @@
 					<tr>
 						<th>车辆类型:</th>
 						<td><select class="easyui-combobox" id="classify"
-							name="classify" style="width: 50px;">
+							name="classify">
+								<option value="" selected="selected">请选择</option>
 								<option value="大型">大型</option>
 								<option value="重型">重型</option>
 								<option value="中型">中型</option>
@@ -141,10 +156,20 @@
 						<td><input id="carVin" name="carVin"
 							class="easyui-validatebox" data-options="required:true"
 							style="width: 200px;" /></td>
-						<th>国产/进口:</th>
-						<td><input id="carProType" name="carProType" type="radio"
-							value="国产" checked="checked" />国产 <input name="carProType"
-							type="radio" value="进口" />进口</td>
+
+						<th>使用性质:</th>
+						<td><select id="carUseNatu" class="easyui-combobox"
+							name="carUseNatu" style="width: 200px;"
+							data-options="required:true">
+								<option></option>
+								<option value="001">货运</option>
+								<option value="002">危化品运输</option>
+								<option value="003">公路客运</option>
+								<option value="006">公交客运</option>
+								<option value="005">出租客运</option>
+								<option value="004">旅游客运</option>
+								<option value="007">非营运</option>
+						</select></td>
 					</tr>
 					<tr>
 						<th>外廓尺寸:</th>
@@ -152,8 +177,7 @@
 							class="easyui-numberbox" style="width: 70px;" /> 宽<input
 							id="carOutWidth" name="carOutWidth" class="easyui-numberbox"
 							style="width: 70px;" /> 高<input id="carOutHeight"
-							name="carOutHeight" class="easyui-numberbox"
-							style="width: 70px;" />mm
+							name="carOutHeight" class="easyui-numberbox" style="width: 70px;" />mm
 						</td>
 						<th>总质量:</th>
 						<td><input id="carTotalmass" name="carTotalmass"
@@ -161,16 +185,16 @@
 					</tr>
 				</table>
 			</div>
-			<div title="车辆其他信息(选填项)"
-				data-options="collapsed:false,collapsible:false,border:false">
+			<div title="车辆其他信息(*选填项,点击展开)" data-options="border:false">
 				<table class="grid">
 					<tr>
 						<th style="width: 120px">发动机型号:</th>
-						<td style="width: 290px"><input id="carEngModel" name="carEngModel"
-							class="easyui-validatebox" style="width: 200px;" /></td>
+						<td style="width: 290px"><input id="carEngModel"
+							name="carEngModel" class="easyui-validatebox"
+							style="width: 200px;" /></td>
 						<th style="width: 120px">发动机号:</th>
-						<td style="width: 290px"><input id="carEngNum" name="carEngNum"
-							class="easyui-validatebox" style="width: 200px;" /></td>
+						<td style="width: 290px"><input id="carEngNum"
+							name="carEngNum" class="easyui-validatebox" style="width: 200px;" /></td>
 					</tr>
 
 					<tr>
@@ -253,17 +277,10 @@
 						<th>驾驶室载客:</th>
 						<td><input id="carCabGuest" name="carCabGuest"
 							class="easyui-numberbox" style="width: 200px;" />人</td>
-						<th>使用性质:</th>
-						<td><select id="carUseNatu" class="easyui-combobox"
-							name="carUseNatu" style="width: 200px;">
-								<option></option>
-								<option value="001">公路客运</option>
-								<option value="002">货运</option>
-								<option value="003">公交客运</option>
-								<option value="004">出租客运</option>
-								<option value="005">旅游客运</option>
-								<option value="006">非营运</option>
-						</select>
+						<th>国产/进口:</th>
+						<td><input id="carProType" name="carProType" type="radio"
+							value="国产" checked="checked" />国产 <input name="carProType"
+							type="radio" value="进口" />进口</td>
 					</tr>
 					<tr>
 						<th>车辆获取方式:</th>
@@ -283,7 +300,49 @@
 					</tr>
 				</table>
 			</div>
+			<div data-options="collapsed:false,collapsible:false,border:false">
+				<ul class="siminput" style="padding-top: 0px; padding-bottom: 5px;">
+					<li style="width: 760px;"><span class="siminput_li_span"
+						style="width: 130px;">车辆登记证上传：</span> <input type="file"
+						id="registrationCertificateFile"
+						name="registrationCertificateFile" class="valid"> <span
+						class="red"></span><span class="red"
+						id="span_registrationCertificateFile"></span> <lable
+							style="display: inline-block;">图片上传，小于3M，jpg、jpeg格式</lable> <input
+						type="hidden" id="registrationCertificateFileType"
+						name="registrationCertificateFileType" value="jpg"></li>
+					<li style="height: 45px; width: 65px; padding-top: 2px;"><img
+						id="registrationCertificateAttach" width="65" height="45"
+						style="cursor: pointer; display: none;" title="点击查看原图"
+						onclick="window.open(this.src)"></li>
+					<li style="width: 760px;"><span class="siminput_li_span"
+						style="width: 130px;">车辆合格证/行驶证：</span> <input type="file"
+						id="drivingLicOrCertFile" name="drivingLicOrCertFile"> <span
+						class="red"></span><span class="red"
+						id="span_drivingLicOrCertFile"></span> <lable
+							style="display: inline-block;">图片上传，小于3M，jpg、jpeg格式</lable> <input
+						type="hidden" id="drivingLicOrCertFileType"
+						name="drivingLicOrCertFileType"></li>
+					<li style="height: 45px; width: 65px; padding-top: 2px;"><img
+						id="drivingLicOrCertAttach" width="65" height="45"
+						style="cursor: pointer; display: none;" title="点击查看原图"
+						onclick="window.open(this.src)"></li>
+					<li style="width: 760px;"><span class="siminput_li_span"
+						style="width: 130px;">车身照片：</span> <input type="file"
+						id="vehicleBodyPhotoFile" name="vehicleBodyPhotoFile"> <span
+						class="red"></span><span class="red"
+						id="span_vehicleBodyPhotoFile"></span> <lable
+							style="display: inline-block;">上传车辆左前方45角度图片，小于3M，jpg、jpeg格式</lable>
+						<input type="hidden" id="vehicleBodyPhotoFileType"
+						name="vehicleBodyPhotoFileType"></li>
+					<li style="height: 45px; width: 65px; padding-top: 2px;"><img
+						id="vehicleBodyPhotoAttach" width="65" height="45"
+						style="cursor: pointer; display: none;" title="点击查看原图"
+						onclick="window.open(this.src)"></li>
+				</ul>
+			</div>
 		</div>
+
 	</form>
 	<!-- 		<div style="text-align: left; padding: 5px"> -->
 	<!-- 			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:submitForm()">保存</a>  -->

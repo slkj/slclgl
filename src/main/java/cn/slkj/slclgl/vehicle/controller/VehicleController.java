@@ -50,6 +50,7 @@ public class VehicleController {
 		pageMap.put("listnum", request.getParameter("listnum"));
 		pageMap.put("phone", request.getParameter("phone"));
 		pageMap.put("carNumber", request.getParameter("carNumber"));
+		pageMap.put("carUseNatu", request.getParameter("carUseNatu"));
 		String sort =request.getParameter("sort");
 		pageMap.put("sort", sort != null ? sort : "id");
 		String order =request.getParameter("order");

@@ -3,15 +3,15 @@
 <mapper namespace="cn.slkj.slclgl.vehicle.mapper.VehicleMapper">
 
 	<sql id="sql_temp">
-		id,companyId,(select compName from  tb_company where id = companyId) as companyName,carOwner,
-		carOwnersType,carOwnersCard,contacts,contactsTel,carNumber,carNumberG,plateColor,classify
-		,carType,carBrand,carModel,carColor,carVin,carProType,carOutLength,carOutWidth,carOutHeight,
-		carTotalmass,carEngNum,carEngModel,carFuelType,carDisplacement,carPower,carManuName,carModality,
-		carTreadBe,carTreadAfter,carTireNum,carTireSpe,carNumOfSpring,carAxleDist,carAxleNum,carContLength,
-		carContWidth,carContHeight,carApproved,carApprGuest,carTrac,carCabGuest,carUseNatu,carUseNatuName,
-		carObtWay,carFacDate,installers,attendants,installtime,installAddress,fees,feeseEnd,isNotice,
-		simPayer,payerTime,CTradingLine,CCatchMenbers,carImg,entryTime,entryId,entryName,depId,
-		simNumber,equitment,networkNo,remark
+		ID,COMPANYID,(SELECT COMPNAME FROM  TB_COMPANY WHERE ID = COMPANYID) AS COMPANYNAME,CAROWNER,
+		CAROWNERSTYPE,CAROWNERSCARD,CONTACTS,CONTACTSTEL,CARNUMBER,CARNUMBERG,PLATECOLOR,CLASSIFY
+		,CARTYPE,CARBRAND,CARMODEL,CARCOLOR,CARVIN,CARPROTYPE,CAROUTLENGTH,CAROUTWIDTH,CAROUTHEIGHT,
+		CARTOTALMASS,CARENGNUM,CARENGMODEL,CARFUELTYPE,CARDISPLACEMENT,CARPOWER,CARMANUNAME,CARMODALITY,
+		CARTREADBE,CARTREADAFTER,CARTIRENUM,CARTIRESPE,CARNUMOFSPRING,CARAXLEDIST,CARAXLENUM,CARCONTLENGTH,
+		CARCONTWIDTH,CARCONTHEIGHT,CARAPPROVED,CARAPPRGUEST,CARTRAC,CARCABGUEST,CARUSENATU,CARUSENATUNAME,
+		CAROBTWAY,CARFACDATE,INSTALLERS,ATTENDANTS,INSTALLTIME,INSTALLADDRESS,FEES,FEESEEND,ISNOTICE,
+		SIMPAYER,PAYERTIME,CTRADINGLINE,CCATCHMENBERS,CARIMG,ENTRYTIME,ENTRYID,ENTRYNAME,DEPID,
+		SIMNUMBER,EQUITMENT,NETWORKNO,REMARK,AREACODE,CITYID,COUNTY
 	</sql>
 	
 	<sql id="sql_car">
@@ -23,7 +23,7 @@
 		CARCONTWIDTH,CARCONTHEIGHT,CARAPPROVED,CARAPPRGUEST,CARTRAC,CARCABGUEST,CARUSENATU,CARUSENATUNAME,
 		CAROBTWAY,CARFACDATE,INSTALLERS,ATTENDANTS,INSTALLTIME,INSTALLADDRESS,FEES,FEESEEND,ISNOTICE,
 		SIMPAYER,PAYERTIME,CTRADINGLINE,CCATCHMENBERS,CARIMG,ENTRYTIME,ENTRYID,ENTRYNAME,DEPID,
-		SIMNUMBER,EQUITMENT,NETWORKNO,REMARK
+		SIMNUMBER,EQUITMENT,NETWORKNO,REMARK,AREACODE,CITYID,COUNTY
 	</sql>
 	<select id="queryList" resultType="Vehicle" parameterType="hashmap">
 			SELECT <include refid="sql_car"/>  FROM TB_VEHICLE TBV
@@ -40,6 +40,18 @@
 				</if>
 				<if test="carNumber != null and carNumber != ''">
 					AND TBV.CARNUMBER  LIKE   CONCAT('%',#{carNumber},'%')   
+				</if>
+				<if test="carUseNatu != null and carUseNatu != ''">
+					AND TBV.CARUSENATU  = #{carUseNatu}  
+				</if>
+				<if test="areaCode != null and areaCode != ''">
+					AND TBV.AREACODE  = #{areaCode}  
+				</if>
+				<if test="cityId != null and cityId != ''">
+					AND TBV.CITYID  = #{cityId}  
+				</if>
+				<if test="county != null and county != ''">
+					AND TBV.COUNTY  = #{county}  
 				</if>
 			</where>
 			<if test="sort != null and sort != ''">
@@ -64,6 +76,18 @@
 				<if test="carNumber != null and carNumber != ''">
 					AND TBV.CARNUMBER  LIKE   CONCAT('%',#{carNumber},'%')   
 				</if>
+				<if test="carUseNatu != null and carUseNatu != ''">
+					AND TBV.CARUSENATU  = #{carUseNatu}  
+				</if>
+				<if test="areaCode != null and areaCode != ''">
+					AND TBV.AREACODE  = #{areaCode}  
+				</if>
+				<if test="cityId != null and cityId != ''">
+					AND TBV.CITYID  = #{cityId}  
+				</if>
+				<if test="county != null and county != ''">
+					AND TBV.COUNTY  = #{county}  
+				</if>
 			</where>
 	</select>
 	<select id="queryOne" parameterType="hashmap" resultType="vehicle">
@@ -74,6 +98,15 @@
 				</if>
 				<if test="carNumber != null and carNumber != ''">
 					AND CARNUMBER  LIKE  '%' + #{carNumber}  + '%'
+				</if>
+				<if test="areaCode != null and areaCode != ''">
+					AND TBV.AREACODE  = #{areaCode}  
+				</if>
+				<if test="cityId != null and cityId != ''">
+					AND TBV.CITYID  = #{cityId}  
+				</if>
+				<if test="county != null and county != ''">
+					AND TBV.COUNTY  = #{county}  
 				</if>
 			</where>
 	</select>
@@ -86,7 +119,8 @@
 			carTreadBe,carTreadAfter,carTireNum,carTireSpe,carNumOfSpring,carAxleDist,carAxleNum,carContLength,
 			carContWidth,carContHeight,carApproved,carApprGuest,carTrac,carCabGuest,carUseNatu,carUseNatuName,
 			carObtWay,carFacDate,installers,attendants,installtime,installAddress,fees,feeseEnd,isNotice,
-			simPayer,payerTime,CTradingLine,CCatchMenbers,carImg,entryTime,entryId,entryName,depId,simNumber,equitment,networkNo,remark,companyId
+			simPayer,payerTime,CTradingLine,CCatchMenbers,carImg,entryTime,entryId,entryName,depId,simNumber,
+			equitment,networkNo,remark,companyId,areaCode,cityId,county
 		)
 		VALUES(
 			#{carOwner},#{carOwnersType},#{carOwnersCard},#{contacts},#{contactsTel},#{carNumber},#{carNumberG},#{plateColor},#{classify},
@@ -96,7 +130,7 @@
 			#{carContWidth},#{carContHeight},#{carApproved},#{carApprGuest},#{carTrac},#{carCabGuest},#{carUseNatu},#{carUseNatuName}
 			,#{carObtWay},#{carFacDate},#{installers},#{attendants},#{installtime},#{installAddress},#{fees},#{feeseEnd},#{isNotice},
 			#{simPayer},#{payerTime},#{CTradingLine},#{CCatchMenbers},#{carImg},#{entryTime},#{entryId},#{entryName},#{depId},
-			#{simNumber},#{equitment},#{networkNo},#{remark},#{companyId}
+			#{simNumber},#{equitment},#{networkNo},#{remark},#{companyId},#{areaCode},#{cityId},#{county}
 		)
 	</insert>
 
@@ -114,7 +148,7 @@
 		installers=#{installers},attendants=#{attendants},installtime=#{installtime},installAddress=#{installAddress},fees=#{fees},
 		feeseEnd=#{feeseEnd},isNotice=#{isNotice},simPayer=#{simPayer},payerTime=#{payerTime},CTradingLine=#{CTradingLine},
 		CCatchMenbers=#{CCatchMenbers},carImg=#{carImg},entryTime=#{entryTime},entryId=#{entryId},entryName=#{entryName},depId=#{depId},simNumber=#{simNumber},
-		equitment=#{equitment},networkNo=#{networkNo},remark=#{remark},companyId=#{companyId}
+		equitment=#{equitment},networkNo=#{networkNo},remark=#{remark},companyId=#{companyId},areaCode=#{areaCode},cityId=#{cityId},county=#{county}
 		WHERE ID = #{id}
 	</update>
 	<update id="activated" parameterType="Vehicle">

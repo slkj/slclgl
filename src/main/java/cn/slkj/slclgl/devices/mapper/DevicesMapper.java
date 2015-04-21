@@ -27,4 +27,6 @@ public interface DevicesMapper {
 
 	List<Devices_record> getAllRecord(Map<String, Object> pageMap);
 
+	Devices queryOne(Map<String, Object> map);
+
 }

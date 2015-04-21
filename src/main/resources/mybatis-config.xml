@@ -20,6 +20,7 @@
 		<typeAlias type="cn.slkj.slclgl.person.bean.Driver_exzm" alias="driver_exzm" />
 		<typeAlias type="cn.slkj.slclgl.after.bean.Phone" alias="phone" />
 		<typeAlias type="cn.slkj.slclgl.devices.bean.Devices_record" alias="Devices_record" />
+		<typeAlias type="cn.slkj.slclgl.xzqh.bean.Xzqh" alias="Xzqh" />
 	</typeAliases>
 	<!-- 设置数据库连接环境 -->
 	<!-- 映射文件 -->
@@ -36,5 +37,6 @@
 		<mapper resource="cn/slkj/slclgl/person/mapper/ExzmMapper.xml" />
 		<mapper resource="cn/slkj/slclgl/person/mapper/UnitMapper.xml" />
 		<mapper resource="cn/slkj/slclgl/after/mapper/PhoneMapper.xml" />
+		<mapper resource="cn/slkj/slclgl/xzqh/mapper/XzqhMapper.xml" />
 	</mappers>
 </configuration>

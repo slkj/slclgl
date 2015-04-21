@@ -275,6 +275,37 @@ public class Vehicle {
 	
 	private String remark;
 	
+	/**
+	 * 省
+	 */
+	private String areaCode;
+	/**
+	 * 市
+	 */
+	private String cityId;
+	/**
+	 * 县
+	 */
+	private String county;
+	
+	public String getAreaCode() {
+		return areaCode;
+	}
+	public void setAreaCode(String areaCode) {
+		this.areaCode = areaCode;
+	}
+	public String getCityId() {
+		return cityId;
+	}
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
+	}
+	public String getCounty() {
+		return county;
+	}
+	public void setCounty(String county) {
+		this.county = county;
+	}
 	public String getRemark() {
 		return remark;
 	}

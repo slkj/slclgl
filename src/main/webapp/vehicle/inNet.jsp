@@ -107,8 +107,8 @@
 // 		$('input:radio[name=carProType]')[0].checked = true;
 	}
 	function backPage() {
-// 		parent.$("#cnIframe").attr("src", "carList.jsp");
-		window.location.href = 'vehicleList.jsp';
+// 		window.location.href = 'vehicleList.jsp';
+		history.go(-1);
 	}
 </script>
 </head>
@@ -140,7 +140,7 @@
 					<tr>
 						<th>入网证明编号:</th>
 						<td><input name="networkNo" class="easyui-validatebox"
-							style="width: 200px;" data-options="required:true" /></td>
+							style="width: 200px;"  /></td>
 						<th>安装人:</th>
 						<td><input name="installers" class="easyui-validatebox"
 							style="width: 200px;" data-options="required:true" /></td>

@@ -32,8 +32,8 @@
 				<th style="width: 100px">SIM 卡 号：</th>
 				<td colspan="3">
 					<input id="phone" name="phone" class="easyui-combobox" 
-					data-options="loader: btsloader,mode: 'remote',valueField: 'id',textField: 'name'"  style="width: 150px"/>
-					*输入连续3位数以上，开启智能搜索。
+					data-options="required:true,loader: btsloader,mode: 'remote',valueField: 'id',textField: 'name'"  style="width: 150px" />
+					*输入连续3位数以上智能搜索。
 				</td>
 			</tr>
 			<tr>

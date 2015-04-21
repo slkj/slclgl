@@ -31,7 +31,7 @@ function loadDataGrid() {
 					{
 						method : 'post',
 						url : basePath + 'list',
-						title : '电话记录列表',
+//						title : '电话记录列表',
 						fit : true,
 						nowrap : true, // false:折行
 						rownumbers : true, // 行号

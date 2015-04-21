@@ -69,6 +69,14 @@ public class DevicesController {
 		return impl.getList(map);
 	}
 
+	@RequestMapping("/queryOne")
+	@ResponseBody
+	public Devices queryOne(String listnum) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("listnum", listnum);
+		return impl.queryOne(map);
+	}
+
 	@RequestMapping(value = "/addDevices", method = { RequestMethod.POST })
 	@ResponseBody
 	public boolean addDevices(Devices devices) {

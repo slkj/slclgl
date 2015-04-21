@@ -40,7 +40,7 @@ function loadDataGrid() {
 					{
 						method : 'post',
 						url : basePath + 'list?ser=1',
-						title : '安装维修列表',
+// 						title : '安装维修列表',
 						fit : true,
 						nowrap : true, // false:折行
 						rownumbers : true, // 行号
@@ -132,7 +132,7 @@ function loadDataGrid() {
 												+ row.id + "');\">详细</span></a>";
 										s += "&nbsp;|&nbsp;"; */
 										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:edit('"
-												+ row.id + "');\">执行</span></a>";
+												+ row.id + "');\">回执单</span></a>";
 												/*s += "&nbsp;|&nbsp;";
 										s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:del('"
 												+ row.id + "','" + index + "');\">删除</span></a>"; */
@@ -214,19 +214,19 @@ function del(id, index) { // 删除操作
 				</table>
 			</form>
 		</div>
-		<div>
-			<table cellspacing="0" cellpadding="0">
-				<tr>
-					<!-- <td>
-						<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onClick="javascript:add();">添加</a>
-					</td>
-					<td><div class="datagrid-btn-separator"></div></td> -->
-					<td align="right">
-						<a href="#"  onclick="outExcel()" class="easyui-linkbutton" data-options="iconCls:'pic pic_157',plain:true">导出</a>
-					</td>
-				</tr>
-			</table>
-		</div>
+<!-- 		<div> -->
+<!-- 			<table cellspacing="0" cellpadding="0"> -->
+<!-- 				<tr> -->
+<!-- 					<td>
+<!-- 						<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onClick="javascript:add();">添加</a> -->
+<!-- 					</td> -->
+<!-- 					<td><div class="datagrid-btn-separator"></div></td>   -->
+<!-- 					<td align="right"> -->
+<!-- 						<a href="#"  onclick="outExcel()" class="easyui-linkbutton" data-options="iconCls:'pic pic_157',plain:true">导出</a> -->
+<!-- 					</td> -->
+<!-- 				</tr> -->
+<!-- 			</table> -->
+<!-- 		</div> -->
 	</div>
 	<table id="dg"></table>
 </body>

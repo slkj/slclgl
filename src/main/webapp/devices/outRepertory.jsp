@@ -71,11 +71,12 @@
 			<tr>
 				<th>领用人：</th>
 				<td width="150px">
-					<select class="easyui-combobox"  name="lyr" panelheight="auto" style="width: 100%" data-options="required:'true'">
-						<option value="马续辉">马续辉</option>
-						<option value="李磊">李磊</option>
-						<option value="代辉">代辉</option>
-					</select>
+<!-- 					<select class="easyui-combobox"  name="lyr" panelheight="auto" style="width: 100%" data-options="required:'true'"> -->
+<!-- 						<option value="马续辉">马续辉</option> -->
+<!-- 						<option value="李磊">李磊</option> -->
+<!-- 						<option value="代辉">代辉</option> -->
+<!-- 					</select> -->
+					<input name="lyr" class="easyui-validatebox" data-options="required:true">
 				</td>
 				<th>领用时间 ：</th>
 				<td><input name="lytime" class="easyui-datebox" data-options="required:'true'"/></td>

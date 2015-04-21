@@ -15,7 +15,7 @@ function loadDataGrid() {
 	grid = $('#dg').datagrid({
 		method : 'post',
 		url : basePath + 'list',
-		title : '公司列表',
+//		title : '公司列表',
 		fit : true,
 		nowrap : true, // false:折行
 		rownumbers : true, // 行号

@@ -39,7 +39,7 @@ function loadDataGrid() {
 	grid = $('#dg').datagrid({
 		method : 'post',
 		url : basePath + 'list',
-//		title : 'GPS设备列表',
+		// title : 'GPS设备列表',
 		fit : true,
 		nowrap : true, // false:折行
 		rownumbers : true, // 行号
@@ -108,16 +108,16 @@ function loadDataGrid() {
 			field : 'listnum',
 			title : '设备编号'
 		}, {
+			field : 'phone',
+			title : 'SIM卡号',
+			sortable : true,
+			order : 'desc',
+		}, {
 			field : 'lyr',
 			title : '领用人'
 		}, {
 			field : 'lytime',
 			title : '领用时间',
-			sortable : true,
-			order : 'desc',
-		}, {
-			field : 'phone',
-			title : 'SIM卡号',
 			sortable : true,
 			order : 'desc',
 		}, {
@@ -203,11 +203,11 @@ function loadDataGrid() {
 }
 function phone(index) {
 	var data = grid.datagrid('getData').rows[index];
-	alert(data.phone);
+//	alert(data.phone);
 }
 function carNumber(index) {
 	var data = grid.datagrid('getData').rows[index];
-	alert(data.carNumber);
+//	alert(data.carNumber);
 }
 function myformatter(date) {
 	var y = date.getFullYear();
@@ -250,14 +250,13 @@ function outRepertory(index) {
 		height : 450,
 		url : basePath + 'outRepertory.jsp',
 		onLoad : function() {
-			
-			$('#txtarea').combotree({    
-			    url: '../data/city_data.json',    
-			    required: true,
-			    lines:true
-			}); 
+
+			$('#txtarea').combotree({
+				url : '../data/city_data.json',
+				required : true,
+				lines : true
+			});
 			$("#form").form('load', data);
-			alert(data.area);
 			$('#txtarea').combotree('setValue', data.area);
 		},
 		buttons : [ {
@@ -292,7 +291,7 @@ function goBack(index) {
 		height : 220,
 		url : basePath + 'goBack.jsp',
 		onLoad : function() {
-			$("#back_id").val( data.id);
+			$("#back_id").val(data.id);
 			$("#riqi").val(CurentTime());
 		},
 		buttons : [ {
@@ -321,7 +320,7 @@ function record(index) {
 		onLoad : function() {
 			$('#fhdg').datagrid({
 				method : 'post',
-				url : basePath + 'recordList?dev_id='+data.id,
+				url : basePath + 'recordList?dev_id=' + data.id,
 				// title : 'GPS设备列表',
 				fit : true,
 				nowrap : true, // false:折行
@@ -332,7 +331,7 @@ function record(index) {
 				showPageList : false,
 				showRefresh : false,
 				loadMsg : '数据加载中,请稍后……',
-				columns : [ [{
+				columns : [ [ {
 					field : 'fhtime',
 					title : '返还时间'
 				}, {
@@ -341,12 +340,12 @@ function record(index) {
 				} ] ]
 			});
 		},
-//		buttons : [ {
-//			text : '关闭',
-//			handler : function() {
-//				SL.closeWindow();
-//			}
-//		} ]
+	// buttons : [ {
+	// text : '关闭',
+	// handler : function() {
+	// SL.closeWindow();
+	// }
+	// } ]
 	});
 }
 // 测试
@@ -537,12 +536,12 @@ function ajaxFileUpload() {
 }
 function CurentTime() {
 	var now = new Date();
-	var year = now.getFullYear(); //年
-	var month = now.getMonth() + 1; //月
-	var day = now.getDate(); //日
-	var hh = now.getHours(); //时
-	var mm = now.getMinutes(); //分
-	var ss = now.getSeconds(); //秒
+	var year = now.getFullYear(); // 年
+	var month = now.getMonth() + 1; // 月
+	var day = now.getDate(); // 日
+	var hh = now.getHours(); // 时
+	var mm = now.getMinutes(); // 分
+	var ss = now.getSeconds(); // 秒
 	var clock = year + "-";
 	if (month < 10)
 		clock += "0";

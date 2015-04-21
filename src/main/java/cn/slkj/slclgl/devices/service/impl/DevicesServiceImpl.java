@@ -66,4 +66,9 @@ public class DevicesServiceImpl implements DevicesService {
 		return mapper.getAllRecord(pageMap);
 	}
 
+	public Devices queryOne(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.queryOne(map);
+	}
+
 }

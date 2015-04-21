@@ -6,7 +6,13 @@ body {
 	/* 	background: #D2E0F2; */
 	margin: 0
 }
+li {
+	list-style: none;
+}
 
+.siminput li {
+	line-height: 24px; float: left; width: 331px; height: 24px;
+}
 a {
 	/* 	color: Black;  */
 	text-decoration: none;

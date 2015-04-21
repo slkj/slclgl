@@ -1,6 +1,10 @@
 var basePath = "../vehicle/";
 var grid;
+var carType;
+var Request = new Object();
 $(function() {
+	Request = GetRequest();
+	carType = Request['ct'];
 	// 初始化页面
 	loadDataGrid();
 	$("#search_btn").click(function() {
@@ -14,7 +18,7 @@ $(function() {
 function loadDataGrid() {
 	grid = $('#dg').datagrid({
 		method : 'post',
-		url : basePath + 'list',
+		url : basePath + 'list?carUseNatu='+carType,
 		// title : '车辆列表',
 		fit : true,
 		nowrap : true, // false:折行
@@ -113,8 +117,8 @@ function loadDataGrid() {
 			title : '档案编号',
 			width : 100
 		}, {
-			field : 'installtime',
-			title : '安装日期',
+			field : 'jyyxq',
+			title : '有效期至',
 			width : 80,
 		}, {
 			field : 'ysz',
@@ -134,7 +138,7 @@ function loadDataGrid() {
 			width : 100,
 			align : 'center',
 			formatter : function(value, row, index) {
-				return "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:vehicleInfo('" + row.id + "');\">详细</span></a>";
+				return "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:vehicle1Info('" + row.id + "');\">详细</span></a>";
 			}
 		}, {
 			field : 'bx',
@@ -142,7 +146,7 @@ function loadDataGrid() {
 			width : 100,
 			align : 'center',
 			formatter : function(value, row, index) {
-				return "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:vehicleInfo('" + row.id + "');\">详细</span></a>";
+				return "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:vehicleI1nfo('" + row.id + "');\">详细</span></a>";
 			}
 		}, {
 			width : 30
@@ -164,7 +168,7 @@ function pos(index) {
 	window.open('../location.jsp')
 }
 function addCar() {
-	window.location.href = 'vehicleAdd.jsp';
+	window.location.href = 'vehicleAdd.jsp?ct='+carType ;
 }
 function inNet(id) {
 	window.location.href = 'inNet.jsp?id=' + id;

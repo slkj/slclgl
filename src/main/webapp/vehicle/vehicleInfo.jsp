@@ -14,12 +14,12 @@
 		Request = GetRequest();
 		id = Request['id'];
 		$.ajax({
-			url : basePath + 'queryOne',
+			url : basePath + 'queryOne?id=' + id,
 			success : function(data) {
 				if (data) {
 					$("#carForm").form('load', data);
-					$("input").attr("readOnly",true);
-// 					$("input").attr("disabled","disabled");
+					$("input").attr("readOnly", true);
+					// 					$("input").attr("disabled","disabled");
 					$('#companyId').combobox('disable');
 					$('#carOwnersType').combobox('disable');
 					$('#plateColor').combobox('disable');
@@ -28,19 +28,21 @@
 					$('#carUseNatu').combobox('disable');
 					$('#carObtWay').combobox('disable');
 					$('#carType').combotree('disable');
-					
-				} 
+
+				}
 			}
 		});
 	});
 	function backPage() {
-		window.location.href = 'vehicleList.jsp';
+		// 		window.location.href = 'vehicleList.jsp';
+		history.go(-1);
 	}
 </script>
 </head>
 <body>
-	<div style="text-align: left; padding: 5px"> 
-		  <a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:backPage()">返回</a>
+	<div style="text-align: left; padding: 5px">
+		<a href="javascript:void(0)" class="easyui-linkbutton"
+			onclick="javascript:backPage()">返回</a>
 	</div>
 	<form id="carForm" metdod="post">
 		<div id="aa" class="easyui-accordion" data-options="border:false">
@@ -90,8 +92,9 @@
 						<td><input id="carNumberG" name="carNumberG"
 							style="width: 200px;" data-options="required:true" /></td>
 						<th>车牌颜色:</th>
-						<td><select id="plateColor" name="plateColor" class="easyui-combobox"
-							data-options="required:true" style="width: 100px;">
+						<td><select id="plateColor" name="plateColor"
+							class="easyui-combobox" data-options="required:true"
+							style="width: 100px;">
 								<option selected="selected" value="黄牌">黄牌</option>
 								<option value="蓝牌">蓝牌</option>
 								<option value="黑牌">黑牌</option>
@@ -133,10 +136,20 @@
 						<td><input id="carVin" name="carVin"
 							class="easyui-validatebox" data-options="required:true"
 							style="width: 200px;" /></td>
-						<th>国产/进口:</th>
-						<td><input id="carProType" name="carProType" type="radio"
-							value="国产" checked="checked" />国产 <input name="carProType"
-							type="radio" value="进口" />进口</td>
+
+						<th>使用性质:</th>
+						<td><select id="carUseNatu" class="easyui-combobox"
+							name="carUseNatu" style="width: 200px;"
+							data-options="required:true">
+								<option></option>
+								<option value="001">货运</option>
+								<option value="002">危化品运输</option>
+								<option value="003">公路客运</option>
+								<option value="006">公交客运</option>
+								<option value="005">出租客运</option>
+								<option value="004">旅游客运</option>
+								<option value="007">非营运</option>
+						</select></td>
 					</tr>
 					<tr>
 						<th>外廓尺寸:</th>
@@ -152,8 +165,7 @@
 					</tr>
 				</table>
 			</div>
-			<div title="车辆其他信息(选填项)"
-				data-options="collapsed:false,collapsible:false,border:false">
+			<div title="车辆其他信息(选填项)" data-options="border:false">
 				<table class="grid">
 					<tr>
 						<th style="width: 120px">发动机型号:</th>
@@ -245,17 +257,10 @@
 						<th>驾驶室载客:</th>
 						<td><input id="carCabGuest" name="carCabGuest"
 							class="easyui-numberbox" style="width: 200px;" />人</td>
-						<th>使用性质:</th>
-						<td><select id="carUseNatu" class="easyui-combobox"
-							name="carUseNatu" style="width: 200px;">
-								<option></option>
-								<option value="001">公路客运</option>
-								<option value="002">货运</option>
-								<option value="003">公交客运</option>
-								<option value="004">出租客运</option>
-								<option value="005">旅游客运</option>
-								<option value="006">非营运</option>
-						</select>
+						<th>国产/进口:</th>
+						<td><input id="carProType" name="carProType" type="radio"
+							value="国产" checked="checked" />国产 <input name="carProType"
+							type="radio" value="进口" />进口</td>
 					</tr>
 					<tr>
 						<th>车辆获取方式:</th>
@@ -274,6 +279,47 @@
 							class="easyui-datebox" editable="false" style="width: 200px;" /></td>
 					</tr>
 				</table>
+			</div>
+			<div data-options="collapsed:false,collapsible:false,border:false">
+				<ul class="siminput" style="padding-top: 0px; padding-bottom: 5px;">
+					<li style="width: 760px;"><span class="siminput_li_span"
+						style="width: 130px;">车辆登记证上传：</span> <input type="file"
+						id="registrationCertificateFile"
+						name="registrationCertificateFile" class="valid"> <span
+						class="red"></span><span class="red"
+						id="span_registrationCertificateFile"></span> <lable
+							style="display: inline-block;">图片上传，小于3M，jpg、jpeg格式</lable> <input
+						type="hidden" id="registrationCertificateFileType"
+						name="registrationCertificateFileType" value="jpg"></li>
+					<li style="height: 45px; width: 65px; padding-top: 2px;"><img
+						id="registrationCertificateAttach" width="65" height="45"
+						style="cursor: pointer; display: none;" title="点击查看原图"
+						onclick="window.open(this.src)"></li>
+					<li style="width: 760px;"><span class="siminput_li_span"
+						style="width: 130px;">车辆合格证/行驶证：</span> <input type="file"
+						id="drivingLicOrCertFile" name="drivingLicOrCertFile"> <span
+						class="red"></span><span class="red"
+						id="span_drivingLicOrCertFile"></span> <lable
+							style="display: inline-block;">图片上传，小于3M，jpg、jpeg格式</lable> <input
+						type="hidden" id="drivingLicOrCertFileType"
+						name="drivingLicOrCertFileType"></li>
+					<li style="height: 45px; width: 65px; padding-top: 2px;"><img
+						id="drivingLicOrCertAttach" width="65" height="45"
+						style="cursor: pointer; display: none;" title="点击查看原图"
+						onclick="window.open(this.src)"></li>
+					<li style="width: 760px;"><span class="siminput_li_span"
+						style="width: 130px;">车身照片：</span> <input type="file"
+						id="vehicleBodyPhotoFile" name="vehicleBodyPhotoFile"> <span
+						class="red"></span><span class="red"
+						id="span_vehicleBodyPhotoFile"></span> <lable
+							style="display: inline-block;">上传车辆左前方45角度图片，小于3M，jpg、jpeg格式</lable>
+						<input type="hidden" id="vehicleBodyPhotoFileType"
+						name="vehicleBodyPhotoFileType"></li>
+					<li style="height: 45px; width: 65px; padding-top: 2px;"><img
+						id="vehicleBodyPhotoAttach" width="65" height="45"
+						style="cursor: pointer; display: none;" title="点击查看原图"
+						onclick="window.open(this.src)"></li>
+				</ul>
 			</div>
 		</div>
 	</form>
