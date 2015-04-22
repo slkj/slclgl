@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.slkj.slclgl.second.mapper.SecondInsuranceMapper">
+	<sql id="sql_temp">
+		id, vid,lastriqi, riqi,nextriqi, life, examine, keepaddress, remark,
+		(SELECT CARNUMBER FROM TB_VEHICLE WHERE ID= VID) AS viotureNumber
+	</sql>
+	
+	
+	<select id="queryOne" parameterType="secondInsurance" resultType="secondInsurance">
+		SELECT <include refid="sql_temp"/> from TB_SECOND
+		<where>
+			<if test="id != null and id != ''">
+				AND id = #{id}
+			</if>
+			</where>
+	</select>
+
+	<insert id="save" parameterType="secondInsurance">
+		INSERT INTO TB_SECOND
+		(id, vid,lastriqi, riqi,nextriqi, life, examine, keepaddress, remark)
+		VALUES
+		(#{id},#{vid},#{lastriqi},#{riqi},#{nextriqi},#{life},#{examine},#{keepaddress},#{remark})
+	</insert>
+	
+	<update id="edit" parameterType="secondInsurance">
+		UPDATE TB_SECOND set 
+			vid = #{vid},lastriqi=#{lastriqi},riqi = #{riqi},nextriqi=#{nextriqi}, life=#{life}, examine=#{examine},keepaddress = #{keepaddress},remark = #{remark} where id = #{id}
+	</update>
+	
+	
+	<delete id="deletes" parameterType="list">
+		DELETE FROM TB_SECOND WHERE ID in
+		<foreach item="ids" collection="array" open="(" separator=","
+			close=")">
+			#{ids}
+		</foreach>
+	</delete>
+	<delete id="delete" parameterType="string">
+		DELETE FROM TB_SECOND WHERE ID  = #{id}
+	</delete>
+	<select id="queryList" resultType="secondInsurance" parameterType="hashmap">
+		SELECT <include refid="sql_temp"/> 
+		FROM(SELECT A.*
+		FROM(
+		SELECT TV.ID AS VID, TV.CARNUMBER as viotureNumber,C.id,C.lastriqi, C.riqi,C.nextriqi, C.life, C.examine, 
+		C.keepaddress, C.remark	 FROM TB_VEHICLE TV  LEFT JOIN (
+				SELECT A.* FROM  TB_SECOND A 
+				JOIN (SELECT MAX(nextriqi) AS nextriqi,VID  FROM TB_SECOND  GROUP BY VID ) B 
+				ON A.VID =B.VID AND A.nextriqi=B.nextriqi  
+			) C ON TV.ID = C.VID  
+			<where>
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+				<if test="depId != null and depId != ''">
+					AND TV.depId  LIKE   #{depId}  + '%'
+				</if>
+				<if test="carNumber != null and carNumber != ''">
+					AND TV.CARNUMBER LIKE '%' + #{carNumber}  + '%'
+				</if>
+				<if test="companyId != null and companyId != ''">
+					AND TV.OWNEDID =#{companyId}
+				</if>
+				<if test="regCompanyId != null and regCompanyId != ''">
+					AND TV.OWNEDID IN  (SELECT ID FROM TB_COMPANY WHERE GSMC LIKE '%' +#{regCompanyId} + '%')
+				</if>
+				<if test="endDate != null and endDate != ''">
+					<![CDATA[ AND C.nextriqi  >= #{endDate} AND C.nextriqi  <= #{endDate1} ]]> 
+				</if>
+			</where>
+		) A )B
+		<!-- WHERE ROWNUM BETWEEN #{startNum} AND #{endNum} -->
+		LIMIT #{startNum},#{endNum}
+	</select>
+	
+	<select id="queryListCount" resultType="int" parameterType="hashmap">
+		SELECT COUNT(0) FROM TB_VEHICLE TV  LEFT JOIN (
+				SELECT A.* FROM  TB_SECOND A 
+				JOIN (SELECT MAX(nextriqi) AS nextriqi,VID  FROM TB_SECOND  GROUP BY VID ) B 
+				ON A.VID =B.VID AND A.nextriqi=B.nextriqi  
+			) C ON TV.ID = C.VID  
+		<where>
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+				<if test="depId != null and depId != ''">
+					AND TV.depId =#{depId}
+				</if>
+				<if test="carNumber != null and carNumber != ''">
+					AND TV.CARNUMBER LIKE '%' + #{carNumber}  + '%'
+				</if>
+				<if test="companyId != null and companyId != ''">
+					AND TV.OWNEDID =#{companyId}
+				</if>
+				<if test="regCompanyId != null and regCompanyId != ''">
+					AND TV.OWNEDID IN  (SELECT ID FROM TB_COMPANY WHERE GSMC LIKE '%' +#{regCompanyId} + '%')
+				</if>
+				<if test="endDate != null and endDate != ''">
+					<![CDATA[ AND C.nextriqi  >= #{endDate} AND C.nextriqi  <= #{endDate1} ]]> 
+				</if>
+			</where>
+		
+	</select>
+
+	
+	<select id="listByVid" resultType="secondInsurance" parameterType="hashmap">
+		SELECT <include refid="sql_temp" /> FROM(SELECT A.* FROM(
+			SELECT TV.ID AS VID, TV.CARNUMBER as viotureNumber,
+		C.id,C.lastriqi, C.riqi,C.nextriqi, C.life, C.examine, 
+		C.keepaddress, C.remark
+	 FROM TB_VEHICLE TV  JOIN TB_SECOND C ON C.VID =TV.ID 
+			<where>
+				<if test="vId != null and vId != ''">
+					AND C.vId =#{vId}
+				</if>
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+			</where>
+			) A )B
+		LIMIT #{startNum},#{endNum}
+	</select>
+	<select id="listByVidCount" resultType="int" parameterType="hashmap">
+		SELECT  COUNT(0)
+				FROM TB_VEHICLE TV  JOIN TB_SECOND TS ON TS.VID =TV.ID 
+			<where>
+				<if test="vId != null and vId != ''">
+					AND TS.vId =#{vId}
+				</if>
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+			</where>
+	</select>
+	
+		<select id="getExpires" resultType="secondInsurance" parameterType="hashmap">
+	SELECT VID,viotureNumber,nextriqi FROM(SELECT A.* FROM(
+		SELECT TV.ID AS VID, TV.CARNUMBER as viotureNumber,C.nextriqi
+			FROM TB_VEHICLE TV   JOIN( SELECT MAX (nextriqi) AS nextriqi, VID FROM TB_SECOND GROUP BY VID )C ON TV.ID = C.VID
+			where <![CDATA[ nextriqi<dateadd(DAY,20,getdate())]]> 
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+				<if test="depId != null and depId != ''">
+					AND TV.depId  LIKE   #{depId}  + '%'
+				</if>
+				<if test="companyId != null and companyId != ''">
+					AND TV.OWNEDID =#{companyId}
+				</if>
+		) A)B
+		LIMIT #{startNum},#{endNum}
+	</select>
+	<select id="getExpiresCount" resultType="int" parameterType="hashmap">
+		SELECT  COUNT(0) FROM TB_VEHICLE TV   JOIN( SELECT MAX (nextriqi) AS nextriqi, VID FROM TB_SECOND GROUP BY VID )C ON TV.ID = C.VID
+			where <![CDATA[ nextriqi<dateadd(DAY,20,getdate())]]> 
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+				<if test="depId != null and depId != ''">
+					AND TV.depId  LIKE   #{depId}  + '%'
+				</if>
+				<if test="companyId != null and companyId != ''">
+					AND TV.OWNEDID =#{companyId}
+				</if>
+	</select>
+</mapper>

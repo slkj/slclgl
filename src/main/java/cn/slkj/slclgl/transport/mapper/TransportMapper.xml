@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.slkj.slclgl.transport.mapper.TransportMapper">
+	<sql id="sql_temp">
+		id, vId, traWord, traCode, traBusLicNo, traBusLicDate, traEcoType, remark, (SELECT CARNUMBER FROM TB_VEHICLE WHERE ID= VID) AS CARNUMBER,testOrgan,endDate
+	</sql>
+
+	<select id="queryOne" parameterType="transport" resultType="transport">
+		SELECT <include refid="sql_temp" /> FROM TB_TRANSPORT
+		<where>
+			<if test="id != null and id != ''">
+				AND id = #{id}
+			</if>
+		</where>
+	</select>
+
+	<insert id="save" parameterType="transport">
+		INSERT INTO TB_TRANSPORT ( id, vId, traWord, traCode, traBusLicNo, traBusLicDate, traEcoType, remark, createTime, testOrgan, endDate)
+		VALUES ( #{id},#{vId}, #{traWord}, #{traCode}, #{traBusLicNo}, #{traBusLicDate},#{traEcoType},#{remark},CONVERT(varchar(20),GETDATE(), 20),#{testOrgan},#{endDate})
+	</insert>
+
+	<update id="edit" parameterType="transport">
+		UPDATE TB_TRANSPORT SET traWord=#{traWord}, traCode=#{traCode}, traBusLicNo=#{traBusLicNo}, traBusLicDate=#{traBusLicDate}, 
+		traEcoType=#{traEcoType}, remark=#{remark},  testOrgan=#{testOrgan}, endDate=#{endDate}  
+		where id = #{id}
+	</update>
+
+
+	<delete id="deletes" parameterType="string">
+		DELETE FROM TB_TRANSPORT WHERE ID  = #{id}
+	</delete>
+
+	<select id="queryList" resultType="transport" parameterType="hashmap">
+		SELECT <include refid="sql_temp" /> FROM(SELECT A.* FROM(
+			SELECT  C.ID, TV.ID AS VID,TV.CARNUMBER, 
+				 C.traWord, C.traCode, C.traBusLicNo, C.traBusLicDate,  C.traEcoType,C.testOrgan,C.endDate,C.createTime,C.remark
+			 FROM TB_VEHICLE TV  LEFT JOIN (
+				SELECT A.* FROM  TB_TRANSPORT A 
+				JOIN (SELECT MAX(ENDDATE) AS ENDDATE,VID  FROM TB_TRANSPORT  GROUP BY VID ) B 
+				ON A.VID =B.VID AND A.ENDDATE=B.ENDDATE  
+			) C ON TV.ID = C.VID  
+			<where>
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+				<if test="carNumber != null and carNumber != ''">
+					AND TV.CARNUMBER LIKE '%' + #{carNumber}  + '%'
+				</if>
+				<if test="regCompanyId != null and regCompanyId != ''">
+					AND TV.OWNEDID IN  (SELECT ID FROM TB_COMPANY WHERE GSMC LIKE '%' +#{regCompanyId} + '%')
+				</if>
+				<if test="depId != null and depId != ''">
+					AND TV.depId  LIKE   #{depId}  + '%'
+				</if>
+				<if test="companyId != null and companyId != ''">
+					AND TV.OWNEDID =#{companyId}
+				</if>
+				
+				<if test="endDate != null and endDate != ''">
+					<![CDATA[ AND C.ENDDATE  >= #{endDate} AND C.ENDDATE  <= #{endDate1} ]]> 
+				</if>
+			</where>
+			) A )B
+		LIMIT #{startNum},#{endNum}
+	</select>
+
+	<select id="queryListCount" resultType="int" parameterType="hashmap">
+		SELECT COUNT(0)  FROM TB_VEHICLE TV  LEFT JOIN (
+				SELECT A.* FROM  TB_TRANSPORT A 
+				JOIN (SELECT MAX(ENDDATE) AS ENDDATE,VID  FROM TB_TRANSPORT  GROUP BY VID ) B 
+				ON A.VID =B.VID AND A.ENDDATE=B.ENDDATE  
+			) C ON TV.ID = C.VID  
+			<where>
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+				<if test="carNumber != null and carNumber != ''">
+					AND TV.CARNUMBER LIKE '%' + #{carNumber}  + '%'
+				</if>
+				<if test="regCompanyId != null and regCompanyId != ''">
+					AND TV.OWNEDID IN  (SELECT ID FROM TB_COMPANY WHERE GSMC LIKE '%' +#{regCompanyId} + '%')
+				</if>
+				<if test="depId != null and depId != ''">
+					AND TV.depId  LIKE   #{depId}  + '%'
+				</if>
+				<if test="companyId != null and companyId != ''">
+					AND TV.OWNEDID =#{companyId}
+				</if>
+				
+				<if test="endDate != null and endDate != ''">
+					<![CDATA[ AND C.ENDDATE  >= #{endDate} AND C.ENDDATE  <= #{endDate1} ]]> 
+				</if>
+			</where>
+	</select>
+	<select id="listByVid" resultType="transport" parameterType="hashmap">
+		SELECT <include refid="sql_temp" /> FROM(SELECT A.* FROM(
+			SELECT  TT.ID, TV.ID AS VID,TV.CARNUMBER, TT.traWord, TT.traCode, TT.traBusLicNo, TT.traBusLicDate,
+			  TT.traEcoType,TT.testOrgan,TT.endDate,TT.createTime,TT.remark
+				FROM TB_VEHICLE TV  JOIN TB_TRANSPORT TT ON TT.VID =TV.ID 
+			<where>
+				<if test="vId != null and vId != ''">
+					AND TT.vId =#{vId}
+				</if>
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+			</where>
+			) A )B
+		LIMIT #{startNum},#{endNum}
+	</select>
+	<select id="listByVidCount" resultType="int" parameterType="hashmap">
+		SELECT  COUNT(0)
+				FROM TB_VEHICLE TV  JOIN TB_TRANSPORT TT ON TT.VID =TV.ID 
+			<where>
+				<if test="vId != null and vId != ''">
+					AND TT.vId =#{vId}
+				</if>
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+			</where>
+	</select>
+	
+		<select id="getExpires" resultType="transport" parameterType="hashmap">
+	SELECT VID,CARNUMBER,ENDDATE FROM(SELECT A.* FROM(
+		SELECT TV.ID AS VID, TV.CARNUMBER,C.ENDDATE
+			FROM TB_VEHICLE TV   JOIN( SELECT MAX (ENDDATE) AS ENDDATE, VID FROM TB_TRANSPORT GROUP BY VID )C ON TV.ID = C.VID
+			where <![CDATA[ ENDDATE<dateadd(DAY,20,getdate())]]> 
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+				<if test="depId != null and depId != ''">
+					AND TV.depId  LIKE   #{depId}  + '%'
+				</if>
+				<if test="companyId != null and companyId != ''">
+					AND TV.OWNEDID =#{companyId}
+				</if>
+		) A)B
+		LIMIT #{startNum},#{endNum}
+	</select>
+	<select id="getExpiresCount" resultType="int" parameterType="hashmap">
+		SELECT  COUNT(0) FROM TB_VEHICLE TV   JOIN( SELECT MAX (ENDDATE) AS ENDDATE, VID FROM TB_TRANSPORT GROUP BY VID )C ON TV.ID = C.VID
+			where <![CDATA[ ENDDATE<dateadd(DAY,20,getdate())]]> 
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+				<if test="depId != null and depId != ''">
+					AND TV.depId  LIKE   #{depId}  + '%'
+				</if>
+				<if test="companyId != null and companyId != ''">
+					AND TV.OWNEDID =#{companyId}
+				</if>
+	</select>
+</mapper>

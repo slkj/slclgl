@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.slkj.slclgl.insurance.mapper.InsuranceMapper">
+	<sql id="sql_temp">
+		id, policy,vid, feiyong, insuranceType,
+		(SELECT typeName FROM TB_INSURANCE_TYPE WHERE TB_INSURANCE_TYPE.ID=insuranceType)typeName,
+		(SELECT shortName FROM TB_INSURANCE_COMPANY WHERE TB_INSURANCE_COMPANY.ID=insuranceCompany)companyName,
+		 riqi, startTime, endTime, insuranceCompany, checkMan, makeMan, remark,
+		 (SELECT CARNUMBER FROM TB_VEHICLE WHERE ID= VID) AS viotureNumber
+	</sql>
+	
+  
+	<select id="queryOne" parameterType="insurance" resultType="insurance">
+		SELECT <include refid="sql_temp"/> from TB_INSURANCE 
+		<where>
+			<if test="id != null and id != ''">
+				AND id = #{id}
+			</if>
+			</where>
+	</select>
+
+	<insert id="save" parameterType="insurance">
+		INSERT INTO TB_INSURANCE
+		(id, policy, vid, feiyong, insuranceType,
+		 riqi, startTime, endTime, insuranceCompany, checkMan, makeMan, remark)
+		VALUES
+		(#{id}, #{policy},  #{vid}, #{feiyong}, #{insuranceType},
+		 #{riqi}, #{startTime}, #{endTime}, #{insuranceCompany}, #{checkMan}, #{makeMan}, #{remark})
+	</insert>
+	
+	<update id="edit" parameterType="insurance">
+		UPDATE TB_INSURANCE set policy=#{policy}, vid=#{vid}, feiyong=#{feiyong}, insuranceType=#{insuranceType},
+		 riqi=#{riqi}, startTime=#{startTime}, endTime=#{endTime}, insuranceCompany=#{insuranceCompany}, 
+		 checkMan=#{checkMan}, makeMan=#{makeMan}, remark=#{remark} where id = #{id}
+	</update>
+	
+	
+	<delete id="deletes" parameterType="list">
+		DELETE FROM TB_INSURANCE WHERE ID in
+		<foreach item="ids" collection="array" open="(" separator=","
+			close=")">
+			#{ids}
+		</foreach>
+	</delete>
+	<delete id="delete" parameterType="string">
+		DELETE FROM TB_INSURANCE WHERE ID  = #{id}
+	</delete>
+	<select id="queryList" resultType="insurance" parameterType="hashmap">
+		SELECT <include refid="sql_temp"/>  FROM(SELECT A.*
+		FROM(
+		SELECT TV.ID AS VID, TV.CARNUMBER as viotureNumber,
+		C.id, C.policy,  C.feiyong, C.insuranceType,
+		 C.riqi, C.startTime, C.endTime, C.insuranceCompany, C.checkMan, C.makeMan, C.remark
+	 FROM TB_VEHICLE TV  LEFT JOIN (
+				SELECT A.* FROM  TB_INSURANCE A 
+				JOIN (SELECT MAX(endTime) AS endTime,VID  FROM TB_INSURANCE  GROUP BY VID ) B 
+				ON A.VID =B.VID AND A.endTime=B.endTime  
+			) C ON TV.ID = C.VID  
+			<where>
+			<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+				<if test="depId != null and depId != ''">
+					AND TV.depId  LIKE   #{depId}  + '%'
+				</if>
+				<if test="carNumber != null and carNumber != ''">
+					AND TV.CARNUMBER LIKE '%' + #{carNumber}  + '%'
+				</if>
+				<if test="companyId != null and companyId != ''">
+					AND TV.OWNEDID =#{companyId}
+				</if>
+				<if test="regCompanyId != null and regCompanyId != ''">
+					AND TV.OWNEDID IN  (SELECT ID FROM TB_COMPANY WHERE GSMC LIKE '%' +#{regCompanyId} + '%')
+				</if>
+				<if test="endDate != null and endDate != ''">
+					<![CDATA[ AND C.endTime  >= #{endDate} AND C.endTime  <= #{endDate1} ]]> 
+				</if>
+			</where>
+		) A )B
+		<!-- WHERE ROWNUM BETWEEN #{startNum} AND #{endNum} -->
+		LIMIT #{startNum},#{endNum}
+	</select>
+	
+	<select id="queryListCount" resultType="int" parameterType="hashmap">
+		SELECT COUNT(0) FROM TB_VEHICLE TV  LEFT JOIN (
+				SELECT A.* FROM  TB_INSURANCE A 
+				JOIN (SELECT MAX(endTime) AS endTime,VID  FROM TB_INSURANCE  GROUP BY VID ) B 
+				ON A.VID =B.VID AND A.endTime=B.endTime  
+			) C ON TV.ID = C.VID  
+			<where>
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+				<if test="depId != null and depId != ''">
+					AND TV.depId =#{depId}
+				</if>
+				<if test="carNumber != null and carNumber != ''">
+					AND TV.CARNUMBER LIKE '%' + #{carNumber}  + '%'
+				</if>
+				<if test="companyId != null and companyId != ''">
+					AND TV.OWNEDID =#{companyId}
+				</if>
+				<if test="regCompanyId != null and regCompanyId != ''">
+					AND TV.OWNEDID IN  (SELECT ID FROM TB_COMPANY WHERE GSMC LIKE '%' +#{regCompanyId} + '%')
+				</if>
+				<if test="endDate != null and endDate != ''">
+					<![CDATA[ AND C.endTime  >= #{endDate} AND C.endTime  <= #{endDate1} ]]> 
+				</if>
+			</where>
+		
+	</select>
+
+	<select id="queryAllTypeList" resultType="insuranceType">
+		SELECT ID,TYPENAME,REMARK  FROM TB_INSURANCE_TYPE		
+	</select>
+	<select id="queryAllInsuranceCompanyList" resultType="insuranceCompany">
+		SELECT id, companyName, shortName, linkman, phone, address  FROM TB_INSURANCE_COMPANY		
+	</select>
+	
+	
+	
+	<select id="listByVid" resultType="insurance" parameterType="hashmap">
+		SELECT <include refid="sql_temp" /> FROM(SELECT A.* FROM(
+			SELECT TV.ID AS VID, TV.CARNUMBER as viotureNumber,
+		C.id, C.policy,  C.feiyong, C.insuranceType,
+		 C.riqi, C.startTime, C.endTime, C.insuranceCompany, C.checkMan, C.makeMan, C.remark
+	 FROM TB_VEHICLE TV  JOIN TB_INSURANCE C ON C.VID =TV.ID 
+			<where>
+				<if test="vId != null and vId != ''">
+					AND C.vId =#{vId}
+				</if>
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+			</where>
+			) A )B
+		LIMIT #{startNum},#{endNum}
+	</select>
+	<select id="listByVidCount" resultType="int" parameterType="hashmap">
+		SELECT  COUNT(0)
+				FROM TB_VEHICLE TV  JOIN TB_INSURANCE TI ON TI.VID =TV.ID 
+			<where>
+				<if test="vId != null and vId != ''">
+					AND TI.vId =#{vId}
+				</if>
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+			</where>
+	</select>
+	
+			<select id="getExpires" resultType="insurance" parameterType="hashmap">
+	SELECT VID,viotureNumber,endTime FROM(SELECT A.* FROM(
+		SELECT TV.ID AS VID, TV.CARNUMBER as viotureNumber,C.endTime
+			FROM TB_VEHICLE TV   JOIN( SELECT MAX (endTime) AS endTime, VID FROM TB_INSURANCE GROUP BY VID )C ON TV.ID = C.VID
+			where <![CDATA[ endTime<dateadd(DAY,20,getdate())]]> 
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+				<if test="depId != null and depId != ''">
+					AND TV.depId  LIKE   #{depId}  + '%'
+				</if>
+				<if test="companyId != null and companyId != ''">
+					AND TV.OWNEDID =#{companyId}
+				</if>
+		) A)B
+		LIMIT #{startNum},#{endNum}
+	</select>
+	<select id="getExpiresCount" resultType="int" parameterType="hashmap">
+		SELECT  COUNT(0) FROM TB_VEHICLE TV   JOIN( SELECT MAX (endTime) AS endTime, VID FROM TB_INSURANCE GROUP BY VID )C ON TV.ID = C.VID
+			where <![CDATA[ endTime<dateadd(DAY,20,getdate())]]> 
+				<if test="operId != null and operId != ''">
+					AND TV.OPERATORID =#{operId}
+				</if>
+				<if test="depId != null and depId != ''">
+					AND TV.depId  LIKE   #{depId}  + '%'
+				</if>
+				<if test="companyId != null and companyId != ''">
+					AND TV.OWNEDID =#{companyId}
+				</if>
+	</select>
+</mapper>

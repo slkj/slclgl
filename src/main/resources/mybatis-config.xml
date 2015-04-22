@@ -21,6 +21,12 @@
 		<typeAlias type="cn.slkj.slclgl.after.bean.Phone" alias="phone" />
 		<typeAlias type="cn.slkj.slclgl.devices.bean.Devices_record" alias="Devices_record" />
 		<typeAlias type="cn.slkj.slclgl.xzqh.bean.Xzqh" alias="Xzqh" />
+		<typeAlias type="cn.slkj.slclgl.driving.bean.Driving" alias="Driving"/>
+		<typeAlias type="cn.slkj.slclgl.transport.bean.Transport" alias="transport"/>
+		<typeAlias type="cn.slkj.slclgl.second.bean.SecondInsurance" alias="secondInsurance" />
+		<typeAlias type="cn.slkj.slclgl.insurance.bean.Insurance" alias="insurance" />
+		<typeAlias type="cn.slkj.slclgl.insurance.bean.InsuranceType" alias="insuranceType" />
+		<typeAlias type="cn.slkj.slclgl.insurance.bean.InsuranceCompany" alias="insuranceCompany" />
 	</typeAliases>
 	<!-- 设置数据库连接环境 -->
 	<!-- 映射文件 -->
@@ -38,5 +44,9 @@
 		<mapper resource="cn/slkj/slclgl/person/mapper/UnitMapper.xml" />
 		<mapper resource="cn/slkj/slclgl/after/mapper/PhoneMapper.xml" />
 		<mapper resource="cn/slkj/slclgl/xzqh/mapper/XzqhMapper.xml" />
+		<mapper resource="cn/slkj/slclgl/driving/mapper/DrivingMapper.xml" />
+		<mapper resource="cn/slkj/slclgl/transport/mapper/TransportMapper.xml" />
+		<mapper resource="cn/slkj/slclgl/second/mapper/SecondInsuranceMapper.xml"/>
+		<mapper resource="cn/slkj/slclgl/insurance/mapper/InsuranceMapper.xml"/>
 	</mappers>
 </configuration>
