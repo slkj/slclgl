@@ -93,8 +93,11 @@ function getData() {
 							formatter : function(value, row, index) {
 								var s = "";
 								if (row.policy != null) {
-									s = '<a href="#" class="roleCls" onclick="view(\'' + row.vid
-											+ '\')">详细</a> ';
+									
+									s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editFun('" + index + "');\">编辑</span></a>";
+									s += "&nbsp;|&nbsp;";
+									s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:delFun('" + index + "');\">删除</span></a>";
+									
 								}
 								return s;
 							}
@@ -128,11 +131,8 @@ function checkRows() {
 	return selRow[0];
 }
 //删除操作
-function delFun() { 
-	if (!checkRows()) {
-		return;
-	}
-	var obj = checkRows();
+function delFun(index) { 
+	var obj = $('#grid').datagrid('getData').rows[index];
 	if (obj.id == null) {
 		return;
 	}
@@ -143,7 +143,7 @@ function delFun() {
 				success : function(data) {
 					if (data) {
 						$('#grid').datagrid('load');
-						top.max.sysSlideShow({
+						SL.sysSlideShow({
 							msg : '成功删除!'
 						});
 					} else {
@@ -160,22 +160,22 @@ function addFun() {
 		return;
 	}
 	var obj = checkRows();
-	top.max.showWindow({
+	SL.showWindow({
 		title : '添加车辆保险信息',
 		iconCls : 'icon-add',
 		width : 600,
 		height : 400,
-		url : 'insurance/add.jsp',
+		url : 'add.jsp',
 		onLoad : function() {
-			top.$('#insuranceCompany').combobox({
-				url : "insurance/queryComboTreeOfInsuranceCompany",
+			$('#insuranceCompany').combobox({
+				url : "../insurance/queryComboTreeOfInsuranceCompany",
 				required : true,
 				valueField : 'id',
 				textField : 'shortName'
 				
 			});
-			top.$('#insuranceType').combobox({
-				url : "insurance/queryComboTreeOfInsuranceType",
+			$('#insuranceType').combobox({
+				url : "../insurance/queryComboTreeOfInsuranceType",
 				required : true,
 				valueField : 'id',
 				textField : 'typeName'
@@ -187,21 +187,21 @@ function addFun() {
 				cache : false,
 				success : function(data) {
 					if (data) {
-						top.$("#form").form('load', data);
-						top.$("#vid").val(data.id);
-						top.$("#carNumber").text(data.carNumber);
-						top.$("#regCompanyName").text(data.regCompanyName);
-						top.$("#address").text(data.address);
-						top.$("#wkcc").text(
+						$("#form").form('load', data);
+						$("#vid").val(data.id);
+						$("#carNumber").text(data.carNumber);
+						$("#regCompanyName").text(data.regCompanyName);
+						$("#address").text(data.address);
+						$("#wkcc").text(
 								data.carOutLength + "*" + data.carOutWidth + "*"
 										+ data.carOutHeight);
-						top.$("#ppxh").text(data.carBrand + data.carModel);
-						top.$("#cllx").text(data.classify + data.carType);
-						top.$("#carVin").text(data.carVin);
-						top.$("#carEngNum").text(data.carEngNum);
-						top.$("#carApprGuest").text(data.carApprGuest);
-						top.$("#carTotalmass").text(data.carTotalmass);
-						top.$("#carTrac").text(data.carTrac);
+						$("#ppxh").text(data.carBrand + data.carModel);
+						$("#cllx").text(data.classify + data.carType);
+						$("#carVin").text(data.carVin);
+						$("#carEngNum").text(data.carEngNum);
+						$("#carApprGuest").text(data.carApprGuest);
+						$("#carTotalmass").text(data.carTotalmass);
+						$("#carTrac").text(data.carTrac);
 						
 					}
 				}
@@ -217,7 +217,7 @@ function addFun() {
 		}, {
 			text : '关闭',
 			handler : function() {
-				top.max.closedlg();
+				SL.closeWindow();
 			}
 		} ]
 	});
@@ -225,7 +225,7 @@ function addFun() {
 // ajax 表单提交审验信息
 function saveAjax(url) {
 	if (top.$("#dform").form('enableValidation').form('validate')) {
-		var data = getFormJson(top.$("#dform"));
+		var data = $("#dform").serialize();
 		$.ajax({
 			cache : false,
 			type : "POST",
@@ -235,9 +235,9 @@ function saveAjax(url) {
 			dataType : 'json',
 			success : function(data) {
 				if (data) {
-					top.max.closeWindow();
+					SL.closeWindow();
 					$('#grid').datagrid('load');
-					top.max.sysSlideShow({
+					SL.sysSlideShow({
 						msg : '保存成功'
 					});
 				} else {
@@ -248,21 +248,18 @@ function saveAjax(url) {
 	}
 }
 // 编辑
-function editFun() {
-	if (!checkRows()) {
-		return;
-	}
-	var obj = checkRows();
+function editFun(index) {
+	var obj = $('#grid').datagrid('getData').rows[index];
 	if (obj.id == null) {
 		top.$.messager.alert('提示', '该车辆没有行驶证信息，请录入行驶证信息。');
 		return;
 	}
-	top.max.showWindow({
+	SL.showWindow({
 		title : '添加车辆行驶信息',
 		iconCls : 'icon-edit',
 		width : 600,
 		height : 400,
-		url : 'insurance/edit.jsp',
+		url : 'edit.jsp',
 		onLoad : function() {
 			top.$('#insuranceCompany').combobox({
 				url : "insurance/queryComboTreeOfInsuranceCompany",
@@ -284,21 +281,21 @@ function editFun() {
 				cache : false,
 				success : function(data) {
 					if (data) {
-						top.$("#form").form('load', data);
-						top.$("#vid").val(data.id);
-						top.$("#carNumber").text(data.carNumber);
-						top.$("#regCompanyName").text(data.regCompanyName);
-						top.$("#address").text(data.address);
-						top.$("#wkcc").text(
+						$("#form").form('load', data);
+						$("#vid").val(data.id);
+						$("#carNumber").text(data.carNumber);
+						$("#regCompanyName").text(data.regCompanyName);
+						$("#address").text(data.address);
+						$("#wkcc").text(
 								data.carOutLength + "*" + data.carOutWidth + "*"
 										+ data.carOutHeight);
-						top.$("#ppxh").text(data.carBrand + data.carModel);
-						top.$("#cllx").text(data.classify + data.carType);
-						top.$("#carVin").text(data.carVin);
-						top.$("#carEngNum").text(data.carEngNum);
-						top.$("#carApprGuest").text(data.carApprGuest);
-						top.$("#carTotalmass").text(data.carTotalmass);
-						top.$("#carTrac").text(data.carTrac);
+						$("#ppxh").text(data.carBrand + data.carModel);
+						$("#cllx").text(data.classify + data.carType);
+						$("#carVin").text(data.carVin);
+						$("#carEngNum").text(data.carEngNum);
+						$("#carApprGuest").text(data.carApprGuest);
+						$("#carTotalmass").text(data.carTotalmass);
+						$("#carTrac").text(data.carTrac);
 					}
 				}
 			});
@@ -308,7 +305,7 @@ function editFun() {
 				cache : false,
 				success : function(data) {
 					if (data) {
-						top.$("#dform").form('load', data);
+						$("#dform").form('load', data);
 					}
 				}
 			});
@@ -324,14 +321,14 @@ function editFun() {
 		}, {
 			text : '关闭',
 			handler : function() {
-				top.max.closedlg();
+				SL.closeWindow();
 			}
 		} ]
 	});
 }
 // 详细信息
-function view(id) {
-	top.max.showWindow({
+/*function view(id) {
+	SL.showWindow({
 		title : '车辆信息',
 		iconCls : 'icon-search',
 		width : 1000,
@@ -357,11 +354,11 @@ function view(id) {
 		buttons : [ {
 			text : '关闭',
 			handler : function() {
-				top.max.closeWindow();
+				SL.closeWindow();
 			}
 		} ]
 	});
-};
+};*/
 function listByCar(){
 	if (!checkRows()) {
 		return;
@@ -371,7 +368,7 @@ function listByCar(){
 		top.$.messager.alert('提示', '该车辆没有保险信息。');
 		return;
 	}
-	top.max.showWindow({
+	SL.showWindow({
 		title : '保险信息',
 		iconCls : 'icons_26',
 		width : 650,
@@ -444,7 +441,7 @@ function listByCar(){
 		buttons : [ {
 			text : '关闭',
 			handler : function() {
-				top.max.closedlg();
+				SL.closeWindow();
 			}
 		} ]
 	});

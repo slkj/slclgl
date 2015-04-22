@@ -108,7 +108,7 @@ public class InsuranceController {
 	public JsonResult save(Insurance insurance)
 			throws Exception {
 		try {
-			insurance.setId(UUID.randomUUID().toString());
+			
 			int i = insuranceService.save(insurance);
 			if (i != -1) {
 				return new JsonResult(true, "");

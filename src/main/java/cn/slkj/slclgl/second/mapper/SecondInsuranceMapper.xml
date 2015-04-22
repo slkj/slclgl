@@ -18,9 +18,9 @@
 
 	<insert id="save" parameterType="secondInsurance">
 		INSERT INTO TB_SECOND
-		(id, vid,lastriqi, riqi,nextriqi, life, examine, keepaddress, remark)
+		( vid,lastriqi, riqi,nextriqi, life, examine, keepaddress, remark)
 		VALUES
-		(#{id},#{vid},#{lastriqi},#{riqi},#{nextriqi},#{life},#{examine},#{keepaddress},#{remark})
+		(#{vid},#{lastriqi},#{riqi},#{nextriqi},#{life},#{examine},#{keepaddress},#{remark})
 	</insert>
 	
 	<update id="edit" parameterType="secondInsurance">

@@ -76,23 +76,23 @@
 				<tr>
 					<th>冀交运管:</th>
 					<td>
-						<input id="traWord" name="traWord" class="easyui-validatebox" type="text" style="width: 50px;" data-options="required:true"/>字
-						<input id="traCode" name="traCode" class="easyui-validatebox" type="text" style="width: 100px;" data-options="required:true"/>号
+						<input id="traWord" name="traWord" class="easyui-validatebox" type="text" style="width: 50px;"  readOnly="true"/>字
+						<input id="traCode" name="traCode" class="easyui-validatebox" type="text" style="width: 100px;" readOnly="true"/>号
 					</td>
 					<th>经济类型：</th>
 					<td>
-						<input id="traEcoType" name="traEcoType" class="easyui-validatebox" type="text" style="width: 150px;"/>
+						<input id="traEcoType" name="traEcoType" class="easyui-validatebox" type="text" style="width: 150px;" readOnly="true"/>
 					</td>
 				</tr>
 			</tr>
 			<tr>
 				<th>经营许可证:</th>
 				<td>
-					<input id="traBusLicNo" name="traBusLicNo" class="easyui-validatebox" type="text" style="width: 150px;"/>
+					<input id="traBusLicNo" name="traBusLicNo" class="easyui-validatebox" type="text" style="width: 150px;" readOnly="true"/>
 				</td>
 				<th>经营许可证核发日期：</th>
 				<td>
-					<input id="traBusLicDate" name="traBusLicDate" class="easyui-datebox" type="text" style="width: 150px;" data-options="required:true"/>
+					<input id="traBusLicDate" name="traBusLicDate" class="easyui-datebox" type="text" style="width: 150px;" data-options="required:true" readOnly="true"/>
 				</td>
 			</tr>
 					<tr>
@@ -104,7 +104,7 @@
 					</tr>
 					<tr>
 						<th>备注：</th>
-						<td colspan="3"><textarea id="introd" name="introd" cols="20"
+						<td colspan="3"><textarea id="remark" name="remark" cols="20"
 								rows="2" style="width: 100%"> </textarea></td>
 					</tr>
 				</table>

@@ -20,7 +20,8 @@
 	</insert>
 
 	<update id="edit" parameterType="Driving">
-		UPDATE TB_DRIVING SET testOrgan = #{testOrgan},endDate=#{endDate}, remark = #{remark}  
+		UPDATE TB_DRIVING SET fileNumber=#{fileNumber},driRegDate=#{driRegDate},driCertDate=#{driCertDate},
+		baoFeiDate=#{baoFeiDate}, testOrgan = #{testOrgan},endDate=#{endDate}, remark = #{remark}  
 		where id = #{id}
 	</update>
 
@@ -43,16 +44,16 @@
 					AND TV.OPERATORID =#{operId}
 				</if>
 				<if test="carNumber != null and carNumber != ''">
-					AND TV.CARNUMBER LIKE '%' + #{carNumber}  + '%'
+					AND TV.CARNUMBER LIKE CONCAT('%',#{carNumber},'%')
 				</if>
 				<if test="regCompanyId != null and regCompanyId != ''">
-					AND TV.OWNEDID IN  (SELECT ID FROM TB_COMPANY WHERE GSMC LIKE '%' +#{regCompanyId} + '%')
+					AND TV.COMPANYID IN  (SELECT ID FROM TB_COMPANY WHERE compName LIKE CONCAT('%',#{regCompanyId},'%'))
 				</if>
 				<if test="depId != null and depId != ''">
-					AND TV.depId  LIKE   #{depId}  + '%'
+					AND TV.depId  LIKE  CONCAT('%',#{depId},'%')
 				</if>
 				<if test="companyId != null and companyId != ''">
-					AND TV.OWNEDID =#{companyId}
+					AND TV.COMPANYID =#{companyId}
 				</if>
 				
 				<if test="endDate != null and endDate != ''">
@@ -74,16 +75,16 @@
 					AND TV.OPERATORID =#{operId}
 				</if>
 				<if test="carNumber != null and carNumber != ''">
-					AND TV.CARNUMBER LIKE '%' + #{carNumber}  + '%'
+					AND TV.CARNUMBER LIKE CONCAT('%',#{carNumber},'%')
 				</if>
 				<if test="regCompanyId != null and regCompanyId != ''">
-					AND TV.OWNEDID IN  (SELECT ID FROM TB_COMPANY WHERE GSMC LIKE '%' +#{regCompanyId} + '%')
+					AND TV.COMPANYID IN  (SELECT ID FROM TB_COMPANY WHERE compName LIKE CONCAT('%',#{regCompanyId},'%'))
 				</if>
 				<if test="depId != null and depId != ''">
-					AND TV.depId  LIKE   #{depId}  + '%'
+					AND TV.depId  LIKE  CONCAT('%',#{depId},'%')
 				</if>
 				<if test="companyId != null and companyId != ''">
-					AND TV.OWNEDID =#{companyId}
+					AND TV.COMPANYID =#{companyId}
 				</if>
 				
 				<if test="endDate != null and endDate != ''">
@@ -129,10 +130,10 @@
 					AND TV.OPERATORID =#{operId}
 				</if>
 				<if test="depId != null and depId != ''">
-					AND TV.depId  LIKE   #{depId}  + '%'
+					AND TV.depId  LIKE  CONCAT('%',#{depId},'%')
 				</if>
 				<if test="companyId != null and companyId != ''">
-					AND TV.OWNEDID =#{companyId}
+					AND TV.COMPANYID =#{companyId}
 				</if>
 		) A)B
 		LIMIT #{startNum},#{endNum}
@@ -144,10 +145,10 @@
 					AND TV.OPERATORID =#{operId}
 				</if>
 				<if test="depId != null and depId != ''">
-					AND TV.depId  LIKE   #{depId}  + '%'
+					AND TV.depId  LIKE  CONCAT('%',#{depId},'%')
 				</if>
 				<if test="companyId != null and companyId != ''">
-					AND TV.OWNEDID =#{companyId}
+					AND TV.COMPANYID =#{companyId}
 				</if>
 	</select>
 </mapper>

@@ -76,27 +76,27 @@
 						<th width="100px">档案编号：</th>
 						<td width="150px"><input name="fileNumber"
 							class="easyui-validatebox" type="text"
-							data-options="required:true" readOnly="true" /></td>
+							data-options="required:true" /></td>
 						<th width="100px">注册日期：</th>
 						<td width="150px"><input name="driRegDate"
-							class="easyui-datebox" readOnly="true" type="text"
+							class="easyui-datebox" type="text"
 							data-options="required:true" /></td>
 					</tr>
 					<tr>
 						<th>发证日期：</th>
 						<td><input name="driCertDate" class="easyui-datebox"
 							editable="false" type="text" data-options="required:true"
-							readOnly="true" /></td>
+							/></td>
 						<th>强制报废期止：</th>
 						<td><input id="baoFeiDate" name="baoFeiDate"
-							class="easyui-datebox" readOnly="true" /></td>
+							class="easyui-datebox" /></td>
 					</tr>
 					<tr>
 						<th>检测机关：</th>
 						<td><input name="testOrgan" class="easyui-textbox" /></td>
 						<th>到期日期：</th>
 						<td><input name="endDate" class="easyui-datebox"
-							data-options="required:true" editable="false" /></td>
+							data-options="required:true" /></td>
 					</tr>
 					<tr>
 						<th>备注：</th>

@@ -76,24 +76,25 @@
 						<th width="100px">档案编号：</th>
 						<td width="150px"><input  id="fileNumber" name="fileNumber" type="text" readOnly="true" /></td>
 						<th width="100px">注册日期：</th>
-						<td width="150px"><input id="driRegDate" name="driRegDate" class="easyui-datebox" readOnly="true"/></td>
+						<td width="150px"><input id="driRegDate" name="driRegDate" class="easyui-datebox" type="text" readOnly="true"/>
+						</td>
 					</tr>
 					<tr>
 						<th>发证日期：</th>
-						<td><input id="driCertDate" name="driCertDate" class="easyui-datebox" readOnly="true" /></td>
+						<td><input id="driCertDate" name="driCertDate" class="easyui-datebox" type="text" readOnly="true" /></td>
 						<th>强制报废期止：</th>
-						<td><input id="baoFeiDate" name="baoFeiDate" class="easyui-datebox" readOnly="true" /></td>
+						<td><input id="baoFeiDate" name="baoFeiDate" class="easyui-datebox" type="text" readOnly="true" /></td>
 					</tr>
 					<tr>
 						<th>检测机关：</th>
-						<td><input name="testOrgan" class="easyui-validatebox" data-options="required:true"/></td>
+						<td><input id="testOrgan" name="testOrgan" class="easyui-validatebox" data-options="required:true"/></td>
 						<th>到期日期：</th>
-						<td><input name="endDate" class="easyui-datebox"
-							data-options="required:true" editable="false" /></td>
+						<td><input id="endDate" name="endDate" class="easyui-datebox" type="text"
+							data-options="required:true"/></td>
 					</tr>
 					<tr>
 						<th>备注：</th>
-						<td colspan="3"><textarea id="introd" name="introd" cols="20"
+						<td colspan="3"><textarea id="remark" name="remark" cols="20"
 								rows="2" style="width: 100%"> </textarea></td>
 					</tr>
 				</table>

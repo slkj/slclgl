@@ -87,9 +87,13 @@ function getData() {
 							align : 'center',
 							formatter : function(value, row, index) {
 								var s = "";
-								if (row.id != null) {
-									s = '<a href="#" class="roleCls" onclick="view(\'' + row.vId
-											+ '\')">详细</a> ';
+								if (row.traWord != null) {
+									s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:derRecord('" + index + "');\">审验</span></a>";
+									s += "&nbsp;|&nbsp;";
+									s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editFun('" + index + "');\">编辑</span></a>";
+									s += "&nbsp;|&nbsp;";
+									s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:delFun('" + index + "');\">删除</span></a>";
+									
 								}
 								return s;
 							}
@@ -123,11 +127,8 @@ function checkRows() {
 	return selRow[0];
 }
 //删除操作
-function delFun() { 
-	if (!checkRows()) {
-		return;
-	}
-	var obj = checkRows();
+function delFun(index) { 
+	var obj = $('#grid').datagrid('getData').rows[index];
 	if (obj.id == null) {
 		return;
 	}
@@ -138,7 +139,7 @@ function delFun() {
 				success : function(data) {
 					if (data) {
 						$('#grid').datagrid('load');
-						top.max.sysSlideShow({
+						SL.sysSlideShow({
 							msg : '成功删除!'
 						});
 					} else {
@@ -155,12 +156,12 @@ function addFun() {
 		return;
 	}
 	var obj = checkRows();
-	top.max.showWindow({
+	SL.showWindow({
 		title : '添加车辆运输证信息',
 		iconCls : 'icon-add',
 		width : 600,
 		height : 400,
-		url : 'transport/add.jsp',
+		url : 'add.jsp',
 		onLoad : function() {
 			// ajax查询单个信息，form回填数据
 			$.ajax({
@@ -169,22 +170,22 @@ function addFun() {
 				cache : false,
 				success : function(data) {
 					if (data) {
-						top.$("#form").form('load', data);
-						top.$("#vId").val(data.id);
-						top.$("#carNumber").text(data.carNumber);
-						top.$("#regCompanyName").text(data.regCompanyName);
-						top.$("#address").text(data.address);
-						top.$("#wkcc").text(
+						$("#form").form('load', data);
+						$("#vId").val(data.id);
+						$("#carNumber").text(data.carNumber);
+						$("#regCompanyName").text(data.regCompanyName);
+						$("#address").text(data.address);
+						$("#wkcc").text(
 								data.carOutLength + "*" + data.carOutWidth + "*"
 										+ data.carOutHeight);
-						top.$("#ppxh").text(data.carBrand + data.carModel);
-						top.$("#cllx").text(data.classify + data.carType);
-						top.$("#carVin").text(data.carVin);
-						top.$("#carEngNum").text(data.carEngNum);
-						top.$("#carApprGuest").text(data.carApprGuest);
-						top.$("#carTotalmass").text(data.carTotalmass);
-						top.$("#carTrac").text(data.carTrac);
-						top.$("#carNumbers").text(data.carNumber);
+						$("#ppxh").text(data.carBrand + data.carModel);
+						$("#cllx").text(data.classify + data.carType);
+						$("#carVin").text(data.carVin);
+						$("#carEngNum").text(data.carEngNum);
+						$("#carApprGuest").text(data.carApprGuest);
+						$("#carTotalmass").text(data.carTotalmass);
+						$("#carTrac").text(data.carTrac);
+						$("#carNumbers").text(data.carNumber);
 					}
 				}
 			});
@@ -199,7 +200,7 @@ function addFun() {
 		}, {
 			text : '关闭',
 			handler : function() {
-				top.max.closedlg();
+				SL.closeWindow();
 			}
 		} ]
 	});
@@ -207,7 +208,7 @@ function addFun() {
 // ajax 表单提交审验信息
 function saveAjax(url) {
 	if (top.$("#dform").form('enableValidation').form('validate')) {
-		var data = getFormJson(top.$("#dform"));
+		var data = $("#dform").serialize();
 		$.ajax({
 			cache : false,
 			type : "POST",
@@ -217,9 +218,9 @@ function saveAjax(url) {
 			dataType : 'json',
 			success : function(data) {
 				if (data) {
-					top.max.closeWindow();
+					SL.closeWindow();
 					$('#grid').datagrid('load');
-					top.max.sysSlideShow({
+					SL.sysSlideShow({
 						msg : '保存成功'
 					});
 				} else {
@@ -230,21 +231,18 @@ function saveAjax(url) {
 	}
 }
 // 编辑
-function editFun() {
-	if (!checkRows()) {
-		return;
-	}
-	var obj = checkRows();
+function editFun(index) {
+	var obj = $('#grid').datagrid('getData').rows[index];
 	if (obj.id == null) {
 		top.$.messager.alert('提示', '该车辆没有运输证信息，请录入运输证信息。');
 		return;
 	}
-	top.max.showWindow({
+	SL.showWindow({
 		title : '编辑车辆运输证信息',
 		iconCls : 'icon-edit',
 		width : 600,
 		height : 400,
-		url : 'transport/edit.jsp',
+		url : 'edit.jsp',
 		onLoad : function() {
 			// ajax查询车辆单个信息，form回填数据
 			$.ajax({
@@ -253,21 +251,21 @@ function editFun() {
 				cache : false,
 				success : function(data) {
 					if (data) {
-						top.$("#form").form('load', data);
-						top.$("#vId").val(data.id);
-						top.$("#carNumber").text(data.carNumber);
-						top.$("#regCompanyName").text(data.regCompanyName);
-						top.$("#address").text(data.address);
-						top.$("#wkcc").text(
+						$("#form").form('load', data);
+						$("#vId").val(data.id);
+						$("#carNumber").text(data.carNumber);
+						$("#regCompanyName").text(data.regCompanyName);
+						$("#address").text(data.address);
+						$("#wkcc").text(
 								data.carOutLength + "*" + data.carOutWidth + "*"
 										+ data.carOutHeight);
-						top.$("#ppxh").text(data.carBrand + data.carModel);
-						top.$("#cllx").text(data.classify + data.carType);
-						top.$("#carVin").text(data.carVin);
-						top.$("#carEngNum").text(data.carEngNum);
-						top.$("#carApprGuest").text(data.carApprGuest);
-						top.$("#carTotalmass").text(data.carTotalmass);
-						top.$("#carTrac").text(data.carTrac);
+						$("#ppxh").text(data.carBrand + data.carModel);
+						$("#cllx").text(data.classify + data.carType);
+						$("#carVin").text(data.carVin);
+						$("#carEngNum").text(data.carEngNum);
+						$("#carApprGuest").text(data.carApprGuest);
+						$("#carTotalmass").text(data.carTotalmass);
+						$("#carTrac").text(data.carTrac);
 
 					}
 				}
@@ -278,8 +276,8 @@ function editFun() {
 				cache : false,
 				success : function(data) {
 					if (data) {
-						top.$("#dform").form('load', data);
-						top.$("#introd").innerText=data.introd;
+						$("#dform").form('load', data);
+						$("#introd").innerText=data.introd;
 					}
 				}
 			});
@@ -295,14 +293,14 @@ function editFun() {
 		}, {
 			text : '关闭',
 			handler : function() {
-				top.max.closedlg();
+				SL.closeWindow();
 			}
 		} ]
 	});
 }
 // 详细信息
-function view(id) {
-	top.max.showWindow({
+/*function view(id) {
+	SL.showWindow({
 		title : '车辆信息',
 		iconCls : 'icon-search',
 		width : 1000,
@@ -328,27 +326,24 @@ function view(id) {
 		buttons : [ {
 			text : '关闭',
 			handler : function() {
-				top.max.closeWindow();
+				SL.closeWindow();
 			}
 		} ]
 	});
-};
+};*/
 // 车辆审验信息
-function derRecord() {
-	if (!checkRows()) {
-		return;
-	}
-	var obj = checkRows();
+function derRecord(index) {
+	var obj = $('#grid').datagrid('getData').rows[index];
 	if (obj.id == null) {
 		top.$.messager.alert('提示', '该车辆没有运输证信息。');
 		return;
 	}
-	top.max.showWindow({
+	SL.showWindow({
 		title : '审验信息',
 		iconCls : 'icons_26',
 		width : 650,
 		height : 400,
-		url : 'transport/der.jsp',
+		url : 'der.jsp',
 		onLoad : function() {
 			$.ajax({
 				url : '../vehicle/queryOne?id=' + obj.vId,
@@ -356,22 +351,22 @@ function derRecord() {
 				cache : false,
 				success : function(data) {
 					if (data) {
-						top.$("#form").form('load', data);
-						top.$("#vId").val(data.id);
-						top.$("#carNumber").text(data.carNumber);
-						top.$("#regCompanyName").text(data.regCompanyName);
-						top.$("#address").text(data.address);
-						top.$("#wkcc").text(
+						$("#form").form('load', data);
+						$("#vId").val(data.id);
+						$("#carNumber").text(data.carNumber);
+						$("#regCompanyName").text(data.regCompanyName);
+						$("#address").text(data.address);
+						$("#wkcc").text(
 								data.carOutLength + "*" + data.carOutWidth + "*"
 										+ data.carOutHeight);
-						top.$("#ppxh").text(data.carBrand + data.carModel);
-						top.$("#cllx").text(data.classify + data.carType);
-						top.$("#carVin").text(data.carVin);
-						top.$("#carEngNum").text(data.carEngNum);
-						top.$("#carApprGuest").text(data.carApprGuest);
-						top.$("#carTotalmass").text(data.carTotalmass);
-						top.$("#carTrac").text(data.carTrac);
-						top.$("#carNumbers").text(data.carNumber);
+						$("#ppxh").text(data.carBrand + data.carModel);
+						$("#cllx").text(data.classify + data.carType);
+						$("#carVin").text(data.carVin);
+						$("#carEngNum").text(data.carEngNum);
+						$("#carApprGuest").text(data.carApprGuest);
+						$("#carTotalmass").text(data.carTotalmass);
+						$("#carTrac").text(data.carTrac);
+						$("#carNumbers").text(data.carNumber);
 					}
 				}
 			});
@@ -381,12 +376,12 @@ function derRecord() {
 				cache : false,
 				success : function(data) {
 					if (data) {
-						top.$('#vId').val(data.vId);
-						top.$('#traWord').val(data.traWord);
-						top.$('#traCode').val(data.traCode);
-						top.$('#traEcoType').val(data.traEcoType);
-						top.$('#traBusLicNo').val(data.traBusLicNo);
-						top.$('#traBusLicDate').datetimebox({value: data.traBusLicDate});
+						$('#vId').val(data.vId);
+						$('#traWord').val(data.traWord);
+						$('#traCode').val(data.traCode);
+						$('#traEcoType').val(data.traEcoType);
+						$('#traBusLicNo').val(data.traBusLicNo);
+						$('#traBusLicDate').datebox({value: data.traBusLicDate});
 					}
 				}
 			});
@@ -401,7 +396,7 @@ function derRecord() {
 		}, {
 			text : '关闭',
 			handler : function() {
-				top.max.closedlg();
+				SL.closeWindow();
 			}
 		} ]
 	});
@@ -416,7 +411,7 @@ function facRecord() {
 		top.$.messager.alert('提示', '该车辆没有运输证信息。');
 		return;
 	}
-	top.max.showWindow({
+	SL.showWindow({
 		title : '运输证审验信息',
 		iconCls : 'icons_26',
 		width : 650,
@@ -476,8 +471,22 @@ function facRecord() {
 		buttons : [ {
 			text : '关闭',
 			handler : function() {
-				top.max.closedlg();
+				SL.closeWindow();
 			}
 		} ]
 	});
+}
+//将表单数据转为json
+function form2Json(id) {
+	var arr = $("#" + id).serializeArray()
+	var jsonStr = "";
+	jsonStr += '{';
+	for (var i = 0; i < arr.length; i++) {
+		jsonStr += '"' + arr[i].name + '":"' + arr[i].value + '",'
+	}
+	jsonStr = jsonStr.substring(0, (jsonStr.length - 1));
+	jsonStr += '}'
+
+	var json = JSON.parse(jsonStr)
+	return json
 }

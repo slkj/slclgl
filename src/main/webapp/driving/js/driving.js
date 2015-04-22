@@ -3,7 +3,7 @@ $(function() {
 	getData();
 	$("#btn").click(function() {
 		$('#grid').datagrid({
-			queryParams : form2Json("searchform")
+			queryParams : form2Json("searchForm")
 		}); // 点击搜索
 		// 清空表单
 		$('#searchForm').form('clear');
@@ -82,7 +82,7 @@ function getData() {
 							formatter : function(value, row, index) {
 								var s = "";
 								if (row.fileNumber != null) {
-									s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:view('" + row.vId + "');\">详细</span></a>";
+									s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:derRecord('" + index + "');\">审验</span></a>";
 									s += "&nbsp;|&nbsp;";
 									s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editFun('" + index + "');\">编辑</span></a>";
 									s += "&nbsp;|&nbsp;";
@@ -114,11 +114,11 @@ function getData() {
 // 判断是否选择行，返回这一行数据 obj
 function checkRows(index) {
 	
-	var data = grid.datagrid('getData').rows[index];
+	var data = $('#grid').datagrid('getData').rows[index];
 	if (data == null) {
 		top.SL.msgShow("提示", "请选择一行数据！", "warning");
 		return;
-	}alert(data.id);
+	}
 	return data;
 }
 //删除操作
@@ -155,7 +155,7 @@ function addFun() {
 		top.$.messager.alert('提示', '请选择一行数据!', 'info');
 		return false;
 	}
-	var obj = selRow;alert(selRow.id);
+	var obj = selRow[0];
 	SL.showWindow({
 		title : '添加车辆行驶信息',
 		iconCls : 'icon-add',
@@ -226,11 +226,11 @@ function saveAjax(url) {
 	}
 }
 // 编辑
-function editFun(index) {alert(index);
+function editFun(index) {
 	if (!checkRows(index)) {
 		return;
 	}
-	var obj = checkRows(index);alert(obj.id);
+	var obj = checkRows(index);
 	if (obj.id == null) {
 		$.messager.alert('提示', '该车辆没有行驶证信息，请录入行驶证信息。');
 		return;
@@ -296,7 +296,7 @@ function editFun(index) {alert(index);
 		} ]
 	});
 }
-// 详细信息
+/*// 详细信息
 function view(id) {
 	SL.showWindow({
 		title : '车辆信息',
@@ -328,7 +328,7 @@ function view(id) {
 			}
 		} ]
 	});
-};
+};*/
 // 车辆审验信息
 function derRecord(index) {
 	if (!checkRows(index)) {
@@ -344,7 +344,7 @@ function derRecord(index) {
 		iconCls : 'icons_26',
 		width : 650,
 		height : 400,
-		url : 'driving/der.jsp',
+		url : 'der.jsp',
 		onLoad : function() {
 			$.ajax({
 				url : '../vehicle/queryOne?id=' + obj.vId,
@@ -380,9 +380,10 @@ function derRecord(index) {
 						$('#vId').val(data.vId);
 						$('#carNumbers').val(data.carNumbers);
 						$('#fileNumber').val(data.fileNumber);
-						$('#driRegDate').datetimebox({value: data.driRegDate});  
-						$('#driCertDate').datetimebox({value: data.driCertDate});  
-						$('#baoFeiDate').datetimebox({value: data.baoFeiDate});  
+						$('#driRegDate').datebox({value: data.driRegDate});  
+						$('#driCertDate').datebox({value: data.driCertDate});  
+						$('#baoFeiDate').datebox({value: data.baoFeiDate}); 
+						
 					}
 				}
 			});
@@ -472,4 +473,18 @@ function facRecord(index) {
 			}
 		} ]
 	});
+}
+//将表单数据转为json
+function form2Json(id) {
+	var arr = $("#" + id).serializeArray()
+	var jsonStr = "";
+	jsonStr += '{';
+	for (var i = 0; i < arr.length; i++) {
+		jsonStr += '"' + arr[i].name + '":"' + arr[i].value + '",'
+	}
+	jsonStr = jsonStr.substring(0, (jsonStr.length - 1));
+	jsonStr += '}'
+
+	var json = JSON.parse(jsonStr)
+	return json
 }

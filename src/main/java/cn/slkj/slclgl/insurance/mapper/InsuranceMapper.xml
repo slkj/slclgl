@@ -21,10 +21,10 @@
 
 	<insert id="save" parameterType="insurance">
 		INSERT INTO TB_INSURANCE
-		(id, policy, vid, feiyong, insuranceType,
+		( policy, vid, feiyong, insuranceType,
 		 riqi, startTime, endTime, insuranceCompany, checkMan, makeMan, remark)
 		VALUES
-		(#{id}, #{policy},  #{vid}, #{feiyong}, #{insuranceType},
+		( #{policy},  #{vid}, #{feiyong}, #{insuranceType},
 		 #{riqi}, #{startTime}, #{endTime}, #{insuranceCompany}, #{checkMan}, #{makeMan}, #{remark})
 	</insert>
 	

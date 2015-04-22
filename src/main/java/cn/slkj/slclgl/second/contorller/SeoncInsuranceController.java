@@ -140,7 +140,7 @@ public class SeoncInsuranceController {
 	public JsonResult save(SecondInsurance secondInsurance)
 			throws Exception {
 		try {
-			secondInsurance.setId(UUID.randomUUID().toString());
+			
 			int i = secondInsuranceService.save(secondInsurance);
 			if (i != -1) {
 				return new JsonResult(true, "");

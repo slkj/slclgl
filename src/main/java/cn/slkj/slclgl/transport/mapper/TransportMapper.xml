@@ -15,8 +15,8 @@
 	</select>
 
 	<insert id="save" parameterType="transport">
-		INSERT INTO TB_TRANSPORT ( id, vId, traWord, traCode, traBusLicNo, traBusLicDate, traEcoType, remark, createTime, testOrgan, endDate)
-		VALUES ( #{id},#{vId}, #{traWord}, #{traCode}, #{traBusLicNo}, #{traBusLicDate},#{traEcoType},#{remark},CONVERT(varchar(20),GETDATE(), 20),#{testOrgan},#{endDate})
+		INSERT INTO TB_TRANSPORT ( vId, traWord, traCode, traBusLicNo, traBusLicDate, traEcoType, remark, createTime, testOrgan, endDate)
+		VALUES ( #{vId}, #{traWord}, #{traCode}, #{traBusLicNo}, #{traBusLicDate},#{traEcoType},#{remark},now(),#{testOrgan},#{endDate})
 	</insert>
 
 	<update id="edit" parameterType="transport">
