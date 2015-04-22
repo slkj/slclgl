@@ -8,7 +8,7 @@
 	</sql>
 	<sql id="sql_onVehicle">
 		TBD.id,TBD.listnum,TBD.firm,TBD.model,TBD.rktime,TBD.state,TBD.fhtime,TBD.lyr,
-		TBD.lytime,TBD.test,TBV.simNumber as phone,TBD.cstime,TBD.tresult,TBD.gpszj,TBD.gpstx,TBD.gsmtx,TBD.dy,
+		TBD.lytime,TBD.test,TBD.phone as phone,TBD.cstime,TBD.tresult,TBD.gpszj,TBD.gpstx,TBD.gsmtx,TBD.dy,
 		TBD.fsd,TBD.jsq,TBD.sxy,TBD.ysq,TBD.mkf,TBD.remark,TBD.pack,
 		TBV.installers,TBV.installtime,TBV.carNumber,
 		(select compName from  tb_company where id =  TBV.companyId) AS company,TBV.networkNo,
