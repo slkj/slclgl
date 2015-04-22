@@ -94,7 +94,7 @@ function loadDataGrid() {
 											field : 'validTime',
 											title : '有效时间',
 											formatter : function(value, rec) {
-												return value == null ? '长期有效': value;
+												return value == "" ? '长期有效': value;
 											}
 										}] ],
 

@@ -140,7 +140,7 @@
 					<tr>
 						<th>入网证明编号:</th>
 						<td><input name="networkNo" class="easyui-validatebox"
-							style="width: 200px;"  /></td>
+							style="width: 200px;"   data-options="required:true"/></td>
 						<th>安装人:</th>
 						<td><input name="installers" class="easyui-validatebox"
 							style="width: 200px;" data-options="required:true" /></td>

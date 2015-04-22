@@ -9,7 +9,7 @@
 <body>
 
 	<form id="form">
-		<input name="id" type="hidden"/>
+		<input id="id"  name="id" type="hidden"/>
 		<table class="grid">
 			<tr>
 				<th colspan="5" style="text-align: left;color: red;">*如有特殊情况请备注。</th>
@@ -25,7 +25,7 @@
 			<tr>
 				<th style="width: 100px">设   备 ID：</th>
 				<td colspan="3">
-					<input name="listnum" class="easyui-numberbox" data-options="required:'true'" disabled="ture" style="width: 200px"/>
+					<input id="listnum" name="listnum" class="easyui-numberbox" data-options="required:'true'" disabled="ture" style="width: 200px"/>
 				</td>
 			</tr>
 			<tr>
@@ -39,14 +39,14 @@
 			<tr>
 				<th>设备厂商：</th>
 				<td width="150px">
-					<select class="easyui-combobox"  name="firm" panelheight="auto" style="width: 100%" disabled="ture">
+					<select class="easyui-combobox" id="firm" name="firm" panelheight="auto" style="width: 100%" disabled="ture">
 						<option value="珠海天琴">珠海天琴</option>
 						<option value="华宝">华宝</option>
 						<option value="博实杰">博实杰</option>
 					</select>
 				</td>
 				<th>厂牌型号：</th>
-				<td><input name="model" class="easyui-textbox" disabled="ture"></td>
+				<td><input name="model" id="model" class="easyui-textbox" disabled="ture"></td>
 			</tr>
 			<script type="text/javascript">
 	            function selectAll(checkbox) {
@@ -71,12 +71,12 @@
 			<tr>
 				<th>是否测试 ：</th>
 				<td>
-					<label><input name="test" type="radio" value="1"  checked="checked"/>是</label> 
+					<label><input id="ttest" name="test" type="radio" value="1" checked="checked"/>是</label> 
 					<label><input name="test" type="radio" value="0" />否</label>
 				</td>
 				<th>测试结果：</th>
 				<td>
-					<label><input name="tresult" type="radio" value="1"  checked="checked"/>定位</label> 
+					<label><input id="tok" name="tresult" type="radio" value="1"checked="checked"/>定位</label> 
 					<label><input name="tresult" type="radio" value="0" />不定位</label>
 				</td>
 			</tr>

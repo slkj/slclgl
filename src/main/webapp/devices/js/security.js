@@ -205,7 +205,11 @@ function testing(index) {
 		height : 450,
 		url : basePath + 'testing.jsp',
 		onLoad : function() {
-			$("#form").form('load', data);
+//			$("#form").form('load', data);
+			$("#id").val(data.id);
+			$("#listnum").val(data.listnum);
+			$("#firm").val(data.firm);
+			$("#model").val(data.model);
 		},
 		buttons : [ {
 			text : '确定',

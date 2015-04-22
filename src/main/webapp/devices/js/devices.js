@@ -50,7 +50,7 @@ function loadDataGrid() {
 		pageSize : 15,
 		pageList : [ 1, 10, 15, 20, 30, 50 ],
 		loadMsg : '数据加载中,请稍后……',
-		columns : [ [ {
+		frozenColumns : [ [ {
 			field : 'pack',
 			title : '包装',
 			align : 'center',
@@ -112,7 +112,8 @@ function loadDataGrid() {
 			title : 'SIM卡号',
 			sortable : true,
 			order : 'desc',
-		}, {
+		} ] ],
+		columns : [ [ {
 			field : 'lyr',
 			title : '领用人'
 		}, {
@@ -203,11 +204,11 @@ function loadDataGrid() {
 }
 function phone(index) {
 	var data = grid.datagrid('getData').rows[index];
-//	alert(data.phone);
+	// alert(data.phone);
 }
 function carNumber(index) {
 	var data = grid.datagrid('getData').rows[index];
-//	alert(data.carNumber);
+	// alert(data.carNumber);
 }
 function myformatter(date) {
 	var y = date.getFullYear();

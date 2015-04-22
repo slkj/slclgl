@@ -13,7 +13,7 @@
 		Request = GetRequest();
 		uid = Request['id'];
 		$.ajax({
-			url : basePath + "queryOne?id="+uid,
+			url : basePath + "queryOne?id=" + uid,
 			success : function(data) {
 				if (data) {
 					$("#userForm").form('load', data);
@@ -38,10 +38,10 @@
 						top.SL.sysSlideShow({
 							msg : '保存成功!'
 						});
-					}else{
+					} else {
 						SL.msgShow("提示", "该账户已经存在，请更换账户！", "warning");
 					}
-					
+
 				}
 			});
 		}
@@ -63,7 +63,7 @@
 			onclick="javascript:backPage()">返回</a>
 	</div>
 	<form id="userForm" metdod="post">
-	<input name="id" type="hidden"/>
+		<input name="id" type="hidden" />
 		<div class="easyui-accordion" data-options="border:false">
 			<div title="用户基本信息"
 				data-options="collapsed:false,collapsible:false,border:false"
@@ -78,36 +78,41 @@
 					</tr>
 					<tr>
 						<th style="width: 100px">账号：</th>
-						<td><input class="easyui-validatebox" name="username" data-options="required:true" /></td>
+						<td><input class="easyui-validatebox" name="username"
+							data-options="required:true" /></td>
 						<th style="width: 100px">密码：</th>
-						<td><input class="easyui-validatebox" name="password" data-options="required:true"  /></td>
+						<td><input class="easyui-validatebox" name="password"
+							data-options="required:true" /></td>
 					</tr>
 					<tr>
 						<th>用户姓名：</th>
-						<td><input class="easyui-validatebox" name="realname" data-options="required:true" /></td>
+						<td><input class="easyui-validatebox" name="realname"
+							data-options="required:true" /></td>
 						<th>性别：</th>
-						<td>
-							<label><input name="sex" type="radio" value="男" checked="checked" />男 </label>
-							<label><input name="sex" type="radio" value="女" />女</label>
-						</td>
+						<td><label><input name="sex" type="radio" value="男"
+								checked="checked" />男 </label> <label><input name="sex"
+								type="radio" value="女" />女</label></td>
 					</tr>
 					<tr>
 						<th>电子邮件：</th>
 						<td><input name="email" class="easyui-validatebox" /></td>
 						<th>联系电话：</th>
-						<td><input name="phone" class="easyui-validatebox" data-options="required:true" /></td>
+						<td><input name="phone" class="easyui-validatebox"
+							data-options="required:true" /></td>
 					</tr>
 					<tr>
 						<th>有效期：</th>
-						<td><input name="validTime" class="easyui-datebox"
-							required="required"></input></td>
+						<td><input name="validTime" class="easyui-datebox"></input></td>
 						<th>所属公司：</th>
-						<td><select id="companyid" name="company" class="easyui-combotree" style="width:200px;"
-									data-options="url:'../company/getTreeList',lines:true"></select> </td>
+						<td><select id="companyid" name="company"
+							class="easyui-combotree" style="width: 200px;"
+							data-options="url:'../company/getTreeList',lines:true"></select>
+						</td>
 					</tr>
 					<tr>
 						<th>备注：</th>
-						<td colspan="3"><input class="easyui-textbox" name="remark" data-options="multiline:true" style="height: 60px; width: 100%"/></td>
+						<td colspan="3"><input class="easyui-textbox" name="remark"
+							data-options="multiline:true" style="height: 60px; width: 100%" /></td>
 					</tr>
 				</table>
 			</div>

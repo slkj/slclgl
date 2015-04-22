@@ -34,7 +34,7 @@ function loadDataGrid() {
 			colspan : 2
 		},{
 			title : '基本信息',
-			colspan : 4
+			colspan : 5
 		}  ], [ {
 			field : '_state',
 			title : '使用状态',
@@ -49,16 +49,17 @@ function loadDataGrid() {
 			title : '操作',
 			field : '_operate',
 			align : 'center',
-			width : 240,
 			formatter : function(value, row, index) {
 				var s = "";
+				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:approval('" + row.id + "');\">入网审核</span></a>";
+				s += "&nbsp;|&nbsp;";
 				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:vehicleInfo('" + row.id + "');\">详细</span></a>";
 				s += "&nbsp;|&nbsp;";
-				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:inNet('" + row.id + "');\">入网</span></a>";
-				s += "&nbsp;|&nbsp;";
-				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:goBack('" + index + "');\">编辑</span></a>";
+				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editRow('" + row.id + "');\">编辑</span></a>";
 				s += "&nbsp;|&nbsp;";
 				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:deleteRow('" + index + "');\">删除</span></a>";
+				s += "&nbsp;|&nbsp;";
+				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:inNet('" + row.id + "');\">设备安装</span></a>";
 				s += "&nbsp;|&nbsp;";
 				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:detailCarInfo('" + index + "');\">安装记录</span></a>";
 				return s;
@@ -72,6 +73,9 @@ function loadDataGrid() {
 			title : '车主',
 			width : 100
 		}, {
+			field : 'contactsTel',
+			title : '联系电话'
+		},{
 			field : 'fhtime',
 			title : '车辆类型',
 			width : 110,
@@ -175,6 +179,9 @@ function inNet(id) {
 }
 function vehicleInfo(id) {
 	window.location.href = 'vehicleInfo.jsp?id=' + id;
+}
+function approval(id) {
+	window.location.href = 'approval.jsp?id=' + id;
 }
 function deleteRow(index) {
 	$.messager.confirm('提示', '将删除该车辆所有信息，确认删除?', function(row) {

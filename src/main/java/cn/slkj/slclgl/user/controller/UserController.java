@@ -1,5 +1,7 @@
 package cn.slkj.slclgl.user.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,6 +31,7 @@ public class UserController {
 	@Autowired
 	private UserServiceImpl userServiceImpl;
 
+	@SuppressWarnings("unused")
 	@RequestMapping("/login")
 	@ResponseBody
 	public JsonResult login(HttpServletRequest request, ModelMap modelMap, HttpSession session) {
@@ -37,12 +41,38 @@ public class UserController {
 		hashMap.put("username", username.trim());
 		hashMap.put("password", password.trim());
 		User user_login = userServiceImpl.login(hashMap);
+		if (!compare_date(user_login.getValidTime())) {
+			return new JsonResult(false, "用户使用时间到期，请联系管理员！");
+		}
 		if (user_login == null) {
 			return new JsonResult(false, "用户名称或密码错误！");
 		} else {
 			modelMap.addAttribute("userSession", user_login);
 			return new JsonResult(true, "登录成功。");
 		}
+	}
+
+	private boolean compare_date(String DATE1) {
+		if (StringUtils.isBlank(DATE1)) {
+			return true;
+		}
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");// 设置日期格式
+		try {
+			Date dt1 = df.parse(DATE1);
+			Date dt2 = df.parse(df.format(new Date()));
+			if (dt1.getTime() > dt2.getTime()) {
+				// System.out.println("dt1 在dt2前");
+				return true;
+			} else if (dt1.getTime() < dt2.getTime()) {
+				// System.out.println("dt1在dt2后");
+				return false;
+			} else {
+				return false;
+			}
+		} catch (Exception exception) {
+			exception.printStackTrace();
+		}
+		return false;
 	}
 
 	@RequestMapping("/list")
