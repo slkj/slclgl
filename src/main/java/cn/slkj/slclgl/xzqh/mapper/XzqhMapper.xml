@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.slkj.slclgl.xzqh.mapper.XzqhMapper">
+
+	<sql id="sql_temp_xzqh">
+		CODE ,PID ,NOTE ,JC,QC,CC,XH,MZ,LX
+	</sql>
+
+	<select id="findProvince" resultType="Xzqh" parameterType="string">
+		SELECT <include refid="sql_temp_xzqh"/>  FROM TB_XZQH WHERE CODE LIKE '%0000' ORDER BY CODE ASC
+	</select>
+	
+	<select id="findCity" resultType="Xzqh" parameterType="hashmap">
+		SELECT <include refid="sql_temp_xzqh"/>  FROM TB_XZQH
+		WHERE code like  CONCAT(#{id},'__00')    and  code !=  #{code}
+	</select>
+	
+	<select id="findCounty" resultType="xzqh" parameterType="hashmap">
+		SELECT <include refid="sql_temp_xzqh"/>  FROM TB_XZQH
+		 WHERE code like   CONCAT(#{id},'%')   and  code !=  #{code}
+	</select>
+	
+	<select id="queryOne" parameterType="hashmap" resultType="Xzqh">
+		SELECT top 1 <include refid="sql_temp_xzqh"/>  FROM TB_XZQH
+		WHERE   code =  #{code}
+	</select>
+	
+	<select id="queryList" parameterType="string" resultType="Xzqh">
+		SELECT   <include refid="sql_temp_xzqh"/>  FROM TB_XZQH
+		WHERE   code like CONCAT(#{code},'%') 
+	</select>
+</mapper>
