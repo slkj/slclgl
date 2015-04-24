@@ -23,8 +23,8 @@
 					</td>
 					<td>年检日期:</td>
 					<td>
-						<input class="Wdate" type="text" id="endDate"  onClick="WdatePicker()"/>至
-						<input class="Wdate" type="text" id="endDate1"  onClick="WdatePicker()"/>
+						<input id="endDate" name="endDate"	class="easyui-datebox" editable="false" />至
+							<input id="endDate1" name="endDate1" class="easyui-datebox" editable="false" />
 					</td>
 					<td><a id="btn" href="#" class="easyui-linkbutton"
 						data-options="iconCls:'icon-search'">查询</a>
@@ -35,6 +35,10 @@
 				<tr>
 					<td>
 						<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onClick="javascript:addFun();">添加</a>
+					</td>
+					<td><div class="datagrid-btn-separator"></div></td>
+					<td>
+						<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onClick="javascript:facRecord();">运输证记录</a>
 					</td>
 					<td><div class="datagrid-btn-separator"></div></td>
 					<td align="right">

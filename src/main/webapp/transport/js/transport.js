@@ -4,7 +4,7 @@ $(function() {
 	getData();
 	$("#btn").click(function() {
 		$('#grid').datagrid({
-			queryParams : form2Json("searchform")
+			queryParams : form2Json("searchForm")
 		}); // 点击搜索
 		// 清空表单
 		$('#searchForm').form('clear');
@@ -416,10 +416,10 @@ function facRecord() {
 		iconCls : 'icons_26',
 		width : 650,
 		height : 400,
-		url : 'transport/record.jsp',
+		url : 'record.jsp',
 		onLoad : function() {
-			top.$('#facdg').datagrid({
-				url : 'transport/listByVid?vId=' + obj.vId,
+			$('#facdg').datagrid({
+				url : '../transport/listByVid?vId=' + obj.vId,
 				width : 'auto',
 				height : 'auto',
 				fit : true,

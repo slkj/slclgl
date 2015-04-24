@@ -404,11 +404,13 @@ function derRecord(index) {
 	});
 }
 // 审验记录
-function facRecord(index) {
-	if (!checkRows(index)) {
-		return;
+function facRecord() {
+	var selRow = $('#grid').datagrid("getSelections");// 返回选中多行
+	if (selRow.length != 1) {
+		top.$.messager.alert('提示', '请选择一行数据!', 'info');
+		return false;
 	}
-	var obj = checkRows(index);
+	var obj = selRow[0];
 	if (obj.fileNumber == null) {
 		$.messager.alert('提示', '该车辆没有行驶证信息。');
 		return;
@@ -418,10 +420,10 @@ function facRecord(index) {
 		iconCls : 'icons_26',
 		width : 650,
 		height : 400,
-		url : 'driving/record.jsp',
+		url : 'record.jsp',
 		onLoad : function() {
 			$('#facdg').datagrid({
-				url : 'driving/listByVid?vId=' + obj.vId,
+				url : '../driving/listByVid?vId=' + obj.vId,
 				width : 'auto',
 				height : 'auto',
 				fit : true,

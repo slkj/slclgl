@@ -3,7 +3,7 @@ $(function() {
 	getData();
 	$("#btn").click(function() {
 		$('#grid').datagrid({
-			queryParams : form2Json("searchform")
+			queryParams : form2Json("searchForm")
 		}); // 点击搜索
 		// 清空表单
 		$('#searchForm').form('clear');
@@ -445,4 +445,18 @@ function listByCar(){
 			}
 		} ]
 	});
+}
+//将表单数据转为json
+function form2Json(id) {
+	var arr = $("#" + id).serializeArray()
+	var jsonStr = "";
+	jsonStr += '{';
+	for (var i = 0; i < arr.length; i++) {
+		jsonStr += '"' + arr[i].name + '":"' + arr[i].value + '",'
+	}
+	jsonStr = jsonStr.substring(0, (jsonStr.length - 1));
+	jsonStr += '}'
+
+	var json = JSON.parse(jsonStr)
+	return json
 }

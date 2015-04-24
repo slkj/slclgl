@@ -23,8 +23,8 @@
 					</td>
 					<td>下次维护日期:</td>
 					<td>
-						<input class="Wdate" type="text" id="endDate"  onClick="WdatePicker()"/>至
-						<input class="Wdate" type="text" id="endDate1"  onClick="WdatePicker()"/>
+						<input id="endDate" name="endDate"	class="easyui-datebox" editable="false" />至
+							<input id="endDate1" name="endDate1" class="easyui-datebox" editable="false" />
 					</td>
 					<td><a id="btn" href="#" class="easyui-linkbutton"
 						data-options="iconCls:'icon-search'">查询</a>

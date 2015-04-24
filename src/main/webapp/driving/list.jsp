@@ -38,6 +38,10 @@
 						<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onClick="javascript:addFun();">添加</a>
 					</td>
 					<td><div class="datagrid-btn-separator"></div></td>
+					<td>
+						<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onClick="javascript:facRecord();">行驶证记录</a>
+					</td>
+					<td><div class="datagrid-btn-separator"></div></td>
 					<td align="right">
 						<a href="#"  onclick="outExcel()" class="easyui-linkbutton" data-options="iconCls:'pic pic_157',plain:true">导出</a>
 					</td>
