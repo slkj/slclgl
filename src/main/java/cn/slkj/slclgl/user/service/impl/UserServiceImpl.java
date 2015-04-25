@@ -11,7 +11,7 @@ import cn.slkj.slclgl.user.bean.User;
 import cn.slkj.slclgl.user.mapper.UserMapper;
 
 @Repository
-public class UserServiceImpl{
+public class UserServiceImpl {
 	@Autowired
 	private UserMapper usermapper;
 
@@ -26,10 +26,11 @@ public class UserServiceImpl{
 	public int getAllUsersCount(Map<String, Object> map) {
 		return usermapper.getAllUsersCount(map);
 	}
-	
+
 	public User queryOne(HashMap<String, Object> hashMap) {
 		return usermapper.queryOne(hashMap);
 	}
+
 	public int save(User user) {
 		return usermapper.save(user);
 	}
@@ -51,6 +52,21 @@ public class UserServiceImpl{
 	public int valid(HashMap<String, Object> hashMap) {
 		// TODO Auto-generated method stub
 		return usermapper.valid(hashMap);
+	}
+
+	public List<User> listByRole(Map<String, Object> pageMap) {
+		// TODO Auto-generated method stub
+		return usermapper.listByRole(pageMap);
+	}
+
+	public int listByRoleCount(Map<String, Object> pageMap) {
+		// TODO Auto-generated method stub
+		return usermapper.listByRoleCount(pageMap);
+	}
+
+	public int saveRole(HashMap<String, Object> hashMap) {
+		// TODO Auto-generated method stub
+		return usermapper.saveRole(hashMap);
 	}
 
 }

@@ -77,54 +77,112 @@ public class DevicesExportExcel {
 		if (result == null) {
 			return null;
 		}
-		int rowLength = result.length;
+		toDevices(result);
+		// int rowLength = result.length;
 		// 默认从1 开始 本来是为0 剔除掉
+		// for (int i = 0; i < rowLength; i++) {
+		// Devices devices = new Devices();
+		// for (int j = 0; j < result[i].length; j++) {// 默认从1开始添加
+		// switch (j) {
+		// case 0:
+		// String str = result[i][j].length() > 0 ? result[i][j] : "2";
+		// if("已出库".equals(str)){str = "1";}
+		// if("未出库".equals(str)){str = "2";}
+		// if("退回".equals(str)){str = "3";}
+		// if("入网使用".equals(str)){str = "4";}
+		// devices.setState(Integer.parseInt(str));
+		// break;
+		// case 1:devices.setListnum(result[i][j]);break;
+		// case 2:devices.setPhone(result[i][j]);break;
+		// case 3:devices.setFirm(result[i][j]);break;
+		// case 4:devices.setModel(result[i][j]);break;
+		// case 5:devices.setRktime(result[i][j]);break;
+		// case 6:devices.setLyr(result[i][j]);break;
+		// case 7:devices.setLytime(result[i][j]);break;
+		// case 8:devices.setFhtime(result[i][j]);break;
+		// case 9:devices.setInstallers(result[i][j]);break;
+		// case 10:devices.setInstalltime(result[i][j]);break;
+		// case 11:devices.setCarNumber(result[i][j]);break;
+		// case 12:devices.setCompany(result[i][j]);break;
+		// case 13:devices.setNetworkNo(result[i][j]);break;
+		// case 14:
+		// String test = result[i][j].length() > 0 ? result[i][j] : "0";
+		// if("未测试".equals(test)){test = "0";}
+		// if("已测试".equals(test)){test = "1";}
+		// devices.setTest(Integer.parseInt(test));
+		// break;
+		// case 15:devices.setCstime(result[i][j]); break;
+		// case 16:
+		// String tresult = result[i][j].length() > 0 ? result[i][j] :
+		// "0";
+		// if("不定位".equals(tresult)){tresult = "0";}
+		// if("定位".equals(tresult)){tresult = "1";}
+		// devices.setTresult(Integer.parseInt(tresult));
+		// break;
+		// case 17:devices.setArea(result[i][j]); break;
+		// }
+		// }
+		// impl.insert(toDevices(result[i]));
+		// }
+		return "ok";
+	}
+
+	private void toDevices(String[][] result) {
+		int rowLength = result.length;
 		for (int i = 0; i < rowLength; i++) {
 			Devices devices = new Devices();
 			for (int j = 0; j < result[i].length; j++) {// 默认从1开始添加
 				switch (j) {
 				case 0:
-					String str = result[i][j].length() > 0 ? result[i][j] : "2";
-					if("已出库".equals(str)){str = "1";} 
-					if("未出库".equals(str)){str = "2";}
-					if("退回".equals(str)){str = "3";}
-					if("入网使用".equals(str)){str = "4";}
-					devices.setState(Integer.parseInt(str));
+					String str = result[i][j];
+					if (str.length() <= 0) {
+						str = "0";
+					} else {
+						if ("全新".equals(str)) {
+							str = "0";
+						}
+						if ("返修".equals(str)) {
+							str = "1";
+						}
+						if ("0".equals(str)) {
+							str = "0";
+						}
+						if ("1".equals(str)) {
+							str = "1";
+						}
+					}
+					devices.setPack(Integer.parseInt(str));
 					break;
-				case 1:devices.setListnum(result[i][j]);break;
-				case 2:devices.setPhone(result[i][j]);break;
-				case 3:devices.setFirm(result[i][j]);break;
-				case 4:devices.setModel(result[i][j]);break;
-				case 5:devices.setRktime(result[i][j]);break;
-				case 6:devices.setLyr(result[i][j]);break;
-				case 7:devices.setLytime(result[i][j]);break;
-				case 8:devices.setFhtime(result[i][j]);break;
-				case 9:devices.setInstallers(result[i][j]);break;
-				case 10:devices.setInstalltime(result[i][j]);break;
-				case 11:devices.setCarNumber(result[i][j]);break;
-				case 12:devices.setCompany(result[i][j]);break;
-				case 13:devices.setNetworkNo(result[i][j]);break;
-				case 14:
-					String test = result[i][j].length() > 0 ? result[i][j] : "0";
-					if("未测试".equals(test)){test = "0";} 
-					if("已测试".equals(test)){test = "1";}
-					devices.setTest(Integer.parseInt(test));
+				case 1:
+					String str1 = result[i][j].length() > 0 ? result[i][j] : "2";
+					if ("已出库".equals(str1)) {
+						str1 = "1";
+					}
+					if ("未出库".equals(str1)) {
+						str1 = "2";
+					}
+					if ("退回".equals(str1)) {
+						str1 = "3";
+					}
+					if ("入网使用".equals(str1)) {
+						str1 = "4";
+					}
+					devices.setState(Integer.parseInt(str1));
 					break;
-				case 15:devices.setCstime(result[i][j]); break;
-				case 16:
-					String tresult = result[i][j].length() > 0 ? result[i][j] : "0";
-					if("不定位".equals(tresult)){tresult = "0";} 
-					if("定位".equals(tresult)){tresult = "1";}
-					devices.setTresult(Integer.parseInt(tresult));
+				case 2:devices.setListnum(result[i][j]);break;
+				case 3:
+					devices.setFirm(result[i][j]);
 					break;
-				case 17:devices.setArea(result[i][j]); break;
+				case 4:
+					devices.setModel(result[i][j]);
+					break;
+				case 5:
+					devices.setRktime(result[i][j]);
+					break;
 				}
-				
-
 			}
 			impl.insert(devices);
 		}
-		return "ok";
 	}
 
 	// 将MultipartFile 转换为File

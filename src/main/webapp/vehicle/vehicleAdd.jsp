@@ -71,6 +71,12 @@
 							name="county" id="county" /></td>
 					</tr>
 					<tr>
+						<th style="width: 120px">所属公司：</th>
+						<td colspan="3"><input id="companyId" class="easyui-combobox"
+							name="companyId" style="width: 300px;"
+							data-options="required:true,valueField:'id',textField:'compName',url:'../company/queryComList'" /></td>
+					</tr>
+					<tr>
 						<th style="width: 120px">业户/车主:</th>
 						<td style="width: 290px"><input name="carOwner"
 							class="easyui-validatebox" data-options="required:true"
@@ -97,29 +103,9 @@
 						<td><input id="carNumber" name="carNumber"
 							class="easyui-validatebox" data-options="required:true"
 							style="width: 200px;" /></td>
-						<th>所属公司:</th>
-						<td><input id="companyId" class="easyui-combobox"
-							name="companyId" style="width: 200px;"
-							data-options="required:true,valueField:'id',textField:'compName',url:'../company/queryComList'" />
-							<!-- 							<select id="companyId" name="companyId" --> <!-- 							class="easyui-combotree" style="width: 200px;" -->
-							<!-- 							data-options="url:'../company/getTreeList',required:true,lines:true"></select> -->
-							<!-- 							<a id="btn" href="#" class="easyui-linkbutton" --> <!-- 							data-options="iconCls:'icon-reload',plain:true"></a> -->
-
-						</td>
-					</tr>
-					<tr>
 						<th>车牌号(挂):</th>
 						<td><input id="carNumberG" name="carNumberG"
 							style="width: 200px;" data-options="required:true" /></td>
-						<th>车牌颜色:</th>
-						<td><select name="plateColor" class="easyui-combobox"
-							data-options="required:true" style="width: 100px;">
-								<option selected="selected" value="黄牌">黄牌</option>
-								<option value="蓝牌">蓝牌</option>
-								<option value="黑牌">黑牌</option>
-								<option value="白牌">白牌</option>
-								<option value="其他">其他</option>
-						</select></td>
 					</tr>
 					<tr>
 						<th>车辆类型:</th>
@@ -136,27 +122,38 @@
 							style="width: 150px;"
 							data-options="url:'../data/carcalss_data.json',required:true,lines:true,panelHeight:300,panelWidth:200"></select>
 						</td>
+						<th>车牌颜色:</th>
+						<td><select name="plateColor" class="easyui-combobox"
+							data-options="required:true" style="width: 100px;">
+								<option selected="selected" value="黄牌">黄牌</option>
+								<option value="蓝牌">蓝牌</option>
+								<option value="黑牌">黑牌</option>
+								<option value="白牌">白牌</option>
+								<option value="其他">其他</option>
+						</select></td>
+					</tr>
+					<tr>
+
 						<th>车辆品牌:</th>
 						<td><input id="carBrand" name="carBrand"
 							class="easyui-validatebox" data-options="required:true"
 							style="width: 200px;" /></td>
-					</tr>
-					<tr>
 						<th>车辆型号:</th>
 						<td><input id="carModel" name="carModel"
 							class="easyui-validatebox" style="width: 200px;" /></td>
+					</tr>
+					<tr>
+						<th nowrap="nowrap">识别代号/车架号:</th>
+						<td><input id="carVin" name="carVin"
+							class="easyui-validatebox" data-options="required:true"
+							style="width: 200px;" /></td>
 						<th>车身颜色:</th>
 						<td><input id="carColor" name="carColor"
 							class="easyui-validatebox" data-options="required:true"
 							style="width: 200px;" /></td>
 					</tr>
 
-					<tr>
-						<th nowrap="nowrap">识别代号/车架号:</th>
-						<td><input id="carVin" name="carVin"
-							class="easyui-validatebox" data-options="required:true"
-							style="width: 200px;" /></td>
-
+					<tr style="display: none;">
 						<th>使用性质:</th>
 						<td><select id="carUseNatu" class="easyui-combobox"
 							name="carUseNatu" style="width: 200px;"

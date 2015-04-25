@@ -23,27 +23,8 @@
 			</div>
 			<table id="grid"></table>
 		</div>
-		<div id="right-panel" data-options="region:'east',title:'权限设置',split:true"
-			style="width: 600px;">
-			<div class="easyui-layout" fit="true">
-				<div region="center" style="padding: 1px;">
-					<div class="easyui-panel" data-options="fit:true,border:false,title:'菜单列表',tools:'#tt'">
-<!-- 						<table id="reslist"></table> -->
-						<ul id="reslist"></ul>  
-					</div>
-					<div id="tt">
-						<a href="#" class="icon-save" onclick="roleModule()"></a>
-					</div>
-				</div>
-				<div data-options="region:'east',split:true" style="width: 240px;">
-					<div id="tt1">
-						<a href="#" class="icon-save" onclick="javascript:alert('add')"></a>
-					</div>
-					<div class="easyui-panel" data-options="fit:true,border:false,title:'操作按钮列表',tools:'#tt1'">
-						<table id="reslist"></table>
-					</div>
-				</div>
-			</div>
+		<div id="right-panel" data-options="region:'east',title:'权限设置',split:true" style="width: 600px;">
+	
 		</div>
 	</div>
 </body>

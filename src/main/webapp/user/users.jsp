@@ -9,7 +9,7 @@
 <script type="text/javascript" src="js/user.js"></script>
 </head>
 <body class="easyui-layout">
-	<div data-options="region:'north'" >
+	<div data-options="region:'north'"  style="height: 35px;padding: 5px">
 		<form name="searchform" method="post" action="" id="searchform">
 			<table cellspacing="0" cellpadding="0" style="padpadding: 5px">
 				<tr>
@@ -18,11 +18,11 @@
 							<option value="" selected="selected">请选择</option>
 							<option value="enabled">启用</option>
 							<option value="disabled">禁用</option>
-					</select> 用户名:<input name="username" type="text" style="width: 150px" /> <a
+					</select>
+					 用户名:<input name="username" type="text" style="width: 150px" /> <a
 						id="search_btn" href="#" class="easyui-linkbutton"
-						data-options="iconCls:'icon-search'">查询</a> <a href="#"
-						onclick="outExcel()" class="easyui-linkbutton"
-						data-options="iconCls:'pic_157'">导出</a>
+						data-options="iconCls:'icon-search'">查询</a>
+<!-- 						 <a href="#" onclick="outExcel()" class="easyui-linkbutton" data-options="iconCls:'pic_157'">导出</a> -->
 					</td>
 				</tr>
 			</table>

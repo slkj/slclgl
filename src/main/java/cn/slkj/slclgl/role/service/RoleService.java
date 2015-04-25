@@ -75,5 +75,9 @@ public class RoleService {
 		map.put("ids", ids);
 		return mapper.deleteRoleRes(map);
 	}
+	public List<Role> queryAll(Map<String, Object> pageMap) {
+		// TODO Auto-generated method stub
+		return mapper.queryAll(pageMap);
+	}
 
 }

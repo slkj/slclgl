@@ -49,7 +49,13 @@ public class RoleController {
 		List<Role> list = service.getAll(pageMap);
 		return new EPager<Role>(total, list);
 	}
-
+	@RequestMapping("/queryAll")
+	@ResponseBody
+	public List<Role> queryAll(HttpServletRequest request) throws Exception {
+		Map<String, Object> pageMap = new HashMap<String, Object>();
+		List<Role> list = service.queryAll(pageMap);
+		return list;
+	}
 	@ResponseBody
 	@RequestMapping(value = "/queryOne")
 	public Role queryOne(String id) {

@@ -148,7 +148,7 @@
 					<tr>
 						<th>安装日期:</th>
 						<td>
-							<img onclick="WdatePicker({el:'installtime',dateFmt:'yyyy-MM-dd HH:mm:ss'})" src="../js/My97DatePicker/skin/datePicker.gif" width="16" height="22" align="absmiddle"/>
+							<img onclick="WdatePicker({el:'installtime',dateFmt:'yyyy-MM-dd'})" src="../js/My97DatePicker/skin/datePicker.gif" width="16" height="22" align="absmiddle"/>
 							<input id="installtime" name="installtime" class="easyui-validatebox" style="width: 200px;" data-options="required:true"/>
 						</td>
 						<th>安装地点:</th>

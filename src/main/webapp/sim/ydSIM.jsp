@@ -131,7 +131,7 @@
 			height : 350,
 			url : basePath + 'simAdd.jsp',
 			onLoad : function() {
-				$("#type").val("1");
+				$("#type").val("2");
 			},
 			buttons : [ {
 				text : '确定',

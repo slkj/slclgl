@@ -25,4 +25,10 @@ public interface UserMapper {
 	int resetPwd(String[] ids);
 
 	int valid(HashMap<String, Object> hashMap);
+
+	List<User> listByRole(Map<String, Object> pageMap);
+
+	int listByRoleCount(Map<String, Object> pageMap);
+
+	int saveRole(HashMap<String, Object> hashMap);
 }

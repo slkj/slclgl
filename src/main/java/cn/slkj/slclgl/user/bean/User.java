@@ -7,7 +7,7 @@ public class User implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Integer id;
+	private String id;
 	private String username;
 	private String password;
 	private String status = "enabled";
@@ -22,6 +22,14 @@ public class User implements Serializable {
 	private String remark;
 	private String lastTime;
 	private String validTime;
+	private String roleId;
+	public String getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
+	}
 
 	public String getValidTime() {
 		return validTime;
@@ -65,11 +73,11 @@ public class User implements Serializable {
 		this.lastTime = lastTime;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

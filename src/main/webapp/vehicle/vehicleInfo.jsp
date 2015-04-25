@@ -163,10 +163,6 @@
 						<td><input id="carTotalmass" name="carTotalmass"
 							class="easyui-numberbox" style="width: 200px;" />kg</td>
 					</tr>
-				</table>
-			</div>
-			<div title="车辆其他信息(选填项)" data-options="border:false">
-				<table class="grid">
 					<tr>
 						<th style="width: 120px">发动机型号:</th>
 						<td style="width: 290px"><input id="carEngModel"

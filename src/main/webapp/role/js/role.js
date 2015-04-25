@@ -1,6 +1,5 @@
 var grid;
 var basePath = "../role/";
-var roleid;
 
 $(function() {
 	loadData();
@@ -38,14 +37,15 @@ function loadData() {
 			field : 'opt',
 			title : '操作',
 			align : 'center',
-			width : 150,
 			formatter : function(value, row, index) {
 				var s = "";
-				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:loadTree('" + row.name + "','" + row.id + "');\">权限修改</span></a>";
+				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:delRow('" + index + "');\">删除</span></a>";
 				s += "&nbsp;|&nbsp;";
 				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editFun('" + index + "');\">编辑</span></a>";
 				s += "&nbsp;|&nbsp;";
-				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:delRow('" + index + "');\">删除</span></a>";
+				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:loadUser('" + row.name + "','" + row.id + "');\">用户</span></a>";
+				s += "&nbsp;|&nbsp;";
+				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:loadModlue('" + row.name + "','" + row.id + "');\">权限修改</span></a>";
 				return s;
 			}
 		} ] ],
@@ -144,20 +144,57 @@ function fCallback(url) {
 		});
 	}
 }
-function loadTree(name, id) {
+var roleid;
+function loadUser(name, id) {
 	$('#right-panel').panel({
-		title : "[" + name + "]:当前权限"
+		title : "[" + name + "]",
+		href : 'allotUser.jsp',
+		onLoad : function() {
+			$('#userdg').datagrid({
+				title :'用户列表',
+				url : '../user/listByRole?id='+id,
+				loadMsg : '数据加载中....',
+				fit : true,
+				rownumbers : true, // 行号
+				pagination : true,
+				pageSize : 20,
+				pageList : [ 1, 10, 15, 20, 30, 50 ],
+				columns : [ [ {
+					field : 'username',
+					title : '用户名',
+					width : 150
+				}, {
+					field : 'realname',
+					title : '姓名',
+					width : 150
+				} ] ]
+
+			});
+			// 设置分页控件
+			$('#userdg').datagrid('getPager').pagination({
+				beforePageText : '第',// 页数文本框前显示的汉字
+				afterPageText : '页    共 {pages} 页',
+				displayMsg : ' {from} - {to} 共 {total} 条'
+			});
+		}
 	});
-	$('#reslist').tree({
-		url : '../module/role2Module?roleId=' + id,
-		loadMsg : '数据加载中....',
-		lines : true,
-		checkbox : true
-	});
+}
+function loadModlue(name, id) {
 	roleid = id;
+	$('#right-panel').panel({
+		title : "[" + name + "]:当前权限",
+		href : 'allotRes.jsp',
+		onLoad : function() {
+			$('#reslist').tree({
+				url : '../module/role2Module?roleId=' + id,
+				loadMsg : '数据加载中....',
+				lines : true,
+				checkbox : true
+			});
+		}
+	});
 }
 function roleModule() {
-
 	var nodes = $('#reslist').tree('getChecked', [ 'checked', 'indeterminate' ]);
 	var ids = [];
 	for (var i = 0; i < nodes.length; i++) {
@@ -194,6 +231,7 @@ function saveInfo(ids) {
 		}
 	});
 }
+
 function delRow(index) {
 	var data = grid.datagrid('getData').rows[index];
 	if (data == null) {

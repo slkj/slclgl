@@ -10,6 +10,11 @@
 	var basePath = "../user/";
 	var Request = new Object();
 	$(function() {
+		$('#roleId').combobox({    
+		    url:'../role/queryAll',    
+		    valueField:'id',    
+		    textField:'name'   
+		});
 		Request = GetRequest();
 		uid = Request['id'];
 		$.ajax({
@@ -70,16 +75,18 @@
 				style="overflow: auto;">
 				<table class="grid">
 					<tr>
-						<th style="width: 100px">用户类型 ：</th>
-						<td colspan="3"><select name="type" class="easyui-combobox">
-								<option selected="selected" value="1">个人用户</option>
-								<option value="2">公司用户</option>
+							<th style="width: 100px">用户类型 ：</th>
+						<td><select name="type" class="easyui-combobox">
+								<option value="1">个人用户</option>
+								<option value="2" selected="selected">公司用户</option>
 						</select></td>
+						<th style="width: 100px">角色:</th>
+						<td><input id="roleId" name="roleId" /> </td>
 					</tr>
 					<tr>
 						<th style="width: 100px">账号：</th>
 						<td><input class="easyui-validatebox" name="username"
-							data-options="required:true" /></td>
+							data-options="required:true" disabled="disabled"/></td>
 						<th style="width: 100px">密码：</th>
 						<td><input class="easyui-validatebox" name="password"
 							data-options="required:true" /></td>

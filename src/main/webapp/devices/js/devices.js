@@ -509,8 +509,12 @@ function ajaxLoading() {
 }
 
 function outExcel() {
-	window.location.href = "outExcel.jsp";
+	window.location.href = "../download.do?name=GPS.xls";
 }
+function openExcel(){
+	 $('#openExcel').dialog('open');
+}
+
 function ajaxLoadEnd() {
 	$(".datagrid-mask").remove();
 	$(".datagrid-mask-msg").remove();
@@ -523,11 +527,12 @@ function ajaxFileUpload() {
 			url : '../upload/excel', // 你处理上传文件的服务端
 			secureuri : false, // 是否启用安全提交,默认为false
 			fileElementId : 'myfile', // 文件选择框的id属性
-			dataType : 'text', // 服务器返回的格式,可以是json或xml等
+			dataType : 'json', // 服务器返回的格式,可以是json或xml等
 			beforeSend : ajaxLoading,// 发送请求前打开进度条
 			success : function(data, status) { // 服务器响应成功时的处理函数
 				ajaxLoadEnd();// 任务执行成功，关闭进度条
 				grid.datagrid('reload');
+				 $('#openExcel').dialog('open');
 				$("#myfile").val("");
 			}
 		});

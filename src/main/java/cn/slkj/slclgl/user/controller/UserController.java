@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -41,6 +42,9 @@ public class UserController {
 		hashMap.put("username", username.trim());
 		hashMap.put("password", password.trim());
 		User user_login = userServiceImpl.login(hashMap);
+		if (user_login == null) {
+			return new JsonResult(false, "用户名或密码错误。");
+		}
 		if (!compare_date(user_login.getValidTime())) {
 			return new JsonResult(false, "用户使用时间到期，请联系管理员！");
 		}
@@ -90,6 +94,20 @@ public class UserController {
 		return new EPager<User>(total, list);
 	}
 
+	@RequestMapping("/listByRole")
+	@ResponseBody
+	public EPager<User> listByRole(HttpServletRequest request,
+			@RequestParam(required = false, defaultValue = "1") Integer page,// 第几页
+			@RequestParam(required = false, defaultValue = "20") Integer rows) {
+		Map<String, Object> pageMap = new HashMap<String, Object>();
+		pageMap.put("roleid", request.getParameter("id"));
+		pageMap.put("startPage", (page - 1) * rows);
+		pageMap.put("endPage", rows);
+		List<User> list = userServiceImpl.listByRole(pageMap);
+		int total = userServiceImpl.listByRoleCount(pageMap);
+		return new EPager<User>(total, list);
+	}
+
 	@ResponseBody
 	@RequestMapping(value = "/queryOne")
 	public User queryOne(String id) {
@@ -110,10 +128,16 @@ public class UserController {
 			if (u != null) {
 				return new JsonResult(false, "用户已经存在，请重新填写。");
 			} else {
+				user.setId(UUID.randomUUID().toString());
 				i = userServiceImpl.save(user);
 			}
 			if (i != -1) {
+				if(StringUtils.isNotBlank(user.getRoleId())){
+					saveRole(user.getId(),user.getRoleId());	
+				}
 				return new JsonResult(true, "操作成功。");
+			}else{
+				return new JsonResult(false, "操作失败！");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -121,6 +145,13 @@ public class UserController {
 		return new JsonResult(false, "操作失败！");
 	}
 
+	private boolean saveRole(String uid,String rid){
+		HashMap<String, Object> hashMap = new HashMap<String, Object>();
+		hashMap.put("uid",uid);
+		hashMap.put("rid",rid);
+		userServiceImpl.saveRole(hashMap);
+		return false;
+	}
 	@ResponseBody
 	@RequestMapping(value = "/editUser", method = RequestMethod.POST)
 	public JsonResult editUser(User user) {
@@ -128,6 +159,9 @@ public class UserController {
 			int i = -1;
 			i = userServiceImpl.edit(user);
 			if (i != -1) {
+				if(StringUtils.isNotBlank(user.getRoleId())){
+					saveRole(user.getId(),user.getRoleId());	
+				}
 				return new JsonResult(true, "操作成功。");
 			}
 		} catch (Exception e) {

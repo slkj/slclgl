@@ -11,126 +11,115 @@ $(function() {
 	});
 });
 function loadDataGrid() {
-	grid = $("#gird")
-			.datagrid(
-					{ // title : '用户列表',
-						url : basePath + 'list',
-						loadMsg : '数据加载中....',
-						fit : true,
-						nowrap : true, // false:折行
-						rownumbers : true, // 行号
-						striped : true, // 隔行变色
-						pagination : true,
-						pageSize : 20,
-						pageList : [ 1, 10, 15, 20, 30, 50 ],
-						fitColumns : true,
-						frozenColumns : [ [ {
-							field : 'ck',
-							checkbox : true
-						}, {
-							title : '编号',
-							field : 'id',
-							sortable : true
-						} ] ],
-						columns : [
-								[
-										{
-											title : '基本信息',
-											colspan : 8
-										},
-										{
-											field : 'opt',
-											title : '操作',
-											width : 150,
-											align : 'center',
-											rowspan : 2,
-											formatter : function(value, row, index) {
-												var s = "";
-												s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editRow('"
-													+ index + "');\">权限设置</span></a>";
-												s += "&nbsp;|&nbsp;";
-												s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editRow('"
-														+ index + "');\">编辑</span></a>";
-												s += "&nbsp;|&nbsp;";
-												s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:deleteRow('"
-														+ index + "');\">删除</span>&nbsp;&nbsp;</a>";
-												return s;
-											}
-										} ],
-								[
-										{
-											field : 'username',
-											title : '用户名',
-											width : 150
-										},
-										{
-											field : 'status',
-											title : '状态',
-											formatter : function(value, rec) {
-												return value == 'enabled' ? '启用'
-														: '<span style="color:red">禁用</span>';
-											}
-										}, {
-											field : 'realname',
-											title : '姓名',
-											width : 150
-										}, {
-											field : 'phone',
-											title : '联系方式',
-											width : 90
-										}, {
-											field : 'companyName',
-											title : '所属公司',
-											width : 150
-										}, {
-											field : 'lastTime',
-											title : '最后登录',
-											width : 150
-										}, {
-											field : 'create_time',
-											title : '创建时间',
-											width : 150
-										}, {
-											field : 'validTime',
-											title : '有效时间',
-											formatter : function(value, rec) {
-												return value == "" ? '长期有效': value;
-											}
-										}] ],
+	grid = $("#gird").datagrid({ // title : '用户列表',
+		url : basePath + 'list',
+		loadMsg : '数据加载中....',
+		fit : true,
+		nowrap : true, // false:折行
+		rownumbers : true, // 行号
+		striped : true, // 隔行变色
+		singleSelect : true,// 是否单选
+		pagination : true,
+		pageSize : 20,
+		pageList : [ 1, 10, 15, 20, 30, 50 ],
+		fitColumns : true,
+//		frozenColumns : [ [ {
+//			field : 'ck',
+//			checkbox : true
+//		}, {
+//			title : '编号',
+//			field : 'id',
+//			sortable : true
+//		} ] ],
+		columns : [ [ {
+			title : '基本信息',
+			colspan : 8
+		}, {
+			field : 'opt',
+			title : '操作',
+			width : 150,
+			align : 'center',
+			rowspan : 2,
+			formatter : function(value, row, index) {
+				var s = "";
+				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:show('" + index + "');\">详细</span></a>";
+				s += "&nbsp;|&nbsp;";
+				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editRow('" + index + "');\">编辑</span></a>";
+				s += "&nbsp;|&nbsp;";
+				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:deleteRow('" + index + "');\">删除</span>&nbsp;&nbsp;</a>";
+				return s;
+			}
+		} ], [ {
+			field : 'username',
+			title : '用户名',
+			width : 150
+		}, {
+			field : 'status',
+			title : '状态',
+			formatter : function(value, rec) {
+				return value == 'enabled' ? '启用' : '<span style="color:red">禁用</span>';
+			}
+		}, {
+			field : 'realname',
+			title : '姓名',
+			width : 150
+		}, {
+			field : 'phone',
+			title : '联系方式',
+			width : 90
+		}, {
+			field : 'companyName',
+			title : '所属公司',
+			width : 150
+		}, {
+			field : 'lastTime',
+			title : '最后登录',
+			width : 150
+		}, {
+			field : 'create_time',
+			title : '创建时间',
+			width : 150
+		}, {
+			field : 'validTime',
+			title : '有效时间',
+			formatter : function(value, rec) {
+				return value == "" ? '长期有效' : value;
+			}
+		} ] ],
 
-						toolbar : [ {
-							id : 'btnadd',
-							text : '新增用户',
-							iconCls : 'icon-add',
-							handler : function() {
-								openDialog_add();
-							}
-						}, '-', {
-							id : 'btnstart',
-							text : '批量启用',
-							iconCls : 'icon-ok',
-							handler : function() {
-								batch('enabled');
-							}
-						}, '-', {
-							id : 'btnstop',
-							text : '批量禁用',
-							iconCls : 'icon-remove',
-							handler : function() {
-								batch('disabled');
-							}
-						}, '-', {
-							id : 'btnreast',
-							text : '密码重置',
-							iconCls : 'icon-reload',
-							handler : function() {
-								batch('reast');
-							}
-						}, ],
-						onLoadSuccess : function() {
-							grid.datagrid('clearSelections');
-						}
-					});
+		toolbar : [ {
+			id : 'btnadd',
+			text : '新增用户',
+			iconCls : 'icon-add',
+			handler : function() {
+				openDialog_add();
+			}
+		}, '-', {
+			id : 'btnstart',
+			text : '批量启用',
+			iconCls : 'icon-ok',
+			handler : function() {
+				batch('enabled');
+			}
+		}, '-', {
+			id : 'btnstop',
+			text : '批量禁用',
+			iconCls : 'icon-remove',
+			handler : function() {
+				batch('disabled');
+			}
+		}, '-', {
+			id : 'btnreast',
+			text : '密码重置',
+			iconCls : 'icon-reload',
+			handler : function() {
+				batch('reast');
+			}
+		} ],
+		onLoadSuccess : function() {
+			grid.datagrid('clearSelections');
+		}
+	});
 
 	// 设置分页控件
 	grid.datagrid('getPager').pagination({
@@ -149,6 +138,11 @@ function editRow(index) {
 	var data = grid.datagrid('getData').rows[index];
 	window.location.href = 'userEdit.jsp?id=' + data.id;
 }
+function show(index) {
+	var data = grid.datagrid('getData').rows[index];
+	window.location.href = 'show.jsp?id=' + data.id;
+}
+
 function deleteRow(index) {
 	var data = grid.datagrid('getData').rows[index];
 	top.$.messager.confirm('确认', '您确认想要删除记录吗？', function(r) {

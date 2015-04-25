@@ -35,6 +35,9 @@
 				<if test="phone != null and phone != ''">
 					AND TBV.SIMNUMBER  LIKE   CONCAT('%',#{phone},'%')   
 				</if>
+				<if test="companyId != null and companyId != ''">
+					AND TBV.COMPANYID  = #{companyId}  
+				</if>
 				<if test="companyName != null and companyName != ''">
 					AND TBC.COMPNAME  LIKE   CONCAT('%',#{companyName},'%')   
 				</if>
@@ -69,6 +72,9 @@
 				</if>
 				<if test="phone != null and phone != ''">
 					AND TBV.SIMNUMBER  LIKE   CONCAT('%',#{phone},'%')   
+				</if>
+				<if test="companyId != null and companyId != ''">
+					AND TBV.COMPANYID  = #{companyId}  
 				</if>
 				<if test="companyName != null and companyName != ''">
 					AND TBC.COMPNAME  LIKE   CONCAT('%',#{companyName},'%')   
