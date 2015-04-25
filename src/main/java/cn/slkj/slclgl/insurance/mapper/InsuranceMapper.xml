@@ -179,4 +179,16 @@
 					AND TV.COMPANYID =#{companyId}
 				</if>
 	</select>
+	<insert id="saveCompany" parameterType="insuranceCompany">
+		INSERT INTO tb_insurance_company 
+	(companyName,shortName,linkman,phone,address)
+VALUES
+	(#{companyName},#{shortName},#{linkman},#{phone},#{address})
+	</insert>
+	<insert id="saveType" parameterType="insuranceType">
+		INSERT INTO tb_insurance_type 
+	(typeName,remark)
+VALUES
+	(#{typeName},#{remark})
+	</insert>
 </mapper>

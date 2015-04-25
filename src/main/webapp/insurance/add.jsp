@@ -75,14 +75,17 @@
 					<td><input type="text" name="policy" class="easyui-validatebox"
 						style="width: 150px" data-options="required:true" /></td>
 						<th align="right">投保类型:</th>
-					<td><input id="insuranceType" name="insuranceType" style="width: 150px;" data-options="required:true" /></td>
+					<td> <input id="insuranceType" name="insuranceType" style="width: 150px;" data-options="required:true" /> 
+					<!-- <input id="typeName" name="typeName" style="width: 150px;" data-options="required:true" /> --></td>
 				 	</tr>
 				<tr>
 				 	<th align="right">费用(元):</th>
 					<td><input name="feiyong" style="width: 150px;" class="easyui-numberbox" data-options="required:true" /></td>
 				<th align="right">承保单位:</th>
-					<td><input id="insuranceCompany" name="insuranceCompany"
-						style="width: 150px;" data-options="required:true" /></td>
+					<td> <input id="insuranceCompany" name="insuranceCompany"
+						style="width: 150px;" data-options="required:true" />
+						<!-- <input id="companyName" name="companyName"
+						style="width: 150px;" data-options="required:true" /> --></td>
 				</tr>
 			
 				<tr>
