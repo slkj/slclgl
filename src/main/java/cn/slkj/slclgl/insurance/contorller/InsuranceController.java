@@ -108,7 +108,12 @@ public class InsuranceController {
 	public JsonResult save(Insurance insurance)
 			throws Exception {
 		try {
-			
+			/*InsuranceCompany c=new InsuranceCompany();
+			c.setShortName(insurance.getCompanyName());
+			int i=insuranceService.saveCompany(c);
+			InsuranceType t=new InsuranceType();
+			t.setTypeName(insurance.getTypeName());
+			int i=insuranceService.saveType(t);*/
 			int i = insuranceService.save(insurance);
 			if (i != -1) {
 				return new JsonResult(true, "");

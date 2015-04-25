@@ -144,4 +144,29 @@ private static Logger log = LoggerFactory.getLogger(InsuranceService.class);
 	public EPager<Insurance> listByVid(HashMap<String, Object> map) {
 		return new EPager<Insurance>(mapper.listByVidCount(map), mapper.listByVid(map));
 	}
+	/**
+	 * 添加保险类型
+	 * @param Agent
+	 */
+	public int saveType(InsuranceType insuranceType) {
+		try {
+			
+			return mapper.saveType(insuranceType);
+		} catch (Exception e) {e.printStackTrace();
+			return -1;
+		}
+	}
+	/**
+	 * 添加保险公司
+	 * @param Agent
+	 */
+	public int saveCompany(InsuranceCompany insuranceCompany) {
+		try {
+			
+			return mapper.saveCompany(insuranceCompany);
+		} catch (Exception e) {e.printStackTrace();
+			return -1;
+		}
+	}
+	
 }

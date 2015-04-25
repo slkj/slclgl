@@ -92,4 +92,15 @@ public interface InsuranceMapper {
 	 */
 	public List<Insurance> listByVid(HashMap<String, Object> map);
 	public int listByVidCount(HashMap<String, Object> map);
+	
+	/**
+	 * 保存保险类型
+	 * @param Insurance
+	 */
+	public int saveType(InsuranceType insuranceType);
+	/**
+	 * 保存保险公司
+	 * @param Insurance
+	 */
+	public int saveCompany(InsuranceCompany insuranceCompany);
 }
