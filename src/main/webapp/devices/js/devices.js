@@ -46,11 +46,14 @@ function loadDataGrid() {
 		striped : true, // 隔行变色
 		pagination : true,
 		fitColumns : true,
-		singleSelect : true,
+		// singleSelect : true,
 		pageSize : 15,
 		pageList : [ 1, 10, 15, 20, 30, 50 ],
 		loadMsg : '数据加载中,请稍后……',
 		frozenColumns : [ [ {
+			field : 'ck',
+			checkbox : true
+		}, {
 			field : 'pack',
 			title : '包装',
 			align : 'center',
@@ -63,17 +66,19 @@ function loadDataGrid() {
 				}
 				return s;
 			}
-		}, {
-			field : 'opt',
-			title : '操作',
-			align : 'center',
-			formatter : function(value, row, index) {
-				var s = "";
-				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:outRepertory('" + index + "');\">出库</span></a>";
-				s += "&nbsp;|&nbsp;";
-				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:goBack('" + index + "');\">退回</span></a>";
-				return s;
-			}
+		// }, {
+		// field : 'opt',
+		// title : '操作',
+		// align : 'center',
+		// formatter : function(value, row, index) {
+		// var s = "";
+		// s += "<a href=\"javascript:void(0)\"><span
+		// onclick=\"javaScript:outRepertory('" + index + "');\">出库</span></a>";
+		// s += "&nbsp;|&nbsp;";
+		// s += "<a href=\"javascript:void(0)\"><span
+		// onclick=\"javaScript:goBack('" + index + "');\">退回</span></a>";
+		// return s;
+		// }
 		}, {
 			field : 'state',
 			title : '使用状态',
@@ -251,7 +256,6 @@ function outRepertory(index) {
 		height : 450,
 		url : basePath + 'outRepertory.jsp',
 		onLoad : function() {
-
 			$('#txtarea').combotree({
 				url : '../data/city_data.json',
 				required : true,
@@ -274,17 +278,119 @@ function outRepertory(index) {
 		} ]
 	});
 }
+function del() {
+	// 得到选中的行
+	var selRow = grid.datagrid("getSelections");// 返回选中多行
+	if (selRow.length == 0) {
+		SL.msgShow("提示", "请至少选择一行数据!！", "warning");
+		return false;
+	}
+	var ids = [];
+	for (var i = 0; i < selRow.length; i++) {
+		var id = selRow[i].id;
+		ids.push(id);
+	}
+	var param = {
+		ids : ids
+	};
+	$.messager.confirm('提示框', '你确定要删除吗?', function(data) {
+		if (data) {
+			$.ajax({
+				cache : false,
+				type : "POST",
+				url : "../devices/deletes",
+				data : param,
+				dataType : "json",
+				cache : false,
+				success : function(data) {
+					if (data) {
+						grid.datagrid('reload');
+						SL.sysSlideShow({
+							msg : "操作成功"
+						});
+					}
+				}
+			});
+		}
+	});
+}
+function ck() {
+	// 得到选中的行
+	var selRow = grid.datagrid("getSelections");// 返回选中多行
+	if (selRow.length == 0) {
+		SL.msgShow("提示", "请至少选择一行数据!！", "warning");
+		return false;
+	}
+	var ids = [];
+	for (var i = 0; i < selRow.length; i++) {
+		var id = selRow[i].id;
+		ids.push(id);
+	}
+	SL.showWindow({
+		title : 'GPS设备出入库信息',
+		iconCls : 'icon-add',
+		width : 550,
+		height : 450,
+		url : basePath + 'ck.jsp',
+		onLoad : function() {
+			$('#txtarea').combotree({
+				url : '../data/city_data.json',
+				required : true,
+				lines : true
+			});
+			// $("#form").form('load', data);
+			// $('#txtarea').combotree('setValue', data.area);
+		},
+		buttons : [ {
+			text : '确定',
+			iconCls : 'icon-add',
+			handler : function() {
+				// fCallback("../devices/outRepertory");
+				// if ($("#form").form('enableValidation').form('validate')) {
+				// var data = $("#form").serialize();
+				var param = {
+					ids : ids,
+					area : $('#txtarea').combotree('getValue'),
+					lyr : $('#lyr').val(),
+					lytime : $('#lytime').datebox('getValue'),
+					remark : $('#remark').val()
+				};
+				$.ajax({
+					cache : false,
+					type : "POST",
+					url : "../devices/outRep",
+					data : param,
+					dataType : "json",
+					cache : false,
+					success : function(data) {
+						if (data) {
+							grid.datagrid('reload');
+							SL.closeWindow();
+						}
+					}
+				});
+			}
+		// }
+		}, {
+			text : '关闭',
+			handler : function() {
+				SL.closeWindow();
+			}
+		} ]
+	});
+}
 // 退回
-function goBack(index) {
-	var data = grid.datagrid('getData').rows[index];
-	if (data.state == 2) {
-		SL.msgShow("提示", "设备未出库，请确认信息。", "warning");
-		return;
-	}
-	if (data.state == 3) {
-		SL.msgShow("提示", "设备未出库，请确认信息。", "warning");
-		return;
-	}
+function goBack() {
+	// var data = grid.datagrid('getData').rows[index];
+	// if (data.state == 2) {
+	// SL.msgShow("提示", "设备未出库，请确认信息。", "warning");
+	// return;
+	// }
+	// if (data.state == 3) {
+	// SL.msgShow("提示", "设备未出库，请确认信息。", "warning");
+	// return;
+	// }
+	var selRow = grid.datagrid("getSelections");
 	SL.showWindow({
 		title : '设备返回信息',
 		iconCls : 'icon-add',
@@ -428,6 +534,14 @@ function autoSIM(vID) {
 	});
 }
 // 入库
+function closedDiv() {
+	$('#listnum').show();
+	$('#listdiv').hide();
+}
+function showDiv() {
+	$('#listdiv').show();
+	$('#listnum').hide();
+}
 function intoRepertory() {
 	SL.showWindow({
 		title : 'GPS设备出入库信息',
@@ -453,22 +567,22 @@ function intoRepertory() {
 	});
 }
 function fCallback(url) {
-	if ($("#form").form('enableValidation').form('validate')) {
-		var data = $("#form").serialize();
-		$.ajax({
-			cache : false,
-			type : "POST",
-			url : url,
-			data : data,
-			async : false,
-			success : function(data) {
-				if (data) {
-					grid.datagrid('reload');
-					SL.closeWindow();
-				}
+	// if ($("#form").form('enableValidation').form('validate')) {
+	var data = $("#form").serialize();
+	$.ajax({
+		cache : false,
+		type : "POST",
+		url : url,
+		data : data,
+		async : false,
+		success : function(data) {
+			if (data) {
+				grid.datagrid('reload');
+				SL.closeWindow();
 			}
-		});
-	}
+		}
+	});
+	// }
 }
 // 编辑
 function edit() {
@@ -511,8 +625,8 @@ function ajaxLoading() {
 function outExcel() {
 	window.location.href = "../download.do?name=GPS.xls";
 }
-function openExcel(){
-	 $('#openExcel').dialog('open');
+function openExcel() {
+	$('#openExcel').dialog('open');
 }
 
 function ajaxLoadEnd() {
@@ -532,7 +646,7 @@ function ajaxFileUpload() {
 			success : function(data, status) { // 服务器响应成功时的处理函数
 				ajaxLoadEnd();// 任务执行成功，关闭进度条
 				grid.datagrid('reload');
-				 $('#openExcel').dialog('open');
+				$('#openExcel').dialog('open');
 				$("#myfile").val("");
 			}
 		});

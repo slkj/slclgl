@@ -38,7 +38,35 @@ public class Devices {
 	private String networkNo;
 	private String area;
 	private String  areaName;
+	private String listNo;
+	private int addType;
+	private String listnum_begin;
+	private String listnum_end;
 	
+	public String getListNo() {
+		return listNo;
+	}
+	public void setListNo(String listNo) {
+		this.listNo = listNo;
+	}
+	public int getAddType() {
+		return addType;
+	}
+	public void setAddType(int addType) {
+		this.addType = addType;
+	}
+	public String getListnum_begin() {
+		return listnum_begin;
+	}
+	public void setListnum_begin(String listnum_begin) {
+		this.listnum_begin = listnum_begin;
+	}
+	public String getListnum_end() {
+		return listnum_end;
+	}
+	public void setListnum_end(String listnum_end) {
+		this.listnum_end = listnum_end;
+	}
 	public String getArea() {
 		return area;
 	}

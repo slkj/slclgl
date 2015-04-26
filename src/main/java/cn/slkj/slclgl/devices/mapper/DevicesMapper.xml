@@ -118,6 +118,20 @@
 		WHERE ID=#{id}
 	</update>
 	
+	<update id="ckData" parameterType="hashmap">
+		UPDATE TB_DEVICES SET 
+                  state=1 ,lyr =#{lyr},lytime=#{lytime},area=#{area},areaName= (select note from tb_xzqh where code = #{area})
+                  WHERE ID in
+		<foreach collection="ids" index="index" item="item" open="(" separator="," close=")">   
+	        #{item}   
+	    </foreach> 
+	</update>
+	<delete id="deletes" parameterType="list">
+		DELETE FROM TB_DEVICES WHERE ID in
+		<foreach item="ids" collection="array" open="(" separator="," close=")">
+			#{ids}
+		</foreach>
+	</delete>
 	<insert id="insert_record" parameterType="Devices">
 		INSERT INTO TB_DEVICES_RECORD (devices_id,fhtime,remark)
 		VALUES(#{id},#{fhtime},#{remark} )

@@ -1,5 +1,6 @@
 package cn.slkj.slclgl.devices.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,5 +29,9 @@ public interface DevicesMapper {
 	List<Devices_record> getAllRecord(Map<String, Object> pageMap);
 
 	Devices queryOne(Map<String, Object> map);
+
+	int ckData(HashMap<String, Object> map);
+
+	int deletes(String[] ids);
 
 }

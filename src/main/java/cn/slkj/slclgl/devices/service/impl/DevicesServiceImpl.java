@@ -1,5 +1,6 @@
 package cn.slkj.slclgl.devices.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +37,9 @@ public class DevicesServiceImpl implements DevicesService {
 		// TODO Auto-generated method stub
 		return mapper.outRepertory(devices);
 	}
+	public int outRepertory(HashMap<String, Object> map) {
+		return mapper.ckData(map);
+	}
 
 	public int goBack(Devices devices) {
 		// TODO Auto-generated method stub
@@ -71,4 +75,9 @@ public class DevicesServiceImpl implements DevicesService {
 		return mapper.queryOne(map);
 	}
 
+	public int deletes(String[] ids) {
+		// TODO Auto-generated method stub
+		return mapper.deletes(ids);
+	}
+	
 }

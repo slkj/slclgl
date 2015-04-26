@@ -1,6 +1,7 @@
 package cn.slkj.slclgl.devices.controller;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.slkj.easyui.util.EPager;
@@ -80,7 +82,25 @@ public class DevicesController {
 	@RequestMapping(value = "/addDevices", method = { RequestMethod.POST })
 	@ResponseBody
 	public boolean addDevices(Devices devices) {
-		int i = impl.insert(devices);
+		int i = 0;
+		if (devices.getAddType() == 1) {
+			int begin = Integer.parseInt(devices.getListnum_begin());
+			int end = Integer.parseInt(devices.getListnum_end());
+			for (int j = begin; j <= end ; j++) {
+				devices.setListnum("");
+				StringBuilder sb = new StringBuilder();
+				sb.append(devices.getListNo());
+				// 0 代表前面补充0     
+			    // 4 代表长度为4     
+			    // d 代表参数为正数型     
+			    String str = String.format("%04d", j);    
+				sb.append(str);
+				devices.setListnum(sb.toString());
+				i = impl.insert(devices);
+			}
+		} else {
+			i = impl.insert(devices);
+		}
 		if (i > 0) {
 			return true;
 		} else {
@@ -99,6 +119,34 @@ public class DevicesController {
 		}
 	}
 
+	@RequestMapping(value = "/outRep")
+	@ResponseBody
+	public boolean outRep(@RequestParam(value = "ids[]") String[] ids,
+			 String area,String lyr,String lytime,String remark) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ids", ids);
+		map.put("area", area);
+		map.put("lyr", lyr);
+		map.put("lytime", lytime);
+		map.put("remark", remark);
+		int i = impl.outRepertory(map);
+		if (i > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@RequestMapping(value = "/deletes")
+	@ResponseBody
+	public boolean deletes(@RequestParam(value = "ids[]") String[] ids ) {
+		int i = impl.deletes(ids);
+		if (i > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	@RequestMapping(value = "/goBack", method = { RequestMethod.POST })
 	@ResponseBody
 	public boolean goBack(Devices devices) {

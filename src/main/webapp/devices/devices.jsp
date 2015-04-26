@@ -79,8 +79,20 @@
 						onClick="javascript:intoRepertory();">入库</a></td>
 					<td><div class="datagrid-btn-separator"></div></td>
 					<td><a href="#" class="easyui-linkbutton"
+						data-options="iconCls:'icon-add',plain:true"
+						onClick="javascript:ck();">出库</a></td>
+					<td><div class="datagrid-btn-separator"></div></td>
+					<td><a href="#" class="easyui-linkbutton"
+						data-options="iconCls:'icon-edit',plain:true"
+						onClick="javascript:goBack();">退回</a></td>
+					<td><div class="datagrid-btn-separator"></div></td>
+					<td><a href="#" class="easyui-linkbutton"
 						data-options="iconCls:'icon-edit',plain:true"
 						onClick="javascript:edit();">编辑</a></td>
+					<td><div class="datagrid-btn-separator"></div></td>
+					<td><a href="#" class="easyui-linkbutton"
+						data-options="iconCls:'icon-remove',plain:true"
+						onClick="javascript:del();">删除</a></td>
 					<td><div class="datagrid-btn-separator"></div></td>
 					<td align="right"><a href="#" onclick="outExcel()"
 						class="easyui-linkbutton"
@@ -97,13 +109,16 @@
 	</div>
 	<table id="dg"></table>
 	<div id="openExcel" class="easyui-dialog" closed="true"
-	 title="设备Excel导入" buttons="#dlg-buttons" style="width: 400px; height: 200px;top: 150px;left: 200px" >
-	  	<span style="color: red;">*如导入失败，请将Excel另存为格式选择为Excel 97/2003的*.xls文件</span>
-		 <input id="myfile" name="myfile" style="width: 200px" type="file" /> 
-		 <span id="msg" style="color: red;"></span>
+		title="设备Excel导入" buttons="#dlg-buttons"
+		style="width: 400px; height: 200px; top: 150px; left: 200px">
+		<span style="color: red;">*如导入失败，请将Excel另存为格式选择为Excel
+			97/2003的*.xls文件</span> <input id="myfile" name="myfile" style="width: 200px"
+			type="file" /> <span id="msg" style="color: red;"></span>
 	</div>
-	 <div id="dlg-buttons">
-      <a href="#" class="easyui-linkbutton" data-options="iconCls:'pic pic_154',plain:true" onclick="return ajaxFileUpload();">导入</a> 
-    </div>
+	<div id="dlg-buttons">
+		<a href="#" class="easyui-linkbutton"
+			data-options="iconCls:'pic pic_154',plain:true"
+			onclick="return ajaxFileUpload();">导入</a>
+	</div>
 </body>
 </html>

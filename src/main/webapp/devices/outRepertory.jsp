@@ -9,7 +9,6 @@
 <body>
 
 	<form id="form">
-		<input name="id" type="hidden"/>
 		<table class="grid">
 			<tr>
 				<th colspan="5" style="text-align: left;color: red;">*如有特殊情况请备注。</th>

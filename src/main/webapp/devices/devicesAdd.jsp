@@ -10,21 +10,36 @@
 
 	<form id="form">
 		<input name="state" value="2" type="hidden"/>
-		<table class="grid">
+		<table class="grid" style="width: 100%">
 			<tr>
 				<th colspan="4" style="text-align: left;color: red;">*请检查设备ID、SIM卡号、入网证明编号是否已存在，已存在数据将重复无法保存。</th>
 			</tr>
 			<tr>
 				<th style="width: 100px">设备包装：</th>
-				<td colspan="3">
+				<td>
 					<label><input name="pack" type="radio" value="0"  checked="checked"/>全新</label>
 					<label><input name="pack" type="radio" value="1" />返修</label> 
+				</td>
+				<th style="width: 100px">设备包装：</th>
+				<td >
+					<label><input name="addType" type="radio" value="0"  checked="checked" onclick="closedDiv()"/>单个加</label>
+					<label><input name="addType" type="radio" value="1" onclick="showDiv()"/>批量加</label> 
 				</td>
 			</tr>
 			<tr>
 				<th style="width: 100px">设备ID：</th>
-				<td  colspan="3">
-					<input name="listnum" class="easyui-numberbox" data-options="required:'true'" style="width: 300px">
+				<td  colspan="3" >	
+					<div id="listnum" style="display: block;">
+						<input id="listnum"  name="listnum" class="easyui-validatebox" data-options="required:'true'" style="width: 200px;">
+					</div>
+					<div id="listdiv" style="display: none;">
+						<input name="listNo" class="easyui-validatebox" data-options="required:'true'" style="width: 200px">
+						<br/>（不包括后四位，例如"CX201005031234"请输入"CX20100503"）
+						<br/>	
+						<input name="listnum_begin" class="easyui-validatebox" data-options="required:'true'" style="width: 100px">
+						- 
+						<input name="listnum_end" class="easyui-validatebox"  data-options="required:'true'" style="width: 100px">
+					</div>
 				</td>
 			</tr>
 <!-- 			<tr> -->
@@ -40,7 +55,7 @@
 <!-- 			</tr> -->
 			<tr>
 				<th>设备厂商：</th>
-				<td width="150px">
+				<td>
 					<select class="easyui-combobox"  name="firm"  style="width: 100%" data-options="required:'true'">
 								<option value="神龙">神龙</option>
 								<option value="珠海天琴">珠海天琴</option>
