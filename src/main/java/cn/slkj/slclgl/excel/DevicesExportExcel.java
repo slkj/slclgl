@@ -16,6 +16,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -26,6 +27,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,16 +35,20 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import cn.slkj.slclgl.devices.bean.Devices;
 import cn.slkj.slclgl.devices.service.impl.DevicesServiceImpl;
+import cn.slkj.slclgl.sim.bean.Sim;
+import cn.slkj.slclgl.sim.service.impl.SimServiceImpl;
+import cn.slkj.slclgl.user.bean.User;
 
 @Controller
 @RequestMapping("/upload")
 public class DevicesExportExcel {
 	@Autowired
 	private DevicesServiceImpl impl;
-
+	@Autowired
+	private SimServiceImpl simServiceImpl;
 	@ResponseBody
-	@RequestMapping("/excel")
-	public String upload(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping("/excel/{t}")
+	public String upload(@PathVariable String t,HttpServletRequest request, HttpServletResponse response,HttpSession session) {
 
 		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd/HH");
 		/** 构建图片保存的目录 **/
@@ -77,57 +83,65 @@ public class DevicesExportExcel {
 		if (result == null) {
 			return null;
 		}
-		toDevices(result);
-		// int rowLength = result.length;
-		// 默认从1 开始 本来是为0 剔除掉
-		// for (int i = 0; i < rowLength; i++) {
-		// Devices devices = new Devices();
-		// for (int j = 0; j < result[i].length; j++) {// 默认从1开始添加
-		// switch (j) {
-		// case 0:
-		// String str = result[i][j].length() > 0 ? result[i][j] : "2";
-		// if("已出库".equals(str)){str = "1";}
-		// if("未出库".equals(str)){str = "2";}
-		// if("退回".equals(str)){str = "3";}
-		// if("入网使用".equals(str)){str = "4";}
-		// devices.setState(Integer.parseInt(str));
-		// break;
-		// case 1:devices.setListnum(result[i][j]);break;
-		// case 2:devices.setPhone(result[i][j]);break;
-		// case 3:devices.setFirm(result[i][j]);break;
-		// case 4:devices.setModel(result[i][j]);break;
-		// case 5:devices.setRktime(result[i][j]);break;
-		// case 6:devices.setLyr(result[i][j]);break;
-		// case 7:devices.setLytime(result[i][j]);break;
-		// case 8:devices.setFhtime(result[i][j]);break;
-		// case 9:devices.setInstallers(result[i][j]);break;
-		// case 10:devices.setInstalltime(result[i][j]);break;
-		// case 11:devices.setCarNumber(result[i][j]);break;
-		// case 12:devices.setCompany(result[i][j]);break;
-		// case 13:devices.setNetworkNo(result[i][j]);break;
-		// case 14:
-		// String test = result[i][j].length() > 0 ? result[i][j] : "0";
-		// if("未测试".equals(test)){test = "0";}
-		// if("已测试".equals(test)){test = "1";}
-		// devices.setTest(Integer.parseInt(test));
-		// break;
-		// case 15:devices.setCstime(result[i][j]); break;
-		// case 16:
-		// String tresult = result[i][j].length() > 0 ? result[i][j] :
-		// "0";
-		// if("不定位".equals(tresult)){tresult = "0";}
-		// if("定位".equals(tresult)){tresult = "1";}
-		// devices.setTresult(Integer.parseInt(tresult));
-		// break;
-		// case 17:devices.setArea(result[i][j]); break;
-		// }
-		// }
-		// impl.insert(toDevices(result[i]));
-		// }
+		if("0".equals(t)){
+			toDevices(result,session);
+		}else if("1".equals(t)){
+			toSim(result,session);
+		}
+		
 		return "ok";
 	}
 
-	private void toDevices(String[][] result) {
+	private void toSim(String[][] result,HttpSession session) {
+		int rowLength = result.length;
+		for (int i = 0; i < rowLength; i++) {
+			Sim sim = new Sim();
+			for (int j = 0; j < result[i].length; j++) {// 默认从1开始添加
+				switch (j) {
+				case 0:
+					sim.setTelnum(result[i][j]);
+					break;
+				case 1:
+					sim.setCardType(result[i][j]);
+					break;
+				case 2:
+					sim.setBusiness(result[i][j]);
+					break;
+				case 3:
+					sim.setRenewtime(result[i][j]);
+					break;
+				case 4:
+					sim.setGys(result[i][j]);
+					break;
+				case 5:
+					sim.setListnum(result[i][j]);
+					break;
+				case 6:
+					sim.setBeizhu(result[i][j]);
+					break;
+				case 7:
+					String str = result[i][j];
+					if (str.length() <= 0) {
+						str = "1";
+					} else {
+						if ("联通".equals(str)) {
+							str = "1";
+						}
+						if ("移动".equals(str)) {
+							str = "2";
+						}
+					}
+					sim.setType(Integer.parseInt(str));
+					break;
+				}
+			}
+			User user = (User) session.getAttribute("userSession");
+			sim.setLrr(user.getRealname());
+			simServiceImpl.insert(sim);
+		}
+	}
+
+	private void toDevices(String[][] result,HttpSession session) {
 		int rowLength = result.length;
 		for (int i = 0; i < rowLength; i++) {
 			Devices devices = new Devices();
@@ -181,6 +195,7 @@ public class DevicesExportExcel {
 					break;
 				}
 			}
+			User user = (User) session.getAttribute("userSession");
 			impl.insert(devices);
 		}
 	}

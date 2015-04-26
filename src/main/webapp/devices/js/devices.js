@@ -627,7 +627,16 @@ function edit() {
 		} ]
 	});
 }
-// 采用jquery easyui loading css效果
+function outExcel() {
+//	window.location.href = "../download.do?name=GPS.xls";
+}
+function excelMB() {
+	window.location.href = "../download.do?name=GPS.xls";
+}
+function openExcel() {
+	$('#openExcel').dialog('open');
+}
+//采用jquery easyui loading css效果
 function ajaxLoading() {
 	$("<div class=\"datagrid-mask\"></div>").css({
 		display : "block",
@@ -640,14 +649,6 @@ function ajaxLoading() {
 		top : ($(window).height() - 45) / 2
 	});
 }
-
-function outExcel() {
-	window.location.href = "../download.do?name=GPS.xls";
-}
-function openExcel() {
-	$('#openExcel').dialog('open');
-}
-
 function ajaxLoadEnd() {
 	$(".datagrid-mask").remove();
 	$(".datagrid-mask-msg").remove();
@@ -657,7 +658,7 @@ function ajaxFileUpload() {
 	$("#msg").empty();
 	if ($("#myfile").val().length > 0) {
 		$.ajaxFileUpload({
-			url : '../upload/excel', // 你处理上传文件的服务端
+			url : '../upload/excel/0', // 你处理上传文件的服务端
 			secureuri : false, // 是否启用安全提交,默认为false
 			fileElementId : 'myfile', // 文件选择框的id属性
 			dataType : 'json', // 服务器返回的格式,可以是json或xml等
@@ -665,7 +666,7 @@ function ajaxFileUpload() {
 			success : function(data, status) { // 服务器响应成功时的处理函数
 				ajaxLoadEnd();// 任务执行成功，关闭进度条
 				grid.datagrid('reload');
-				$('#openExcel').dialog('open');
+				$('#openExcel').dialog('close');
 				$("#myfile").val("");
 			}
 		});

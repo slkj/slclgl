@@ -233,9 +233,9 @@
 		<div class="menu-sep"></div>
 		<div id="closeright">当前页右侧全部关闭</div>
 		<div id="closeleft">当前页左侧全部关闭</div>
-		<div class="menu-sep"></div>
-		<div id="exit">退出</div>
+<!-- 		<div class="menu-sep"></div> -->
+<!-- 		<div id="exit">退出</div> -->
 	</div>
-	<div id="dd" />
+	<div id="dd" ></div>
 </body>
 </html>

@@ -134,7 +134,18 @@ function addTab(subtitle, url, icon) {
 		});
 	} else {
 		$('#tabs').tabs('select', subtitle);
+		//刷新tabs
+		var currentTab = $('#tabs').tabs('getSelected');
+		var iframe = $(currentTab.panel('options').content);
+		var src = iframe.attr('src');
+		$('#tabs').tabs('update', {
+			tab : currentTab,
+			options : {
+				content : createFrame(src)
+			}
+		})
 		$('#mm-tabupdate').click();
+		
 	}
 	tabClose();
 }

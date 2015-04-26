@@ -96,7 +96,7 @@
 					<td><div class="datagrid-btn-separator"></div></td>
 					<td align="right"><a href="#" onclick="outExcel()"
 						class="easyui-linkbutton"
-						data-options="iconCls:'pic pic_157',plain:true">导入模板下载</a></td>
+						data-options="iconCls:'pic pic_157',plain:true">导出</a></td>
 					<td><div class="datagrid-btn-separator"></div></td>
 					<td style="text-align: right;"><a href="#"
 						class="easyui-linkbutton"
@@ -116,6 +116,9 @@
 			type="file" /> <span id="msg" style="color: red;"></span>
 	</div>
 	<div id="dlg-buttons">
+		<a href="#" class="easyui-linkbutton"
+			data-options="iconCls:'pic pic_154',plain:true"
+			onclick="return excelMB();">导入模板下载</a>
 		<a href="#" class="easyui-linkbutton"
 			data-options="iconCls:'pic pic_154',plain:true"
 			onclick="return ajaxFileUpload();">导入</a>
