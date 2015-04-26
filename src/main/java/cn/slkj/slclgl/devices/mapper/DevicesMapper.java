@@ -34,4 +34,6 @@ public interface DevicesMapper {
 
 	int deletes(String[] ids);
 
+	int edit(Devices devices);
+
 }

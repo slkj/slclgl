@@ -132,6 +132,14 @@
 			#{ids}
 		</foreach>
 	</delete>
+	<update id="edit" parameterType="Devices">
+		UPDATE TB_DEVICES SET  
+			 pack =#{pack},listnum=#{listnum},firm=#{firm},model= #{model},remark=#{remark},
+			 gsmtx=#{gsmtx},gpszj=#{gpszj},dy=#{dy},fsd=#{fsd},jsq=#{jsq},
+			 sxy=#{sxy},ysq=#{ysq},mkf=#{mkf}
+        WHERE ID = #{id}
+	</update>
+	
 	<insert id="insert_record" parameterType="Devices">
 		INSERT INTO TB_DEVICES_RECORD (devices_id,fhtime,remark)
 		VALUES(#{id},#{fhtime},#{remark} )

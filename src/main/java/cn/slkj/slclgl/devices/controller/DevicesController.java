@@ -86,14 +86,14 @@ public class DevicesController {
 		if (devices.getAddType() == 1) {
 			int begin = Integer.parseInt(devices.getListnum_begin());
 			int end = Integer.parseInt(devices.getListnum_end());
-			for (int j = begin; j <= end ; j++) {
+			for (int j = begin; j <= end; j++) {
 				devices.setListnum("");
 				StringBuilder sb = new StringBuilder();
 				sb.append(devices.getListNo());
-				// 0 代表前面补充0     
-			    // 4 代表长度为4     
-			    // d 代表参数为正数型     
-			    String str = String.format("%04d", j);    
+				// 0 代表前面补充0
+				// 4 代表长度为4
+				// d 代表参数为正数型
+				String str = String.format("%04d", j);
 				sb.append(str);
 				devices.setListnum(sb.toString());
 				i = impl.insert(devices);
@@ -101,6 +101,17 @@ public class DevicesController {
 		} else {
 			i = impl.insert(devices);
 		}
+		if (i > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@RequestMapping(value = "/editDevices", method = { RequestMethod.POST })
+	@ResponseBody
+	public boolean editDevices(Devices devices) {
+		int i = impl.edit(devices);
 		if (i > 0) {
 			return true;
 		} else {
@@ -121,8 +132,8 @@ public class DevicesController {
 
 	@RequestMapping(value = "/outRep")
 	@ResponseBody
-	public boolean outRep(@RequestParam(value = "ids[]") String[] ids,
-			 String area,String lyr,String lytime,String remark) {
+	public boolean outRep(@RequestParam(value = "ids[]") String[] ids, String area, String lyr,
+			String lytime, String remark) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("ids", ids);
 		map.put("area", area);
@@ -139,7 +150,7 @@ public class DevicesController {
 
 	@RequestMapping(value = "/deletes")
 	@ResponseBody
-	public boolean deletes(@RequestParam(value = "ids[]") String[] ids ) {
+	public boolean deletes(@RequestParam(value = "ids[]") String[] ids) {
 		int i = impl.deletes(ids);
 		if (i > 0) {
 			return true;
@@ -147,6 +158,7 @@ public class DevicesController {
 			return false;
 		}
 	}
+
 	@RequestMapping(value = "/goBack", method = { RequestMethod.POST })
 	@ResponseBody
 	public boolean goBack(Devices devices) {

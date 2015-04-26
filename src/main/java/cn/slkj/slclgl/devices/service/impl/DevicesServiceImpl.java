@@ -79,5 +79,10 @@ public class DevicesServiceImpl implements DevicesService {
 		// TODO Auto-generated method stub
 		return mapper.deletes(ids);
 	}
+
+	public int edit(Devices devices) {
+		// TODO Auto-generated method stub
+		return mapper.edit(devices);
+	}
 	
 }

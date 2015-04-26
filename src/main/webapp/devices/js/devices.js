@@ -586,19 +586,38 @@ function fCallback(url) {
 }
 // 编辑
 function edit() {
+	var selRow = grid.datagrid("getSelections");// 返回选中多行
+	if (selRow.length != 1) {
+		SL.msgShow("提示", "请选择一行数据!！", "warning");
+		return false;
+	}
 	SL.showWindow({
 		title : 'GPS设备出入库信息',
 		iconCls : 'icon-add',
 		width : 550,
 		height : 450,
-		url : basePath + 'devicesAdd.jsp',
+		url : basePath + 'devicesEdit.jsp',
 		onLoad : function() {
+			$("#form").form('load', selRow[0]);
 		},
 		buttons : [ {
 			text : '确定',
 			iconCls : 'icon-add',
 			handler : function() {
-				fCallback();
+				var data = $("#form").serialize();
+				$.ajax({
+					cache : false,
+					type : "POST",
+					url : '../devices/editDevices',
+					data : data,
+					async : false,
+					success : function(data) {
+						if (data) {
+							grid.datagrid('reload');
+							SL.closeWindow();
+						}
+					}
+				});
 			}
 		}, {
 			text : '关闭',
