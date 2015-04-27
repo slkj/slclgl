@@ -1,6 +1,7 @@
 var grid;
 var basePath = "";
 $(function() {
+	loadButton();
 	// 初始化页面
 	loadDataGrid();
 	$("#search_btn").click(function() {
@@ -21,6 +22,31 @@ $(function() {
 	});
 
 });
+function loadButton() {
+	$.ajax({
+		url : "../module/getRolePer",
+		type : "POST",
+		data : {
+			roleid : $("#roleId").val(),
+			modlueid : '14'
+		},
+		async : false,
+		dataType : "json",
+		cache : false,
+		success : function(r) {
+			listButton = r;
+			var str="<tr>";
+			$.each(r, function(i, o) {
+				if(o.pLevel == 1){
+					str +="<td><a href=\"javascript:void(0)\" class=\"easyui-linkbutton\" data-options=\"iconCls:'"+o.iconCls+"',plain:true\" onclick=\""+o.pDesc+"()\">"+o.pName+"</a></td>";
+				} 
+			});
+			str +="</tr>"
+			var targetObj=$("#toolbar").append(str);
+			$.parser.parse(targetObj);
+		}
+	});
+}
 // 将表单数据转为json
 function form2Json(id) {
 	var arr = $("#" + id).serializeArray()

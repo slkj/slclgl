@@ -9,6 +9,7 @@
 <script type="text/javascript" src="js/vehicle.js"></script>
 </head>
 <body>
+	<input id="roleId" type="hidden" value="${userSession.roleId }">
 	<div id="tb" style="padding: 5px; height: auto">
 		<form name="searchform" method="post" action="" id="searchform">
 			<table cellspacing="0" cellpadding="0">

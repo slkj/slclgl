@@ -8,7 +8,7 @@ public class Permission {
 	private String iconCls;
 	private String pid;
 	private String pLevel;
-	private int order;
+	private int sort;
 	public int getId() {
 		return id;
 	}
@@ -39,22 +39,22 @@ public class Permission {
 	public void setpLevel(String pLevel) {
 		this.pLevel = pLevel;
 	}
-	public int getOrder() {
-		return order;
-	}
-	public void setOrder(int order) {
-		this.order = order;
-	}
 	public String getIconCls() {
 		return iconCls;
 	}
 	public void setIconCls(String iconCls) {
 		this.iconCls = iconCls;
 	}
+	public int getSort() {
+		return sort;
+	}
+	public void setSort(int sort) {
+		this.sort = sort;
+	}
 	@Override
 	public String toString() {
 		return "Permission [id=" + id + ", pName=" + pName + ", pDesc=" + pDesc + ", iconCls="
-				+ iconCls + ", pid=" + pid + ", pLevel=" + pLevel + ", order=" + order + "]";
+				+ iconCls + ", pid=" + pid + ", pLevel=" + pLevel + ", sort=" + sort + "]";
 	}
 	
 }

@@ -22,7 +22,7 @@ function loadButton() {
 		url : "../module/getRolePer",
 		type : "POST",
 		data : {
-			roleid : '1',
+			roleid : $("#roleId").val(),
 			modlueid : '10'
 		},
 		async : false,
@@ -33,7 +33,7 @@ function loadButton() {
 			var str="<tr>";
 			$.each(r, function(i, o) {
 				if(o.pLevel == 1){
-					str +="<td><a href=\"javascript:void(0)\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icons "+o.iconCls+"',plain:true\" onclick=\"()\">"+o.pName+"</a></td>";
+					str +="<td><a href=\"javascript:void(0)\" class=\"easyui-linkbutton\" data-options=\"iconCls:'"+o.iconCls+"',plain:true\" onclick=\""+o.pDesc+"()\">"+o.pName+"</a></td>";
 				} 
 			});
 			str +="</tr>"

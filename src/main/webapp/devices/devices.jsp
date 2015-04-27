@@ -11,6 +11,7 @@
 <script type="text/javascript" src="js/devices.js"></script>
 </head>
 <body>
+<input id="roleId" type="hidden" value="${userSession.roleId }">
 	<div id="tb" style="padding: 5px; height: auto">
 		<div>
 			<form name="searchform" method="post" action="" id="searchform">
@@ -72,38 +73,22 @@
 			</form>
 		</div>
 		<div>
-			<table cellspacing="0" cellpadding="0">
-				<tr>
-					<td><a href="#" class="easyui-linkbutton"
-						data-options="iconCls:'icon-add',plain:true"
-						onClick="javascript:intoRepertory();">入库</a></td>
-					<td><div class="datagrid-btn-separator"></div></td>
-					<td><a href="#" class="easyui-linkbutton"
-						data-options="iconCls:'icon-add',plain:true"
-						onClick="javascript:ck();">出库</a></td>
-					<td><div class="datagrid-btn-separator"></div></td>
-					<td><a href="#" class="easyui-linkbutton"
-						data-options="iconCls:'icon-edit',plain:true"
-						onClick="javascript:goBack();">退回</a></td>
-					<td><div class="datagrid-btn-separator"></div></td>
-					<td><a href="#" class="easyui-linkbutton"
-						data-options="iconCls:'icon-edit',plain:true"
-						onClick="javascript:edit();">编辑</a></td>
-					<td><div class="datagrid-btn-separator"></div></td>
-					<td><a href="#" class="easyui-linkbutton"
-						data-options="iconCls:'icon-remove',plain:true"
-						onClick="javascript:del();">删除</a></td>
-					<td><div class="datagrid-btn-separator"></div></td>
-					<td align="right"><a href="#" onclick="outExcel()"
-						class="easyui-linkbutton"
-						data-options="iconCls:'pic pic_157',plain:true">导出</a></td>
-					<td><div class="datagrid-btn-separator"></div></td>
-					<td style="text-align: right;"><a href="#"
-						class="easyui-linkbutton"
-						data-options="iconCls:'pic pic_154',plain:true"
-						onclick="return openExcel();">导入</a> <span id="msg"
-						style="color: red;"></span></td>
-				</tr>
+			<table id="toolbar" cellspacing="0" cellpadding="0">
+<!-- 				<tr> -->
+<!-- 					<td><a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onClick="javascript:intoRepertory();">入库</a></td> -->
+<!-- 					<td><div class="datagrid-btn-separator"></div></td> -->
+<!-- 					<td><a href="#" class="easyui-linkbutton" data-options="iconCls:'pic_115',plain:true" onClick="javascript:ck();">出库</a></td> -->
+<!-- 					<td><div class="datagrid-btn-separator"></div></td> -->
+<!-- 					<td><a href="#" class="easyui-linkbutton" data-options="iconCls:'pic_56',plain:true" onClick="javascript:goBack();">退回</a></td> -->
+<!-- 					<td><div class="datagrid-btn-separator"></div></td> -->
+<!-- 					<td><a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" onClick="javascript:edit();">编辑</a></td> -->
+<!-- 					<td><div class="datagrid-btn-separator"></div></td> -->
+<!-- 					<td><a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onClick="javascript:del();">删除</a></td> -->
+<!-- 					<td><div class="datagrid-btn-separator"></div></td> -->
+<!-- 					<td><a href="#" class="easyui-linkbutton" data-options="iconCls:'pic_157',plain:true" onclick="outExcel()" >导出</a></td> -->
+<!-- 					<td><div class="datagrid-btn-separator"></div></td> -->
+<!-- 					<td><a href="#" class="easyui-linkbutton" data-options="iconCls:'pic_154',plain:true" onclick="return openExcel();">导入</a> </td> -->
+<!-- 				</tr> -->
 			</table>
 		</div>
 	</div>
