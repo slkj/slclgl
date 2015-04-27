@@ -6,6 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SIM卡管理</title>
 <%@ include file="/common/taglibs.jsp"%>
+<script type="text/javascript" src="../js/ajaxfileupload.js"></script>
+
 
 <script type="text/javascript">
 	var grid;
@@ -39,6 +41,7 @@
 		grid = $('#dg').datagrid({
 			method : 'post',
 			url : '../sim/list?type=2',
+// 			title : '联通卡列表',
 			fit : true,
 			nowrap : true, //false:折行
 			rownumbers : true, //行号
@@ -71,9 +74,9 @@
 			}, {
 				field : 'business',
 				title : '套餐业务'
-			}, {
-				field : 'kktime',
-				title : '开卡日期'
+// 			}, {
+// 				field : 'kktime',
+// 				title : '开卡日期'
 			}, {
 				field : 'renewtime',
 				title : '续费日期'
@@ -128,7 +131,7 @@
 			title : '联通SIM卡出入库信息',
 			iconCls : 'icon-add',
 			width : 550,
-			height : 350,
+			height : 370,
 			url : basePath + 'simAdd.jsp',
 			onLoad : function() {
 				$("#type").val("2");
@@ -164,6 +167,52 @@
 				}
 			});
 
+		}
+	}
+	function outExcel() {
+	}
+	function excelMB() {
+		window.location.href = "../download.do?name=sim.xls";
+	}
+	function openExcel() {
+		$('#openExcel').dialog('open');
+	}
+	//采用jquery easyui loading css效果
+	function ajaxLoading() {
+		$("<div class=\"datagrid-mask\"></div>").css({
+			display : "block",
+			width : "100%",
+			height : $(window).height()
+		}).appendTo("body");
+		$("<div class=\"datagrid-mask-msg\"></div>").html("正在处理，请稍候。。。").appendTo("body").css({
+			display : "block",
+			left : ($(document.body).outerWidth(true) - 190) / 2,
+			top : ($(window).height() - 45) / 2
+		});
+	}
+	function ajaxLoadEnd() {
+		$(".datagrid-mask").remove();
+		$(".datagrid-mask-msg").remove();
+	}
+	// 导入客户,在页面中引入 js/swfupload/ajaxfileupload.js
+	function ajaxFileUpload() {
+		$("#msg").empty();
+		if ($("#myfile").val().length > 0) {
+			$.ajaxFileUpload({
+				url : '../upload/excel/1', // 你处理上传文件的服务端
+				secureuri : false, // 是否启用安全提交,默认为false
+				fileElementId : 'myfile', // 文件选择框的id属性
+				dataType : 'json', // 服务器返回的格式,可以是json或xml等
+				beforeSend : ajaxLoading,// 发送请求前打开进度条
+				success : function(data, status) { // 服务器响应成功时的处理函数
+					ajaxLoadEnd();// 任务执行成功，关闭进度条
+					grid.datagrid('reload');
+					$('#openExcel').dialog('close');
+					$("#myfile").val("");
+				}
+			});
+		} else {
+			$("#msg").append("请选择要导入的文件！");
 		}
 	}
 </script>
@@ -220,28 +269,43 @@
 					data-options="iconCls:'icon-add',plain:true"
 					onClick="javascript:addNew();">新增</a></td>
 				<td><div class="datagrid-btn-separator"></div></td>
-				<td><a href="#" class="easyui-linkbutton"
-					data-options="iconCls:'pic pic_221',plain:true"
-					onClick="javascript:addNew();">开卡</a></td>
+<!-- 				<td><a href="#" class="easyui-linkbutton" -->
+<!-- 					data-options="iconCls:'pic pic_221',plain:true" -->
+<!-- 					onClick="javascript:addNew();">开卡</a></td> -->
 <!-- 				<td><div class="datagrid-btn-separator"></div></td> -->
 <!-- 				<td><a href="#" class="easyui-linkbutton" -->
 <!-- 					data-options="iconCls:'pic_22',plain:true" -->
 <!-- 					onClick="javascript:addNew();">缴费</a></td> -->
-				<td><div class="datagrid-btn-separator"></div></td>
+<!-- 				<td><div class="datagrid-btn-separator"></div></td> -->
 				<td><a href="#" class="easyui-linkbutton"
 					data-options="iconCls:'pic pic_48',plain:true"
 					onClick="javascript:addNew();">返回</a></td>
 				<td><div class="datagrid-btn-separator"></div></td>
 				<td align="right"><a href="#" class="easyui-linkbutton"
 					data-options="iconCls:'pic pic_154',plain:true"
-					onClick="javascript:addNew();">导入</a></td>
+					onClick="javascript:openExcel();">导入</a></td>
 				<td><div class="datagrid-btn-separator"></div></td>
 				<td align="right"><a href="#" class="easyui-linkbutton"
 					data-options="iconCls:'pic pic_157',plain:true"
-					onClick="javascript:addNew();">导出</a></td>
+					onClick="javascript:outExcel();">导出</a></td>
 			</tr>
 		</table>
 	</div>
 	<table id="dg"></table>
+	<div id="openExcel" class="easyui-dialog" closed="true"
+		title="设备Excel导入" buttons="#dlg-buttons"
+		style="width: 400px; height: 200px; top: 150px; left: 200px">
+		<span style="color: red;">*如导入失败，请将Excel另存为格式选择为Excel
+			97/2003的*.xls文件</span> <input id="myfile" name="myfile" style="width: 200px"
+			type="file"/> <span id="msg" style="color: red;"></span>
+	</div>
+	<div id="dlg-buttons">
+		<a href="#" class="easyui-linkbutton"
+			data-options="iconCls:'pic pic_154',plain:true"
+			onclick="return excelMB();">导入模板下载</a>
+		<a href="#" class="easyui-linkbutton"
+			data-options="iconCls:'pic pic_154',plain:true"
+			onclick="return ajaxFileUpload();">导入</a>
+	</div>
 </body>
 </html>

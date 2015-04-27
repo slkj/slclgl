@@ -109,11 +109,11 @@
 		<div id="login_content">
 			<div class="loginForm">
 				<p>
-					<label>用户名：</label> <input type="text" id="username" size="20" value="admin"
+					<label>用户名：</label> <input type="text" id="username" size="20" value=""
 						class="login_input" />
 				</p>
 				<p>
-					<label>密码：</label> <input type="password" id="password" size="20" value="123"
+					<label>密码：</label> <input type="password" id="password" size="20" value=""
 						class="login_input" />
 				</p>
 				<!-- 				<p> -->

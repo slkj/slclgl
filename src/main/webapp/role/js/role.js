@@ -10,7 +10,7 @@ function loadData() {
 		url : basePath + 'list',
 		width : 'auto',
 		height : 'auto',
-		nowrap : true,
+		nowrap : false,
 		striped : true,
 		collapsible : false,// 是否可折叠的
 		fit : true,// 自动大小
@@ -24,15 +24,15 @@ function loadData() {
 		columns : [ [ {
 			title : '角色名称',
 			field : 'name',
-			width : 100
+			width : 150
 		}, {
 			title : '资源描述',
 			field : 'dscript',
-			width : 150
+			width : 220
 		}, {
 			title : '排序',
 			field : 'sort',
-			width : 100
+			width : 50
 		}, {
 			field : 'opt',
 			title : '操作',
