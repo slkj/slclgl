@@ -19,11 +19,11 @@
 		</div>
 		<div data-options="region:'east',split:true" style="width: 240px;">
 			<div id="tt1">
-				<a href="#" class="icon-save" onclick="javascript:alert('add')"></a>
+				<a href="#" class="icon-save" onclick="javascript:rolePermi()"></a>
 			</div>
 			<div class="easyui-panel"
 				data-options="fit:true,border:false,title:'操作按钮列表',tools:'#tt1'">
-				<table id="reslist"></table>
+				<ul id="permilist"></ul>
 			</div>
 		</div>
 	</div>

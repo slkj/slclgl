@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import cn.slkj.easyui.util.Tree;
 import cn.slkj.slclgl.module.bean.Module;
+import cn.slkj.slclgl.module.bean.Permission;
 import cn.slkj.slclgl.module.mapper.ModuleMapper;
 
 @Repository
@@ -81,7 +82,15 @@ public class ModuleServiceImpl {
 	}
 
 	public List<Module> listByUser(HashMap<String, Object> map) {
-		// TODO Auto-generated method stub
 		return mapper.listByUser(map);
+	}
+
+	public List<Permission> getPermission(HashMap<String, Object> map) {
+		return mapper.getPermission(map);
+	}
+
+	public List<Permission> getRolePer(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.getRolePer(map);
 	}
 }

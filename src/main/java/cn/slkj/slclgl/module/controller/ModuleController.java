@@ -12,10 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.slkj.easyui.util.Tree;
 import cn.slkj.slclgl.module.bean.Module;
+import cn.slkj.slclgl.module.bean.Permission;
 import cn.slkj.slclgl.module.service.impl.ModuleServiceImpl;
 import cn.slkj.slclgl.user.bean.User;
 
@@ -41,16 +43,16 @@ public class ModuleController {
 
 	@RequestMapping(value = "/list/user")
 	@ResponseBody
-	public List<Module> listByUser(String id,HttpSession session) {
+	public List<Module> listByUser(String id, HttpSession session) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		if(StringUtils.isNotBlank(id)){
-			map.put("id",id);
-		}else{
-			User user = (User)session.getAttribute("userSession");	
-			map.put("id",user.getId());
+
+		if (StringUtils.isNotBlank(id)) {
+			map.put("id", id);
+		} else {
+			User user = (User) session.getAttribute("userSession");
+			map.put("id", user.getId());
 		}
-		
+
 		List<Module> list = moduleServiceImpl.listByUser(map);
 		return makeTree(list);
 	}
@@ -105,6 +107,23 @@ public class ModuleController {
 		List<Module> allList = moduleServiceImpl.getAll(map);
 		List<Module> checkList = moduleServiceImpl.getModuleByRoleId(map);
 		return initCheckBoxTree(allList, "0", checkList);
+	}
+
+	@RequestMapping(value = "/getPermission")
+	@ResponseBody
+	public List<Permission> getPermission(String id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		return moduleServiceImpl.getPermission(map);
+	}
+
+	@RequestMapping(value = "/getRolePer")
+	@ResponseBody
+	public List<Permission> getRolePer(String roleid, String modlueid) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("roleid", roleid);
+		map.put("modlueid", modlueid);
+		return moduleServiceImpl.getRolePer(map);
 	}
 
 	// 将list转换为需要的json格式

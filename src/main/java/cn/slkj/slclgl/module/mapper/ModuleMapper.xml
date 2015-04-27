@@ -41,4 +41,13 @@
 		</if> 
     	AND ID != '1'  
 	</select>
+	<select id="getPermission" parameterType="hashmap" resultType="Permission">
+		SELECT TP.* FROM TB_MODULE TM, TB_PERMISSION TP
+		WHERE TM.ID = TP.PID AND TM.ID = #{id}
+	</select>
+	<select id="getRolePer" parameterType="hashmap" resultType="Permission">
+		SELECT TP.* FROM  TB_PERMISSION TP ,TB_ROLE_PERMI TRP 
+		WHERE   TP.ID =TRP.PERMI_ID AND TRP.MODULE_ID=#{modlueid} AND TRP.ROLE_ID =#{roleid}
+	</select>
+	
 </mapper>

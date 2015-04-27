@@ -32,5 +32,7 @@ public interface RoleMapper {
 	int deleteRoleRes(HashMap<String, Object> map);
 
 	List<Role> queryAll(Map<String, Object> pageMap);
- 
+
+	int deleteRolePer(HashMap<String, Object> map);
+	int saveRolePer(HashMap<String, Object> map);	
 }

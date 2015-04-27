@@ -27,6 +27,8 @@
 		<typeAlias type="cn.slkj.slclgl.insurance.bean.Insurance" alias="insurance" />
 		<typeAlias type="cn.slkj.slclgl.insurance.bean.InsuranceType" alias="insuranceType" />
 		<typeAlias type="cn.slkj.slclgl.insurance.bean.InsuranceCompany" alias="insuranceCompany" />
+		<typeAlias type="cn.slkj.slclgl.module.bean.Permission" alias="Permission" />
+		
 	</typeAliases>
 	<!-- 设置数据库连接环境 -->
 	<!-- 映射文件 -->

@@ -83,7 +83,7 @@ function InitLeftMenu() {
 				ul.slideUp();
 
 		} else {
-			addTab(tabTitle, url, icon);
+			addTab(menuid,tabTitle, url, icon);
 			$('.navlist li div').removeClass("selected");
 			$(this).parent().addClass("selected");
 		}
@@ -124,9 +124,10 @@ function find(menuid) {
 	return obj;
 }
 
-function addTab(subtitle, url, icon) {
+function addTab(menuid,subtitle, url, icon) {
 	if (!$('#tabs').tabs('exists', subtitle)) {
 		$('#tabs').tabs('add', {
+			id : menuid,
 			title : subtitle,
 			content : createFrame(url),
 			closable : true,
@@ -249,7 +250,7 @@ function closeTab(action) {
 	case "closeleft":
 		var tabIndex = $('#tabs').tabs('getTabIndex', currentTab);
 		if (tabIndex == 1) {
-			alert('亲，前边那个上头有人，咱惹不起哦。 ^@^!!');
+			alert('亲，首页无法关闭。 ^@^!!');
 			return false;
 		}
 		$.each(allTabtitle, function(i, n) {

@@ -144,15 +144,15 @@ function fCallback(url) {
 		});
 	}
 }
-var roleid;
+var roleid, modlueid;
 function loadUser(name, id) {
 	$('#right-panel').panel({
 		title : "[" + name + "]",
 		href : 'allotUser.jsp',
 		onLoad : function() {
 			$('#userdg').datagrid({
-				title :'用户列表',
-				url : '../user/listByRole?id='+id,
+				title : '用户列表',
+				url : '../user/listByRole?id=' + id,
 				loadMsg : '数据加载中....',
 				fit : true,
 				rownumbers : true, // 行号
@@ -189,7 +189,45 @@ function loadModlue(name, id) {
 				url : '../module/role2Module?roleId=' + id,
 				loadMsg : '数据加载中....',
 				lines : true,
-				checkbox : true
+				checkbox : true,
+				onClick : function(node) {
+					modlueid = node.id;
+					$('#permilist').datagrid({
+						url : "../module/getPermission?id=" + node.id,
+						fit : true,
+						striped : true, // 隔行变色
+						columns : [ [ {
+							field : 'ck',
+							checkbox : true
+						}, {
+							field : 'pName',
+						} ] ],
+						onLoadSuccess : function(data) {
+							// 根据角色 和 菜单id 查询按钮列表
+							$.ajax({
+								url : "../module/getRolePer",
+								type : "POST",
+								data : {
+									roleid : roleid,
+									modlueid : modlueid
+								},
+								async : false,
+								dataType : "json",
+								cache : false,
+								success : function(r) {
+									for (var int = 0; int < data.rows.length; int++) {
+										for (var int2 = 0; int2 < r.length; int2++) {
+											if(data.rows[int].id = r[int2].id){
+												$('#permilist').datagrid("selectRow", int);
+											}
+										}
+									}
+								}
+							});
+							
+						}
+					});
+				}
 			});
 		}
 	});
@@ -205,6 +243,37 @@ function roleModule() {
 	} else {
 		top.SL.msgShow('提示', '请选择分配资源!', 'warning');
 	}
+}
+function rolePermi() {
+	var selRow = $('#permilist').datagrid("getSelections");// 返回选中多行
+	var ids = [];
+	for (var i = 0; i < selRow.length; i++) {
+		ids.push(selRow[i].id);
+	}
+	var param = {
+		roleid : roleid,
+		modlueid : modlueid,
+		ids : ids
+	};
+	$.ajax({
+		url : basePath + "saveRolePer",
+		type : "POST",
+		data : param,
+		async : false,
+		dataType : "json",
+		cache : false,
+		success : function(data) {
+			if (data) {
+				top.SL.sysSlideShow({
+					msg : '授权成功!'
+				});
+			} else {
+				top.SL.sysSlideShow({
+					msg : '授权失败!'
+				});
+			}
+		}
+	});
 }
 function saveInfo(ids) {
 	var param = {

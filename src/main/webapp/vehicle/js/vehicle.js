@@ -5,6 +5,7 @@ var Request = new Object();
 $(function() {
 	Request = GetRequest();
 	carType = Request['ct'];
+	loadButton();
 	// 初始化页面
 	loadDataGrid();
 	$("#search_btn").click(function() {
@@ -15,6 +16,32 @@ $(function() {
 		$('#searchform').form('clear');
 	});
 });
+var listButton;
+function loadButton() {
+	$.ajax({
+		url : "../module/getRolePer",
+		type : "POST",
+		data : {
+			roleid : '1',
+			modlueid : '10'
+		},
+		async : false,
+		dataType : "json",
+		cache : false,
+		success : function(r) {
+			listButton = r;
+			var str="<tr>";
+			$.each(r, function(i, o) {
+				if(o.pLevel == 1){
+					str +="<td><a href=\"javascript:void(0)\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icons "+o.iconCls+"',plain:true\" onclick=\"()\">"+o.pName+"</a></td>";
+				} 
+			});
+			str +="</tr>"
+			var targetObj=$("#toolbar").append(str);
+			$.parser.parse(targetObj);
+		}
+	});
+}
 function loadDataGrid() {
 	grid = $('#dg').datagrid({
 		method : 'post',
@@ -51,17 +78,23 @@ function loadDataGrid() {
 			align : 'center',
 			formatter : function(value, row, index) {
 				var s = "";
-				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:approval('" + row.id + "');\">入网审核</span></a>";
-				s += "&nbsp;|&nbsp;";
-				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:vehicleInfo('" + row.id + "');\">详细</span></a>";
-				s += "&nbsp;|&nbsp;";
-				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editRow('" + row.id + "');\">编辑</span></a>";
-				s += "&nbsp;|&nbsp;";
-				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:deleteRow('" + index + "');\">删除</span></a>";
-				s += "&nbsp;|&nbsp;";
-				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:inNet('" + row.id + "');\">设备安装</span></a>";
-				s += "&nbsp;|&nbsp;";
-				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:detailCarInfo('" + index + "');\">安装记录</span></a>";
+				$.each(listButton, function(i, o) {
+					if(o.pLevel == 2){
+						s +="<a href=\"javascript:void(0)\"><span onclick=\"javaScript:"+o.pDesc+"('" + row.id + "');\">"+o.pName+"</span></a>";
+						s += "&nbsp;|&nbsp;";
+					} 
+				});
+//				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:approval('" + row.id + "');\">入网审核</span></a>";
+//				s += "&nbsp;|&nbsp;";
+//				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:vehicleInfo('" + row.id + "');\">详细</span></a>";
+//				s += "&nbsp;|&nbsp;";
+//				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editRow('" + row.id + "');\">编辑</span></a>";
+//				s += "&nbsp;|&nbsp;";
+//				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:deleteRow('" + index + "');\">删除</span></a>";
+//				s += "&nbsp;|&nbsp;";
+//				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:inNet('" + row.id + "');\">设备安装</span></a>";
+//				s += "&nbsp;|&nbsp;";
+//				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:detailCarInfo('" + index + "');\">安装记录</span></a>";
 				return s;
 			}
 		}, {
@@ -140,9 +173,6 @@ function loadDataGrid() {
 			}
 		} ] ],
 		toolbar : '#tb',
-		onLoadSuccess : function() {
-			grid.datagrid('clearSelections');
-		}
 	});
 	// 设置分页控件
 	grid.datagrid('getPager').pagination({

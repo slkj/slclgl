@@ -32,16 +32,16 @@
 				
 			</table>
 		</form>
-		<table cellspacing="0" cellpadding="0">
-			<tr>
-				<td><a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onClick="javascript:addCar();">新加车辆</a></td>
-				<td><div class="datagrid-btn-separator"></div></td>
-				<td><a href="#" class="easyui-linkbutton" data-options="iconCls:'pic_stop',plain:true" onClick="">批量报停</a></td>
-				<td><div class="datagrid-btn-separator"></div></td>
-				<td><a href="#" onclick="outExcel()" class="easyui-linkbutton" data-options="iconCls:'pic pic_157',plain:true">导出</a></td>
-				<td><div class="datagrid-btn-separator"></div></td>
-				<td><a href="#" class="easyui-linkbutton" data-options="iconCls:'pic pic_154',plain:true" onclick="return ajaxFileUpload();">导入</a></td>
-			</tr>
+		<table id="toolbar" cellspacing="0" cellpadding="0">
+<!-- 			<tr> -->
+<!-- 				<td><a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onClick="javascript:addCar();">新加车辆</a></td> -->
+<!-- 				<td><div class="datagrid-btn-separator"></div></td> -->
+<!-- 				<td><a href="#" class="easyui-linkbutton" data-options="iconCls:'pic_stop',plain:true" onClick="">批量报停</a></td> -->
+<!-- 				<td><div class="datagrid-btn-separator"></div></td> -->
+<!-- 				<td><a href="#" onclick="outExcel()" class="easyui-linkbutton" data-options="iconCls:'pic pic_157',plain:true">导出</a></td> -->
+<!-- 				<td><div class="datagrid-btn-separator"></div></td> -->
+<!-- 				<td><a href="#" class="easyui-linkbutton" data-options="iconCls:'pic pic_154',plain:true" onclick="return ajaxFileUpload();">导入</a></td> -->
+<!-- 			</tr> -->
 		</table>
 	</div>
 	<table id="dg"></table>

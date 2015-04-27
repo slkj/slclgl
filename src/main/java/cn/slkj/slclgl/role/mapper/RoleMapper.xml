@@ -52,4 +52,15 @@
 	<delete id="deleteRoleRes" parameterType="hashmap">
 		DELETE FROM TB_ROLE_RES WHERE  ROLE_ID = #{roleid}
 	</delete>
+	
+	<delete id="deleteRolePer" parameterType="hashmap">
+		DELETE FROM TB_ROLE_PERMI WHERE    ROLE_ID = #{roleid} AND MODULE_ID = #{modlueid}
+	</delete>
+		<insert id="saveRolePer" parameterType="hashmap" >
+		INSERT INTO TB_ROLE_PERMI(role_id,module_id,permi_id)
+		VALUES
+		<foreach collection="ids" item="item" index="index" separator=",">
+			(#{roleid},#{modlueid}, #{item} )
+		</foreach>
+	</insert>
 </mapper>

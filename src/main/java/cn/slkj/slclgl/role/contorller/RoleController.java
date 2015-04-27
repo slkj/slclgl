@@ -131,4 +131,26 @@ public class RoleController {
 		log.debug("{}，角色id为空");
 		return false;
 	}
+	/**
+	 * 保存角色 菜单 下操作按钮
+	 * @param roleid
+	 * @param ids
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/saveRolePer", method = RequestMethod.POST)
+	private boolean saveRolePer(@RequestParam(required = false, defaultValue = "") String roleid,
+			@RequestParam(required = false, defaultValue = "") String modlueid,
+			@RequestParam(value = "ids[]") String[] ids) {
+		if (StringUtils.isNotBlank(roleid)) {
+			service.deleteRolePer(roleid,modlueid, ids);
+			int i = service.saveRolePer(roleid,modlueid,ids);
+			if (i != -1) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
 }

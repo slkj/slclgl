@@ -79,5 +79,19 @@ public class RoleService {
 		// TODO Auto-generated method stub
 		return mapper.queryAll(pageMap);
 	}
-
+	public int deleteRolePer(String roleid, String modlueid, String[] ids) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("roleid", roleid);
+		map.put("modlueid", modlueid);
+		map.put("ids", ids);
+		return mapper.deleteRolePer(map);
+	}
+	public int saveRolePer(String roleid, String modlueid, String[] ids) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("roleid", roleid);
+		map.put("modlueid", modlueid);
+		map.put("ids", ids);
+		return mapper.saveRolePer(map);
+	}
+	
 }
