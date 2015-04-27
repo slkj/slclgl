@@ -137,6 +137,7 @@ public class DevicesExportExcel {
 			}
 			User user = (User) session.getAttribute("userSession");
 			sim.setLrr(user.getRealname());
+			sim.setState("0");
 			simServiceImpl.insert(sim);
 		}
 	}

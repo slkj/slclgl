@@ -687,7 +687,7 @@ function ajaxFileUpload() {
 			url : '../upload/excel/0', // 你处理上传文件的服务端
 			secureuri : false, // 是否启用安全提交,默认为false
 			fileElementId : 'myfile', // 文件选择框的id属性
-			dataType : 'json', // 服务器返回的格式,可以是json或xml等
+			dataType : 'text', // 服务器返回的格式,可以是json或xml等
 			beforeSend : ajaxLoading,// 发送请求前打开进度条
 			success : function(data, status) { // 服务器响应成功时的处理函数
 				ajaxLoadEnd();// 任务执行成功，关闭进度条
