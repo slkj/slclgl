@@ -1,5 +1,6 @@
 package cn.slkj.slclgl.sim.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,4 +14,8 @@ public interface SimMapper {
 	List<Sim> getList(Map<String, Object> map);
 
 	int insert(Sim sim);
+
+	int edit(Sim sim);
+
+	int simPay(HashMap<String, Object> map);
 }

@@ -1,5 +1,6 @@
 package cn.slkj.slclgl.sim.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,15 @@ public class SimServiceImpl implements SimService {
 	@Override
 	public int insert(Sim sim) {
 		return mapper.insert(sim);
+	}
+
+	public int edit(Sim sim) {
+		// TODO Auto-generated method stub
+		return mapper.edit(sim);
+	}
+
+	public int simPay(HashMap<String, Object> map) {
+		return mapper.simPay(map);
 	}
 
 }
