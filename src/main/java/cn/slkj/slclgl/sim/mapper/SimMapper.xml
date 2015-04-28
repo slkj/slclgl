@@ -4,27 +4,44 @@
 	<select id="getAll" resultType="Sim" parameterType="hashmap">
 		SELECT * FROM TB_SIM   
 		<where>
-			<if test="type != null and type != ''">and type  = #{type} </if>
-			<if test="state != null and state != ''">and state =  #{state} </if>
-			<if test="cardType != null and cardType != ''">and cardType =  #{cardType} </if>
+			<if test="type != null and type != ''">AND TYPE  = #{type} </if>
+			<if test="telnum != null and telnum != ''">AND TELNUM  LIKE CONCAT('%',#{telnum},'%') </if>
+			<if test="state != null and state != ''">AND STATE =  #{state} </if>
+			<if test="cardType != null and cardType != ''">AND CARDTYPE =  #{cardType} </if>
+			<if test="lyr != null and lyr != ''">AND LYR   LIKE CONCAT('%',#{lyr},'%')  </if>
+			
 		</where>
 		LIMIT  #{startPage},#{endPage}
 	</select>
 	<select id="getAllCount" resultType="int" parameterType="hashmap">
 		SELECT COUNT(1) FROM TB_SIM 
 		<where>
-			<if test="type != null and type != ''">and type  = #{type} </if>
-			<if test="state != null and state != ''">and state =  #{state} </if>
-			<if test="cardType != null and cardType != ''">and cardType =  #{cardType} </if>
+			<if test="type != null and type != ''">AND TYPE  = #{type} </if>
+			<if test="telnum != null and telnum != ''">AND TELNUM  LIKE CONCAT('%',#{telnum},'%') </if>
+			<if test="state != null and state != ''">AND STATE =  #{state} </if>
+			<if test="cardType != null and cardType != ''">AND CARDTYPE =  #{cardType} </if>
+			<if test="lyr != null and lyr != ''">AND LYR   LIKE CONCAT('%',#{lyr},'%')  </if>
 		</where>
 	</select>
 	<select id="getList" resultType="Sim" parameterType="hashmap">
-		SELECT * FROM TB_SIM  WHERE telnum like CONCAT('%',#{telnum},'%')  and state != 1
+		SELECT * FROM TB_SIM  WHERE TELNUM LIKE CONCAT('%',#{telnum},'%')  AND STATE != 1
 	</select>
 	<insert id="insert" parameterType="Sim">
 		INSERT INTO TB_SIM
-		(TYPE,CARDTYPE,LISTNUM,TELNUM,STATE,INTIME,OUTTIME,KKTIME,FHTIME,BEIZHU,LYR,GYS,lrr,renewtime,business)
+		(TYPE,CARDTYPE,LISTNUM,TELNUM,STATE,INTIME,OUTTIME,KKTIME,FHTIME,BEIZHU,LYR,GYS,LRR,RENEWTIME,BUSINESS)
 		VALUES(#{type},#{cardType},#{listnum},#{telnum},#{state},now(),#{outtime},#{kktime},#{fhtime},#{beizhu},
 		#{lyr},#{gys},#{lrr},#{renewtime},#{business})
 	</insert>
+	<update id="edit" parameterType="Sim">
+		UPDATE TB_SIM SET
+			CARDTYPE=#{cardType},LISTNUM=#{listnum},TELNUM=#{telnum},
+			GYS=#{gys},RENEWTIME=#{renewtime},BUSINESS=#{business},BEIZHU=#{beizhu}
+		WHERE ID=#{id}
+	</update>
+	<update id="simPay" parameterType="hashmap">
+		UPDATE TB_SIM SET  RENEWTIME = now()  WHERE ID in
+		<foreach collection="ids" index="index" item="item" open="(" separator="," close=")">   
+	        #{item}   
+	    </foreach> 
+	</update>
 </mapper>

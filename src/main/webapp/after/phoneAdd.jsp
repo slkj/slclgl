@@ -88,7 +88,7 @@
 							class="Wdate" style="width: 200px" />
 						</td>
 						<th>客服人员：</th>
-						<td><input class="easyui-validatebox" name="customer" style="width: 200px;"   ></td>
+						<td><input class="easyui-validatebox" name="customer" style="width: 200px;"   value="${userSession.realname }"></td>
 					</tr>
 					<tr>
 						<th>客户公司：</th>

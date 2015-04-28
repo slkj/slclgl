@@ -602,9 +602,11 @@ function fCallback(url) {
 		data : data,
 		async : false,
 		success : function(data) {
+			SL.closeWindow();
 			if (data) {
 				grid.datagrid('reload');
-				SL.closeWindow();
+			}else{
+				SL.msgShow("提示", "请检查设备ID是否已经存在!", "warning");
 			}
 		}
 	});
@@ -614,7 +616,7 @@ function fCallback(url) {
 function edit() {
 	var selRow = grid.datagrid("getSelections");// 返回选中多行
 	if (selRow.length != 1) {
-		SL.msgShow("提示", "请选择一行数据!！", "warning");
+		SL.msgShow("提示", "请选择一行数据!", "warning");
 		return false;
 	}
 	SL.showWindow({

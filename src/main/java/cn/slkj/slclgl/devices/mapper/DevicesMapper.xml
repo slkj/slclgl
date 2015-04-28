@@ -97,10 +97,18 @@
 		</where>
 	</select>
 	<insert id="insert" parameterType="Devices">
-		INSERT INTO TB_DEVICES
-		(listnum,firm,model,rktime,state,fhtime,lyr,lytime,test,cstime,tresult,gpszj,gpstx,gsmtx,dy,fsd,jsq,sxy,ysq,mkf,remark,pack,area)
-		VALUES(#{listnum},#{firm},#{model},curdate() ,#{state},#{fhtime},#{lyr},#{lytime},#{test},#{cstime},
-		#{tresult},#{gpszj},#{gpstx},#{gsmtx},#{dy},#{fsd},#{jsq},#{sxy},#{ysq},#{mkf},#{remark},#{pack},#{area})
+<!-- 		INSERT INTO TB_DEVICES -->
+<!-- 		(listnum,firm,model,rktime,state,fhtime,lyr,lytime,test,cstime,tresult,gpszj,gpstx,gsmtx,dy,fsd,jsq,sxy,ysq,mkf,remark,pack,area) -->
+<!-- 		VALUES(#{listnum},#{firm},#{model},curdate() ,#{state},#{fhtime},#{lyr},#{lytime},#{test},#{cstime}, -->
+<!-- 		#{tresult},#{gpszj},#{gpstx},#{gsmtx},#{dy},#{fsd},#{jsq},#{sxy},#{ysq},#{mkf},#{remark},#{pack},#{area}) -->
+
+			INSERT INTO TB_DEVICES 
+				(listnum,firm,model,rktime,state,fhtime,lyr,lytime,test,cstime,tresult,gpszj,gpstx,gsmtx,dy,fsd,jsq,sxy,ysq,mkf,remark,pack,area)
+				SELECT
+					#{listnum},#{firm},#{model},curdate() ,#{state},#{fhtime},#{lyr},#{lytime},#{test},#{cstime}, 
+					#{tresult},#{gpszj},#{gpstx},#{gsmtx},#{dy},#{fsd},#{jsq},#{sxy},#{ysq},#{mkf},#{remark},#{pack},#{area}
+				FROM DUAL
+				WHERE NOT EXISTS (SELECT * FROM TB_DEVICES WHERE listnum = #{listnum});
 	</insert>
 	<update id="testing" parameterType="Devices">
 		UPDATE TB_DEVICES SET 

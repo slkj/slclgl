@@ -2,12 +2,12 @@ package cn.slkj.slclgl.sim.bean;
 
 public class Sim {
 
-	private Long id;
+	private String id;
 	private int type;
 	private String cardType;
 	private String listnum;
 	private String telnum;
-	private String state;
+	private int state;
 	private String intime;
 	private String outtime;
 	private String kktime;
@@ -18,10 +18,10 @@ public class Sim {
 	private String gys;
 	private String lyr;
 	private String lrr;
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getCardType() {
@@ -42,10 +42,10 @@ public class Sim {
 	public void setTelnum(String telnum) {
 		this.telnum = telnum;
 	}
-	public String getState() {
+	public int getState() {
 		return state;
 	}
-	public void setState(String state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 	public String getIntime() {
