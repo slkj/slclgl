@@ -76,6 +76,19 @@ function getData() {
 							field : 'remark'
 						},
 						{
+							title : '是否到期',
+							field : 'status',
+							formatter : function(value, row) {
+								if (row.endDate != null) {
+									var curDate = DateUtil.dateToStr("yyyy-MM-dd HH:mm:ss",DateUtil.dateAdd('d',90,new Date()));
+									if(row.endDate < curDate){
+										return "<span style=\"color:red;\">是</span>";
+									}
+									return "";
+								}
+							}
+						},
+						{
 							title : '操作',
 							field : '_operate',
 							align : 'center',

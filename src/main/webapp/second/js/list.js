@@ -80,6 +80,19 @@ function getData() {
 							field : 'remark'
 						},
 						{
+							title : '是否到期',
+							field : 'status',
+							formatter : function(value, row) {
+								if (row.nextriqi != null) {
+									var curDate = DateUtil.dateToStr("yyyy-MM-dd HH:mm:ss",DateUtil.dateAdd('d',30,new Date()));
+									if(row.nextriqi < curDate){
+										return "<span style=\"color:red;\">是</span>";
+									}
+									return "";
+								}
+							}
+						},
+						{
 							title : '操作',
 							field : '_operate',
 							align : 'center',
