@@ -23,6 +23,9 @@
 			<if test="companyid != null and companyid != ''">
 				AND companyid = #{companyid}
 			</if>
+			<if test="qualification_type != null and qualification_type != ''">
+				AND qualification_type = #{qualification_type}
+			</if>
 		</where>
 			LIMIT #{startNum},#{endNum}
 			
@@ -30,6 +33,17 @@
 
 	<select id="total" resultType="int" parameterType="hashmap">
 		SELECT COUNT(0) FROM TB_PERSON
+		<where>
+			<if test="name != null and name != ''">
+				AND name  Like CONCAT('%',#{name},'%')
+			</if>
+			<if test="companyid != null and companyid != ''">
+				AND companyid = #{companyid}
+			</if>
+			<if test="qualification_type != null and qualification_type != ''">
+				AND qualification_type = #{qualification_type}
+			</if>
+		</where>
 	</select>
 	<insert id="insert" parameterType="person">
 		INSERT INTO TB_PERSON (

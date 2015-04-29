@@ -10,6 +10,14 @@
 <script src="${pageContext.request.contextPath}/js/ajaxfileupload.js" type="text/javascript"></script> --%>
 <script type="text/javascript">
 	var basePath = "../person/";
+	var type="";
+	$(function() {
+		var Request = new Object();
+		Request = GetRequest();
+		type = Request['type'];
+		$('#qualification_type').val(type);
+		
+	});
 	function submitForm() {
 		if ($("#carForm").form('enableValidation').form('validate')) {
 			var data = $("#carForm").serialize();
@@ -31,10 +39,10 @@
 		$('#carForm').form('clear');
 	}
 	function backPage() {
-		window.location.href = 'driver.jsp';
+		window.location.href = 'driver.jsp?type='+type;
 	}
-	function upload(){alert("js");
-	if($("#pic").val().length > 0){alert("1");
+	function upload(){
+	if($("#pic").val().length > 0){
 	$.ajaxFileUpload(  
             {  
          cache : false,
@@ -61,7 +69,7 @@
 	}else{
 		alert('请选择图片');
 	}
-	alert("jss");
+	
 }
 </script>
 </head>

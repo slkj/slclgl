@@ -1,6 +1,10 @@
 var grid;
 var basePath = "../person/";
+var type="";
 $(function() {
+	var Request = new Object();
+	Request = GetRequest();
+	type = Request['type'];
 	// 初始化页面
 	loadDataGrid();
 	$("#search_btn").click(function() {
@@ -30,7 +34,7 @@ function loadDataGrid() {
 			.datagrid(
 					{
 						method : 'post',
-						url : basePath + 'list',
+						url : basePath + 'list?type='+type,
 						title : '司机列表',
 						fit : true,
 						nowrap : true, // false:折行
@@ -98,7 +102,7 @@ function loadDataGrid() {
 	
 }
 function add() {
-	window.location.href='driverAdd.jsp';
+	window.location.href='driverAdd.jsp?type='+type;
 }
 function edit(id){
 	window.location.href='driverEdit.jsp?id='+id;

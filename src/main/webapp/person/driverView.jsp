@@ -31,7 +31,7 @@
 	});
 	
 	function backPage() {
-		window.location.href = 'driver.jsp';
+		window.location.href = 'driver.jsp?type='+$('#qualification_type').val();
 	}
 </script>
 </head>
@@ -41,7 +41,8 @@
 			onclick="javascript:backPage()">返回</a>
 	</div>
 	<form id="carForm" metdod="post">
-	
+	<input hidden="true" id="qualification_type" name="qualification_type"
+			value="" />
 		<div id="aa" class="easyui-accordion" data-options="border:false">
 			<div title="驾驶员基本信息"
 				data-options="collapsed:false,collapsible:false,border:false"

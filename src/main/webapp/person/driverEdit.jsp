@@ -50,7 +50,7 @@
 		$('#carForm').form('clear');
 	}
 	function backPage() {
-		window.location.href = 'driver.jsp';
+		window.location.href = 'driver.jsp?type='+$('#qualification_type').val();
 	}
 </script>
 </head>
