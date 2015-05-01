@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.slkj.slclgl.prove.mapper.ProveMapper">
+	<sql id="sql_temp">
+		id,number,company,vid,zhengdy,fudy,accx,shacx,zuozx,youzx,yuangd,jingd,mais,xingszzp,
+		dengjzzp,siswdzp,result,inspector,riqi
+	</sql>
+	
+	<select id="getAll" resultType="prove" parameterType="hashmap">
+		SELECT <include refid="sql_temp"/> FROM TB_PROVE
+			
+		LIMIT #{startPage},#{endPage}
+	</select>
+
+	<select id="getAllCount" resultType="int" parameterType="hashmap">
+
+		SELECT COUNT(1) FROM TB_PROVE
+			
+	</select>
+	
+</mapper>
