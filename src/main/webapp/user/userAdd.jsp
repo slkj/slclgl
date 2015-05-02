@@ -66,7 +66,7 @@
 					<tr>
 						<th style="width: 100px">用户类型 ：</th>
 						<td><select name="type" class="easyui-combobox">
-								<option value="1">个人用户</option>
+								<option value="1">平台用户</option>
 								<option value="2" selected="selected">公司用户</option>
 						</select></td>
 						<th style="width: 100px">角色:</th>

@@ -215,13 +215,13 @@ function loadModlue(name, id) {
 								dataType : "json",
 								cache : false,
 								success : function(r) {
-									for (var int = 0; int < data.rows.length; int++) {
 										for (var int2 = 0; int2 < r.length; int2++) {
-											if(data.rows[int].id = r[int2].id){
-												$('#permilist').datagrid("selectRow", int);
+											for (var int = 0; int < data.rows.length; int++) {
+												if(data.rows[int].id == r[int2].id){
+													$('#permilist').datagrid("selectRow", int);
+												}
 											}
 										}
-									}
 								}
 							});
 							

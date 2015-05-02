@@ -1,7 +1,7 @@
 var grid;
 var basePath = "";
 $(function() {
-//	loadButton();
+	// loadButton();
 	// 初始化页面
 	loadDataGrid();
 	$("#search_btn").click(function() {
@@ -22,31 +22,16 @@ $(function() {
 	});
 
 });
-/*function loadButton() {
-	$.ajax({
-		url : "../module/getRolePer",
-		type : "POST",
-		data : {
-			roleid : $("#roleId").val(),
-			modlueid : '14'
-		},
-		async : false,
-		dataType : "json",
-		cache : false,
-		success : function(r) {
-			listButton = r;
-			var str="<tr>";
-			$.each(r, function(i, o) {
-				if(o.pLevel == 1){
-					str +="<td><a href=\"javascript:void(0)\" class=\"easyui-linkbutton\" data-options=\"iconCls:'"+o.iconCls+"',plain:true\" onclick=\""+o.pDesc+"()\">"+o.pName+"</a></td>";
-				} 
-			});
-			str +="</tr>"
-			var targetObj=$("#toolbar").append(str);
-			$.parser.parse(targetObj);
-		}
-	});
-}*/
+/*
+ * function loadButton() { $.ajax({ url : "../module/getRolePer", type : "POST",
+ * data : { roleid : $("#roleId").val(), modlueid : '14' }, async : false,
+ * dataType : "json", cache : false, success : function(r) { listButton = r; var
+ * str="<tr>"; $.each(r, function(i, o) { if(o.pLevel == 1){ str +="<td><a
+ * href=\"javascript:void(0)\" class=\"easyui-linkbutton\"
+ * data-options=\"iconCls:'"+o.iconCls+"',plain:true\"
+ * onclick=\""+o.pDesc+"()\">"+o.pName+"</a></td>"; } }); str +="</tr>" var
+ * targetObj=$("#toolbar").append(str); $.parser.parse(targetObj); } }); }
+ */
 // 将表单数据转为json
 function form2Json(id) {
 	var arr = $("#" + id).serializeArray()
@@ -76,83 +61,28 @@ function loadDataGrid() {
 		pageSize : 15,
 		pageList : [ 1, 10, 15, 20, 30, 50 ],
 		loadMsg : '数据加载中,请稍后……',
-		
+
 		columns : [ [ {
+			field : 'result',
+			title : '使用地区'
+		}, {
 			field : 'number',
-			title : '入网编号'
+			title : '编号'
 		}, {
-			field : 'carNumber',
-			title : '车牌号',
-			sortable : true,
-			order : 'desc',
-		}, {
-			field : 'companyName',
-			title : '运营商',
-		},  {
-			field : 'GPSID',
-			title : '设备终端ID',
-		}, {
-			field : 'sim',
-			title : 'SIM卡号'
-		},  {
-			field : 'zhengdy',
-			title : '正电源'
-		}, {
-			field : 'fudy',
-			title : '负电源'
-		}, {
-			field : 'accx',
-			title : 'ACC线'
-		}, {
-			field : 'shacx',
-			title : '刹车线'
-		},  {
-			field : 'sim',
-			title : '左转向'
-		}, {
-			field : 'sim',
-			title : '右转向'
-		}, {
-			field : 'sim',
-			title : '远光灯'
-		}, {
-			field : 'sim',
-			title : '近光灯'
-		}, {
-			field : 'sim',
-			title : '迈速'
-		}, {
-			field : 'sim',
-			title : '行驶证照片'
-		}, {
-			field : 'sim',
-			title : '车辆登记照片'
-		}, {
-			field : 'sim',
-			title : '车身45度角照片'
-		},{
 			field : 'inspector',
 			title : '安检员'
 
 		}, {
+			field : 'inspector',
+			title : '网监员'
+
+		}, {
 			field : 'riqi',
 			title : '测试日期'
-		},  {
+		}, {
 			field : 'result',
-			title : '测试结果',
-			align : 'center',
-			formatter : function(value, row, index) {
-				var s = "";
-			
-					if (value == 1) {
-						s = "定位";
-					} else if (value == 0) {
-						s = "<span style=\"color:red;\">不定位</span>";
-					}
-				
-				return s;
-			}
-		}] ],
+			title : '备注'
+		} ] ],
 		toolbar : '#tb',
 		// getSelectedRow : function() {
 		// return $('#dg').datagrid('getSelected');
@@ -543,7 +473,7 @@ function fCallback(url) {
 			SL.closeWindow();
 			if (data) {
 				grid.datagrid('reload');
-			}else{
+			} else {
 				SL.msgShow("提示", "请检查设备ID是否已经存在!", "warning");
 			}
 		}
@@ -594,7 +524,7 @@ function edit() {
 	});
 }
 function outExcel() {
-//	window.location.href = "../download.do?name=GPS.xls";
+	// window.location.href = "../download.do?name=GPS.xls";
 }
 function excelMB() {
 	window.location.href = "../download.do?name=GPS.xls";
@@ -602,7 +532,7 @@ function excelMB() {
 function openExcel() {
 	$('#openExcel').dialog('open');
 }
-//采用jquery easyui loading css效果
+// 采用jquery easyui loading css效果
 function ajaxLoading() {
 	$("<div class=\"datagrid-mask\"></div>").css({
 		display : "block",

@@ -23,7 +23,7 @@
 			</div>
 			<div class="easyui-panel"
 				data-options="fit:true,border:false,title:'操作按钮列表',tools:'#tt1'">
-				<ul id="permilist"></ul>
+				<table id="permilist"></table>
 			</div>
 		</div>
 	</div>
