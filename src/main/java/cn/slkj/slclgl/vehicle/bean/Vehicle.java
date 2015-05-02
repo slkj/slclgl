@@ -3,12 +3,15 @@
  */
 package cn.slkj.slclgl.vehicle.bean;
 
+
 /**
  * @author maxh
  *
  */
 public class Vehicle {
-
+	private String djFile;
+	private String xsFile;
+	private String carimg;
 	private String id;
 	/**
 	 * 所属公司
@@ -707,6 +710,25 @@ public class Vehicle {
 	}
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
+	}
+ 
+	public String getDjFile() {
+		return djFile;
+	}
+	public void setDjFile(String djFile) {
+		this.djFile = djFile;
+	}
+	public String getXsFile() {
+		return xsFile;
+	}
+	public void setXsFile(String xsFile) {
+		this.xsFile = xsFile;
+	}
+	public String getCarimg() {
+		return carimg;
+	}
+	public void setCarimg(String carimg) {
+		this.carimg = carimg;
 	}
 	@Override
 	public String toString() {

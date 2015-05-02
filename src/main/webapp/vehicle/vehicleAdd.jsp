@@ -7,6 +7,8 @@
 <title>添加货运车辆</title>
 <%@ include file="/common/taglibs.jsp"%>
 <script type="text/javascript" src="../js/city.js"></script>
+<!-- 引用ajaxfileupload.js -->
+<script src="../js/ajaxfileupload.js"></script>
 <script type="text/javascript">
 	var basePath = "../vehicle/";
 	var carType;
@@ -34,6 +36,32 @@
 			});
 		}
 	}
+	function save() {
+		if ($("#carForm").form('enableValidation').form('validate')) {
+			var carNumber = $("#carNumber").val();
+			$.ajaxFileUpload({
+				url : basePath + 'uploadCarImg?carNumber='+carNumber,
+				secureuri : false,
+				fileElementId : [ 'djFile', 'xsFile', 'carimg' ],//file标签的id  
+				dataType : 'json',//返回数据的类型  
+				success : function(data, status) //服务器成功响应处理函数
+				{
+					if (data) {
+					    $("#djFileVal").val(data.djFile);
+					    $("#xsFileVal").val(data.xsFile);
+					    $("#carimgVal").val(data.carimg);
+						submitForm();
+					} else {
+						alert("【图片提交失败！】");
+					}
+				},
+				error : function(data, status, e)//服务器响应失败处理函数
+				{
+					alert("【服务器异常，请连续管理员！】" + e);
+				}
+			});
+		}
+	}
 	function clearForm() {
 		$('#ff').form('clear');
 		$("#regName").combobox("setValue", "3");
@@ -48,17 +76,34 @@
 		// 		window.location.href = 'vehicleList.jsp';
 		history.go(-1);
 	}
+	// 将表单数据转为json
+	function form2Json(id) {
+		var arr = $("#" + id).serializeArray()
+		var jsonStr = "";
+		jsonStr += '{';
+		for (var i = 0; i < arr.length; i++) {
+			jsonStr += '"' + arr[i].name + '":"' + arr[i].value + '",'
+		}
+		jsonStr = jsonStr.substring(0, (jsonStr.length - 1));
+		jsonStr += '}'
+		var json = JSON.parse(jsonStr)
+		return json
+	}
 </script>
 </head>
 <body>
 	<div style="text-align: left; padding: 5px">
 		<a href="javascript:void(0)" class="easyui-linkbutton"
-			onclick="javascript:submitForm()">保存</a> <a href="javascript:void(0)"
+			onclick="javascript:save()">保存</a> <a href="javascript:void(0)"
 			class="easyui-linkbutton" onclick="javascript:clearForm()">重置</a> <a
 			href="javascript:void(0)" class="easyui-linkbutton"
 			onclick="javascript:backPage()">返回</a>
 	</div>
 	<form id="carForm" metdod="post">
+  		<input type="hidden" id="djFileVal"  name="djFile" />
+		<input type="hidden" id="xsFileVal" name="xsFile" />
+	    <input type="hidden" id="carimgVal" name="carimg" />
+			 
 		<div id="aa" class="easyui-accordion" data-options="border:false">
 			<div title="车辆基本信息"
 				data-options="collapsed:false,collapsible:false,border:false"
@@ -297,55 +342,41 @@
 					</tr>
 				</table>
 			</div>
-			<div data-options="collapsed:false,collapsible:false,border:false">
-				<ul class="siminput" style="padding-top: 0px; padding-bottom: 5px;">
-					<li style="width: 760px;"><span class="siminput_li_span"
-						style="width: 130px;">车辆登记证上传：</span> <input type="file"
-						id="registrationCertificateFile"
-						name="registrationCertificateFile" class="valid"> <span
-						class="red"></span><span class="red"
-						id="span_registrationCertificateFile"></span> <lable
-							style="display: inline-block;">图片上传，小于3M，jpg、jpeg格式</lable> <input
-						type="hidden" id="registrationCertificateFileType"
-						name="registrationCertificateFileType" value="jpg"></li>
-					<li style="height: 45px; width: 65px; padding-top: 2px;"><img
-						id="registrationCertificateAttach" width="65" height="45"
-						style="cursor: pointer; display: none;" title="点击查看原图"
-						onclick="window.open(this.src)"></li>
-					<li style="width: 760px;"><span class="siminput_li_span"
-						style="width: 130px;">车辆合格证/行驶证：</span> <input type="file"
-						id="drivingLicOrCertFile" name="drivingLicOrCertFile"> <span
-						class="red"></span><span class="red"
-						id="span_drivingLicOrCertFile"></span> <lable
-							style="display: inline-block;">图片上传，小于3M，jpg、jpeg格式</lable> <input
-						type="hidden" id="drivingLicOrCertFileType"
-						name="drivingLicOrCertFileType"></li>
-					<li style="height: 45px; width: 65px; padding-top: 2px;"><img
-						id="drivingLicOrCertAttach" width="65" height="45"
-						style="cursor: pointer; display: none;" title="点击查看原图"
-						onclick="window.open(this.src)"></li>
-					<li style="width: 760px;"><span class="siminput_li_span"
-						style="width: 130px;">车身照片：</span> <input type="file"
-						id="vehicleBodyPhotoFile" name="vehicleBodyPhotoFile"> <span
-						class="red"></span><span class="red"
-						id="span_vehicleBodyPhotoFile"></span> <lable
-							style="display: inline-block;">上传车辆左前方45角度图片，小于3M，jpg、jpeg格式</lable>
-						<input type="hidden" id="vehicleBodyPhotoFileType"
-						name="vehicleBodyPhotoFileType"></li>
-					<li style="height: 45px; width: 65px; padding-top: 2px;"><img
-						id="vehicleBodyPhotoAttach" width="65" height="45"
-						style="cursor: pointer; display: none;" title="点击查看原图"
-						onclick="window.open(this.src)"></li>
-				</ul>
-			</div>
+			<!-- 			<div data-options="collapsed:false,collapsible:false,border:false"> -->
+			<!-- 				<label style="color: red;">上传车辆左前方45角度图片，图片上传，小于3M，jpg、jpeg格式</label> -->
+			<!-- 				<form name="cForm" action="/springMVC7/file/upload2" enctype="multipart/form-data" method="post""> -->
+			<!-- 					<ul style="padding-top: 0px; padding-bottom: 5px;"> -->
+			<!-- 						<li>车辆登记证上传： <input type="file" id="djFile" name="djFile" -->
+			<!-- 							size="28" accept="image/jpeg,image/png,image/gif,image/jpeg" /> -->
+			<!-- 						</li> -->
+			<!-- 						<li>车辆合格证/行驶证： <input type="file" id="xsFile" name="xsFile" -->
+			<!-- 							size="28" accept="image/jpeg,image/png,image/gif,image/jpeg" /> -->
+			<!-- 						</li> -->
+			<!-- 						<li>车身照片： <input type="file" id="carimg" name="carimg" -->
+			<!-- 							size="28" accept="image/jpeg,image/png,image/gif,image/jpeg" /> -->
+			<!-- 						</li> -->
+			<!-- 					</ul> -->
+			<!-- 				</form> -->
+			<!-- 			</div> -->
 		</div>
-
 	</form>
-	<!-- 		<div style="text-align: left; padding: 5px"> -->
-	<!-- 			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:submitForm()">保存</a>  -->
-	<!-- 			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:clearForm()">重置</a> -->
-	<!-- 			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:clearForm()">返回</a> -->
-	<!-- 		</div> -->
+	<div>
+		<label style="color: red;">上传车辆左前方45角度图片，图片上传，小于3M，jpg、jpeg格式</label>
+		<form name="cForm" action="/springMVC7/file/upload2"
+			enctype="multipart/form-data" method="post"">
+			<ul style="padding-top: 0px; padding-bottom: 5px;">
+				<li>车辆登记证上传： <input type="file" id="djFile" name="myfiles"
+					size="28" accept="image/jpeg,image/png,image/gif,image/jpeg" />
+				</li>
+				<li>车辆合格证/行驶证： <input type="file" id="xsFile" name="myfiles"
+					size="28" accept="image/jpeg,image/png,image/gif,image/jpeg" />
+				</li>
+				<li>车身照片： <input type="file" id="carimg" name="myfiles"
+					size="28" accept="image/jpeg,image/png,image/gif,image/jpeg" />
+				</li>
+			</ul>
+		</form>
+	</div>
 	<div style="height: 30px"></div>
 </body>
 </html>
