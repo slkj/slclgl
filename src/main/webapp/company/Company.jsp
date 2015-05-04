@@ -14,8 +14,8 @@
 			<form name="searchform" method="post" action="" id="searchform">
 				<table cellspacing="0" cellpadding="0">
 					<tr>
-						<td> 公司名称:<input name="compName" type="text" style="width: 150px" /> 
-							组织机构代码:<input name="organizationCode" type="text" style="width: 150px" /> 
+						<td> 公司名称:<input class="easyui-textbox" name="compName" type="text" style="width: 150px" /> 
+							组织机构代码:<input class="easyui-textbox" name="organizationCode" type="text" style="width: 150px" /> 
 							<a id="search_btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:'true'">查询</a>
 						</td>
 					</tr>

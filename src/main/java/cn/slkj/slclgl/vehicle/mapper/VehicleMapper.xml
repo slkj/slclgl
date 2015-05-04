@@ -11,7 +11,7 @@
 		CARCONTWIDTH,CARCONTHEIGHT,CARAPPROVED,CARAPPRGUEST,CARTRAC,CARCABGUEST,CARUSENATU,CARUSENATUNAME,
 		CAROBTWAY,CARFACDATE,INSTALLERS,ATTENDANTS,INSTALLTIME,INSTALLADDRESS,FEES,FEESEEND,ISNOTICE,
 		SIMPAYER,PAYERTIME,CTRADINGLINE,CCATCHMENBERS,CARIMG,ENTRYTIME,ENTRYID,ENTRYNAME,DEPID,
-		SIMNUMBER,EQUITMENT,NETWORKNO,REMARK,AREACODE,CITYID,COUNTY
+		SIMNUMBER,EQUITMENT,NETWORKNO,REMARK,AREACODE,CITYID,COUNTY,CARIMG,DJFILE,XSFILE
 	</sql>
 	
 	<sql id="sql_car">
@@ -23,7 +23,7 @@
 		CARCONTWIDTH,CARCONTHEIGHT,CARAPPROVED,CARAPPRGUEST,CARTRAC,CARCABGUEST,CARUSENATU,CARUSENATUNAME,
 		CAROBTWAY,CARFACDATE,INSTALLERS,ATTENDANTS,INSTALLTIME,INSTALLADDRESS,FEES,FEESEEND,ISNOTICE,
 		SIMPAYER,PAYERTIME,CTRADINGLINE,CCATCHMENBERS,CARIMG,ENTRYTIME,ENTRYID,ENTRYNAME,DEPID,
-		SIMNUMBER,EQUITMENT,NETWORKNO,REMARK,AREACODE,CITYID,COUNTY
+		SIMNUMBER,EQUITMENT,NETWORKNO,REMARK,AREACODE,CITYID,COUNTY,CARIMG,DJFILE,XSFILE
 	</sql>
 	<select id="queryList" resultType="Vehicle" parameterType="hashmap">
 			SELECT <include refid="sql_car"/>  FROM TB_VEHICLE TBV
@@ -125,8 +125,8 @@
 			carTreadBe,carTreadAfter,carTireNum,carTireSpe,carNumOfSpring,carAxleDist,carAxleNum,carContLength,
 			carContWidth,carContHeight,carApproved,carApprGuest,carTrac,carCabGuest,carUseNatu,carUseNatuName,
 			carObtWay,carFacDate,installers,attendants,installtime,installAddress,fees,feeseEnd,isNotice,
-			simPayer,payerTime,CTradingLine,CCatchMenbers,carImg,entryTime,entryId,entryName,depId,simNumber,
-			equitment,networkNo,remark,companyId,areaCode,cityId,county
+			simPayer,payerTime,CTradingLine,CCatchMenbers,entryTime,entryId,entryName,depId,simNumber,
+			equitment,networkNo,remark,companyId,areaCode,cityId,county,carImg,djFile,xsFile
 		)
 		VALUES(
 			#{carOwner},#{carOwnersType},#{carOwnersCard},#{contacts},#{contactsTel},#{carNumber},#{carNumberG},#{plateColor},#{classify},
@@ -135,8 +135,8 @@
 			#{carTreadBe},#{carTreadAfter},#{carTireNum},#{carTireSpe},#{carNumOfSpring},#{carAxleDist},#{carAxleNum},#{carContLength},
 			#{carContWidth},#{carContHeight},#{carApproved},#{carApprGuest},#{carTrac},#{carCabGuest},#{carUseNatu},#{carUseNatuName}
 			,#{carObtWay},#{carFacDate},#{installers},#{attendants},#{installtime},#{installAddress},#{fees},#{feeseEnd},#{isNotice},
-			#{simPayer},#{payerTime},#{CTradingLine},#{CCatchMenbers},#{carImg},#{entryTime},#{entryId},#{entryName},#{depId},
-			#{simNumber},#{equitment},#{networkNo},#{remark},#{companyId},#{areaCode},#{cityId},#{county}
+			#{simPayer},#{payerTime},#{CTradingLine},#{CCatchMenbers},#{entryTime},#{entryId},#{entryName},#{depId},
+			#{simNumber},#{equitment},#{networkNo},#{remark},#{companyId},#{areaCode},#{cityId},#{county},#{carImg},#{djFile},#{xsFile}
 		)
 	</insert>
 
@@ -153,8 +153,9 @@
 		carCabGuest=#{carCabGuest},carUseNatu=#{carUseNatu},carUseNatuName=#{carUseNatuName},carObtWay=#{carObtWay},carFacDate=#{carFacDate},
 		installers=#{installers},attendants=#{attendants},installtime=#{installtime},installAddress=#{installAddress},fees=#{fees},
 		feeseEnd=#{feeseEnd},isNotice=#{isNotice},simPayer=#{simPayer},payerTime=#{payerTime},CTradingLine=#{CTradingLine},
-		CCatchMenbers=#{CCatchMenbers},carImg=#{carImg},entryTime=#{entryTime},entryId=#{entryId},entryName=#{entryName},depId=#{depId},simNumber=#{simNumber},
+		CCatchMenbers=#{CCatchMenbers},entryTime=#{entryTime},entryId=#{entryId},entryName=#{entryName},depId=#{depId},simNumber=#{simNumber},
 		equitment=#{equitment},networkNo=#{networkNo},remark=#{remark},companyId=#{companyId},areaCode=#{areaCode},cityId=#{cityId},county=#{county}
+		,carImg=#{carImg} ,djFile=#{djFile},xsFile=#{xsFile}
 		WHERE ID = #{id}
 	</update>
 	<update id="activated" parameterType="Vehicle">

@@ -9,9 +9,7 @@ package cn.slkj.slclgl.vehicle.bean;
  *
  */
 public class Vehicle {
-	private String djFile;
-	private String xsFile;
-	private String carimg;
+
 	private String id;
 	/**
 	 * 所属公司
@@ -290,6 +288,14 @@ public class Vehicle {
 	 * 县
 	 */
 	private String county;
+	/**
+	 * 登记照片
+	 */
+	private String djFile;
+	/**
+	 * 行驶证照片
+	 */
+	private String xsFile;
 	
 	public String getAreaCode() {
 		return areaCode;
@@ -723,12 +729,6 @@ public class Vehicle {
 	}
 	public void setXsFile(String xsFile) {
 		this.xsFile = xsFile;
-	}
-	public String getCarimg() {
-		return carimg;
-	}
-	public void setCarimg(String carimg) {
-		this.carimg = carimg;
 	}
 	@Override
 	public String toString() {

@@ -125,6 +125,12 @@ function find(menuid) {
 }
 
 function addTab(menuid,subtitle, url, icon) {
+	//动态传选择菜单id
+	if(url.indexOf("?") >= 0){
+		url += "&tabid="+menuid;
+	}else{
+		url += "?tabid="+menuid;
+	}
 	if (!$('#tabs').tabs('exists', subtitle)) {
 		$('#tabs').tabs('add', {
 			id : menuid,

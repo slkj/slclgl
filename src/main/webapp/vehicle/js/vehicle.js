@@ -1,10 +1,11 @@
 var basePath = "../vehicle/";
 var grid;
-var carType;
+var carType,tabid;
 var Request = new Object();
 $(function() {
 	Request = GetRequest();
 	carType = Request['ct'];
+	tabid = Request['tabid'];
 	loadButton();
 	// 初始化页面
 	loadDataGrid();
@@ -23,21 +24,21 @@ function loadButton() {
 		type : "POST",
 		data : {
 			roleid : $("#roleId").val(),
-			modlueid : '10'
+			modlueid : tabid
 		},
 		async : false,
 		dataType : "json",
 		cache : false,
 		success : function(r) {
 			listButton = r;
-			var str="<tr>";
+			var str = "<tr>";
 			$.each(r, function(i, o) {
-				if(o.pLevel == 1){
-					str +="<td><a href=\"javascript:void(0)\" class=\"easyui-linkbutton\" data-options=\"iconCls:'"+o.iconCls+"',plain:true\" onclick=\""+o.pDesc+"()\">"+o.pName+"</a></td>";
-				} 
+				if (o.pLevel == 1) {
+					str += "<td><a href=\"javascript:void(0)\" class=\"easyui-linkbutton\" data-options=\"iconCls:'" + o.iconCls + "',plain:true\" onclick=\"" + o.pDesc + "()\">" + o.pName + "</a></td>";
+				}
 			});
-			str +="</tr>"
-			var targetObj=$("#toolbar").append(str);
+			str += "</tr>"
+			var targetObj = $("#toolbar").append(str);
 			$.parser.parse(targetObj);
 		}
 	});
@@ -45,9 +46,10 @@ function loadButton() {
 function loadDataGrid() {
 	grid = $('#dg').datagrid({
 		method : 'post',
-		url : basePath + 'list?carUseNatu='+carType,
+		url : basePath + 'list?carUseNatu=' + carType,
 		// title : '车辆列表',
 		fit : true,
+		fitColumns : true,
 		nowrap : true, // false:折行
 		rownumbers : true, // 行号
 		striped : true, // 隔行变色
@@ -58,11 +60,6 @@ function loadDataGrid() {
 		pageList : [ 1, 10, 15, 20, 30, 50 ],
 		loadMsg : '数据加载中,请稍后……',
 		frozenColumns : [ [ {
-			colspan : 2
-		},{
-			title : '基本信息',
-			colspan : 5
-		}  ], [ {
 			field : '_state',
 			title : '使用状态',
 			formatter : function(value, row, index) {
@@ -79,22 +76,28 @@ function loadDataGrid() {
 			formatter : function(value, row, index) {
 				var s = "";
 				$.each(listButton, function(i, o) {
-					if(o.pLevel == 2){
-						s +="<a href=\"javascript:void(0)\"><span onclick=\"javaScript:"+o.pDesc+"('" + row.id + "');\">"+o.pName+"</span></a>";
+					if (o.pLevel == 2) {
+						s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:" + o.pDesc + "('" + row.id + "');\">" + o.pName + "</span></a>";
 						s += "&nbsp;|&nbsp;";
-					} 
+					}
 				});
-//				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:approval('" + row.id + "');\">入网审核</span></a>";
-//				s += "&nbsp;|&nbsp;";
-//				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:vehicleInfo('" + row.id + "');\">详细</span></a>";
-//				s += "&nbsp;|&nbsp;";
-//				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editRow('" + row.id + "');\">编辑</span></a>";
-//				s += "&nbsp;|&nbsp;";
-//				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:deleteRow('" + index + "');\">删除</span></a>";
-//				s += "&nbsp;|&nbsp;";
-//				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:inNet('" + row.id + "');\">设备安装</span></a>";
-//				s += "&nbsp;|&nbsp;";
-//				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:detailCarInfo('" + index + "');\">安装记录</span></a>";
+//				 s += "<a href=\"javascript:void(0)\"><span  onclick=\"javaScript:approval('" + row.id +
+//				 "');\">入网审核</span></a>";
+//				 s += "&nbsp;|&nbsp;";
+//				 s += "<a href=\"javascript:void(0)\"><span  onclick=\"javaScript:vehicleInfo('" + row.id +
+//				 "');\">详细</span></a>";
+//				 s += "&nbsp;|&nbsp;";
+//				 s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editRow('" + row.id +
+//				 "');\">编辑</span></a>";
+//				 s += "&nbsp;|&nbsp;";
+//				 s += "<a href=\"javascript:void(0)\"><span  onclick=\"javaScript:deleteRow('" + index +
+//				 "');\">删除</span></a>";
+//				 s += "&nbsp;|&nbsp;";
+//				 s += "<a href=\"javascript:void(0)\"><span  onclick=\"javaScript:inNet('" + row.id +
+//				 "');\">设备安装</span></a>";
+//				 s += "&nbsp;|&nbsp;";
+//				 s += "<a href=\"javascript:void(0)\"><span  onclick=\"javaScript:detailCarInfo('" + index +
+//				 "');\">安装记录</span></a>";
 				return s;
 			}
 		}, {
@@ -106,7 +109,7 @@ function loadDataGrid() {
 		}, {
 			field : 'contactsTel',
 			title : '联系电话'
-		},{
+		}, {
 			field : 'fhtime',
 			title : '车辆类型',
 			formatter : function(value, row, index) {
@@ -186,7 +189,7 @@ function pos(index) {
 	window.open('../location.jsp')
 }
 function addCar() {
-	window.location.href = 'vehicleAdd.jsp?ct='+carType ;
+	window.location.href = 'vehicleAdd.jsp?ct=' + carType;
 }
 function inNet(id) {
 	window.location.href = 'inNet.jsp?id=' + id;

@@ -102,7 +102,7 @@
 	<form id="carForm" metdod="post">
   		<input type="hidden" id="djFileVal"  name="djFile" />
 		<input type="hidden" id="xsFileVal" name="xsFile" />
-	    <input type="hidden" id="carimgVal" name="carimg" />
+	    <input type="hidden" id="carimgVal" name="carImg" />
 			 
 		<div id="aa" class="easyui-accordion" data-options="border:false">
 			<div title="车辆基本信息"

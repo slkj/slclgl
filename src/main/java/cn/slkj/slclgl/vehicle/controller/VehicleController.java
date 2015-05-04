@@ -102,8 +102,10 @@ public class VehicleController {
 		String jstr = "{";
 		// 如果用的是Tomcat服务器，则文件会上传到\\%TOMCAT_HOME%\\webapps\\YourWebProject\\upload\\文件夹中
 		// 这里实现文件上传操作用的是commons.io.FileUtils类,它会自动判断/upload是否存在,不存在会自动创建
-		String realPath = request.getSession().getServletContext()
-				.getRealPath("/carimg/" + carNumber);
+//		String realPath = request.getSession().getServletContext()
+//				.getRealPath("/carimg/" + carNumber);
+		
+		String realPath =  "D:/carimg/" + carNumber+"/";
 		String originalFilename = null;
 		for (int i = 0; i < myfiles.length; i++) {
 			MultipartFile multipartFile = myfiles[i];

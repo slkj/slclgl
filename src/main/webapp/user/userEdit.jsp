@@ -85,15 +85,15 @@
 					</tr>
 					<tr>
 						<th style="width: 100px">账号：</th>
-						<td><input class="easyui-validatebox" name="username"
+						<td><input class="easyui-textbox" name="username"
 							data-options="required:true" disabled="disabled"/></td>
 						<th style="width: 100px">密码：</th>
-						<td><input class="easyui-validatebox" name="password"
+						<td><input class="easyui-textbox" name="password" type="password"
 							data-options="required:true" /></td>
 					</tr>
 					<tr>
 						<th>用户姓名：</th>
-						<td><input class="easyui-validatebox" name="realname"
+						<td><input class="easyui-textbox" name="realname"
 							data-options="required:true" /></td>
 						<th>性别：</th>
 						<td><label><input name="sex" type="radio" value="男"
@@ -102,9 +102,9 @@
 					</tr>
 					<tr>
 						<th>电子邮件：</th>
-						<td><input name="email" class="easyui-validatebox" /></td>
+						<td><input name="email" class="easyui-textbox" /></td>
 						<th>联系电话：</th>
-						<td><input name="phone" class="easyui-validatebox"
+						<td><input name="phone" class="easyui-textbox"
 							data-options="required:true" /></td>
 					</tr>
 					<tr>

@@ -11,7 +11,7 @@
 		<table class="grid">
 			<tr>
 				<th style="width: 100px">角色名称：</th>
-				<td><input name="name" class="easyui-validatebox" data-options="required:'true'" style="width: 330px"></td>
+				<td><input name="name" class="easyui-textbox" data-options="required:'true'" style="width: 330px"></td>
 			</tr>
 			<tr>
 				<th>排序：</th>

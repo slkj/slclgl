@@ -14,7 +14,7 @@
 			<tr>
 				<th style="width: 80px">资源名称：</th>
 				<td><input name="name" style="width: 300px"
-					class="easyui-validatebox" data-options="required:true"></td>
+					class="easyui-textbox" data-options="required:true"></td>
 			</tr>
 			<tr>
 				<th>上级菜单：</th>
@@ -33,13 +33,13 @@
 			</tr>
 			<tr>
 				<th>顺序：</th>
-				<td><input type="text" name="priority" class="easyui-numberbox"
-					value="99" data-options="min:0"></input></td>
+				<td><input type="text" name="priority" class="easyui-numberbox" value="99" data-options="min:0"></input></td>
 			</tr>
 			<tr>
 				<th>说明：</th>
-				<td><input class="easyui-textbox" name="description"
-					data-options="multiline:true" style="height: 60px; width: 300px"></input></td>
+				<td>
+					<input class="easyui-textbox" name="description" data-options="multiline:true" style="height: 60px; width:300px"></input>	
+				</td>
 			</tr>
 		</table>
 	</form>

@@ -18,7 +18,7 @@
 						{
 							url : '../module/list',
 							loadMsg : '数据加载中....',
-							title : '系统资源管理列表',
+// 							title : '系统资源管理列表',
 							width : winSize.width,
 							height : winSize.height,
 							nowrap : true, //false:折行
