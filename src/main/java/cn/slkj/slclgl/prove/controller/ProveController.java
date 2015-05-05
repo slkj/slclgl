@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.slkj.easyui.util.EPager;
+import cn.slkj.easyui.util.JsonResult;
 import cn.slkj.slclgl.devices.bean.Devices;
 import cn.slkj.slclgl.devices.bean.Devices_record;
 import cn.slkj.slclgl.prove.bean.Prove;
@@ -61,5 +62,63 @@ public class ProveController {
 		List<Prove> list = proveService.getAll(pageMap);
 		return new EPager<Prove>(total, list);
 	}
+	/**
+	 * 获取实体
+	 * @param insurance
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/queryOne")
+	public Prove queryOne(Prove prove) {
+		return proveService.queryOne(prove);
+	}
+	/** 添加*/
+	@ResponseBody
+	@RequestMapping(value = "/save", method = { RequestMethod.POST })
+	public JsonResult save(Prove prove)
+			throws Exception {
+		try {
+			
+			int i = proveService.save(prove);
+			if (i != -1) {
+				return new JsonResult(true, "");
+			}
+		} catch (Exception e) {
+			throw new Exception(
+					"this is the detail of ajax exception information");
+		}
+		return new JsonResult(false, "保存失败！");
+	}
+	
+	
+	
+	
+	/** 编辑*/
+	@ResponseBody
+	@RequestMapping(value = "/editSave", method = { RequestMethod.POST })
+	public JsonResult editSave(Prove prove)
+			throws Exception {
+		try {
 
+			int i = proveService.edit(prove);
+			if (i != -1) {
+				return new JsonResult(true, "");
+			}
+		} catch (Exception e) {
+			throw new Exception(
+					"this is the detail of ajax exception information");
+		}
+		return new JsonResult(false, "编辑失败！");
+	}
+	
+	/** 单条删除*/
+	@ResponseBody
+	@RequestMapping(value = "/delete")
+	public JsonResult delete(String id) {
+		int i = proveService.delete(id);
+		if (i > 0) {
+			return new JsonResult(true, "");
+		}
+		return new JsonResult(false, "删除失败！");
+	}
 }

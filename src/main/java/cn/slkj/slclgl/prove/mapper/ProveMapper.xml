@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.slkj.slclgl.prove.mapper.ProveMapper">
 	<sql id="sql_temp">
-		id,number,company,vid,zhengdy,fudy,accx,shacx,zuozx,youzx,yuangd,jingd,mais,xingszzp,
-		dengjzzp,siswdzp,result,inspector,riqi
+		id,uid,number,address,wangjian,inspector,riqi,remark
 	</sql>
 	
 	<select id="getAll" resultType="prove" parameterType="hashmap">
@@ -17,5 +16,27 @@
 		SELECT COUNT(1) FROM TB_PROVE
 			
 	</select>
+	<select id="queryOne" parameterType="prove" resultType="prove">
+		SELECT <include refid="sql_temp"/> from TB_PROVE
+		<where>
+			<if test="id != null and id != ''">
+				AND id = #{id}
+			</if>
+			</where>
+	</select>
+	<insert id="save" parameterType="prove">
+	INSERT INTO `tb_prove` 
+	(uid,number,address,wangjian,inspector,riqi,remark)
+		VALUES
+		(#{uid},#{number},#{address},#{wangjian},#{inspector},#{riqi},#{remark})
+	</insert>
 	
+	<update id="edit" parameterType="prove">
+		UPDATE TB_PROVE set 
+			uid = #{uid},number=#{number},address = #{address},wangjian=#{wangjian}, inspector=#{inspector}, riqi=#{riqi},remark = #{remark} where id = #{id}
+	</update>
+	
+<delete id="delete" parameterType="string">
+		DELETE FROM TB_PROVE WHERE ID  = #{id}
+	</delete>
 </mapper>

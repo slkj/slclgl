@@ -24,6 +24,62 @@ public class ProveService{
 		return mapper.getAllCount(map);
 	}
 
-	
+	/**
+	 * 根据id获取
+	 * @param Agent
+	 * @return
+	 */
+	public Prove queryOne(Prove prove) {
+		
+		if (prove == null) {
+			return null;
+		}
+		try {
+			return mapper.queryOne(prove);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	/**
+	 * 添加
+	 * @param Agent
+	 */
+	public int save(Prove prove) {
+		try {
+			
+			return mapper.save(prove);
+		} catch (Exception e) {
+			return -1;
+		}
+	}
+
+	/**
+	 * 编辑
+	 * @param Agent
+	 */
+	public int edit(Prove prove) {
+		try {
+			
+			return mapper.edit(prove);
+		} catch (Exception e) {
+			return -1;
+		}
+	}
+
+
+
+	/**
+	 * 根据id删除
+	 * @param id
+	 */
+	public int delete(String id) {
+		try {
+			
+			return mapper.delete(id);
+		} catch (Exception e) {
+			return -1;
+		}
+	}
 	
 }

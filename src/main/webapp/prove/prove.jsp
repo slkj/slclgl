@@ -16,44 +16,31 @@
 				<table cellspacing="0" cellpadding="0">
 					<tr>
 						<td> 证明编号:<input name="number" class="easyui-numberbox"
-							style="width: 150px" /> SIM卡号:<input name="phone"
-							class="easyui-numberbox" style="width: 150px" /> 车牌号:<input
+							style="width: 150px" /> 使用地区:<input name="address"
+							class="easyui-numberbox" style="width: 150px" /> 测试日期:<input
 							name="carNumber" class="easyui-textbox" style="width: 150px" />
+							 <a
+							id="search_btn" href="#" class="easyui-linkbutton"
+							data-options="iconCls:'icon-search',plain:'true'">查询</a>
 						</td>
 					</tr>
 					<tr height="3px"></tr>
-					<tr>
-						<td>设备终端ID：<input name="lyr" class="easyui-textbox"
-							style="width: 150px" /> 
-						<td>设备厂商 : <select id="firm" class="easyui-combobox"
-							name="firm" panelheight="auto" style="width: 100px">
-								<option value="" selected="selected">请选择</option>
-								<option value="神龙">神龙</option>
-								<option value="珠海天琴">珠海天琴</option>
-								<option value="华宝">华宝</option>
-								<option value="博实结">博实结</option>
-								<option value="中斗">中斗</option>
-								<option value="赛格">赛格</option>
-								<option value="赛格">航天无线</option>
-								<option value="鸿泉">鸿泉</option>
-						</select> 
-						</td>
-					</tr>
-					<tr>
-						<td><a id="high_search_btn" href="#"
-							class="easyui-linkbutton"
-							data-options="iconCls:'icon-search',plain:'true'">更多条件</a> <a
-							id="search_btn" href="#" class="easyui-linkbutton"
-							data-options="iconCls:'icon-search',plain:'true'">查询</a></td>
-					</tr>
+					
 				</table>
 			</form>
-		</div>
-		<div>
-			<table id="toolbar" cellspacing="0" cellpadding="0">
-
+			<table cellspacing="0" cellpadding="0">
+				<tr>
+					<td>
+						<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onClick="javascript:addFun();">添加</a>
+					</td>
+					<td><div class="datagrid-btn-separator"></div></td>
+					<td align="right">
+						<a href="#"  onclick="outExcel()" class="easyui-linkbutton" data-options="iconCls:'pic pic_157',plain:true">导出</a>
+					</td>
+				</tr>
 			</table>
 		</div>
+		
 	</div>
 	<table id="dg"></table>
 
