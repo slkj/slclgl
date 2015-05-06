@@ -12,19 +12,28 @@
 		<input name="uid" type="hidden" value="${userSession.id }" />
 		<table class="grid" style="width: 100%">
 			<tr>
-				<th>使用地区：</th>
-				<td colspan="3"><input name="address" class="easyui-validatebox" style="width: 260px"></td>
+				<th>使用类型：</th>
+				<td colspan="3">
+				<select class="easyui-combobox"  name="firm" style="width: 200px" data-options="required:'true'">
+								<option value="邯郸安装">邯郸安装</option>
+								<option value="邯郸使用">邯郸使用</option>
+								<option value="石家庄安装">石家庄安装</option>
+								<option value="石家庄使用">石家庄使用</option>
+								<option value="廊坊专用">廊坊专用</option>
+								<option value="抚宁专用">抚宁专用</option>
+								<option value="山西专用">山西专用</option>
+					</select></td>
 			</tr>
 			<tr>
 				<th style="width: 100px">入网编号：</th>
-				<td><input name="number" class="easyui-validatebox" style="width: 200px"></td>
+				<td><input name="number" class="easyui-validatebox" style="width: 200px" data-options="required:'true'"></td>
 				<th>测试日期：</th>
-				<td><input name="riqi" class="easyui-datebox" editable="false"  style="width: 200px"></td>
+				<td><input name="riqi" class="easyui-datebox" editable="false"  style="width: 200px" data-options="required:'true'"></td>
 			</tr>
 			
 			<tr>
 				<th style="width: 100px">安检员：</th>
-				<td><input name="inspector" class="easyui-validatebox" style="width: 200px"></td>
+				<td><input name="inspector" class="easyui-validatebox" style="width: 200px" data-options="required:'true'"></td>
 			<th style="width: 100px">网监员：</th>
 				<td><input name="wangjian" class="easyui-validatebox" style="width: 200px"></td>
 			</tr>

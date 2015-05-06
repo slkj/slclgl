@@ -66,6 +66,18 @@ public class ProveService{
 			return -1;
 		}
 	}
+	/**
+	 * 使用
+	 * @param Agent
+	 */
+	public int use(Prove prove) {
+		try {
+			
+			return mapper.use(prove);
+		} catch (Exception e) {
+			return -1;
+		}
+	}
 
 
 

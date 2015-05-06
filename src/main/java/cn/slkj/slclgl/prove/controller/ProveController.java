@@ -33,29 +33,12 @@ public class ProveController {
 		Map<String, Object> pageMap = new HashMap<String, Object>();
 		int page = Integer.parseInt(request.getParameter("page"));
 		int rows = Integer.parseInt(request.getParameter("rows"));
-		pageMap.put("rktime", request.getParameter("rktime"));
-		pageMap.put("rktime1", request.getParameter("rktime1"));
-		pageMap.put("lytime", request.getParameter("lytime"));
-		pageMap.put("lytime1", request.getParameter("lytime1"));
-		pageMap.put("fhtime", request.getParameter("fhtime"));
-		pageMap.put("fhtime1", request.getParameter("fhtime1"));
+		pageMap.put("number", request.getParameter("number"));
+		pageMap.put("address", request.getParameter("address"));
+		pageMap.put("usman", request.getParameter("usman"));
+		pageMap.put("endDate", request.getParameter("endDate"));
+		pageMap.put("endDate1", request.getParameter("endDate1"));
 		pageMap.put("state", request.getParameter("state"));
-		pageMap.put("lyr", request.getParameter("lyr"));
-		pageMap.put("firm", request.getParameter("firm"));
-		// TODO 处理地区代码，如果后面有0的要like
-		String area = request.getParameter("area");
-		pageMap.put("area", area != null ? LocationUtil.toLocation(area) : area);
-		pageMap.put("listnum", request.getParameter("listnum"));
-		pageMap.put("phone", request.getParameter("phone"));
-		pageMap.put("carNumber", request.getParameter("carNumber"));
-		String sort = request.getParameter("sort");
-		// if(StringUtils.isNotBlank(sort)){
-		pageMap.put("sort", sort != null ? sort : "rktime");
-		// }
-		String order = request.getParameter("order");
-		// if(StringUtils.isNotBlank(order)){
-		pageMap.put("order", order != null ? order : "desc");
-		// }
 		pageMap.put("startPage", (page - 1) * rows);
 		pageMap.put("endPage", rows);
 		int total = proveService.getAllCount(pageMap);
@@ -101,6 +84,23 @@ public class ProveController {
 		try {
 
 			int i = proveService.edit(prove);
+			if (i != -1) {
+				return new JsonResult(true, "");
+			}
+		} catch (Exception e) {
+			throw new Exception(
+					"this is the detail of ajax exception information");
+		}
+		return new JsonResult(false, "编辑失败！");
+	}
+	/** 使用*/
+	@ResponseBody
+	@RequestMapping(value = "/useSave", method = { RequestMethod.POST })
+	public JsonResult useSave(Prove prove)
+			throws Exception {
+		try {
+
+			int i = proveService.use(prove);
 			if (i != -1) {
 				return new JsonResult(true, "");
 			}

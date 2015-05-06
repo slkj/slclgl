@@ -2,19 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.slkj.slclgl.prove.mapper.ProveMapper">
 	<sql id="sql_temp">
-		id,uid,number,address,wangjian,inspector,riqi,remark
+		id,uid,number,address,ustype,usman,usriqi,wangjian,inspector,riqi,state,remark
 	</sql>
 	
 	<select id="getAll" resultType="prove" parameterType="hashmap">
 		SELECT <include refid="sql_temp"/> FROM TB_PROVE
-			
+			<where>
+				<if test="number != null and number != ''">AND number like CONCAT('%',#{number},'%')</if>
+				<if test="address != null and address != ''">AND address LIKE CONCAT('%',#{address},'%')</if>
+				<if test="usman != null and usman != ''"> AND usman LIKE CONCAT('%',#{usman},'%') </if>
+				<if test="endDate != null and endDate != ''">AND riqi >= #{endDate} </if>
+				<if test="endDate1 != null and endDate1 != ''"> AND riqi &lt;= #{endDate1} </if>
+				<if test="state != null and state != ''">AND STATE =  #{state} </if>
+			</where>
 		LIMIT #{startPage},#{endPage}
 	</select>
 
 	<select id="getAllCount" resultType="int" parameterType="hashmap">
 
 		SELECT COUNT(1) FROM TB_PROVE
-			
+			<where>
+				<if test="number != null and number != ''">AND number like CONCAT('%',#{number},'%')</if>
+				<if test="address != null and address != ''">AND address LIKE CONCAT('%',#{address},'%')</if>
+				<if test="usman != null and usman != ''"> AND usman LIKE CONCAT('%',#{usman},'%') </if>
+				<if test="endDate != null and endDate != ''">AND riqi >= #{endDate} </if>
+				<if test="endDate1 != null and endDate1 != ''"> AND riqi &lt;= #{endDate1} </if>
+				<if test="state != null and state != ''">AND STATE =  #{state} </if>
+			</where>
 	</select>
 	<select id="queryOne" parameterType="prove" resultType="prove">
 		SELECT <include refid="sql_temp"/> from TB_PROVE
@@ -25,17 +39,20 @@
 			</where>
 	</select>
 	<insert id="save" parameterType="prove">
-	INSERT INTO `tb_prove` 
-	(uid,number,address,wangjian,inspector,riqi,remark)
+	INSERT INTO TB_PROVE
+	(uid,number,ustype,wangjian,inspector,riqi,state,remark)
 		VALUES
-		(#{uid},#{number},#{address},#{wangjian},#{inspector},#{riqi},#{remark})
+		(#{uid},#{number},#{ustype},#{wangjian},#{inspector},#{riqi},0,#{remark})
 	</insert>
 	
 	<update id="edit" parameterType="prove">
 		UPDATE TB_PROVE set 
-			uid = #{uid},number=#{number},address = #{address},wangjian=#{wangjian}, inspector=#{inspector}, riqi=#{riqi},remark = #{remark} where id = #{id}
+			uid = #{uid},number=#{number},ustype=#{ustype},wangjian=#{wangjian}, inspector=#{inspector}, riqi=#{riqi},remark = #{remark} where id = #{id}
 	</update>
-	
+	<update id="use" parameterType="prove">
+		UPDATE TB_PROVE set 
+			address = #{address},usman=#{usman}, usriqi=#{usriqi},state=1,remark = #{remark} where id = #{id}
+	</update>
 <delete id="delete" parameterType="string">
 		DELETE FROM TB_PROVE WHERE ID  = #{id}
 	</delete>

@@ -27,6 +27,11 @@ public interface ProveMapper {
 	 * @param Insurance
 	 */
 	public int edit(Prove prove);
+	/**
+	 * 使用
+	 * @param Insurance
+	 */
+	public int use(Prove prove);
 	
 	
 	/**

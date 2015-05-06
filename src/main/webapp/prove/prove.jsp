@@ -15,10 +15,9 @@
 			<form name="searchform" method="post" action="" id="searchform">
 				<table cellspacing="0" cellpadding="0">
 					<tr>
-						<td> 证明编号:<input name="number" class="easyui-numberbox"
-							style="width: 150px" /> 使用地区:<input name="address"
-							class="easyui-numberbox" style="width: 150px" /> 测试日期:<input
-							name="carNumber" class="easyui-textbox" style="width: 150px" />
+						<td> 证明编号:<input name="number" class="easyui-textbox"
+							style="width: 150px" /> 使用地区:<input id="address" name="address"/> 领用人:<input
+							name="usman" class="easyui-textbox" style="width: 150px" />
 							 <a
 							id="search_btn" href="#" class="easyui-linkbutton"
 							data-options="iconCls:'icon-search',plain:'true'">查询</a>
@@ -32,6 +31,10 @@
 				<tr>
 					<td>
 						<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onClick="javascript:addFun();">添加</a>
+					</td>
+					<td><div class="datagrid-btn-separator"></div></td>
+					<td>
+						<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onClick="javascript:useFun();">使用</a>
 					</td>
 					<td><div class="datagrid-btn-separator"></div></td>
 					<td align="right">

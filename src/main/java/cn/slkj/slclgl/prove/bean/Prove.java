@@ -5,9 +5,13 @@ public class Prove {
 	private String uid;//操作人
 	private String number;//证明编号
 	private String address;//使用地区
+	private String ustype;//使用类型
+	private String usman;//领用人
+	private String usriqi;//领用时间
 	private String wangjian;//网监员
 	private String inspector;//安检员
 	private String riqi;//测试日期
+	private Integer state;
 	private String remark;//备注
 	public String getId() {
 		return id;
@@ -33,6 +37,24 @@ public class Prove {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public String getUstype() {
+		return ustype;
+	}
+	public void setUstype(String ustype) {
+		this.ustype = ustype;
+	}
+	public String getUsman() {
+		return usman;
+	}
+	public void setUsman(String usman) {
+		this.usman = usman;
+	}
+	public String getUsriqi() {
+		return usriqi;
+	}
+	public void setUsriqi(String usriqi) {
+		this.usriqi = usriqi;
+	}
 	public String getWangjian() {
 		return wangjian;
 	}
@@ -50,6 +72,13 @@ public class Prove {
 	}
 	public void setRiqi(String riqi) {
 		this.riqi = riqi;
+	}
+	
+	public Integer getState() {
+		return state;
+	}
+	public void setState(Integer state) {
+		this.state = state;
 	}
 	public String getRemark() {
 		return remark;

@@ -1,7 +1,10 @@
 var grid;
 var basePath = "";
 $(function() {
-
+	$('#address').combotree({
+		url : '../data/city_data.json',
+		lines : true
+	});
 	// 初始化页面
 	loadDataGrid();
 	$("#search_btn").click(function() {
@@ -54,11 +57,29 @@ function loadDataGrid() {
 		loadMsg : '数据加载中,请稍后……',
 
 		columns : [ [ {
+			field : 'state',
+			title : '使用状态',
+			formatter : function(value, row) {
+				var s = "";
+				if (value == "0") {
+					s = "<div  style='background-color:#CD3333;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>未使用</div>";
+				} else if (value == "1") {
+					s = "<div  style='background-color:#FF8C00;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>已使用</div>";
+				}
+				return s;
+			}
+		}, {
 			field : 'address',
 			title : '使用地区'
 		}, {
 			field : 'number',
 			title : '编号'
+		},{
+			field : 'usman',
+			title : '领用人'
+		},{
+			field : 'usriqi',
+			title : '领用日期'
 		}, {
 			field : 'inspector',
 			title : '安检员'
@@ -204,6 +225,59 @@ function editFun(id) {
 			iconCls : 'icons_45',
 			handler : function() {
 				var url = 'editSave';
+				saveAjax(url);
+			}
+		}, {
+			text : '关闭',
+			handler : function() {
+				SL.closeWindow();
+			}
+		} ]
+	});
+}
+function useFun() {
+	// 得到选中的行
+	var selRow = grid.datagrid("getSelections");// 返回选中多行
+	if (selRow.length == 0) {
+		SL.msgShow("提示", "请至少选择一行数据!！", "warning");
+		return false;
+	}
+	var id=selRow[0].id;
+	if (selRow[0].state == "1") {
+		SL.msgShow("提示", "证明已使用！", "warning");
+		return;
+	}
+	SL.showWindow({
+		title : '使用',
+		iconCls : 'icon-add',
+		width : 550,
+		height : 450,
+		url :'proveUse.jsp',
+		onLoad : function() {
+			$.ajax({
+				url : 'queryOne?id=' + id,
+				async : false,
+				cache : false,
+				success : function(data) {
+					if (data) {
+						//$("#dform").form('load', data);
+						$('#id').val(data.id);alert(data.id);
+						$('#remark').textbox('setValue',data.remark);
+					}
+				}
+			});
+			$('#address').combotree({
+				url : '../data/city_data.json',
+				required : true,
+				lines : true
+			});
+			
+		},
+		buttons : [ {
+			text : '保存',
+			iconCls : 'icons_45',
+			handler : function() {
+				var url = 'useSave';
 				saveAjax(url);
 			}
 		}, {
