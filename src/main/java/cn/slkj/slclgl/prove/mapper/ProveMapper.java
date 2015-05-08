@@ -24,16 +24,19 @@ public interface ProveMapper {
 	
 	/**
 	 * 编辑
-	 * @param Insurance
+	 * @param prove
 	 */
 	public int edit(Prove prove);
 	/**
 	 * 使用
-	 * @param Insurance
+	 * @param prove
 	 */
 	public int use(Prove prove);
-	
-	
+	/**
+	 * 作废
+	 * @param ids
+	 */
+	int tovoid(String[] ids);
 	/**
 	 * 根据id删除
 	 * @param id

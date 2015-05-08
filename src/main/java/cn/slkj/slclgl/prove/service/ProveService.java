@@ -78,7 +78,18 @@ public class ProveService{
 			return -1;
 		}
 	}
-
+	/**
+	 * 作废
+	 * @param Agent
+	 */
+	public int tovoid(String[] ids){
+		try {
+			
+			return mapper.tovoid(ids);
+		} catch (Exception e) {
+			return -1;
+		}
+	}
 
 
 	/**

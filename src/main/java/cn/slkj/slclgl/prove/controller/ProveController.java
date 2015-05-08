@@ -110,7 +110,23 @@ public class ProveController {
 		}
 		return new JsonResult(false, "编辑失败！");
 	}
-	
+	/** 使用*/
+	@ResponseBody
+	@RequestMapping(value = "/voidSave", method = { RequestMethod.POST })
+	public JsonResult voidSave(@RequestParam(value = "ids[]") String[] ids)
+			throws Exception {
+		try {
+
+			int i = proveService.tovoid(ids);
+			if (i != -1) {
+				return new JsonResult(true, "");
+			}
+		} catch (Exception e) {
+			throw new Exception(
+					"this is the detail of ajax exception information");
+		}
+		return new JsonResult(false, "编辑失败！");
+	}
 	/** 单条删除*/
 	@ResponseBody
 	@RequestMapping(value = "/delete")

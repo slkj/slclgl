@@ -53,6 +53,12 @@
 		UPDATE TB_PROVE set 
 			address = #{address},usman=#{usman}, usriqi=#{usriqi},state=1,remark = #{remark} where id = #{id}
 	</update>
+	<update id="tovoid" parameterType="list">
+		UPDATE TB_PROVE set state=2 WHERE state=0 and ID in
+		<foreach item="ids" collection="array" open="(" separator="," close=")">
+			#{ids}
+		</foreach>
+	</update>
 <delete id="delete" parameterType="string">
 		DELETE FROM TB_PROVE WHERE ID  = #{id}
 	</delete>

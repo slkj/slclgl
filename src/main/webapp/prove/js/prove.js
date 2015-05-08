@@ -57,6 +57,9 @@ function loadDataGrid() {
 		loadMsg : '数据加载中,请稍后……',
 
 		columns : [ [ {
+			field : 'ck',
+			checkbox : true
+		},{
 			field : 'state',
 			title : '使用状态',
 			formatter : function(value, row) {
@@ -65,6 +68,8 @@ function loadDataGrid() {
 					s = "<div  style='background-color:#CD3333;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>未使用</div>";
 				} else if (value == "1") {
 					s = "<div  style='background-color:#FF8C00;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>已使用</div>";
+				}else if (value == "2") {
+					s = "<div  style='background-color:#aaaaaa;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>已作废</div>";
 				}
 				return s;
 			}
@@ -261,12 +266,12 @@ function useFun() {
 				success : function(data) {
 					if (data) {
 						//$("#dform").form('load', data);
-						$('#id').val(data.id);alert(data.id);
+						$('#id').val(data.id);
 						$('#remark').textbox('setValue',data.remark);
 					}
 				}
 			});
-			$('#address').combotree({
+			$('#address1').combotree({
 				url : '../data/city_data.json',
 				required : true,
 				lines : true
@@ -286,5 +291,41 @@ function useFun() {
 				SL.closeWindow();
 			}
 		} ]
+	});
+}
+function tovoid() {
+	// 得到选中的行
+	var selRow = grid.datagrid("getSelections");// 返回选中多行
+	if (selRow.length == 0) {
+		SL.msgShow("提示", "请至少选择一行数据!！", "warning");
+		return false;
+	}
+	var ids = [];
+	for (var i = 0; i < selRow.length; i++) {
+		var id = selRow[i].id;
+		ids.push(id);
+	}
+	var param = {
+		ids : ids
+	};
+	$.messager.confirm('提示框', '你确定要作废吗?', function(data) {
+		if (data) {
+			$.ajax({
+				cache : false,
+				type : "POST",
+				url : "voidSave",
+				data : param,
+				dataType : "json",
+				cache : false,
+				success : function(data) {
+					if (data) {
+						grid.datagrid('reload');
+						SL.sysSlideShow({
+							msg : "操作成功"
+						});
+					}
+				}
+			});
+		}
 	});
 }

@@ -13,9 +13,9 @@
 		<table class="grid" style="width: 100%">
 			
 			<tr>
-				<th>所在地区：</th>
+				<th>使用地区：</th>
 				<td colspan="3">
-					<input id="address" name="address"/>  
+					<input id="address1" name="address"/>  
 					<span style="color: red;">*证明使用地区</span>
 				</td>
 			</tr>
