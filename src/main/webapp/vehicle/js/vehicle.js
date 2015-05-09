@@ -197,15 +197,18 @@ function inNet(id) {
 function vehicleInfo(id) {
 	window.location.href = 'vehicleInfo.jsp?id=' + id;
 }
+function editRow(id) {
+	window.location.href = 'vehicleEdit.jsp?id=' + id;
+}
 function approval(id) {
 	window.location.href = 'approval.jsp?id=' + id;
 }
-function deleteRow(index) {
+function deleteRow(id) {
 	$.messager.confirm('提示', '将删除该车辆所有信息，确认删除?', function(row) {
 		if (row) {
-			var data = grid.datagrid('getData').rows[index];
+//			var data = grid.datagrid('getData').rows[index];
 			$.ajax({
-				url : basePath + 'delete?id=' + data.id,
+				url : basePath + 'delete?id=' + id,
 				success : function(data) {
 					if (data) {
 						grid.datagrid('reload');

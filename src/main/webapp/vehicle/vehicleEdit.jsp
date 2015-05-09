@@ -4,23 +4,30 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>添加货运车辆</title>
+<title>车辆详细信息</title>
 <%@ include file="/common/taglibs.jsp"%>
-<script type="text/javascript" src="../js/city.js"></script>
-<!-- 引用ajaxfileupload.js -->
-<script src="../js/ajaxfileupload.js"></script>
 <script type="text/javascript">
 	var basePath = "../vehicle/";
-	var carType;
+	var id;
 	var Request = new Object();
 	$(function() {
-		Request = GetRequest();
-		carType = Request['ct'];
-		$("#carUseNatu").combobox('readonly');
-		$("#carUseNatu").combobox("setValue", carType);
 		loadCompany();
+		Request = GetRequest();
+		id = Request['id'];
+		$.ajax({
+			url : basePath + 'queryOne?id=' + id,
+			success : function(data) {
+				if (data) {
+					
+					$("#carForm").form('load', data);
+				}
+			}
+		});
 	});
-
+	function backPage() {
+		// 		window.location.href = 'vehicleList.jsp';
+		history.go(-1);
+	}
 	function loadCompany() {
 		$('#companyId').combobox({
 			url : '../company/queryComList',
@@ -29,107 +36,22 @@
 			textField : 'compName'
 		});
 	}
-	function submitForm() {
-		if ($("#carForm").form('enableValidation').form('validate')) {
-			var data = $("#carForm").serialize();
-			$.ajax({
-				cache : false,
-				type : 'POST',
-				url : basePath + 'save',
-				data : data,
-				async : false,
-				success : function(data) {
-					if (data) {
-						backPage();
-					}
-				}
-			});
-		}
-	}
-	function save() {
-		if ($("#carForm").form('enableValidation').form('validate')) {
-			var carNumber = $("#carNumber").val();
-			$.ajaxFileUpload({
-				url : basePath + 'uploadCarImg?carNumber=' + carNumber,
-				secureuri : false,
-				fileElementId : [ 'djFile', 'xsFile', 'carimg' ],//file标签的id  
-				dataType : 'json',//返回数据的类型  
-				success : function(data, status) //服务器成功响应处理函数
-				{
-					if (data) {
-						$("#djFileVal").val(data.djFile);
-						$("#xsFileVal").val(data.xsFile);
-						$("#carimgVal").val(data.carimg);
-						submitForm();
-					} else {
-						alert("【图片提交失败！】");
-					}
-				},
-				error : function(data, status, e)//服务器响应失败处理函数
-				{
-					alert("【服务器异常，请连续管理员！】" + e);
-				}
-			});
-		}
-	}
-	function clearForm() {
-		$('#ff').form('clear');
-		$("#regName").combobox("setValue", "3");
-		$("#selCarType").combobox("setValue", "黄牌");
-		$("#classify").combobox("setValue", "大型");
-		$("#carObtWay").combobox("setValue", "购买");
-
-		$('input:radio[name=carProType]')[0].checked = true;
-	}
-	function backPage() {
-		// 		parent.$("#cnIframe").attr("src", "carList.jsp");
-		// 		window.location.href = 'vehicleList.jsp';
-		history.go(-1);
-	}
-	// 将表单数据转为json
-	function form2Json(id) {
-		var arr = $("#" + id).serializeArray()
-		var jsonStr = "";
-		jsonStr += '{';
-		for (var i = 0; i < arr.length; i++) {
-			jsonStr += '"' + arr[i].name + '":"' + arr[i].value + '",'
-		}
-		jsonStr = jsonStr.substring(0, (jsonStr.length - 1));
-		jsonStr += '}'
-		var json = JSON.parse(jsonStr)
-		return json
-	}
 </script>
 </head>
 <body>
 	<div style="text-align: left; padding: 5px">
 		<a href="javascript:void(0)" class="easyui-linkbutton"
-			onclick="javascript:save()">保存</a> <a href="javascript:void(0)"
-			class="easyui-linkbutton" onclick="javascript:clearForm()">重置</a> <a
-			href="javascript:void(0)" class="easyui-linkbutton"
+			onclick="javascript:save()">保存</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton"
 			onclick="javascript:backPage()">返回</a>
 	</div>
 	<form id="carForm" metdod="post">
-		<input type="hidden" id="djFileVal" name="djFile" /> <input
-			type="hidden" id="xsFileVal" name="xsFile" /> <input type="hidden"
-			id="carimgVal" name="carImg" />
-
+		<input name="id" type="hidden">
 		<div id="aa" class="easyui-accordion" data-options="border:false">
 			<div title="车辆基本信息"
 				data-options="collapsed:false,collapsible:false,border:false"
 				style="overflow: auto;">
 				<table class="grid">
-					<tr>
-						<th style="width: 120px">所属地区：</th>
-						<td colspan="3"><input name="areaCode" id="areaCode" /> <span
-							id="areaName"></span> <input name="cityId" id="cityId" /> <input
-							name="county" id="county" /></td>
-					</tr>
-					<tr>
-						<th style="width: 120px">所属公司：</th>
-						<td colspan="3"><input id="companyId" name="companyId"
-							style="width: 300px;" /></td>
-					</tr>
 					<tr>
 						<th style="width: 120px">业户/车主:</th>
 						<td style="width: 290px"><input name="carOwner"
@@ -157,15 +79,29 @@
 						<td><input id="carNumber" name="carNumber"
 							class="easyui-validatebox" data-options="required:true"
 							style="width: 200px;" /></td>
+						<th>所属公司:</th>
+						<td><input id="companyId"  name="companyId" style="width: 200px;" />
+						</td>
+					</tr>
+					<tr>
 						<th>车牌号(挂):</th>
 						<td><input id="carNumberG" name="carNumberG"
 							style="width: 200px;" data-options="required:true" /></td>
+						<th>车牌颜色:</th>
+						<td><select id="plateColor" name="plateColor"
+							class="easyui-combobox" data-options="required:true"
+							style="width: 100px;">
+								<option selected="selected" value="黄牌">黄牌</option>
+								<option value="蓝牌">蓝牌</option>
+								<option value="黑牌">黑牌</option>
+								<option value="白牌">白牌</option>
+								<option value="其他">其他</option>
+						</select></td>
 					</tr>
 					<tr>
 						<th>车辆类型:</th>
 						<td><select class="easyui-combobox" id="classify"
-							name="classify">
-								<option value="" selected="selected">请选择</option>
+							name="classify" style="width: 50px;">
 								<option value="大型">大型</option>
 								<option value="重型">重型</option>
 								<option value="中型">中型</option>
@@ -176,38 +112,27 @@
 							style="width: 150px;"
 							data-options="url:'../data/carcalss_data.json',required:true,lines:true,panelHeight:300,panelWidth:200"></select>
 						</td>
-						<th>车牌颜色:</th>
-						<td><select name="plateColor" class="easyui-combobox"
-							data-options="required:true" style="width: 100px;">
-								<option selected="selected" value="黄牌">黄牌</option>
-								<option value="蓝牌">蓝牌</option>
-								<option value="黑牌">黑牌</option>
-								<option value="白牌">白牌</option>
-								<option value="其他">其他</option>
-						</select></td>
-					</tr>
-					<tr>
-
 						<th>车辆品牌:</th>
 						<td><input id="carBrand" name="carBrand"
 							class="easyui-validatebox" data-options="required:true"
 							style="width: 200px;" /></td>
+					</tr>
+					<tr>
 						<th>车辆型号:</th>
 						<td><input id="carModel" name="carModel"
 							class="easyui-validatebox" style="width: 200px;" /></td>
-					</tr>
-					<tr>
-						<th nowrap="nowrap">识别代号/车架号:</th>
-						<td><input id="carVin" name="carVin"
-							class="easyui-validatebox" data-options="required:true"
-							style="width: 200px;" /></td>
 						<th>车身颜色:</th>
 						<td><input id="carColor" name="carColor"
 							class="easyui-validatebox" data-options="required:true"
 							style="width: 200px;" /></td>
 					</tr>
 
-					<tr style="display: none;">
+					<tr>
+						<th nowrap="nowrap">识别代号/车架号:</th>
+						<td><input id="carVin" name="carVin"
+							class="easyui-validatebox" data-options="required:true"
+							style="width: 200px;" /></td>
+
 						<th>使用性质:</th>
 						<td><select id="carUseNatu" class="easyui-combobox"
 							name="carUseNatu" style="width: 200px;"
@@ -234,10 +159,6 @@
 						<td><input id="carTotalmass" name="carTotalmass"
 							class="easyui-numberbox" style="width: 200px;" />kg</td>
 					</tr>
-				</table>
-			</div>
-			<div title="车辆其他信息(*选填项,点击展开)" data-options="border:false">
-				<table class="grid">
 					<tr>
 						<th style="width: 120px">发动机型号:</th>
 						<td style="width: 290px"><input id="carEngModel"
@@ -351,22 +272,6 @@
 					</tr>
 				</table>
 			</div>
-			<!-- 			<div data-options="collapsed:false,collapsible:false,border:false"> -->
-			<!-- 				<label style="color: red;">上传车辆左前方45角度图片，图片上传，小于3M，jpg、jpeg格式</label> -->
-			<!-- 				<form name="cForm" action="/springMVC7/file/upload2" enctype="multipart/form-data" method="post""> -->
-			<!-- 					<ul style="padding-top: 0px; padding-bottom: 5px;"> -->
-			<!-- 						<li>车辆登记证上传： <input type="file" id="djFile" name="djFile" -->
-			<!-- 							size="28" accept="image/jpeg,image/png,image/gif,image/jpeg" /> -->
-			<!-- 						</li> -->
-			<!-- 						<li>车辆合格证/行驶证： <input type="file" id="xsFile" name="xsFile" -->
-			<!-- 							size="28" accept="image/jpeg,image/png,image/gif,image/jpeg" /> -->
-			<!-- 						</li> -->
-			<!-- 						<li>车身照片： <input type="file" id="carimg" name="carimg" -->
-			<!-- 							size="28" accept="image/jpeg,image/png,image/gif,image/jpeg" /> -->
-			<!-- 						</li> -->
-			<!-- 					</ul> -->
-			<!-- 				</form> -->
-			<!-- 			</div> -->
 		</div>
 	</form>
 	<div>
