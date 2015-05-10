@@ -50,9 +50,9 @@
 </script>
 </head>
 <body>
-	<div style="text-align: left; padding: 5px">
-		<a href="javascript:void(0)" class="easyui-linkbutton"
-			onclick="javascript:backPage()">返回</a>
+	<div class="easyui-panel" style="padding: 5px">
+	<a href="javascript:void(0)" class="easyui-linkbutton"
+			onclick="javascript:backPage()" data-options="iconCls:'icon-undo'">返回</a>
 	</div>
 	<form id="carForm" metdod="post">
 		<div id="aa" class="easyui-accordion" data-options="border:false">
@@ -258,9 +258,9 @@
 						<td><input id="carCabGuest" name="carCabGuest"
 							class="easyui-numberbox" style="width: 200px;" />人</td>
 						<th>国产/进口:</th>
-						<td><input id="carProType" name="carProType" type="radio" disabled="disabled"
-							value="国产" checked="checked" />国产 <input name="carProType"
-							type="radio" value="进口" disabled="disabled"/>进口</td>
+						<td><input id="carProType" name="carProType" type="radio"
+							disabled="disabled" value="国产" checked="checked" />国产 <input
+							name="carProType" type="radio" value="进口" disabled="disabled" />进口</td>
 					</tr>
 					<tr>
 						<th>车辆获取方式:</th>
