@@ -3,7 +3,6 @@
  */
 package cn.slkj.slclgl.vehicle.bean;
 
-
 /**
  * @author maxh
  *
@@ -77,7 +76,7 @@ public class Vehicle {
 	 * 国产/进口
 	 */
 	private String carProType;
-	
+
 	/**
 	 * 外廓尺寸(长)
 	 */
@@ -150,7 +149,7 @@ public class Vehicle {
 	 * 轴数
 	 */
 	private String carAxleNum;
-	
+
 	/**
 	 * 货箱内部尺寸(长)
 	 */
@@ -205,7 +204,7 @@ public class Vehicle {
 	 */
 	private String simNumber;
 	/**
-	 * 入网证明编号 
+	 * 入网证明编号
 	 */
 	private String networkNo;
 	/**
@@ -273,9 +272,9 @@ public class Vehicle {
 	 * 录入人单位
 	 */
 	private String depId;
-	
+
 	private String remark;
-	
+
 	/**
 	 * 省
 	 */
@@ -296,444 +295,660 @@ public class Vehicle {
 	 * 行驶证照片
 	 */
 	private String xsFile;
-	
+
+	/**
+	 * 档案编号
+	 */
+	private String xszbh;
+	/**
+	 * 到期日期
+	 */
+	private String xszdqrq;
+	/**
+	 * 道路运输经营许可证
+	 */
+	private String ysz;
+	/**
+	 * 经营许可证
+	 */
+	private String jyxkz;
+	/**
+	 * 到期日期
+	 */
+	private String xkzdqrq;
+	/**
+	 * 二级维护到期日期
+	 */
+	private String ejwhDqTime;
+
+	public String getXszbh() {
+		return xszbh;
+	}
+
+	public void setXszbh(String xszbh) {
+		this.xszbh = xszbh;
+	}
+
+	public String getXszdqrq() {
+		return xszdqrq;
+	}
+
+	public void setXszdqrq(String xszdqrq) {
+		this.xszdqrq = xszdqrq;
+	}
+
+	public String getYsz() {
+		return ysz;
+	}
+
+	public void setYsz(String ysz) {
+		this.ysz = ysz;
+	}
+
+	public String getJyxkz() {
+		return jyxkz;
+	}
+
+	public void setJyxkz(String jyxkz) {
+		this.jyxkz = jyxkz;
+	}
+
+	public String getXkzdqrq() {
+		return xkzdqrq;
+	}
+
+	public void setXkzdqrq(String xkzdqrq) {
+		this.xkzdqrq = xkzdqrq;
+	}
+
+	public String getEjwhDqTime() {
+		return ejwhDqTime;
+	}
+
+	public void setEjwhDqTime(String ejwhDqTime) {
+		this.ejwhDqTime = ejwhDqTime;
+	}
+
 	public String getAreaCode() {
 		return areaCode;
 	}
+
 	public void setAreaCode(String areaCode) {
 		this.areaCode = areaCode;
 	}
+
 	public String getCityId() {
 		return cityId;
 	}
+
 	public void setCityId(String cityId) {
 		this.cityId = cityId;
 	}
+
 	public String getCounty() {
 		return county;
 	}
+
 	public void setCounty(String county) {
 		this.county = county;
 	}
+
 	public String getRemark() {
 		return remark;
 	}
+
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	public String getCarOwner() {
 		return carOwner;
 	}
+
 	public void setCarOwner(String carOwner) {
 		this.carOwner = carOwner;
 	}
+
 	public String getCarOwnersType() {
 		return carOwnersType;
 	}
+
 	public void setCarOwnersType(String carOwnersType) {
 		this.carOwnersType = carOwnersType;
 	}
+
 	public String getCarOwnersCard() {
 		return carOwnersCard;
 	}
+
 	public void setCarOwnersCard(String carOwnersCard) {
 		this.carOwnersCard = carOwnersCard;
 	}
+
 	public String getContacts() {
 		return contacts;
 	}
+
 	public void setContacts(String contacts) {
 		this.contacts = contacts;
 	}
+
 	public String getContactsTel() {
 		return contactsTel;
 	}
+
 	public void setContactsTel(String contactsTel) {
 		this.contactsTel = contactsTel;
 	}
+
 	public String getCarNumber() {
 		return carNumber;
 	}
+
 	public void setCarNumber(String carNumber) {
 		this.carNumber = carNumber;
 	}
+
 	public String getCarNumberG() {
 		return carNumberG;
 	}
+
 	public void setCarNumberG(String carNumberG) {
 		this.carNumberG = carNumberG;
 	}
+
 	public String getPlateColor() {
 		return plateColor;
 	}
+
 	public void setPlateColor(String plateColor) {
 		this.plateColor = plateColor;
 	}
+
 	public String getClassify() {
 		return classify;
 	}
+
 	public void setClassify(String classify) {
 		this.classify = classify;
 	}
+
 	public String getCarType() {
 		return carType;
 	}
+
 	public void setCarType(String carType) {
 		this.carType = carType;
 	}
+
 	public String getCarBrand() {
 		return carBrand;
 	}
+
 	public void setCarBrand(String carBrand) {
 		this.carBrand = carBrand;
 	}
+
 	public String getCarModel() {
 		return carModel;
 	}
+
 	public void setCarModel(String carModel) {
 		this.carModel = carModel;
 	}
+
 	public String getCarColor() {
 		return carColor;
 	}
+
 	public void setCarColor(String carColor) {
 		this.carColor = carColor;
 	}
+
 	public String getCarVin() {
 		return carVin;
 	}
+
 	public void setCarVin(String carVin) {
 		this.carVin = carVin;
 	}
+
 	public String getCarProType() {
 		return carProType;
 	}
+
 	public void setCarProType(String carProType) {
 		this.carProType = carProType;
 	}
+
 	public String getCarOutLength() {
 		return carOutLength;
 	}
+
 	public void setCarOutLength(String carOutLength) {
 		this.carOutLength = carOutLength;
 	}
+
 	public String getCarOutWidth() {
 		return carOutWidth;
 	}
+
 	public void setCarOutWidth(String carOutWidth) {
 		this.carOutWidth = carOutWidth;
 	}
+
 	public String getCarOutHeight() {
 		return carOutHeight;
 	}
+
 	public void setCarOutHeight(String carOutHeight) {
 		this.carOutHeight = carOutHeight;
 	}
+
 	public String getCarTotalmass() {
 		return carTotalmass;
 	}
+
 	public void setCarTotalmass(String carTotalmass) {
 		this.carTotalmass = carTotalmass;
 	}
+
 	public String getCarEngNum() {
 		return carEngNum;
 	}
+
 	public void setCarEngNum(String carEngNum) {
 		this.carEngNum = carEngNum;
 	}
+
 	public String getCarEngModel() {
 		return carEngModel;
 	}
+
 	public void setCarEngModel(String carEngModel) {
 		this.carEngModel = carEngModel;
 	}
+
 	public String getCarFuelType() {
 		return carFuelType;
 	}
+
 	public void setCarFuelType(String carFuelType) {
 		this.carFuelType = carFuelType;
 	}
+
 	public String getCarDisplacement() {
 		return carDisplacement;
 	}
+
 	public void setCarDisplacement(String carDisplacement) {
 		this.carDisplacement = carDisplacement;
 	}
+
 	public String getCarPower() {
 		return carPower;
 	}
+
 	public void setCarPower(String carPower) {
 		this.carPower = carPower;
 	}
+
 	public String getCarManuName() {
 		return carManuName;
 	}
+
 	public void setCarManuName(String carManuName) {
 		this.carManuName = carManuName;
 	}
+
 	public String getCarModality() {
 		return carModality;
 	}
+
 	public void setCarModality(String carModality) {
 		this.carModality = carModality;
 	}
+
 	public String getCarTreadBe() {
 		return carTreadBe;
 	}
+
 	public void setCarTreadBe(String carTreadBe) {
 		this.carTreadBe = carTreadBe;
 	}
+
 	public String getCarTreadAfter() {
 		return carTreadAfter;
 	}
+
 	public void setCarTreadAfter(String carTreadAfter) {
 		this.carTreadAfter = carTreadAfter;
 	}
+
 	public String getCarTireNum() {
 		return carTireNum;
 	}
+
 	public void setCarTireNum(String carTireNum) {
 		this.carTireNum = carTireNum;
 	}
+
 	public String getCarTireSpe() {
 		return carTireSpe;
 	}
+
 	public void setCarTireSpe(String carTireSpe) {
 		this.carTireSpe = carTireSpe;
 	}
+
 	public String getCarNumOfSpring() {
 		return carNumOfSpring;
 	}
+
 	public void setCarNumOfSpring(String carNumOfSpring) {
 		this.carNumOfSpring = carNumOfSpring;
 	}
+
 	public String getCarAxleDist() {
 		return carAxleDist;
 	}
+
 	public void setCarAxleDist(String carAxleDist) {
 		this.carAxleDist = carAxleDist;
 	}
+
 	public String getCarAxleNum() {
 		return carAxleNum;
 	}
+
 	public void setCarAxleNum(String carAxleNum) {
 		this.carAxleNum = carAxleNum;
 	}
+
 	public String getCarContLength() {
 		return carContLength;
 	}
+
 	public void setCarContLength(String carContLength) {
 		this.carContLength = carContLength;
 	}
+
 	public String getCarContWidth() {
 		return carContWidth;
 	}
+
 	public void setCarContWidth(String carContWidth) {
 		this.carContWidth = carContWidth;
 	}
+
 	public String getCarContHeight() {
 		return carContHeight;
 	}
+
 	public void setCarContHeight(String carContHeight) {
 		this.carContHeight = carContHeight;
 	}
+
 	public String getCarApproved() {
 		return carApproved;
 	}
+
 	public void setCarApproved(String carApproved) {
 		this.carApproved = carApproved;
 	}
+
 	public String getCarApprGuest() {
 		return carApprGuest;
 	}
+
 	public void setCarApprGuest(String carApprGuest) {
 		this.carApprGuest = carApprGuest;
 	}
+
 	public String getCarTrac() {
 		return carTrac;
 	}
+
 	public void setCarTrac(String carTrac) {
 		this.carTrac = carTrac;
 	}
+
 	public String getCarCabGuest() {
 		return carCabGuest;
 	}
+
 	public void setCarCabGuest(String carCabGuest) {
 		this.carCabGuest = carCabGuest;
 	}
+
 	public String getCarUseNatu() {
 		return carUseNatu;
 	}
+
 	public void setCarUseNatu(String carUseNatu) {
 		this.carUseNatu = carUseNatu;
 	}
+
 	public String getCarUseNatuName() {
 		return carUseNatuName;
 	}
+
 	public void setCarUseNatuName(String carUseNatuName) {
 		this.carUseNatuName = carUseNatuName;
 	}
+
 	public String getCarObtWay() {
 		return carObtWay;
 	}
+
 	public void setCarObtWay(String carObtWay) {
 		this.carObtWay = carObtWay;
 	}
+
 	public String getCarFacDate() {
 		return carFacDate;
 	}
+
 	public void setCarFacDate(String carFacDate) {
 		this.carFacDate = carFacDate;
 	}
+
 	public String getInstallers() {
 		return installers;
 	}
+
 	public void setInstallers(String installers) {
 		this.installers = installers;
 	}
+
 	public String getAttendants() {
 		return attendants;
 	}
+
 	public void setAttendants(String attendants) {
 		this.attendants = attendants;
 	}
+
 	public String getInstalltime() {
 		return installtime;
 	}
+
 	public void setInstalltime(String installtime) {
 		this.installtime = installtime;
 	}
+
 	public String getInstallAddress() {
 		return installAddress;
 	}
+
 	public void setInstallAddress(String installAddress) {
 		this.installAddress = installAddress;
 	}
+
 	public String getFees() {
 		return fees;
 	}
+
 	public void setFees(String fees) {
 		this.fees = fees;
 	}
+
 	public String getFeeseEnd() {
 		return feeseEnd;
 	}
+
 	public void setFeeseEnd(String feeseEnd) {
 		this.feeseEnd = feeseEnd;
 	}
+
 	public String getIsNotice() {
 		return isNotice;
 	}
+
 	public void setIsNotice(String isNotice) {
 		this.isNotice = isNotice;
 	}
+
 	public String getSimPayer() {
 		return simPayer;
 	}
+
 	public void setSimPayer(String simPayer) {
 		this.simPayer = simPayer;
 	}
+
 	public String getPayerTime() {
 		return payerTime;
 	}
+
 	public void setPayerTime(String payerTime) {
 		this.payerTime = payerTime;
 	}
+
 	public String getCTradingLine() {
 		return CTradingLine;
 	}
+
 	public void setCTradingLine(String cTradingLine) {
 		CTradingLine = cTradingLine;
 	}
+
 	public String getCCatchMenbers() {
 		return CCatchMenbers;
 	}
+
 	public void setCCatchMenbers(String cCatchMenbers) {
 		CCatchMenbers = cCatchMenbers;
 	}
+
 	public String getCarImg() {
 		return carImg;
 	}
+
 	public void setCarImg(String carImg) {
 		this.carImg = carImg;
 	}
+
 	public String getEntryTime() {
 		return entryTime;
 	}
+
 	public void setEntryTime(String entryTime) {
 		this.entryTime = entryTime;
 	}
+
 	public String getEntryId() {
 		return entryId;
 	}
+
 	public void setEntryId(String entryId) {
 		this.entryId = entryId;
 	}
+
 	public String getEntryName() {
 		return entryName;
 	}
+
 	public void setEntryName(String entryName) {
 		this.entryName = entryName;
 	}
+
 	public String getDepId() {
 		return depId;
 	}
+
 	public void setDepId(String depId) {
 		this.depId = depId;
 	}
+
 	public String getSimNumber() {
 		return simNumber;
 	}
+
 	public void setSimNumber(String simNumber) {
 		this.simNumber = simNumber;
 	}
+
 	public String getEquitment() {
 		return equitment;
 	}
+
 	public void setEquitment(String equitment) {
 		this.equitment = equitment;
 	}
+
 	public String getNetworkNo() {
 		return networkNo;
 	}
+
 	public void setNetworkNo(String networkNo) {
 		this.networkNo = networkNo;
 	}
+
 	public String getCompanyId() {
 		return companyId;
 	}
+
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
 	}
+
 	public String getCompanyName() {
 		return companyName;
 	}
+
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
- 
+
 	public String getDjFile() {
 		return djFile;
 	}
+
 	public void setDjFile(String djFile) {
 		this.djFile = djFile;
 	}
+
 	public String getXsFile() {
 		return xsFile;
 	}
+
 	public void setXsFile(String xsFile) {
 		this.xsFile = xsFile;
 	}
+
 	@Override
 	public String toString() {
 		return "Vehicle [id=" + id + ", carNumber=" + carNumber + ", equitment=" + equitment
 				+ ", simNumber=" + simNumber + ", installtime=" + installtime + "]";
 	}
-	
+
 }

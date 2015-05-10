@@ -10,96 +10,105 @@
 <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
 <link rel="stylesheet" type="text/css" href="css/default.css" />
 <link rel="stylesheet" type="text/css" href="css/syscss.css" />
+
+<link rel="stylesheet" type="text/css" href="css/syscss.css" />
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src='js/SL.index.js'></script>
+<script type="text/javascript" src='js/SL.easyUI.js' ></script>
 
-<script type="text/javascript">
-	//设置登录窗口
-	function openPwd() {
-		$('#w').window({
-			title : '修改密码',
-			width : 350,
-			height : 200,
-			modal : true,
-			shadow : true,
-			closed : true,
-			resizable : false
-		});
-	}
-	//关闭登录窗口
-	function closePwd() {
-		$('#w').window('close');
-	}
-
-	//修改密码
-	function serverLogin() {
-		var $newpass = $('#txtNewPass');
-		var $rePass = $('#txtRePass');
-
-		if ($newpass.val() == '') {
-			msgShow('系统提示', '请输入密码！', 'warning');
-			return false;
-		}
-		if ($rePass.val() == '') {
-			msgShow('系统提示', '请在一次输入密码！', 'warning');
-			return false;
-		}
-
-		if ($newpass.val() != $rePass.val()) {
-			msgShow('系统提示', '两次密码不一至！请重新输入', 'warning');
-			return false;
-		}
-
-		$.post('/ajax/editpassword.ashx?newpass=' + $newpass.val(), function(msg) {
-			msgShow('系统提示', '恭喜，密码修改成功！<br>您的新密码为：' + msg, 'info');
-			$newpass.val('');
-			$rePass.val('');
-			close();
-		})
-
-	}
-
-	$(function() {
-
-		openPwd();
-
-		$('#editpass').click(function() {
-			$('#w').window('open');
-		});
-
-		$('#btnEp').click(function() {
-			serverLogin();
-		})
-
-		$('#btnCancel').click(function() {
-			closePwd();
-		})
-
-		$('#loginOut').click(function() {
-			$.messager.confirm('系统提示', '您确定要退出本次登录吗?', function(r) {
-
-				if (r) {
-					location.href = '/ajax/loginout.ashx';
-				}
-			});
-		})
-	});
-</script>
 <style type="text/css">
-.tabs-tool {
-	border-top-width: 0; border-right-width: 0;
+a {
+	color: Black; text-decoration: none;
 }
 
-.tabs-tool table {
-	border-width: 0;
-	/* border-collapse: collapse; */ border-spacing: 0;
+a:hover {
+	color: black; text-decoration: none;
+}
+
+* {
+	font-size: 12px; font-family: Tahoma, Verdana, 微软雅黑, 新宋体
+}
+
+a {
+	color: Black; text-decoration: none;
+}
+
+a:hover {
+	color: blue; text-decoration: none;
+}
+
+.footer {
+	text-align: center; color: #15428B; margin: 0px; padding: 0px; line-height: 23px; font-weight: bold;
+}
+
+.head a {
+	color: White; text-decoration: none;
+}
+
+.shortcut {
+	margin-left: 5px; margin-top: 8px; height: 62px;
+}
+
+.shortcut li {
+	float: left; list-style: none; margin-right: 10px; cursor: pointer;
+}
+
+.bigicon .img {
+	display: block
+}
+
+.bigicon ul {
+	
+}
+
+.bigicon li {
+	text-align: center
+}
+
+.menuItem li div:hover {
+	border: 1px dashed #D69C00; background: #FFE88C; cursor: pointer
+}
+
+.bigicon ul {
+	list-style-type: none; margin: 0; padding: 10px
+}
+
+.bigicon ul li {
+	padding: 0
+}
+
+.bigicon ul li a {
+	line-height: 24px; cursor: pointer; text-decoration: none;
+}
+
+.bigicon ul li a span.nav {
+	font-family: "Arial Negreta", "Arial"; font-weight: 700; font-style: normal; font-size: 12px; color: #333; text-align: left; line-height: normal;
+}
+
+.bigicon ul li div {
+	margin: 2px 0; padding-left: 10px; padding-top: 2px; border: 1px solid transparent
+}
+
+.menuItem li div:hover {
+	border: 1px dashed #D69C00; background: #FFE88C; cursor: pointer
+}
+
+.bigicon ul li div.hover a {
+	color: #D16C00; text-decoration: none
+}
+
+.bigicon ul li div.selected {
+	border: 1px solid #D69C00; background: #FFE88C; cursor: default
+}
+
+.bigicon ul li div.selected a {
+	color: #D16C00; font-weight: bold
 }
 </style>
+<script type="text/javascript" src="js/main.js"></script>
 </head>
-<body class="easyui-layout" style="overflow-y: hidden" fit="true"
-	scroll="no">
+<body class="easyui-layout" style="overflow-y: hidden" scroll="no">
 	<noscript>
 		<div
 			style="position: absolute; z-index: 100000; height: 2046px; top: 0px; left: 0px; width: 100%; background: white; text-align: center;">
@@ -114,80 +123,78 @@
 			<img src="images/loading.gif" align="absmiddle" /> 正在加载中,请稍候...
 		</div>
 	</div>
+	<!-- 顶部-->
+	<div region="north" border="false"
+		style="height: 98px; padding: 1px; overflow: hidden; width: 1438px; display: block; background: rgb(168, 215, 233);">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td align="left" style="vertical-align: text-bottom"><img
+					src="images/login/images/logo.jpg">
+					<div style="position: absolute; top: 75px; left: 33px;">
+						JEECG Framework <span style="letter-spacing: -1px;">3.4.3
+							GA</span>
+					</div></td>
+				<td align="right" nowrap="">
+					<table border="0" cellpadding="0" cellspacing="0">
+						<tr style="height: 25px;" align="right">
+							<td style="" colspan="2">
+								<div
+									style="background: url(images/login/images/top_bg.jpg) no-repeat right center; float: right;">
+									<div style="float: left; line-height: 25px; margin-left: 70px;">
+										<span style="color: #386780">用户:</span> <span
+											style="color: #FFFFFF">${userSession.realname }</span>&nbsp;&nbsp;&nbsp;&nbsp;
+									</div>
+									<div style="float: left; margin-left: 18px;">
+										<div style="right: 0px; bottom: 0px;">
+											<a id="editpass" href="#" class="easyui-linkbutton"
+												data-options="iconCls:'icon-comturn',plain:true">控制面板</a> <a
+												id="btn" href="#" class="easyui-linkbutton"
+												data-options="iconCls:'icon-tip',plain:true">帮助</a> <a
+												id="loginOut" href="#" class="easyui-linkbutton"
+												data-options="iconCls:'icon-exit',plain:true">注销</a>
+										</div>
 
-	<div region="north" split="true" border="false"
-		style="overflow: hidden; height: 30px; background: url(images/layout-browser-hd-bg.gif) #7f99be repeat-x center 50%; line-height: 20px; color: #fff; font-family: Verdana, 微软雅黑, 黑体">
-		<span style="float: right; padding-right: 20px;" class="head">欢迎
-			ADMIN <a href="#" id="editpass">修改密码</a> <a href="#" id="loginOut">安全退出</a>
-		</span> <span style="padding-left: 10px; font-size: 16px;"><img
-			src="images/blocks.gif" width="20" height="20" align="absmiddle" />
-			神龙OA管理系统</span>
-	</div>
-	<div region="south" split="true"
-		style="height: 30px; background: #D2E0F2;">
-		<div class="footer">By 北京神龙天地网络科技有限公司 河北神龙物流信息科技有限公司</div>
-	</div>
-	<div region="west" split="true" title="导航菜单" style="width: 180px;"
-		id="west">
-		<div id="nav">
-			<!--  导航内容 -->
 
-		</div>
-
-	</div>
-	<div id="mainPanle" region="center"
-		style="background: #eee; overflow-y: hidden">
-		<div id="tabs" class="easyui-tabs" fit="true" border="false"
-			tools="#mainTabs_tools">
-			<div title="欢迎使用" data-options="iconCls:'pic pic_17'"
-				style="padding: 20px; overflow: hidden; color: red;"></div>
-		</div>
-	</div>
-	<div id="mainTabs_tools" class="tabs-tool"
-		style="height: 27px; right: 0px;">
-		<table>
-			<tbody>
-				<tr>
-					<td><a id="mainTabs_jumpHome" class="easyui-linkbutton"
-						title="跳至首页" data-options="plain: true, iconCls: 'pic pic_17'"></a></td>
-					<td><div class="datagrid-btn-separator"></div></td>
-					<td><a id="mainTabs_toggleAll" class="easyui-linkbutton"
-						title="关闭所有页面"
-						data-options="plain: true, iconCls: 'pic pic_58'" onclick="closeAllTabs()"></a></td>
-			</tbody>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr style="height: 80px;">
+							<td colspan="2">
+								<ul id="topMenus" class="shortcut">
+									<!-- 									<li style="position: relative;"><img class="imag1" src="plug-in/login/images/default.png" style="display: inline;">  <img class="imag2" src="plug-in/login/images/default_up.png" style="display: none;"><div style="width:67px;position: absolute;top:40px;text-align:center;color:#909090;font-size:12px;"><span style="letter-spacing:-1px;">自定义表单</span></div></li> -->
+									<!-- 									<li><img class="imag1" src="plug-in/login/images/xtgl.png" style="display: none;">  <img class="imag2" src="plug-in/login/images/xtgl_up.png" style="display: inline;"> </li> -->
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
 		</table>
 	</div>
-
-	<!--修改密码窗口-->
-	<div id="w" class="easyui-window" title="修改密码" collapsible="false" 
-		minimizable="false" maximizable="false" icon="icon-save"
-		style="width: 300px; height: 150px; padding: 5px; background: #fafafa;">
-		<div class="easyui-layout" fit="true">
-			<div region="center" border="false"
-				style="padding: 10px; background: #fff; border: 1px solid #ccc;">
-				<table cellpadding=3>
-					<tr>
-						<td>新密码：</td>
-						<td><input id="txtNewPass" type="password" class="txt01" /></td>
-					</tr>
-					<tr>
-						<td>确认密码：</td>
-						<td><input id="txtRePass" type="password" class="txt01" /></td>
-					</tr>
-				</table>
-			</div>
-			<div region="south" border="false"
-				style="text-align: right; height: 30px; line-height: 30px;">
-				<a id="btnEp" class="easyui-linkbutton" icon="icon-ok"
-					href="javascript:void(0)"> 确定</a> <a id="btnCancel"
-					class="easyui-linkbutton" icon="icon-cancel"
-					href="javascript:void(0)">取消</a>
-			</div>
+	<!-- 左侧-->
+	<div region="west" split="true" href="" title="导航菜单"
+		style="width: 150px; padding: 1px;" class="bigicon">
+		<ul id="menu1" class="bigicon menuItem"></ul>
+	</div>
+	<!-- 中间-->
+	<div id="mainPanle" region="center" style="overflow: hidden;">
+		<div id="tabs" class="easyui-tabs" fit="true" border="false">
+			<div class="easyui-tab" title="首页" href=""
+				style="padding: 2px; overflow: hidden;"></div>
 		</div>
 	</div>
-
+	<!-- 底部 -->
+	<div region="south" border="false"
+		style="height: 25px; overflow: hidden;">
+		<div align="center" style="color: #1fa3e5; padding-top: 2px">
+			&copy; 版权所有 <span class="tip"> <a href="http://www.wlsh.cn"
+				title="河北神龙物流信息科技有限公司">河北神龙物流信息科技有限公司</a> 版本 V2.0
+			</span>
+		</div>
+	</div>
 	<div id="mm" class="easyui-menu" style="width: 150px;">
-		<div id="tabupdate">刷新</div>
+		<div id="refresh">刷新</div>
 		<div class="menu-sep"></div>
 		<div id="close">关闭</div>
 		<div id="closeall">全部关闭</div>
@@ -195,9 +202,7 @@
 		<div class="menu-sep"></div>
 		<div id="closeright">当前页右侧全部关闭</div>
 		<div id="closeleft">当前页左侧全部关闭</div>
-		<div class="menu-sep"></div>
-		<div id="exit">退出</div>
 	</div>
-	<div id="dd" />
+	<div id="dd"></div>
 </body>
 </html>

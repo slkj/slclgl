@@ -107,4 +107,8 @@ public class VehicleService {
 		}
 	}
 
+	public int update(Vehicle vehicle) {
+		return mapper.edit(vehicle);
+	}
+
 }

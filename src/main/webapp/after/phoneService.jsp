@@ -31,6 +31,12 @@
 			
 		});
 		$("#serviceRiqi").val(CurentTime());
+		$('#serviceMan').combobox({    
+		    url:'../data/after.json',    
+		    valueField:'id',    
+		    textField:'text' ,
+		    required:true
+		});  
 	});
 	function CurentTime() {
 		var now = new Date();
@@ -158,7 +164,11 @@
 							onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
 							class="Wdate" style="width: 200px" /></td>
 							<th>服务人员：</th>
-						<td><input id="serviceMan" type="text" style="width: 200px;" name="serviceMan" /></td>
+						<td>
+						
+<!-- 							<input id="serviceMan" type="text" style="width: 200px;" name="serviceMan" /> -->
+						<input id="serviceMan"  name="serviceMan" />  
+						</td>
 					</tr>
 					
 					<!-- <tr>

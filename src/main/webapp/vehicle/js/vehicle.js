@@ -1,6 +1,6 @@
 var basePath = "../vehicle/";
 var grid;
-var carType,tabid;
+var carType, tabid;
 var Request = new Object();
 $(function() {
 	Request = GetRequest();
@@ -81,31 +81,14 @@ function loadDataGrid() {
 						s += "&nbsp;|&nbsp;";
 					}
 				});
-//				 s += "<a href=\"javascript:void(0)\"><span  onclick=\"javaScript:approval('" + row.id +
-//				 "');\">入网审核</span></a>";
-//				 s += "&nbsp;|&nbsp;";
-//				 s += "<a href=\"javascript:void(0)\"><span  onclick=\"javaScript:vehicleInfo('" + row.id +
-//				 "');\">详细</span></a>";
-//				 s += "&nbsp;|&nbsp;";
-//				 s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editRow('" + row.id +
-//				 "');\">编辑</span></a>";
-//				 s += "&nbsp;|&nbsp;";
-//				 s += "<a href=\"javascript:void(0)\"><span  onclick=\"javaScript:deleteRow('" + index +
-//				 "');\">删除</span></a>";
-//				 s += "&nbsp;|&nbsp;";
-//				 s += "<a href=\"javascript:void(0)\"><span  onclick=\"javaScript:inNet('" + row.id +
-//				 "');\">设备安装</span></a>";
-//				 s += "&nbsp;|&nbsp;";
-//				 s += "<a href=\"javascript:void(0)\"><span  onclick=\"javaScript:detailCarInfo('" + index +
-//				 "');\">安装记录</span></a>";
 				return s;
 			}
 		}, {
 			field : 'carNumber',
 			title : '车牌号'
 		}, {
-			field : 'carOwner',
-			title : '车主'
+			field : 'contacts',
+			title : '联系人'
 		}, {
 			field : 'contactsTel',
 			title : '联系电话'
@@ -131,7 +114,7 @@ function loadDataGrid() {
 			title : '道路运输证',
 			colspan : 3
 		}, {
-			title : '其他',
+			title : '',
 			colspan : 2
 		} ], [ {
 			field : 'equitment',
@@ -146,11 +129,20 @@ function loadDataGrid() {
 			field : 'installtime',
 			title : '安装日期'
 		}, {
-			field : 'dabh',
+			field : 'xszbh',
 			title : '档案编号'
 		}, {
-			field : 'jyyxq',
-			title : '有效期至'
+			field : 'xszdqrq',
+			title : '到期日期',
+			formatter : function(value, row) {
+				if (value != null) {
+					var curDate = DateUtil.dateToStr("yyyy-MM-dd HH:mm:ss", DateUtil.dateAdd('d', 90, new Date()));
+					if (value < curDate) {
+						return "<span style=\"color:red;\">" + value + "</span>";
+					}
+					return value;
+				}
+			}
 		}, {
 			field : 'ysz',
 			title : '道路运输经营许可证'
@@ -158,14 +150,28 @@ function loadDataGrid() {
 			field : 'jyxkz',
 			title : '经营许可证'
 		}, {
-			field : 'dqrq',
-			title : '到期日期'
+			field : 'xkzdqrq',
+			title : '到期日期',
+			formatter : function(value, row) {
+				if (value != null) {
+					var curDate = DateUtil.dateToStr("yyyy-MM-dd HH:mm:ss", DateUtil.dateAdd('d', 30, new Date()));
+					if (value < curDate) {
+						return "<span style=\"color:red;font-weight:bold;\">" + value + "</span>";
+					}
+					return value;
+				}
+			}
 		}, {
-			field : 'ejwh',
-			title : '二级维护',
-			align : 'center',
-			formatter : function(value, row, index) {
-				return "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:vehicle1Info('" + row.id + "');\">详细</span></a>";
+			field : 'ejwhDqTime',
+			title : '二保到期日期',
+			formatter : function(value, row) {
+				if (value != null) {
+					var curDate = DateUtil.dateToStr("yyyy-MM-dd HH:mm:ss", DateUtil.dateAdd('d', 30, new Date()));
+					if (value < curDate) {
+						return "<span style=\"color:red;font-weight:bold;\">" + value + "</span>";
+					}
+					return value;
+				}
 			}
 		}, {
 			field : 'bx',
@@ -197,15 +203,18 @@ function inNet(id) {
 function vehicleInfo(id) {
 	window.location.href = 'vehicleInfo.jsp?id=' + id;
 }
+function editRow(id) {
+	window.location.href = 'vehicleEdit.jsp?id=' + id;
+}
 function approval(id) {
 	window.location.href = 'approval.jsp?id=' + id;
 }
-function deleteRow(index) {
+function deleteRow(id) {
 	$.messager.confirm('提示', '将删除该车辆所有信息，确认删除?', function(row) {
 		if (row) {
-			var data = grid.datagrid('getData').rows[index];
+			// var data = grid.datagrid('getData').rows[index];
 			$.ajax({
-				url : basePath + 'delete?id=' + data.id,
+				url : basePath + 'delete?id=' + id,
 				success : function(data) {
 					if (data) {
 						grid.datagrid('reload');

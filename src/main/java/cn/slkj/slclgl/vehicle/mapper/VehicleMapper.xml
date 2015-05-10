@@ -23,10 +23,10 @@
 		CARCONTWIDTH,CARCONTHEIGHT,CARAPPROVED,CARAPPRGUEST,CARTRAC,CARCABGUEST,CARUSENATU,CARUSENATUNAME,
 		CAROBTWAY,CARFACDATE,INSTALLERS,ATTENDANTS,INSTALLTIME,INSTALLADDRESS,FEES,FEESEEND,ISNOTICE,
 		SIMPAYER,PAYERTIME,CTRADINGLINE,CCATCHMENBERS,CARIMG,ENTRYTIME,ENTRYID,ENTRYNAME,DEPID,
-		SIMNUMBER,EQUITMENT,NETWORKNO,REMARK,AREACODE,CITYID,COUNTY,CARIMG,DJFILE,XSFILE
+		SIMNUMBER,EQUITMENT,NETWORKNO,REMARK,AREACODE,CITYID,COUNTY,CARIMG,DJFILE,XSFILE,xszbh,xszdqrq,ysz,jyxkz,xkzdqrq,ejwhDqTime
 	</sql>
 	<select id="queryList" resultType="Vehicle" parameterType="hashmap">
-			SELECT <include refid="sql_car"/>  FROM TB_VEHICLE TBV
+			SELECT <include refid="sql_car"/>  FROM v_vehicle TBV
 			LEFT JOIN TB_COMPANY TBC ON TBV.COMPANYID = TBC.ID
 			<where>
 				<if test="listnum != null and listnum != ''">
@@ -64,7 +64,7 @@
 	</select>
 
 	<select id="queryListCount" resultType="int" parameterType="hashmap">
-		SELECT COUNT(tbv.id)   FROM TB_VEHICLE TBV
+		SELECT COUNT(tbv.id)   FROM v_vehicle TBV
 			LEFT JOIN TB_COMPANY TBC ON TBV.COMPANYID = TBC.ID
 			<where>
 				<if test="listnum != null and listnum != ''">
@@ -151,11 +151,8 @@
 		carTireSpe=#{carTireSpe},carNumOfSpring=#{carNumOfSpring},carAxleDist=#{carAxleDist},carAxleNum=#{carAxleNum},carContLength=#{carContLength},
 		carContWidth=#{carContWidth},carContHeight=#{carContHeight},carApproved=#{carApproved},carApprGuest=#{carApprGuest},carTrac=#{carTrac},
 		carCabGuest=#{carCabGuest},carUseNatu=#{carUseNatu},carUseNatuName=#{carUseNatuName},carObtWay=#{carObtWay},carFacDate=#{carFacDate},
-		installers=#{installers},attendants=#{attendants},installtime=#{installtime},installAddress=#{installAddress},fees=#{fees},
-		feeseEnd=#{feeseEnd},isNotice=#{isNotice},simPayer=#{simPayer},payerTime=#{payerTime},CTradingLine=#{CTradingLine},
-		CCatchMenbers=#{CCatchMenbers},entryTime=#{entryTime},entryId=#{entryId},entryName=#{entryName},depId=#{depId},simNumber=#{simNumber},
-		equitment=#{equitment},networkNo=#{networkNo},remark=#{remark},companyId=#{companyId},areaCode=#{areaCode},cityId=#{cityId},county=#{county}
-		,carImg=#{carImg} ,djFile=#{djFile},xsFile=#{xsFile}
+		CTradingLine=#{CTradingLine}, CCatchMenbers=#{CCatchMenbers},entryTime=#{entryTime},entryId=#{entryId},entryName=#{entryName},depId=#{depId}, 
+		remark=#{remark},companyId=#{companyId},areaCode=#{areaCode},cityId=#{cityId},county=#{county},carImg=#{carImg} ,djFile=#{djFile},xsFile=#{xsFile}
 		WHERE ID = #{id}
 	</update>
 	<update id="activated" parameterType="Vehicle">

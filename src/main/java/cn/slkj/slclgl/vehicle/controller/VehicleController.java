@@ -93,7 +93,21 @@ public class VehicleController {
 		}
 		return false;
 	}
-
+	@ResponseBody
+	@RequestMapping(value = "/update", method = { RequestMethod.POST })
+	public boolean update(Vehicle vehicle) throws Exception {
+		try {
+			int i = vehicleService.update(vehicle);
+			if (i > 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return false;
+	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/uploadCarImg", method = { RequestMethod.POST })
 	public String uploadCarImg(@RequestParam MultipartFile[] myfiles,

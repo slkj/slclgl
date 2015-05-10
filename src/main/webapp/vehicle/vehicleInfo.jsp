@@ -11,6 +11,7 @@
 	var id;
 	var Request = new Object();
 	$(function() {
+		loadCompany();
 		Request = GetRequest();
 		id = Request['id'];
 		$.ajax({
@@ -33,6 +34,15 @@
 			}
 		});
 	});
+	function loadCompany() {
+		$('#companyId').combobox({
+			url : '../company/queryComList',
+			required : true,
+			valueField : 'id',
+			textField : 'compName',
+			editable : false
+		});
+	}
 	function backPage() {
 		// 		window.location.href = 'vehicleList.jsp';
 		history.go(-1);
@@ -40,9 +50,9 @@
 </script>
 </head>
 <body>
-	<div style="text-align: left; padding: 5px">
-		<a href="javascript:void(0)" class="easyui-linkbutton"
-			onclick="javascript:backPage()">返回</a>
+	<div class="easyui-panel" style="padding: 5px">
+	<a href="javascript:void(0)" class="easyui-linkbutton"
+			onclick="javascript:backPage()" data-options="iconCls:'icon-undo'">返回</a>
 	</div>
 	<form id="carForm" metdod="post">
 		<div id="aa" class="easyui-accordion" data-options="border:false">
@@ -78,14 +88,8 @@
 							class="easyui-validatebox" data-options="required:true"
 							style="width: 200px;" /></td>
 						<th>所属公司:</th>
-						<td><input id="companyId" class="easyui-combobox"
-							name="companyId" style="width: 200px;"
-							data-options="required:true,valueField:'id',textField:'compName',url:'../company/queryComList'" />
-							<!-- 							<select id="companyId" name="companyId" --> <!-- 							class="easyui-combotree" style="width: 200px;" -->
-							<!-- 							data-options="url:'../company/getTreeList',required:true,lines:true"></select> -->
-							<!-- 							<a id="btn" href="#" class="easyui-linkbutton" --> <!-- 							data-options="iconCls:'icon-reload',plain:true"></a> -->
-
-						</td>
+						<td><input id="companyId" name="companyId"
+							style="width: 200px;" /></td>
 					</tr>
 					<tr>
 						<th>车牌号(挂):</th>
@@ -255,8 +259,8 @@
 							class="easyui-numberbox" style="width: 200px;" />人</td>
 						<th>国产/进口:</th>
 						<td><input id="carProType" name="carProType" type="radio"
-							value="国产" checked="checked" />国产 <input name="carProType"
-							type="radio" value="进口" />进口</td>
+							disabled="disabled" value="国产" checked="checked" />国产 <input
+							name="carProType" type="radio" value="进口" disabled="disabled" />进口</td>
 					</tr>
 					<tr>
 						<th>车辆获取方式:</th>
@@ -272,53 +276,29 @@
 						</select></td>
 						<th>车辆出厂日期:</th>
 						<td><input id="carFacDate" name="carFacDate"
-							class="easyui-datebox" editable="false" style="width: 200px;" /></td>
+							class="easyui-datebox" disabled="true" style="width: 200px;" /></td>
 					</tr>
 				</table>
 			</div>
-			<div data-options="collapsed:false,collapsible:false,border:false">
-				<ul class="siminput" style="padding-top: 0px; padding-bottom: 5px;">
-					<li style="width: 760px;"><span class="siminput_li_span"
-						style="width: 130px;">车辆登记证上传：</span> <input type="file"
-						id="registrationCertificateFile"
-						name="registrationCertificateFile" class="valid"> <span
-						class="red"></span><span class="red"
-						id="span_registrationCertificateFile"></span> <lable
-							style="display: inline-block;">图片上传，小于3M，jpg、jpeg格式</lable> <input
-						type="hidden" id="registrationCertificateFileType"
-						name="registrationCertificateFileType" value="jpg"></li>
-					<li style="height: 45px; width: 65px; padding-top: 2px;"><img
-						id="registrationCertificateAttach" width="65" height="45"
-						style="cursor: pointer; display: none;" title="点击查看原图"
-						onclick="window.open(this.src)"></li>
-					<li style="width: 760px;"><span class="siminput_li_span"
-						style="width: 130px;">车辆合格证/行驶证：</span> <input type="file"
-						id="drivingLicOrCertFile" name="drivingLicOrCertFile"> <span
-						class="red"></span><span class="red"
-						id="span_drivingLicOrCertFile"></span> <lable
-							style="display: inline-block;">图片上传，小于3M，jpg、jpeg格式</lable> <input
-						type="hidden" id="drivingLicOrCertFileType"
-						name="drivingLicOrCertFileType"></li>
-					<li style="height: 45px; width: 65px; padding-top: 2px;"><img
-						id="drivingLicOrCertAttach" width="65" height="45"
-						style="cursor: pointer; display: none;" title="点击查看原图"
-						onclick="window.open(this.src)"></li>
-					<li style="width: 760px;"><span class="siminput_li_span"
-						style="width: 130px;">车身照片：</span> <input type="file"
-						id="vehicleBodyPhotoFile" name="vehicleBodyPhotoFile"> <span
-						class="red"></span><span class="red"
-						id="span_vehicleBodyPhotoFile"></span> <lable
-							style="display: inline-block;">上传车辆左前方45角度图片，小于3M，jpg、jpeg格式</lable>
-						<input type="hidden" id="vehicleBodyPhotoFileType"
-						name="vehicleBodyPhotoFileType"></li>
-					<li style="height: 45px; width: 65px; padding-top: 2px;"><img
-						id="vehicleBodyPhotoAttach" width="65" height="45"
-						style="cursor: pointer; display: none;" title="点击查看原图"
-						onclick="window.open(this.src)"></li>
-				</ul>
-			</div>
 		</div>
 	</form>
+	<div>
+		<label style="color: red;">上传车辆左前方45角度图片，图片上传，小于3M，jpg、jpeg格式</label>
+		<form name="cForm" action="/springMVC7/file/upload2"
+			enctype="multipart/form-data" method="post"">
+			<ul style="padding-top: 0px; padding-bottom: 5px;">
+				<li>车辆登记证上传： <input type="file" id="djFile" name="myfiles"
+					size="28" accept="image/jpeg,image/png,image/gif,image/jpeg" />
+				</li>
+				<li>车辆合格证/行驶证： <input type="file" id="xsFile" name="myfiles"
+					size="28" accept="image/jpeg,image/png,image/gif,image/jpeg" />
+				</li>
+				<li>车身照片： <input type="file" id="carimg" name="myfiles"
+					size="28" accept="image/jpeg,image/png,image/gif,image/jpeg" />
+				</li>
+			</ul>
+		</form>
+	</div>
 	<div style="height: 30px"></div>
 </body>
 </html>
