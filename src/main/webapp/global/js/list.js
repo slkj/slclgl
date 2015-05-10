@@ -26,19 +26,14 @@ function getData() {
 				pageList : [ 1, 10, 15, 20, 30, 50 ],
 				loadMsg : '数据加载中,请稍后……',
 				rowStyler : function(index, row) {
-					var comDay = 20;
-					if (row.nextriqi != null) {
-						// 获取当前时间，判断2个时间差是否大于全局变量comDay
-						var curDate = DateUtil.curentTime();
-						if(row.nextriqi > curDate){
-							return
-						}
-						// 打印日期差
-						var days = DateUtil.DiffLong(row.nextriqi,curDate) ;
-						if(days > comDay){
+					if (row.endriqi != null) {
+						var curDate = DateUtil.dateToStr("yyyy-MM-dd HH:mm:ss",DateUtil.dateAdd('d',30,new Date()));
+						if(row.endriqi < curDate){
 							return 'color:#FF4040;font-weight:bold;';
 						}
+						return;
 					}
+					
 				},
 				columns : [ [
 						{
