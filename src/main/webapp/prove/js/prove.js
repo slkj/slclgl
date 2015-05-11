@@ -244,12 +244,16 @@ function useFun() {
 	// 得到选中的行
 	var selRow = grid.datagrid("getSelections");// 返回选中多行
 	if (selRow.length == 0) {
-		SL.msgShow("提示", "请至少选择一行数据!！", "warning");
+		SL.msgShow("提示", "请选择一行数据!！", "warning");
 		return false;
 	}
 	var id=selRow[0].id;
 	if (selRow[0].state == "1") {
 		SL.msgShow("提示", "证明已使用！", "warning");
+		return;
+	}
+	if (selRow[0].state == "2") {
+		SL.msgShow("提示", "证明已作废！", "warning");
 		return;
 	}
 	SL.showWindow({

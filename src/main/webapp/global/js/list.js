@@ -1,6 +1,5 @@
 var url = "../global/list";
 $(function() {
-
 	getData();
 	$("#btn").click(function() {
 		$('#grid').datagrid({

@@ -25,16 +25,12 @@ function getData() {
 				pageList : [ 1, 10, 15, 20, 30, 50 ],
 				loadMsg : '数据加载中,请稍后……',
 				rowStyler : function(index, row) {
-					var comDay = 20;
 					if (row.endDate != null) {
-						var curDate = DateUtil.curentTime();
-						if(row.endDate > curDate){
-							return;
-						}
-						var days = DateUtil.DiffLong(row.endDate,curDate) ;
-						if(days > comDay){
+						var curDate = DateUtil.dateToStr("yyyy-MM-dd HH:mm:ss",DateUtil.dateAdd('d',90,new Date()));
+						if(row.endDate < curDate){
 							return 'color:#FF4040;font-weight:bold;';
 						}
+						return;
 					}
 				},
 				columns : [ [
