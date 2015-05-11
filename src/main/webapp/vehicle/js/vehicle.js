@@ -106,7 +106,7 @@ function loadDataGrid() {
 		} ] ],
 		columns : [ [ {
 			title : '车载终端',
-			colspan : 4
+			colspan : 5
 		}, {
 			title : '机动车行驶证',
 			colspan : 2
@@ -129,20 +129,16 @@ function loadDataGrid() {
 			field : 'installtime',
 			title : '安装日期'
 		}, {
+			field : 'feeseEnd',
+			title : '检验有效期至',
+			styler:cellStyler30
+		}, {
 			field : 'xszbh',
 			title : '档案编号'
 		}, {
 			field : 'xszdqrq',
 			title : '到期日期',
-			formatter : function(value, row) {
-				if (value != null) {
-					var curDate = DateUtil.dateToStr("yyyy-MM-dd HH:mm:ss", DateUtil.dateAdd('d', 90, new Date()));
-					if (value < curDate) {
-						return "<span style=\"color:red;\">" + value + "</span>";
-					}
-					return value;
-				}
-			}
+			styler:cellStyler90
 		}, {
 			field : 'ysz',
 			title : '道路运输经营许可证'
@@ -152,27 +148,11 @@ function loadDataGrid() {
 		}, {
 			field : 'xkzdqrq',
 			title : '到期日期',
-			formatter : function(value, row) {
-				if (value != null) {
-					var curDate = DateUtil.dateToStr("yyyy-MM-dd HH:mm:ss", DateUtil.dateAdd('d', 30, new Date()));
-					if (value < curDate) {
-						return "<span style=\"color:red;font-weight:bold;\">" + value + "</span>";
-					}
-					return value;
-				}
-			}
+			styler:cellStyler30
 		}, {
 			field : 'ejwhDqTime',
 			title : '二保到期日期',
-			formatter : function(value, row) {
-				if (value != null) {
-					var curDate = DateUtil.dateToStr("yyyy-MM-dd HH:mm:ss", DateUtil.dateAdd('d', 30, new Date()));
-					if (value < curDate) {
-						return "<span style=\"color:red;font-weight:bold;\">" + value + "</span>";
-					}
-					return value;
-				}
-			}
+			styler:cellStyler30
 		}, {
 			field : 'bx',
 			title : '保险',
@@ -190,15 +170,24 @@ function loadDataGrid() {
 		displayMsg : '当前显示 {from} - {to} 条记录   共 {total} 条记录'
 	});
 }
+function cellStyler30(value,row,index){
+	var curDate = DateUtil.dateToStr("yyyy-MM-dd HH:mm:ss", DateUtil.dateAdd('d', 30, new Date()));
+	if (value < curDate) {
+		return 'background-color:#ffee00;color:red;font-weight:bold;';
+	}
+}
+function cellStyler90(value,row,index){
+    var curDate = DateUtil.dateToStr("yyyy-MM-dd HH:mm:ss", DateUtil.dateAdd('d', 30, new Date()));
+	if (value < curDate) {
+		return 'background-color:#ffee00;color:red;font-weight:bold;';
+	}
+}
 function pos(index) {
 	var data = grid.datagrid('getData').rows[index];
 	window.open('../location.jsp')
 }
 function addCar() {
 	window.location.href = 'vehicleAdd.jsp?ct=' + carType;
-}
-function inNet(id) {
-	window.location.href = 'inNet.jsp?id=' + id;
 }
 function vehicleInfo(id) {
 	window.location.href = 'vehicleInfo.jsp?id=' + id;

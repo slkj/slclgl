@@ -2,69 +2,86 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.slkj.slclgl.global.mapper.GlobalMapper">
 	<sql id="sql_temp">
-		id,vid,facilitator,phone,install,installer,installriqi,qzsy,zdtype,
-		zdid,sim,zdy,fdy,acc,scx,zzx,yzx,ygd,jgd,endriqi,azzm,qzsyzm,remark,carcertdate,
-		(select carnumber from tb_vehicle where id= vid) as carnumber
+		id,vid,carNumber,contacts,contactsTel,carType,companyName,equitment,simNumber,
+		facilitator,networkNo,azzm,installtime,installer,endriqi,remark 
 	</sql>
 	<select id="queryList" resultType="global" parameterType="hashmap">
-		SELECT <include refid="sql_temp"/>  FROM(SELECT A.* FROM(
-			SELECT C.ID, TV.ID AS VID, TV.CARNUMBER,C.FACILITATOR,C.PHONE,C.INSTALL, 
-			C.INSTALLER,C.INSTALLRIQI,c.qzsy,C.ZDTYPE,C.ZDID,C.SIM,c.zdy,
-			C.fdy,C.acc,C.scx,C.zzx,C.yzx,C.ygd,C.jgd,C.ENDRIQI,C.AZZM,C.QZSYZM ,C.remark,C.carcertdate
-			FROM TB_VEHICLE TV LEFT JOIN ( SELECT A.* FROM tb_global A JOIN ( SELECT MAX(endriqi) AS endriqi, VID FROM tb_global GROUP BY VID ) B
-			 ON A.VID = B.VID AND A.endriqi = B.endriqi ) C ON TV.ID = C.VID
-			<where>
-				<if test="operId != null and operId != ''">
-					AND TV.OPERATORID =#{operId}
-				</if>
-				<if test="carNumber != null and carNumber != ''">
-					AND TV.CARNUMBER LIKE CONCAT('%',#{carNumber},'%')
-				</if>
-				<if test="regCompanyId != null and regCompanyId != ''">
-					AND TV.COMPANYID IN  (SELECT ID FROM TB_COMPANY WHERE compName LIKE CONCAT('%',#{regCompanyId},'%'))
-				</if>
-				<if test="depId != null and depId != ''">
-					AND TV.depId  LIKE   CONCAT('%',#{depId},'%')
-				</if>
-				<if test="companyId != null and companyId != ''">
-					AND TV.OWNEDID =#{companyId}
-				</if>
+<!-- 		SELECT <include refid="sql_temp"/>  FROM(SELECT A.* FROM( -->
+<!-- 			SELECT C.ID, TV.ID AS VID, TV.CARNUMBER,C.FACILITATOR,C.PHONE,C.INSTALL,  -->
+<!-- 			C.INSTALLER,C.INSTALLRIQI,c.qzsy,C.ZDTYPE,C.ZDID,C.SIM,c.zdy, -->
+<!-- 			C.fdy,C.acc,C.scx,C.zzx,C.yzx,C.ygd,C.jgd,C.ENDRIQI,C.AZZM,C.QZSYZM ,C.remark,C.carcertdate -->
+<!-- 			FROM TB_VEHICLE TV LEFT JOIN ( SELECT A.* FROM tb_global A JOIN ( SELECT MAX(endriqi) AS endriqi, VID FROM tb_global GROUP BY VID ) B -->
+<!-- 			 ON A.VID = B.VID AND A.endriqi = B.endriqi ) C ON TV.ID = C.VID -->
+<!-- 			<where> -->
+<!-- 				<if test="operId != null and operId != ''"> -->
+<!-- 					AND TV.OPERATORID =#{operId} -->
+<!-- 				</if> -->
+<!-- 				<if test="carNumber != null and carNumber != ''"> -->
+<!-- 					AND TV.CARNUMBER LIKE CONCAT('%',#{carNumber},'%') -->
+<!-- 				</if> -->
+<!-- 				<if test="regCompanyId != null and regCompanyId != ''"> -->
+<!-- 					AND TV.COMPANYID IN  (SELECT ID FROM TB_COMPANY WHERE compName LIKE CONCAT('%',#{regCompanyId},'%')) -->
+<!-- 				</if> -->
+<!-- 				<if test="depId != null and depId != ''"> -->
+<!-- 					AND TV.depId  LIKE   CONCAT('%',#{depId},'%') -->
+<!-- 				</if> -->
+<!-- 				<if test="companyId != null and companyId != ''"> -->
+<!-- 					AND TV.OWNEDID =#{companyId} -->
+<!-- 				</if> -->
 				
-				<if test="endDate != null and endDate != ''">
-					<![CDATA[ AND C.ENDRIQI  >= #{endDate} AND C.ENDRIQI  <= #{endDate1} ]]> 
-				</if>
-			</where>
+<!-- 				<if test="endDate != null and endDate != ''"> -->
+<!-- 					<![CDATA[ AND C.ENDRIQI  >= #{endDate} AND C.ENDRIQI  <= #{endDate1} ]]>  -->
+<!-- 				</if> -->
+<!-- 			</where> -->
 		
-		) A )B
+<!-- 		) A )B -->
+<!-- 		LIMIT #{startNum},#{endNum} -->
+
+		
+
+		SELECT
+			TG.ID AS ID,TV.ID AS VID,TV.CARNUMBER ,TV.CONTACTS,TV.CONTACTSTEL,TV.CLASSIFY,TV.CARTYPE,
+			(SELECT TC.COMPNAME FROM TB_COMPANY TC WHERE TC.ID = TV.COMPANYID ) AS COMPANYNAME,
+			TG.EQUITMENT,TG.SIMNUMBER,TG.FACILITATOR,TG.NETWORKNO,TG.AZZM,TG.INSTALLTIME,TG.INSTALLER,TG.ENDRIQI,TG.REMARK ,TG.INSADDERSS
+		FROM
+			TB_VEHICLE TV   LEFT  JOIN    
+			(SELECT ID,vid,max(ENDRIQI)as ENDRIQI,EQUITMENT,SIMNUMBER,FACILITATOR,NETWORKNO,AZZM,
+			INSTALLTIME,INSTALLER,INSADDERSS,REMARK  FROM TB_GLOBAL GROUP BY vid) TG ON TV.ID = TG.VID
 		LIMIT #{startNum},#{endNum}
 	</select>
 	
 	<select id="queryListCount" resultType="int" parameterType="hashmap">
-		SELECT  COUNT(0) FROM TB_VEHICLE TV 
-		LEFT JOIN ( SELECT A.* FROM tb_global A JOIN 
-		( SELECT MAX(endriqi) AS endriqi, VID FROM tb_global GROUP BY VID ) B
-			 ON A.VID = B.VID AND A.endriqi = B.endriqi ) C ON TV.ID = C.VID
-			<where>
-				<if test="operId != null and operId != ''">
-					AND TV.OPERATORID =#{operId}
-				</if>
-				<if test="carNumber != null and carNumber != ''">
-					AND TV.CARNUMBER LIKE CONCAT('%',#{carNumber},'%')
-				</if>
-				<if test="regCompanyId != null and regCompanyId != ''">
-					AND TV.COMPANYID IN  (SELECT ID FROM TB_COMPANY WHERE compName LIKE CONCAT('%',#{regCompanyId},'%'))
-				</if>
-				<if test="depId != null and depId != ''">
-					AND TV.depId  LIKE   CONCAT('%',#{depId},'%')
-				</if>
-				<if test="companyId != null and companyId != ''">
-					AND TV.OWNEDID =#{companyId}
-				</if>
+<!-- 		SELECT  COUNT(0) FROM TB_VEHICLE TV  -->
+<!-- 		LEFT JOIN ( SELECT A.* FROM tb_global A JOIN  -->
+<!-- 		( SELECT MAX(endriqi) AS endriqi, VID FROM tb_global GROUP BY VID ) B -->
+<!-- 			 ON A.VID = B.VID AND A.endriqi = B.endriqi ) C ON TV.ID = C.VID -->
+<!-- 			<where> -->
+<!-- 				<if test="operId != null and operId != ''"> -->
+<!-- 					AND TV.OPERATORID =#{operId} -->
+<!-- 				</if> -->
+<!-- 				<if test="carNumber != null and carNumber != ''"> -->
+<!-- 					AND TV.CARNUMBER LIKE CONCAT('%',#{carNumber},'%') -->
+<!-- 				</if> -->
+<!-- 				<if test="regCompanyId != null and regCompanyId != ''"> -->
+<!-- 					AND TV.COMPANYID IN  (SELECT ID FROM TB_COMPANY WHERE compName LIKE CONCAT('%',#{regCompanyId},'%')) -->
+<!-- 				</if> -->
+<!-- 				<if test="depId != null and depId != ''"> -->
+<!-- 					AND TV.depId  LIKE   CONCAT('%',#{depId},'%') -->
+<!-- 				</if> -->
+<!-- 				<if test="companyId != null and companyId != ''"> -->
+<!-- 					AND TV.OWNEDID =#{companyId} -->
+<!-- 				</if> -->
 				
-				<if test="endDate != null and endDate != ''">
-					<![CDATA[ AND C.ENDRIQI  >= #{endDate} AND C.ENDRIQI  <= #{endDate1} ]]> 
-				</if>
-			</where>
+<!-- 				<if test="endDate != null and endDate != ''"> -->
+<!-- 					<![CDATA[ AND C.ENDRIQI  >= #{endDate} AND C.ENDRIQI  <= #{endDate1} ]]>  -->
+<!-- 				</if> -->
+<!-- 			</where> -->
+		SELECT
+			 COUNT(0)
+		FROM
+			TB_VEHICLE TV   LEFT  JOIN    
+			(SELECT ID,vid,max(ENDRIQI)as ENDRIQI,EQUITMENT,SIMNUMBER,FACILITATOR,NETWORKNO,AZZM,
+			INSTALLTIME,INSTALLER,INSADDERSS,REMARK  FROM TB_GLOBAL GROUP BY vid) TG ON TV.ID = TG.VID
 	</select>
 	
 	
@@ -100,7 +117,7 @@
 	</select>
 	
 	<select id="queryOne" parameterType="global" resultType="global">
-		SELECT <include refid="sql_temp"/>  from TB_GLOBAL 
+		SELECT *  from TB_GLOBAL 
 		<where>
 			<if test="id != null and id != ''">
 				AND id = #{id}
@@ -110,20 +127,25 @@
 	
 	<insert id="save" parameterType="global">
 		INSERT INTO TB_GLOBAL
-		(vid,facilitator,phone,install,installer,installriqi,qzsy,zdtype,
-		zdid,sim,zdy,fdy,acc,scx,zzx,yzx,ygd,jgd,endriqi,azzm,qzsyzm,remark,carcertdate)
+		(vid,equitment,simNumber,facilitator,networkNo,azzm,installtime,installer,insAdderss, endriqi,remark)
 		VALUES
-		(#{vId},#{facilitator},#{phone},#{install},#{installer},#{installriqi},#{qzsy},#{zdtype},
-		#{zdid},#{sim},#{zdy},#{fdy},#{acc},#{scx},#{zzx},#{yzx},#{ygd},#{jgd},#{endriqi},#{azzm},#{qzsyzm},#{remark},#{carCertDate})
+		(#{vId},#{equitment},#{simNumber},#{facilitator},#{networkNo},#{azzm},#{installtime},#{installer},#{insAdderss},#{endriqi},#{remark})
 	</insert>
 	
 	<update id="edit" parameterType="global">
 		UPDATE TB_GLOBAL SET 
-			facilitator = #{facilitator},phone = #{phone},install=#{install}, installer=#{installer},installriqi=#{installriqi}, 
-			qzsy=#{qzsy}, zdtype=#{zdtype}, zdid=#{zdid},sim = #{sim},zdy = #{zdy},fdy = #{fdy},acc=#{acc}, scx=#{scx}, zzx=#{zzx},yzx = #{yzx},
-			ygd=#{ygd}, jgd=#{jgd}, endriqi=#{endriqi},azzm = #{azzm},qzsyzm = #{qzsyzm},remark = #{remark},carcertdate=#{carCertDate}
-				
-		 WHERE ID = #{id}
+			equitment = #{equitment},
+			simNumber = #{simNumber},
+			facilitator = #{facilitator},
+			networkNo = #{networkNo},
+			azzm = #{azzm},
+			installtime = #{installtime},
+			installer = #{installer},
+			insAdderss = #{insAdderss}, 
+			endriqi = #{endriqi},
+			remark = #{remark}
+		WHERE
+			ID = #{id}
 	</update>
 	
 	<delete id="delete" parameterType="string">

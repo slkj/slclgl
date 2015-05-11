@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import cn.slkj.easyui.util.EPager;
 import cn.slkj.slclgl.global.bean.Global;
 import cn.slkj.slclgl.global.mapper.GlobalMapper;
-import cn.slkj.slclgl.insurance.bean.Insurance;
 
 /**
  * 定位服务方法

@@ -7,7 +7,6 @@ package cn.slkj.slclgl.global.bean;
  *
  */
 public class Global {
-
 	private String id;
 	/**
 	 * 车辆外键id
@@ -17,92 +16,64 @@ public class Global {
 	 * 车牌号
 	 */
 	private String carNumber;
-
 	/**
-	 * 登记日期
+	 * 联系人
 	 */
-	private String carCertDate;
+	private String contacts;
+	/**
+	 * 联系电话
+	 */
+	private String contactsTel;
+	/**
+	 * 车辆种类
+	 */
+	private String classify;
+	/**
+	 * 车辆类型 
+	 */
+	private String carType;
+	/**
+	 * 所属公司
+	 */
+	private String companyName;
+	/**
+	 * 设备号
+	 */
+	private String equitment;
+	/**
+	 * SIM卡
+	 */
+	private String simNumber;
 	/**
 	 * 运营商
 	 */
 	private String facilitator;
 	/**
-	 * 服务电话
+	 * 入网证明编号 
 	 */
-	private String phone;
-	/**
-	 * 安装单位
-	 */
-	private String install;
-	/**
-	 * 安装人员
-	 */
-	private String installer;
-	/**
-	 * 安装日期
-	 */
-	private String installriqi;
-	/**
-	 * 前置/使用
-	 */
-	private String qzsy;
-	/**
-	 * 终端型号
-	 */
-	private String zdtype;
-	/**
-	 * 车载终端ID
-	 */
-	private String zdid;
-	/**
-	 * SIM卡号
-	 */
-	private String sim;
-	/**
-	 * 正电源
-	 */
-	private String zdy;
-	/**
-	 * 负电源
-	 */
-	private String fdy;
-	/**
-	 * acc线
-	 */
-	private String acc;
-	/**
-	 * 刹车线
-	 */
-	private String scx;
-	/**
-	 * 左转向
-	 */
-	private String zzx;
-	/**
-	 * 右转向
-	 */
-	private String yzx;
-	/**
-	 * 远光灯
-	 */
-	private String ygd;
-	/**
-	 * 近光灯
-	 */
-	private String jgd;
-	/**
-	 * 维保日期
-	 */
-	private String endriqi;
+	private String networkNo;
 	/**
 	 * 安装证明编号
 	 */
 	private String azzm;
+	/**
+	 * 安装日期
+	 */
+	private String installtime;
 
 	/**
-	 * 证明编号
+	 * 安装人
 	 */
-	private String qzsyzm;
+	private String installer;
+	/**
+	 * 安装地点
+	 */
+	private String insAdderss;
+
+	/**
+	 * 维保日期
+	 */
+	private String endriqi;
 
 	/**
 	 * 备注
@@ -133,12 +104,52 @@ public class Global {
 		this.carNumber = carNumber;
 	}
 
-	public String getCarCertDate() {
-		return carCertDate;
+	public String getContacts() {
+		return contacts;
 	}
 
-	public void setCarCertDate(String carCertDate) {
-		this.carCertDate = carCertDate;
+	public void setContacts(String contacts) {
+		this.contacts = contacts;
+	}
+
+	public String getContactsTel() {
+		return contactsTel;
+	}
+
+	public void setContactsTel(String contactsTel) {
+		this.contactsTel = contactsTel;
+	}
+
+	public String getCarType() {
+		return carType;
+	}
+
+	public void setCarType(String carType) {
+		this.carType = carType;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public String getEquitment() {
+		return equitment;
+	}
+
+	public void setEquitment(String equitment) {
+		this.equitment = equitment;
+	}
+
+	public String getSimNumber() {
+		return simNumber;
+	}
+
+	public void setSimNumber(String simNumber) {
+		this.simNumber = simNumber;
 	}
 
 	public String getFacilitator() {
@@ -149,140 +160,12 @@ public class Global {
 		this.facilitator = facilitator;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getNetworkNo() {
+		return networkNo;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getInstall() {
-		return install;
-	}
-
-	public void setInstall(String install) {
-		this.install = install;
-	}
-
-	public String getInstaller() {
-		return installer;
-	}
-
-	public void setInstaller(String installer) {
-		this.installer = installer;
-	}
-
-	public String getInstallriqi() {
-		return installriqi;
-	}
-
-	public void setInstallriqi(String installriqi) {
-		this.installriqi = installriqi;
-	}
-
-	public String getQzsy() {
-		return qzsy;
-	}
-
-	public void setQzsy(String qzsy) {
-		this.qzsy = qzsy;
-	}
-
-	public String getZdtype() {
-		return zdtype;
-	}
-
-	public void setZdtype(String zdtype) {
-		this.zdtype = zdtype;
-	}
-
-	public String getZdid() {
-		return zdid;
-	}
-
-	public void setZdid(String zdid) {
-		this.zdid = zdid;
-	}
-
-	public String getSim() {
-		return sim;
-	}
-
-	public void setSim(String sim) {
-		this.sim = sim;
-	}
-
-	public String getZdy() {
-		return zdy;
-	}
-
-	public void setZdy(String zdy) {
-		this.zdy = zdy;
-	}
-
-	public String getFdy() {
-		return fdy;
-	}
-
-	public void setFdy(String fdy) {
-		this.fdy = fdy;
-	}
-
-	public String getAcc() {
-		return acc;
-	}
-
-	public void setAcc(String acc) {
-		this.acc = acc;
-	}
-
-	public String getScx() {
-		return scx;
-	}
-
-	public void setScx(String scx) {
-		this.scx = scx;
-	}
-
-	public String getZzx() {
-		return zzx;
-	}
-
-	public void setZzx(String zzx) {
-		this.zzx = zzx;
-	}
-
-	public String getYzx() {
-		return yzx;
-	}
-
-	public void setYzx(String yzx) {
-		this.yzx = yzx;
-	}
-
-	public String getYgd() {
-		return ygd;
-	}
-
-	public void setYgd(String ygd) {
-		this.ygd = ygd;
-	}
-
-	public String getJgd() {
-		return jgd;
-	}
-
-	public void setJgd(String jgd) {
-		this.jgd = jgd;
-	}
-
-	public String getEndriqi() {
-		return endriqi;
-	}
-
-	public void setEndriqi(String endriqi) {
-		this.endriqi = endriqi;
+	public void setNetworkNo(String networkNo) {
+		this.networkNo = networkNo;
 	}
 
 	public String getAzzm() {
@@ -293,12 +176,28 @@ public class Global {
 		this.azzm = azzm;
 	}
 
-	public String getQzsyzm() {
-		return qzsyzm;
+	public String getInstalltime() {
+		return installtime;
 	}
 
-	public void setQzsyzm(String qzsyzm) {
-		this.qzsyzm = qzsyzm;
+	public void setInstalltime(String installtime) {
+		this.installtime = installtime;
+	}
+
+	public String getInstaller() {
+		return installer;
+	}
+
+	public void setInstaller(String installer) {
+		this.installer = installer;
+	}
+
+	public String getEndriqi() {
+		return endriqi;
+	}
+
+	public void setEndriqi(String endriqi) {
+		this.endriqi = endriqi;
 	}
 
 	public String getRemark() {
@@ -309,16 +208,30 @@ public class Global {
 		this.remark = remark;
 	}
 
-	@Override
-	public String toString() {
-		return "Global [id=" + id + ", vId=" + vId + ", carNumber=" + carNumber + ", carCertDate="
-				+ carCertDate + ", facilitator=" + facilitator + ", phone=" + phone + ", install="
-				+ install + ", installer=" + installer + ", installriqi=" + installriqi + ", qzsy="
-				+ qzsy + ", zdtype=" + zdtype + ", zdid=" + zdid + ", sim=" + sim + ", zdy=" + zdy
-				+ ", fdy=" + fdy + ", acc=" + acc + ", scx=" + scx + ", zzx=" + zzx + ", yzx="
-				+ yzx + ", ygd=" + ygd + ", jgd=" + jgd + ", endriqi=" + endriqi + ", azzm=" + azzm
-				+ ", qzsyzm=" + qzsyzm + ", remark=" + remark + "]";
+	public String getClassify() {
+		return classify;
 	}
 
+	public void setClassify(String classify) {
+		this.classify = classify;
+	}
+
+	public String getInsAdderss() {
+		return insAdderss;
+	}
+
+	public void setInsAdderss(String insAdderss) {
+		this.insAdderss = insAdderss;
+	}
+
+	@Override
+	public String toString() {
+		return "Global [id=" + id + ", vId=" + vId + ", carNumber=" + carNumber + ", contacts="
+				+ contacts + ", contactsTel=" + contactsTel + ", classify=" + classify
+				+ ", carType=" + carType + ", companyName=" + companyName + ", equitment="
+				+ equitment + ", simNumber=" + simNumber + ", facilitator=" + facilitator
+				+ ", networkNo=" + networkNo + ", azzm=" + azzm + ", installtime=" + installtime
+				+ ", installer=" + installer + ", endriqi=" + endriqi + ", remark=" + remark + "]";
+	}
 
 }

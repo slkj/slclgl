@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>二保记录信息</title>
+<title>车辆卫星地位信息</title>
 <%@ include file="/common/taglibs.jsp"%>
-<script type="text/javascript" src="../js/lib/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="../js/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="js/list.js"></script>
 </head>
 <body>
@@ -16,34 +16,25 @@
 			<table>
 				<tr>
 					<td>车牌号:</td>
-					<td><input id="carNumber" name="carNumber" style="width: 100px;" />
-					</td>
+					<td><input id="carNumber" name="carNumber"
+						style="width: 100px;" /></td>
 					<td>公司名称:</td>
-					<td><input id="regCompanyId" name="regCompanyId" style="width: 100px;" />
-					</td>
-					<td>下次维护日期:</td>
-					<td>
-						<input id="endDate" name="endDate"	class="easyui-datebox" editable="false" />至
-							<input id="endDate1" name="endDate1" class="easyui-datebox" editable="false" />
-					</td>
+					<td><input id="regCompanyId" name="regCompanyId"
+						style="width: 100px;" /></td>
+					<td>维保日期:</td>
+					<td><input id="endDate" name="endDate" class="easyui-datebox"
+						editable="false" />至 <input id="endDate1" name="endDate1"
+						class="easyui-datebox" editable="false" /></td>
 					<td><a id="btn" href="#" class="easyui-linkbutton"
-						data-options="iconCls:'icon-search'">查询</a>
+						data-options="iconCls:'icon-search'">查询</a><a href="#"
+						onclick="outExcel()" class="easyui-linkbutton"
+						data-options="iconCls:'pic pic_157'">导出</a>
+				</tr>
+				<tr>
+					<td colspan="7"><span style="color: #F00">【红色标记是维保到期的车辆，提前30天提醒。】</span></td>
 				</tr>
 			</table>
 		</form>
-		<table cellspacing="0" cellpadding="0">
-				<tr>
-					<td>
-						<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onClick="javascript:addFun();">添加</a>
-					</td>
-					<td><div class="datagrid-btn-separator"></div></td>
-					<td align="right">
-						<a href="#"  onclick="outExcel()" class="easyui-linkbutton" data-options="iconCls:'pic pic_157',plain:true">导出</a>
-					</td>
-				</tr>
-			</table>
-		<!-- <table id="toolbars" cellspacing="0" cellpadding="0"></table>
-		<div style="color: #F00">【①点击车牌号查询车辆详细信息，②红色标记是需要维护的车辆】</div> -->
 	</div>
 </body>
 </html>

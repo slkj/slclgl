@@ -18,7 +18,6 @@ import cn.slkj.easyui.util.EPager;
 import cn.slkj.easyui.util.JsonResult;
 import cn.slkj.slclgl.global.bean.Global;
 import cn.slkj.slclgl.global.service.GlobalService;
-import cn.slkj.slclgl.user.bean.User;
 
 /**
  * 卫星定位服务
@@ -33,16 +32,15 @@ public class GlobalController {
 	private GlobalService globalService;
 
 	@ResponseBody
-	@RequestMapping(value = "/list", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/list")
 	public EPager<Global> list(
 			@RequestParam(required = false, defaultValue = "1") Integer page,// 第几页
-			@RequestParam(required = false, defaultValue = "10") Integer rows,// 每页显示多少行
+			@RequestParam(required = false, defaultValue = "15") Integer rows,// 每页显示多少行
 			String carNumber, String regCompanyId, String vId, String operId,
 			@RequestParam(required = false, defaultValue = "") String endDate,
 			@RequestParam(required = false, defaultValue = "") String endDate1, HttpSession session)
 			throws UnsupportedEncodingException {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
 		if (StringUtils.isNotBlank(carNumber)) {
 			map.put("carNumber", carNumber);
 		}
@@ -58,13 +56,6 @@ public class GlobalController {
 		if (StringUtils.isNotBlank(endDate1)) {
 			map.put("endDate1", endDate1);
 		}
-		/*User user = (User) session.getAttribute("userSession");
-		if(user.getType().equals("2")){
-			map.put("depId", user.getDepartcode());
-		}
-		else if(user.getType().equals("1")){
-			map.put("companyId", user.getCompanyid());
-		}*/
 		map.put("endNum", page * rows);
 		map.put("startNum", (page - 1) * rows);
 
@@ -81,13 +72,6 @@ public class GlobalController {
 			@RequestParam(required = false, defaultValue = "10") Integer rows,// 每页显示多少行
 			HttpSession session) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		/*User user = (User) session.getAttribute("userSession");
-		if(user.getType().equals("2")){
-			map.put("depId", user.getDepartcode());
-		}
-		else if(user.getType().equals("1")){
-			map.put("companyId", user.getCompanyid());
-		}*/
 		map.put("endNum", page * rows);
 		map.put("startNum", (page - 1) * rows);
 		return globalService.getExpires(map);
@@ -116,9 +100,9 @@ public class GlobalController {
 	@RequestMapping(value = "/saveGlobal", method = { RequestMethod.POST })
 	public JsonResult save(Global global) {
 		try {
-			global.setId(UUID.randomUUID().toString());
+//			global.setId(UUID.randomUUID().toString());
 			int i = globalService.save(global);
-			if (i != -1) {
+			if (i > 0) {
 				return new JsonResult(true, "");
 			}
 		} catch (Exception e) {
@@ -135,17 +119,17 @@ public class GlobalController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/editGlobal", method = { RequestMethod.POST })
-	public boolean editGlobal(Global global) {
+	public JsonResult editGlobal(Global global) {
 		try {
 
 			int i = globalService.edit(global);
-			if (i != -1) {
-				return true;
+			if (i > 0) {
+				return new JsonResult(true, "");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return false;
+		return new JsonResult(false, "保存失败！");
 	}
 
 	/** 批量删除 */
@@ -169,12 +153,6 @@ public class GlobalController {
 		if (StringUtils.isNotBlank(vId)) {
 			map.put("vId", vId);
 		}
-		/*if (StringUtils.isNotBlank(operId)) {
-			map.put("operId", operId);
-		} else {
-			User user = (User) session.getAttribute("userSession");
-			map.put("operId", user.getU_id());
-		}*/
 		map.put("endNum", page * rows);
 		map.put("startNum", (page - 1) * rows);
 		return globalService.listByVid(map);

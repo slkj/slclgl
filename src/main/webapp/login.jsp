@@ -45,7 +45,7 @@
 				data : user,
 				success : function(data) {
 					if (data.success) {
-						window.location.href = "index.jsp";
+						window.location.href = "main.jsp";
 					} else {
 						$("#password").val("");
 						$("#vcode").val("");

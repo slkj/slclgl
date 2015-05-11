@@ -108,7 +108,7 @@ a:hover {
 </style>
 <script type="text/javascript" src="js/main.js"></script>
 </head>
-<body class="easyui-layout" style="overflow-y: hidden" scroll="no">
+<body id="index_layout" class="easyui-layout" style="overflow-y: hidden" scroll="no">
 	<noscript>
 		<div
 			style="position: absolute; z-index: 100000; height: 2046px; top: 0px; left: 0px; width: 100%; background: white; text-align: center;">
@@ -128,12 +128,13 @@ a:hover {
 		style="height: 98px; padding: 1px; overflow: hidden; width: 1438px; display: block; background: rgb(168, 215, 233);">
 		<table width="100%" border="0" cellpadding="0" cellspacing="0">
 			<tr>
-				<td align="left" style="vertical-align: text-bottom"><img
-					src="images/login/images/logo.jpg">
-					<div style="position: absolute; top: 75px; left: 33px;">
-						JEECG Framework <span style="letter-spacing: -1px;">3.4.3
-							GA</span>
-					</div></td>
+				<td align="left" style="vertical-align: text-bottom">
+					<img src="images/login/logo1.jpg">
+<!-- 					<div style="position: absolute; top: 75px; left: 33px;"> -->
+<!-- 						JEECG Framework <span style="letter-spacing: -1px;">3.4.3 -->
+<!-- 							GA</span> -->
+<!-- 					</div> -->
+				</td>
 				<td align="right" nowrap="">
 					<table border="0" cellpadding="0" cellspacing="0">
 						<tr style="height: 25px;" align="right">

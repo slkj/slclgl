@@ -55,8 +55,10 @@ function getMeuns() {
 		$(this).siblings().find(".imag1").show();
 		var m = _menus[this.id];
 		if(m.children.length > 1){
+			$('#index_layout').layout('expand','west');  
 			InitLeftMenu(this.id);
 		}else{
+			$('#index_layout').layout('collapse','west');  
 			addTab(m.id,m.name, m.url, "");
 		}
 		
