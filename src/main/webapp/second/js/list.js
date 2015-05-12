@@ -37,12 +37,24 @@ function getData() {
 				columns : [ [
 						{
 							title : '车牌号',
-							field : 'viotureNumber',
-							formatter : function(value, row) {
-								return '<a id="' + row.id
-										+ '" href="javascript:void(0);" onclick="view(\'' + row.vid
-										+ '\')">' + value + '</a> ';
+							field : 'viotureNumber'
+						},{
+							field : 'contacts',
+							title : '联系人'
+						}, {
+							field : 'contactsTel',
+							title : '联系电话'
+						}, {
+							field : 'fhtime',
+							title : '车辆类型',
+							formatter : function(value, row, index) {
+								var calss = row.classify == null ? "" : row.classify;
+								var carType = row.carType == null ? "" : row.carType;
+								return calss + carType;
 							}
+						}, {
+							field : 'companyName',
+							title : '所属公司'
 						},
 						{
 							title : '二保单位',
@@ -73,43 +85,30 @@ function getData() {
 							title : '备注',
 							field : 'remark'
 						},
-						{
-							title : '是否到期',
-							field : 'status',
-							formatter : function(value, row) {
-								if (row.nextriqi != null) {
-									var curDate = DateUtil.dateToStr("yyyy-MM-dd HH:mm:ss",DateUtil.dateAdd('d',30,new Date()));
-									if(row.nextriqi < curDate){
-										return "<span style=\"color:red;\">是</span>";
-									}
-									return "";
-								}
-							}
-						},
+						
 						{
 							title : '操作',
 							field : '_operate',
 							align : 'center',
 							formatter : function(value, row, index) {
 								var s = "";
-								if (row.keepaddress != null) {
-									
+								
+									s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:addFun('" + row.vId + "');\">二保</span></a>";
+									s += "&nbsp;|&nbsp;";
+									s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:listByCar('" + row.vId + "');\">二保记录</span></a>";
+									s += "&nbsp;|&nbsp;";
 									s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editFun('" + index + "');\">编辑</span></a>";
 									s += "&nbsp;|&nbsp;";
 									s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:delFun('" + index + "');\">删除</span></a>";
 									
-								}
+							
 								return s;
 							}
 						} ] ],
 				toolbar : "#toolbar",
 				onLoadSuccess : function() {
 					$('#grid').datagrid('clearSelections'); // 一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题
-					$('.roleCls').linkbutton({
-						text : '详细 ',
-						plain : true,
-						iconCls : 'icons_35'
-					});
+					
 				}
 			});
 	// 设置分页控件
@@ -155,11 +154,8 @@ function delFun(index) {
 	})
 }  
 // 弹出添加页面
-function addFun() {
-	if (!checkRows()) {
-		return;
-	}
-	var obj = checkRows();
+function addFun(vid) {
+	
 	SL.showWindow({
 		title : '添加二级维护信息',
 		iconCls : 'icon-add',
@@ -167,32 +163,7 @@ function addFun() {
 		height : 400,
 		url : 'add.jsp',
 		onLoad : function() {
-			// ajax查询单个信息，form回填数据
-			$.ajax({
-				url : '../vehicle/queryOne?id=' + obj.vid,
-				async : false,
-				cache : false,
-				success : function(data) {
-					if (data) {
-						$("#form").form('load', data);
-						$("#vid").val(data.id);
-						$("#carNumber").text(data.carNumber);
-						$("#regCompanyName").text(data.regCompanyName);
-						$("#address").text(data.address);
-						$("#wkcc").text(
-								data.carOutLength + "*" + data.carOutWidth + "*"
-										+ data.carOutHeight);
-						$("#ppxh").text(data.carBrand + data.carModel);
-						$("#cllx").text(data.classify + data.carType);
-						$("#carVin").text(data.carVin);
-						$("#carEngNum").text(data.carEngNum);
-						$("#carApprGuest").text(data.carApprGuest);
-						$("#carTotalmass").text(data.carTotalmass);
-						$("#carTrac").text(data.carTrac);
-						$("#carNumbers").text(data.carNumber);
-					}
-				}
-			});
+			$("#vid").val(vid);
 		},
 		buttons : [ {
 			text : '保存',
@@ -248,31 +219,7 @@ function editFun(index) {
 		height : 400,
 		url : 'edit.jsp',
 		onLoad : function() {
-			// ajax查询车辆单个信息，form回填数据
-			$.ajax({
-				url : '../vehicle/queryOne?id=' + obj.vid,
-				async : false,
-				cache : false,
-				success : function(data) {
-					if (data) {
-						$("#form").form('load', data);
-						$("#vid").val(data.id);
-						$("#carNumber").text(data.carNumber);
-						$("#regCompanyName").text(data.regCompanyName);
-						$("#address").text(data.address);
-						$("#wkcc").text(
-								data.carOutLength + "*" + data.carOutWidth + "*"
-										+ data.carOutHeight);
-						$("#ppxh").text(data.carBrand + data.carModel);
-						$("#cllx").text(data.classify + data.carType);
-						$("#carVin").text(data.carVin);
-						$("#carEngNum").text(data.carEngNum);
-						$("#carApprGuest").text(data.carApprGuest);
-						$("#carTotalmass").text(data.carTotalmass);
-						$("#carTrac").text(data.carTrac);
-					}
-				}
-			});
+			
 			$.ajax({
 				url : '../second/queryOne?id=' + obj.id,
 				async : false,
@@ -333,15 +280,8 @@ function editFun(index) {
 		} ]
 	});
 };*/
-function listByCar(){
-	if (!checkRows()) {
-		return;
-	}
-	var obj = checkRows();
-	if (obj.id == null) {
-		top.$.messager.alert('提示', '该车辆没有保险信息。');
-		return;
-	}
+function listByCar(vid){
+	
 	SL.showWindow({
 		title : '保险信息',
 		iconCls : 'icons_26',
@@ -350,7 +290,7 @@ function listByCar(){
 		url : 'second/record.jsp',
 		onLoad : function() {
 			top.$('#facdg').datagrid({
-				url : 'second/listByVid?vId=' + obj.vid,
+				url : 'second/listByVid?vId=' + vid,
 				width : 'auto',
 				height : 'auto',
 				fit : true,

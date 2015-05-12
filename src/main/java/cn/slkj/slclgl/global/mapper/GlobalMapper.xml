@@ -6,38 +6,7 @@
 		facilitator,networkNo,azzm,installtime,installer,endriqi,remark 
 	</sql>
 	<select id="queryList" resultType="global" parameterType="hashmap">
-<!-- 		SELECT <include refid="sql_temp"/>  FROM(SELECT A.* FROM( -->
-<!-- 			SELECT C.ID, TV.ID AS VID, TV.CARNUMBER,C.FACILITATOR,C.PHONE,C.INSTALL,  -->
-<!-- 			C.INSTALLER,C.INSTALLRIQI,c.qzsy,C.ZDTYPE,C.ZDID,C.SIM,c.zdy, -->
-<!-- 			C.fdy,C.acc,C.scx,C.zzx,C.yzx,C.ygd,C.jgd,C.ENDRIQI,C.AZZM,C.QZSYZM ,C.remark,C.carcertdate -->
-<!-- 			FROM TB_VEHICLE TV LEFT JOIN ( SELECT A.* FROM tb_global A JOIN ( SELECT MAX(endriqi) AS endriqi, VID FROM tb_global GROUP BY VID ) B -->
-<!-- 			 ON A.VID = B.VID AND A.endriqi = B.endriqi ) C ON TV.ID = C.VID -->
-<!-- 			<where> -->
-<!-- 				<if test="operId != null and operId != ''"> -->
-<!-- 					AND TV.OPERATORID =#{operId} -->
-<!-- 				</if> -->
-<!-- 				<if test="carNumber != null and carNumber != ''"> -->
-<!-- 					AND TV.CARNUMBER LIKE CONCAT('%',#{carNumber},'%') -->
-<!-- 				</if> -->
-<!-- 				<if test="regCompanyId != null and regCompanyId != ''"> -->
-<!-- 					AND TV.COMPANYID IN  (SELECT ID FROM TB_COMPANY WHERE compName LIKE CONCAT('%',#{regCompanyId},'%')) -->
-<!-- 				</if> -->
-<!-- 				<if test="depId != null and depId != ''"> -->
-<!-- 					AND TV.depId  LIKE   CONCAT('%',#{depId},'%') -->
-<!-- 				</if> -->
-<!-- 				<if test="companyId != null and companyId != ''"> -->
-<!-- 					AND TV.OWNEDID =#{companyId} -->
-<!-- 				</if> -->
-				
-<!-- 				<if test="endDate != null and endDate != ''"> -->
-<!-- 					<![CDATA[ AND C.ENDRIQI  >= #{endDate} AND C.ENDRIQI  <= #{endDate1} ]]>  -->
-<!-- 				</if> -->
-<!-- 			</where> -->
-		
-<!-- 		) A )B -->
-<!-- 		LIMIT #{startNum},#{endNum} -->
 
-		
 
 			SELECT
 					TG.ID AS ID,TV.ID AS VID,TV.CARNUMBER ,TV.CONTACTS,TV.CONTACTSTEL,TV.CLASSIFY,TV.CARTYPE,
@@ -65,31 +34,7 @@
 	</select>
 	
 	<select id="queryListCount" resultType="int" parameterType="hashmap">
-<!-- 		SELECT  COUNT(0) FROM TB_VEHICLE TV  -->
-<!-- 		LEFT JOIN ( SELECT A.* FROM tb_global A JOIN  -->
-<!-- 		( SELECT MAX(endriqi) AS endriqi, VID FROM tb_global GROUP BY VID ) B -->
-<!-- 			 ON A.VID = B.VID AND A.endriqi = B.endriqi ) C ON TV.ID = C.VID -->
-<!-- 			<where> -->
-<!-- 				<if test="operId != null and operId != ''"> -->
-<!-- 					AND TV.OPERATORID =#{operId} -->
-<!-- 				</if> -->
-<!-- 				<if test="carNumber != null and carNumber != ''"> -->
-<!-- 					AND TV.CARNUMBER LIKE CONCAT('%',#{carNumber},'%') -->
-<!-- 				</if> -->
-<!-- 				<if test="regCompanyId != null and regCompanyId != ''"> -->
-<!-- 					AND TV.COMPANYID IN  (SELECT ID FROM TB_COMPANY WHERE compName LIKE CONCAT('%',#{regCompanyId},'%')) -->
-<!-- 				</if> -->
-<!-- 				<if test="depId != null and depId != ''"> -->
-<!-- 					AND TV.depId  LIKE   CONCAT('%',#{depId},'%') -->
-<!-- 				</if> -->
-<!-- 				<if test="companyId != null and companyId != ''"> -->
-<!-- 					AND TV.OWNEDID =#{companyId} -->
-<!-- 				</if> -->
-				
-<!-- 				<if test="endDate != null and endDate != ''"> -->
-<!-- 					<![CDATA[ AND C.ENDRIQI  >= #{endDate} AND C.ENDRIQI  <= #{endDate1} ]]>  -->
-<!-- 				</if> -->
-<!-- 			</where> -->
+
 			SELECT
 				COUNT(0)
 			FROM

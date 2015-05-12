@@ -19,66 +19,7 @@ public class SecondInsurance {
 	 * 车牌号
 	 */
 	private String viotureNumber;
-	/**
-	 * 品牌
-	 */
-	private String carBrand;
-	/**
-	 * 型号
-	 */
-	private String carModel;
-	/**
-	 * 投保人名称
-	 */
-	private String regCompanyName;
-	/**
-	 * 车辆类型
-	 */
-	private String carType;
-	/**
-	 * 车架号
-	 */
-	private String carVin;
-	/**
-	 * 联系人
-	 */
-	private String carman;
-	/**
-	 * 联系电话
-	 */
-	private String carphone;
-	/**
-	 * 总质量
-	 */
-	private String carTotalmass;
-	/**
-	 * 使用性质
-	 */
-	private String carUseNatu;
-	/**
-	 * 发动机号
-	 */
-	private String carEngNum;
-	/**
-	 * 核定载客
-	 */
-	private String carApprGuest;
-	/**
-	 * 核定载重量
-	 */
-	private String carApproved;
-	/**
-	 * 排量
-	 */
-	private String carDisplacement;
-	/**
-	 * 功率
-	 */
-	private String carPower;
-	/**
-	 * 登记日期
-	 */
-	private String carCertDate;
+	
 	/**
 	 * 上次维修日期
 	 */
@@ -107,6 +48,26 @@ public class SecondInsurance {
 	 * 备注
 	 */
 	private String remark;
+	/**
+	 * 联系人
+	 */
+	private String contacts;
+	/**
+	 * 联系电话
+	 */
+	private String contactsTel;
+	/**
+	 * 车辆种类
+	 */
+	private String classify;
+	/**
+	 * 车辆类型 
+	 */
+	private String carType;
+	/**
+	 * 所属公司
+	 */
+	private String companyName;
 	public String getId() {
 		return id;
 	}
@@ -121,99 +82,7 @@ public class SecondInsurance {
 	public void setVid(String vid) {
 		this.vid = vid;
 	}
-	public String getCarBrand() {
-		return carBrand;
-	}
-	public void setCarBrand(String carBrand) {
-		this.carBrand = carBrand;
-	}
-	public String getCarModel() {
-		return carModel;
-	}
-	public void setCarModel(String carModel) {
-		this.carModel = carModel;
-	}
-	public String getRegCompanyName() {
-		return regCompanyName;
-	}
-	public void setRegCompanyName(String regCompanyName) {
-		this.regCompanyName = regCompanyName;
-	}
-	public String getCarType() {
-		return carType;
-	}
-	public void setCarType(String carType) {
-		this.carType = carType;
-	}
 	
-	public String getCarVin() {
-		return carVin;
-	}
-	public void setCarVin(String carVin) {
-		this.carVin = carVin;
-	}
-	public String getCarman() {
-		return carman;
-	}
-	public void setCarman(String carman) {
-		this.carman = carman;
-	}
-	public String getCarphone() {
-		return carphone;
-	}
-	public void setCarphone(String carphone) {
-		this.carphone = carphone;
-	}
-	
-	public String getCarTotalmass() {
-		return carTotalmass;
-	}
-	public void setCarTotalmass(String carTotalmass) {
-		this.carTotalmass = carTotalmass;
-	}
-	
-	public String getCarUseNatu() {
-		return carUseNatu;
-	}
-	public void setCarUseNatu(String carUseNatu) {
-		this.carUseNatu = carUseNatu;
-	}
-	public String getCarEngNum() {
-		return carEngNum;
-	}
-	public void setCarEngNum(String carEngNum) {
-		this.carEngNum = carEngNum;
-	}
-	public String getCarApprGuest() {
-		return carApprGuest;
-	}
-	public void setCarApprGuest(String carApprGuest) {
-		this.carApprGuest = carApprGuest;
-	}
-	public String getCarApproved() {
-		return carApproved;
-	}
-	public void setCarApproved(String carApproved) {
-		this.carApproved = carApproved;
-	}
-	public String getCarDisplacement() {
-		return carDisplacement;
-	}
-	public void setCarDisplacement(String carDisplacement) {
-		this.carDisplacement = carDisplacement;
-	}
-	public String getCarPower() {
-		return carPower;
-	}
-	public void setCarPower(String carPower) {
-		this.carPower = carPower;
-	}
-	public String getCarCertDate() {
-		return carCertDate;
-	}
-	public void setCarCertDate(String carCertDate) {
-		this.carCertDate = carCertDate;
-	}
 	public String getLastriqi() {
 		return lastriqi;
 	}
@@ -263,6 +132,36 @@ public class SecondInsurance {
 	}
 	public void setViotureNumber(String viotureNumber) {
 		this.viotureNumber = viotureNumber;
+	}
+	public String getContacts() {
+		return contacts;
+	}
+	public void setContacts(String contacts) {
+		this.contacts = contacts;
+	}
+	public String getContactsTel() {
+		return contactsTel;
+	}
+	public void setContactsTel(String contactsTel) {
+		this.contactsTel = contactsTel;
+	}
+	public String getClassify() {
+		return classify;
+	}
+	public void setClassify(String classify) {
+		this.classify = classify;
+	}
+	public String getCarType() {
+		return carType;
+	}
+	public void setCarType(String carType) {
+		this.carType = carType;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 	
 	

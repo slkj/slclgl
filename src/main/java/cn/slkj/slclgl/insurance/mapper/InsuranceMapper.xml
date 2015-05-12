@@ -46,7 +46,7 @@
 		DELETE FROM TB_INSURANCE WHERE ID  = #{id}
 	</delete>
 	<select id="queryList" resultType="insurance" parameterType="hashmap">
-		SELECT <include refid="sql_temp"/>  FROM(SELECT A.*
+		<!-- SELECT <include refid="sql_temp"/>  FROM(SELECT A.*
 		FROM(
 		SELECT TV.ID AS VID, TV.CARNUMBER as viotureNumber,
 		C.id, C.policy,  C.feiyong, C.insuranceType,
@@ -77,34 +77,54 @@
 				</if>
 			</where>
 		) A )B
-		<!-- WHERE ROWNUM BETWEEN #{startNum} AND #{endNum} -->
+		WHERE ROWNUM BETWEEN #{startNum} AND #{endNum}
+		LIMIT #{startNum},#{endNum} -->
+		SELECT
+					C.ID AS ID,TV.ID AS VID,TV.CARNUMBER as viotureNumber,TV.CONTACTS,TV.CONTACTSTEL,TV.CLASSIFY,TV.CARTYPE,
+					TC.COMPNAME AS COMPANYNAME,
+					C.id, C.policy,  C.feiyong, C.insuranceType,
+		 C.riqi, C.startTime, C.endTime, C.insuranceCompany, C.checkMan, C.makeMan, C.remark
+			FROM
+						TB_VEHICLE TV   
+			LEFT  JOIN    
+						(SELECT id, policy,vid, feiyong, insuranceType,
+		(SELECT typeName FROM TB_INSURANCE_TYPE WHERE TB_INSURANCE_TYPE.ID=insuranceType)typeName,
+		(SELECT shortName FROM TB_INSURANCE_COMPANY WHERE TB_INSURANCE_COMPANY.ID=insuranceCompany)companyName,
+		 riqi, startTime, insuranceCompany, checkMan, makeMan, remark,MAX(endTime) AS endTime  FROM TB_INSURANCE GROUP BY vid) C ON TV.ID = C.VID
+			LEFT  JOIN 
+			TB_COMPANY TC on TV.companyId = TC.ID
+			<where>
+				<if test="carNumber != null and carNumber != ''">
+					AND TV.CARNUMBER LIKE CONCAT('%',#{carNumber},'%')
+				</if>
+				<if test="companName != null and companName != ''">
+					AND TC.COMPNAME LIKE CONCAT('%',#{companName},'%')
+				</if>
+				<if test="endDate != null and endDate != ''">
+					<![CDATA[ AND C.ENDDATE  >= #{endDate} AND C.ENDDATE  <= #{endDate1} ]]> 
+				</if>
+			</where>
 		LIMIT #{startNum},#{endNum}
 	</select>
 	
 	<select id="queryListCount" resultType="int" parameterType="hashmap">
-		SELECT COUNT(0) FROM TB_VEHICLE TV  LEFT JOIN (
-				SELECT A.* FROM  TB_INSURANCE A 
-				JOIN (SELECT MAX(endTime) AS endTime,VID  FROM TB_INSURANCE  GROUP BY VID ) B 
-				ON A.VID =B.VID AND A.endTime=B.endTime  
-			) C ON TV.ID = C.VID  
+		SELECT COUNT(0) FROM TB_VEHICLE TV   
+			LEFT  JOIN    
+						(SELECT id, policy,vid, feiyong, insuranceType,
+		(SELECT typeName FROM TB_INSURANCE_TYPE WHERE TB_INSURANCE_TYPE.ID=insuranceType)typeName,
+		(SELECT shortName FROM TB_INSURANCE_COMPANY WHERE TB_INSURANCE_COMPANY.ID=insuranceCompany)companyName,
+		 riqi, startTime, insuranceCompany, checkMan, makeMan, remark,MAX(endTime) AS endTime  FROM TB_INSURANCE GROUP BY vid) C ON TV.ID = C.VID
+			LEFT  JOIN 
+			TB_COMPANY TC on TV.companyId = TC.ID
 			<where>
-				<if test="operId != null and operId != ''">
-					AND TV.OPERATORID =#{operId}
-				</if>
-				<if test="depId != null and depId != ''">
-					AND TV.depId =#{depId}
-				</if>
 				<if test="carNumber != null and carNumber != ''">
 					AND TV.CARNUMBER LIKE CONCAT('%',#{carNumber},'%')
 				</if>
-				<if test="companyId != null and companyId != ''">
-					AND TV.COMPANYID =#{companyId}
-				</if>
-				<if test="regCompanyId != null and regCompanyId != ''">
-					AND TV.COMPANYID IN  (SELECT ID FROM TB_COMPANY WHERE compName LIKE CONCAT('%',#{regCompanyId},'%'))
+				<if test="companName != null and companName != ''">
+					AND TC.COMPNAME LIKE CONCAT('%',#{companName},'%')
 				</if>
 				<if test="endDate != null and endDate != ''">
-					<![CDATA[ AND C.endTime  >= #{endDate} AND C.endTime  <= #{endDate1} ]]> 
+					<![CDATA[ AND C.ENDDATE  >= #{endDate} AND C.ENDDATE  <= #{endDate1} ]]> 
 				</if>
 			</where>
 		

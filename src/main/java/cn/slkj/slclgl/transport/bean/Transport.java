@@ -55,6 +55,26 @@ public class Transport {
 	 * 到期日期
 	 */
 	private String endDate;
+	/**
+	 * 联系人
+	 */
+	private String contacts;
+	/**
+	 * 联系电话
+	 */
+	private String contactsTel;
+	/**
+	 * 车辆种类
+	 */
+	private String classify;
+	/**
+	 * 车辆类型 
+	 */
+	private String carType;
+	/**
+	 * 所属公司
+	 */
+	private String companyName;
 	public String getId() {
 		return id;
 	}
@@ -121,6 +141,36 @@ public class Transport {
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	public String getContacts() {
+		return contacts;
+	}
+	public void setContacts(String contacts) {
+		this.contacts = contacts;
+	}
+	public String getContactsTel() {
+		return contactsTel;
+	}
+	public void setContactsTel(String contactsTel) {
+		this.contactsTel = contactsTel;
+	}
+	public String getClassify() {
+		return classify;
+	}
+	public void setClassify(String classify) {
+		this.classify = classify;
+	}
+	public String getCarType() {
+		return carType;
+	}
+	public void setCarType(String carType) {
+		this.carType = carType;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 	
 	

@@ -31,62 +31,48 @@
 	</delete>
 
 	<select id="queryList" resultType="Driving" parameterType="hashmap">
-		SELECT <include refid="sql_temp" /> FROM(SELECT A.* FROM(
-			SELECT  C.ID, TV.ID AS VID,TV.CARNUMBER, 
-				 C.DRIREGDATE, C.DRICERTDATE, C.BAOFEIDATE, C.REMARK,  C.TESTORGAN,C.ENDDATE,C.FILENUMBER,C.CREATETIME
-			 FROM TB_VEHICLE TV  LEFT JOIN (
-				SELECT A.* FROM  TB_DRIVING A 
-				JOIN (SELECT MAX(ENDDATE) AS ENDDATE,VID  FROM TB_DRIVING  GROUP BY VID ) B 
-				ON A.VID =B.VID AND A.ENDDATE=B.ENDDATE  
-			) C ON TV.ID = C.VID  
+		
+			SELECT
+					C.ID AS ID,TV.ID AS VID,TV.CARNUMBER ,TV.CONTACTS,TV.CONTACTSTEL,TV.CLASSIFY,TV.CARTYPE,
+					TC.COMPNAME AS COMPANYNAME,
+					C.DRIREGDATE, C.DRICERTDATE, C.BAOFEIDATE, C.REMARK,  C.TESTORGAN,C.ENDDATE,C.FILENUMBER,C.CREATETIME
+			FROM
+						TB_VEHICLE TV   
+			LEFT  JOIN    
+						(SELECT ID,VID,DRIREGDATE, DRICERTDATE, BAOFEIDATE, REMARK,testOrgan,fileNumber,CREATETIME,MAX(ENDDATE) AS ENDDATE  FROM TB_DRIVING GROUP BY vid) C ON TV.ID = C.VID
+			LEFT  JOIN 
+			TB_COMPANY TC on TV.companyId = TC.ID
 			<where>
-				<if test="operId != null and operId != ''">
-					AND TV.OPERATORID =#{operId}
-				</if>
 				<if test="carNumber != null and carNumber != ''">
 					AND TV.CARNUMBER LIKE CONCAT('%',#{carNumber},'%')
 				</if>
-				<if test="regCompanyId != null and regCompanyId != ''">
-					AND TV.COMPANYID IN  (SELECT ID FROM TB_COMPANY WHERE compName LIKE CONCAT('%',#{regCompanyId},'%'))
+				<if test="companName != null and companName != ''">
+					AND TC.COMPNAME LIKE CONCAT('%',#{companName},'%')
 				</if>
-				<if test="depId != null and depId != ''">
-					AND TV.depId  LIKE  CONCAT('%',#{depId},'%')
-				</if>
-				<if test="companyId != null and companyId != ''">
-					AND TV.COMPANYID =#{companyId}
-				</if>
-				
 				<if test="endDate != null and endDate != ''">
 					<![CDATA[ AND C.ENDDATE  >= #{endDate} AND C.ENDDATE  <= #{endDate1} ]]> 
 				</if>
 			</where>
-			) A )B
-			LIMIT #{startNum},#{endNum}
+		LIMIT #{startNum},#{endNum}
 	</select>
 
 	<select id="queryListCount" resultType="int" parameterType="hashmap">
-		SELECT COUNT(0)  FROM TB_VEHICLE TV  LEFT JOIN (
-				SELECT A.* FROM  TB_DRIVING A 
-				JOIN (SELECT MAX(ENDDATE) AS ENDDATE,VID  FROM TB_DRIVING  GROUP BY VID ) B 
-				ON A.VID =B.VID AND A.ENDDATE=B.ENDDATE  
-			) C ON TV.ID = C.VID  
+		
+			SELECT
+				COUNT(0)
+			FROM
+						TB_VEHICLE TV   
+			LEFT  JOIN    
+						(SELECT ID,VID,DRIREGDATE, DRICERTDATE, BAOFEIDATE, REMARK,testOrgan,fileNumber,CREATETIME,MAX(ENDDATE) AS ENDDATE  FROM TB_DRIVING GROUP BY vid) C ON TV.ID = C.VID
+			LEFT  JOIN 
+			TB_COMPANY TC on TV.companyId = TC.ID
 			<where>
-				<if test="operId != null and operId != ''">
-					AND TV.OPERATORID =#{operId}
-				</if>
 				<if test="carNumber != null and carNumber != ''">
 					AND TV.CARNUMBER LIKE CONCAT('%',#{carNumber},'%')
 				</if>
-				<if test="regCompanyId != null and regCompanyId != ''">
-					AND TV.COMPANYID IN  (SELECT ID FROM TB_COMPANY WHERE compName LIKE CONCAT('%',#{regCompanyId},'%'))
+				<if test="companName != null and companName != ''">
+					AND TC.COMPNAME LIKE CONCAT('%',#{companName},'%')
 				</if>
-				<if test="depId != null and depId != ''">
-					AND TV.depId  LIKE  CONCAT('%',#{depId},'%')
-				</if>
-				<if test="companyId != null and companyId != ''">
-					AND TV.COMPANYID =#{companyId}
-				</if>
-				
 				<if test="endDate != null and endDate != ''">
 					<![CDATA[ AND C.ENDDATE  >= #{endDate} AND C.ENDDATE  <= #{endDate1} ]]> 
 				</if>
