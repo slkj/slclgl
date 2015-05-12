@@ -129,11 +129,9 @@ function loadDataGrid() {
 			title : '厂牌型号',
 			align : 'center',
 			formatter : function(value, row, index) {
-				var s = "<span style=\"font-weight:bold;\">" + row.firm + "</span>";
-				if (row.model != "") {
-					s = "<span style=\"font-weight:bold;\">" + row.firm + "(" + row.model + ")</span>";
-				}
-				return s;
+				var firm = row.firm == null ? "" : row.firm;
+				var model = row.model == null ? "" : row.model;
+				return firm + model;
 			}
 		}, {
 			field : 'listnum',

@@ -26,13 +26,12 @@
 							<select  id="firm"  class="easyui-combobox"  name="firm" panelheight="auto" style="width: 100px">
 								<option value="" selected="selected">请选择</option>
 								<option value="神龙">神龙</option>
-								<option value="珠海天琴">珠海天琴</option>
 								<option value="华宝">华宝</option>
 								<option value="博实结">博实结</option>
+								<option value="鸿泉">鸿泉</option>
 								<option value="中斗">中斗</option>
 								<option value="赛格">赛格</option>
-								<option value="赛格">航天无线</option>
-								<option value="鸿泉">鸿泉</option>
+								<option value="航天无线">航天无线</option>
 							</select>
 						</td>
 <!-- 					</tr> -->

@@ -66,13 +66,9 @@ function loadDataGrid() {
 									title : '厂牌型号',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var s = "<span style=\"font-weight:bold;\">" + row.firm
-												+ "</span>";
-										if (row.model != "") {
-											s = "<span style=\"font-weight:bold;\">" + row.firm
-													+ "(" + row.model + ")</span>";
-										}
-										return s;
+										var firm = row.firm == null ? "" : row.firm;
+										var model = row.model == null ? "" : row.model;
+										return firm + model;
 									}
 								},
 								{
@@ -123,13 +119,9 @@ function loadDataGrid() {
 									formatter : function(value, row, index) {
 										var s = "";
 										if (value == 1) {
-											// s = "<span
-											// style=\"color:green;\">已测试</span>";
-											s = "已测试";
+											s = "已检测";
 										} else if (value == 0) {
-											// s = "<span
-											// style=\"color:red;\">未测试</span>";
-											s = "未测试";
+											s = "<span style=\"color:red;\">未检测</span>";
 										}
 										return s;
 									}
@@ -190,6 +182,10 @@ function loadDataGrid() {
 // 测试
 function testing(index) {
 	var data = grid.datagrid('getData').rows[index];
+	if (data.test == "1") {
+		SL.msgShow("提示", "设备已经测试过！", "warning");
+		return;
+	}
 	if (data.state == "1") {
 		SL.msgShow("提示", "设备已经出库！", "warning");
 		return;
@@ -207,9 +203,13 @@ function testing(index) {
 		onLoad : function() {
 //			$("#form").form('load', data);
 			$("#id").val(data.id);
-			$("#listnum").val(data.listnum);
-			$("#firm").val(data.firm);
-			$("#model").val(data.model);
+			$('#listnum').numberbox('setValue', data.listnum);
+			$('#firm').textbox('setValue', data.firm);
+			$('#model').textbox('setValue', data.model);
+//			
+//			$("#listnum").val(data.listnum);
+//			$("#firm").val(data.firm);
+//			$("#model").val(data.model);
 		},
 		buttons : [ {
 			text : '确定',

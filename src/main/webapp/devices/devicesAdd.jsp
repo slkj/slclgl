@@ -58,13 +58,12 @@
 				<td>
 					<select class="easyui-combobox"  name="firm"  style="width: 100%" data-options="required:'true'">
 								<option value="神龙">神龙</option>
-								<option value="珠海天琴">珠海天琴</option>
 								<option value="华宝">华宝</option>
 								<option value="博实结">博实结</option>
+								<option value="鸿泉">鸿泉</option>
 								<option value="中斗">中斗</option>
 								<option value="赛格">赛格</option>
-								<option value="赛格">航天无线</option>
-								<option value="鸿泉">鸿泉</option>
+								<option value="航天无线">航天无线</option>
 					</select>
 				</td>
 				<th>厂牌型号：</th>

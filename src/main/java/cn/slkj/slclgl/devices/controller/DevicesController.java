@@ -41,20 +41,18 @@ public class DevicesController {
 		pageMap.put("state", request.getParameter("state"));
 		pageMap.put("lyr", request.getParameter("lyr"));
 		pageMap.put("firm", request.getParameter("firm"));
-		// TODO 处理地区代码，如果后面有0的要like
 		String area = request.getParameter("area");
 		pageMap.put("area", area != null ? LocationUtil.toLocation(area) : area);
 		pageMap.put("listnum", request.getParameter("listnum"));
 		pageMap.put("phone", request.getParameter("phone"));
 		pageMap.put("carNumber", request.getParameter("carNumber"));
+		pageMap.put("test", request.getParameter("test"));
+		//排序
 		String sort = request.getParameter("sort");
-		// if(StringUtils.isNotBlank(sort)){
 		pageMap.put("sort", sort != null ? sort : "rktime");
-		// }
 		String order = request.getParameter("order");
-		// if(StringUtils.isNotBlank(order)){
 		pageMap.put("order", order != null ? order : "desc");
-		// }
+		//分页
 		pageMap.put("startPage", (page - 1) * rows);
 		pageMap.put("endPage", rows);
 		int total = impl.getAllCount(pageMap);

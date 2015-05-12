@@ -47,6 +47,7 @@
 				<if test="firm != null and firm != ''">AND FIRM LIKE CONCAT('%',#{firm},'%')  </if>
 				<if test="area != null and area != ''">AND AREA LIKE CONCAT('%',#{area},'%')  </if>
 				<if test="carNumber != null and carNumber != ''">AND CARNUMBER LIKE CONCAT('%',#{carNumber},'%')  </if>
+				<if test="test != null and test != ''">AND TEST =  #{test} </if>
 			</where>
 			<if test="sort != null and sort != ''">
 					ORDER BY  ${sort}       ${order}
@@ -87,6 +88,7 @@
 				<if test="firm != null and firm != ''">AND FIRM LIKE CONCAT('%',#{firm},'%')  </if>
 				<if test="area != null and area != ''">AND AREA LIKE CONCAT('%',#{area},'%')  </if>
 				<if test="carNumber != null and carNumber != ''">AND CARNUMBER LIKE CONCAT('%',#{carNumber},'%')  </if>
+				<if test="test != null and test != ''">AND TEST =  #{test} </if>
 			</where>
 	</select>
 	<select id="getList" resultType="Devices" parameterType="hashmap">
