@@ -39,14 +39,28 @@
 
 		
 
-		SELECT
-			TG.ID AS ID,TV.ID AS VID,TV.CARNUMBER ,TV.CONTACTS,TV.CONTACTSTEL,TV.CLASSIFY,TV.CARTYPE,
-			(SELECT TC.COMPNAME FROM TB_COMPANY TC WHERE TC.ID = TV.COMPANYID ) AS COMPANYNAME,
-			TG.EQUITMENT,TG.SIMNUMBER,TG.FACILITATOR,TG.NETWORKNO,TG.AZZM,TG.INSTALLTIME,TG.INSTALLER,TG.ENDRIQI,TG.REMARK ,TG.INSADDERSS
-		FROM
-			TB_VEHICLE TV   LEFT  JOIN    
-			(SELECT ID,vid,max(ENDRIQI)as ENDRIQI,EQUITMENT,SIMNUMBER,FACILITATOR,NETWORKNO,AZZM,
-			INSTALLTIME,INSTALLER,INSADDERSS,REMARK  FROM TB_GLOBAL GROUP BY vid) TG ON TV.ID = TG.VID
+			SELECT
+					TG.ID AS ID,TV.ID AS VID,TV.CARNUMBER ,TV.CONTACTS,TV.CONTACTSTEL,TV.CLASSIFY,TV.CARTYPE,
+					TC.COMPNAME AS COMPANYNAME,
+					TG.EQUITMENT,TG.SIMNUMBER,TG.FACILITATOR,TG.NETWORKNO,TG.AZZM,TG.INSTALLTIME,TG.INSTALLER,TG.ENDRIQI,TG.REMARK ,TG.INSADDERSS
+			FROM
+						TB_VEHICLE TV   
+			LEFT  JOIN    
+						(SELECT ID,vid,max(ENDRIQI)as ENDRIQI,EQUITMENT,SIMNUMBER,FACILITATOR,NETWORKNO,AZZM,
+						INSTALLTIME,INSTALLER,INSADDERSS,REMARK  FROM TB_GLOBAL GROUP BY vid) TG ON TV.ID = TG.VID
+			LEFT  JOIN 
+			TB_COMPANY TC on TV.companyId = TC.ID
+			<where>
+				<if test="carNumber != null and carNumber != ''">
+					AND TV.CARNUMBER LIKE CONCAT('%',#{carNumber},'%')
+				</if>
+				<if test="companName != null and companName != ''">
+					AND TC.COMPNAME LIKE CONCAT('%',#{companName},'%')
+				</if>
+				<if test="endDate != null and endDate != ''">
+					<![CDATA[ AND TG.ENDRIQI  >= #{endDate} AND TG.ENDRIQI  <= #{endDate1} ]]> 
+				</if>
+			</where>
 		LIMIT #{startNum},#{endNum}
 	</select>
 	
@@ -76,12 +90,26 @@
 <!-- 					<![CDATA[ AND C.ENDRIQI  >= #{endDate} AND C.ENDRIQI  <= #{endDate1} ]]>  -->
 <!-- 				</if> -->
 <!-- 			</where> -->
-		SELECT
-			 COUNT(0)
-		FROM
-			TB_VEHICLE TV   LEFT  JOIN    
-			(SELECT ID,vid,max(ENDRIQI)as ENDRIQI,EQUITMENT,SIMNUMBER,FACILITATOR,NETWORKNO,AZZM,
-			INSTALLTIME,INSTALLER,INSADDERSS,REMARK  FROM TB_GLOBAL GROUP BY vid) TG ON TV.ID = TG.VID
+			SELECT
+				COUNT(0)
+			FROM
+						TB_VEHICLE TV   
+			LEFT  JOIN    
+						(SELECT ID,vid,max(ENDRIQI)as ENDRIQI,EQUITMENT,SIMNUMBER,FACILITATOR,NETWORKNO,AZZM,
+						INSTALLTIME,INSTALLER,INSADDERSS,REMARK  FROM TB_GLOBAL GROUP BY vid) TG ON TV.ID = TG.VID
+			LEFT  JOIN 
+			TB_COMPANY TC on TV.companyId = TC.ID
+			<where>
+				<if test="carNumber != null and carNumber != ''">
+					AND TV.CARNUMBER LIKE CONCAT('%',#{carNumber},'%')
+				</if>
+				<if test="companName != null and companName != ''">
+					AND TC.COMPNAME LIKE CONCAT('%',#{companName},'%')
+				</if>
+				<if test="endDate != null and endDate != ''">
+					<![CDATA[ AND TG.ENDRIQI  >= #{endDate} AND TG.ENDRIQI  <= #{endDate1} ]]> 
+				</if>
+			</where>
 	</select>
 	
 	
@@ -153,32 +181,20 @@
 	</delete>
 	
 	<select id="listByVid" resultType="global" parameterType="hashmap">
-		SELECT <include refid="sql_temp" /> FROM(SELECT A.*,ROW_NUMBER() OVER (ORDER BY endriqi DESC) ROWNUM FROM(
-			SELECT TV.ID AS VID, TV.CARNUMBER as carNumber,
-		C.id, C.FACILITATOR,C.PHONE,C.INSTALL, C.INSTALLER,C.INSTALLRIQI,c.qzsy,C.ZDTYPE,C.ZDID,C.SIM,c.zdy,
-			C.fdy,C.acc,C.scx,C.zzx,C.yzx,C.ygd,C.jgd,C.ENDRIQI,C.AZZM,C.QZSYZM ,C.remark,C.carcertdate
-	 FROM TB_VEHICLE TV  JOIN TB_GLOBAL C ON C.VID =TV.ID 
-			<where>
-				<if test="vId != null and vId != ''">
-					AND C.vId =#{vId}
-				</if>
-				<if test="operId != null and operId != ''">
-					AND TV.OPERATORID =#{operId}
-				</if>
-			</where>
-			) A )B
-		WHERE ROWNUM &gt; #{startNum} AND ROWNUM &lt;=#{endNum}
+		 SELECT *  from TB_GLOBAL 
+		 <where>
+			<if test="vId != null and vId != ''">
+				AND  vId =#{vId}
+			</if>
+		</where>
+		 LIMIT #{startNum},#{endNum}
 	</select>
 	<select id="listByVidCount" resultType="int" parameterType="hashmap">
-		SELECT  COUNT(0)
-				FROM TB_VEHICLE TV  JOIN TB_GLOBAL TI ON TI.VID =TV.ID 
-			<where>
-				<if test="vId != null and vId != ''">
-					AND TI.vId =#{vId}
-				</if>
-				<if test="operId != null and operId != ''">
-					AND TV.OPERATORID =#{operId}
-				</if>
-			</where>
+		 SELECT COUNT(0) from TB_GLOBAL 
+		<where>
+			<if test="vId != null and vId != ''">
+				AND  vId =#{vId}
+			</if>
+		</where>
 	</select>
 </mapper>

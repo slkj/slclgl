@@ -16,11 +16,9 @@
 			<table>
 				<tr>
 					<td>车牌号:</td>
-					<td><input id="carNumber" name="carNumber"
-						style="width: 100px;" /></td>
-					<td>公司名称:</td>
-					<td><input id="regCompanyId" name="regCompanyId"
-						style="width: 100px;" /></td>
+					<td><input name="carNumber" style="width: 100px;" /></td>
+					<td>所属公司:</td>
+					<td><input name="companName" style="width: 100px;" /></td>
 					<td>维保日期:</td>
 					<td><input id="endDate" name="endDate" class="easyui-datebox"
 						editable="false" />至 <input id="endDate1" name="endDate1"

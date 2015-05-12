@@ -36,7 +36,7 @@ public class GlobalController {
 	public EPager<Global> list(
 			@RequestParam(required = false, defaultValue = "1") Integer page,// 第几页
 			@RequestParam(required = false, defaultValue = "15") Integer rows,// 每页显示多少行
-			String carNumber, String regCompanyId, String vId, String operId,
+			String carNumber, String companName,
 			@RequestParam(required = false, defaultValue = "") String endDate,
 			@RequestParam(required = false, defaultValue = "") String endDate1, HttpSession session)
 			throws UnsupportedEncodingException {
@@ -44,11 +44,8 @@ public class GlobalController {
 		if (StringUtils.isNotBlank(carNumber)) {
 			map.put("carNumber", carNumber);
 		}
-		if (StringUtils.isNotBlank(regCompanyId)) {
-			map.put("regCompanyId", regCompanyId);
-		}
-		if (StringUtils.isNotBlank(vId)) {
-			map.put("vId", vId);
+		if (StringUtils.isNotBlank(companName)) {
+			map.put("companName", companName);
 		}
 		if (StringUtils.isNotBlank(endDate)) {
 			map.put("endDate", endDate);
@@ -68,7 +65,8 @@ public class GlobalController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/getExpires", method = { RequestMethod.POST, RequestMethod.GET })
-	public EPager<Global> getExpires(@RequestParam(required = false, defaultValue = "1") Integer page,// 第几页
+	public EPager<Global> getExpires(
+			@RequestParam(required = false, defaultValue = "1") Integer page,// 第几页
 			@RequestParam(required = false, defaultValue = "10") Integer rows,// 每页显示多少行
 			HttpSession session) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -100,7 +98,7 @@ public class GlobalController {
 	@RequestMapping(value = "/saveGlobal", method = { RequestMethod.POST })
 	public JsonResult save(Global global) {
 		try {
-//			global.setId(UUID.randomUUID().toString());
+			// global.setId(UUID.randomUUID().toString());
 			int i = globalService.save(global);
 			if (i > 0) {
 				return new JsonResult(true, "");
@@ -142,6 +140,7 @@ public class GlobalController {
 		}
 		return false;
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "/listByVid", method = { RequestMethod.POST })
 	public EPager<Global> listByVid(

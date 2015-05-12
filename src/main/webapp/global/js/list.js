@@ -93,7 +93,7 @@ function getData() {
 				s += "&nbsp;|&nbsp;";
 				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editFun('" + row.id + "');\">编辑</span></a>";
 				s += "&nbsp;|&nbsp;";
-				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:delFun('" + index + "');\">删除</span></a>";
+//				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:delFun('" + index + "');\">删除</span></a>";
 				return s;
 			}
 		} ] ],
@@ -150,13 +150,63 @@ function delFun(index) {
 }
 function record(id) {
 	SL.showWindow({
-		title : '添加',
+		title : '设备安装记录',
 		iconCls : 'icon-search',
 		width : 750,
 		height : 500,
-		url : 'approval.jsp',
+		url : 'record.jsp',
 		onLoad : function() {
-
+			$('#facdg').datagrid({
+				url : '../global/listByVid?vId=' + id,
+				width : 'auto',
+				height : 'auto',
+				fit : true,
+				nowrap : true, // false:折行
+				rownumbers : true, // 行号
+				striped : true, // 隔行变色
+				singleSelect : true, // 只允许选择一行
+				pagination : true,
+				pageSize : 15,
+				pageList : [ 1, 10, 15, 20, 30, 50 ],
+				loadMsg : '数据加载中,请稍后……',
+				columns : [ [ {
+					field : 'equitment',
+					title : '设备号'
+				}, {
+					field : 'simNumber',
+					title : 'SIM卡'
+				}, {
+					title : '运营商',
+					field : 'facilitator'
+				}, {
+					field : 'networkNo',
+					title : '入网证明编号'
+				}, {
+					title : '安装证明编号',
+					field : 'azzm'
+				}, {
+					field : 'installtime',
+					title : '安装日期'
+				}, {
+					field : 'installer',
+					title : '安装人'
+				}, {
+					field : 'insAdderss',
+					title : '安装地点'
+				}, {
+					title : '维保日期',
+					field : 'endriqi'
+				}, {
+					title : '备注',
+					field : 'remark'
+				} ] ]
+			});
+			// 设置分页控件
+			$('#facdg').datagrid('getPager').pagination({
+				beforePageText : '第',// 页数文本框前显示的汉字
+				afterPageText : '页    共 {pages} 页',
+				displayMsg : '当前显示 {from} - {to} 条记录   共 {total} 条记录'
+			});
 		},
 		buttons : [ {
 			text : '关闭',
@@ -219,7 +269,7 @@ function saveAjax(url) {
 }
 // 编辑
 function editFun(id) {
-	if(id == 'null'){
+	if (id == 'null') {
 		top.$.messager.alert('提示', '该车辆不存在车载设备安装记录，请核对信息。');
 		return;
 	}
@@ -250,87 +300,6 @@ function editFun(id) {
 				saveAjax(url);
 			}
 		}, {
-			text : '关闭',
-			handler : function() {
-				SL.closeWindow();
-			}
-		} ]
-	});
-}
-
-function listByCar() {
-	if (!checkRows()) {
-		return;
-	}
-	var obj = checkRows();
-	if (obj.id == null) {
-		top.$.messager.alert('提示', '该车辆没有历史记录信息。');
-		return;
-	}
-	SL.showWindow({
-		title : '历史记录',
-		iconCls : 'icons_26',
-		width : 750,
-		height : 500,
-		url : 'global/record.jsp',
-		onLoad : function() {
-			top.$('#facdg').datagrid({
-				url : 'global/listByVid?vId=' + obj.vid,
-				width : 'auto',
-				height : 'auto',
-				fit : true,
-				nowrap : true, // false:折行
-				rownumbers : true, // 行号
-				striped : true, // 隔行变色
-				singleSelect : true, // 只允许选择一行
-				pagination : true,
-				pageSize : 15,
-				pageList : [ 1, 10, 15, 20, 30, 50 ],
-				loadMsg : '数据加载中,请稍后……',
-				columns : [ [ {
-					title : '车牌号',
-					field : 'carNumber'
-
-				}, {
-					title : '运营商',
-					field : 'facilitator'
-				}, {
-					title : '终端ID',
-					field : 'zdid'
-				}, {
-					title : '终端型号',
-					field : 'zdtype'
-				}, {
-					title : 'SIM卡',
-					field : 'facilitator'
-				}, {
-					title : '安装单位',
-					field : 'install'
-				}, {
-					title : '安装人',
-					field : 'installer'
-				}, {
-					title : '安装日期',
-					field : 'installriqi'
-				}, {
-					title : '维保日期',
-					field : 'endriqi'
-				}, {
-					title : '安装证明编号',
-					field : 'azzm'
-				}, {
-					title : '证明编号',
-					field : 'qzsyzm'
-				} ] ]
-			});
-			// 设置分页控件
-			top.$('#facdg').datagrid('getPager').pagination({
-				beforePageText : '第',// 页数文本框前显示的汉字
-				afterPageText : '页    共 {pages} 页',
-				displayMsg : '当前显示 {from} - {to} 条记录   共 {total} 条记录'
-			});
-		},
-		buttons : [ {
 			text : '关闭',
 			handler : function() {
 				SL.closeWindow();
