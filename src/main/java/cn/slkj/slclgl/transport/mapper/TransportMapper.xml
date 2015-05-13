@@ -39,7 +39,9 @@
 			FROM
 						TB_VEHICLE TV   
 			LEFT  JOIN    
-						(SELECT id, vId, traWord, traCode, traBusLicNo, traBusLicDate, traEcoType, remark,testOrgan,createTime,MAX(ENDDATE) AS ENDDATE  FROM TB_TRANSPORT GROUP BY vid) C ON TV.ID = C.VID
+						(SELECT A.* FROM  TB_TRANSPORT A 
+				JOIN (SELECT MAX(ENDDATE) AS ENDDATE,VID  FROM TB_TRANSPORT  GROUP BY VID ) B 
+				ON A.VID =B.VID AND A.ENDDATE=B.ENDDATE GROUP BY VID ) C ON TV.ID = C.VID
 			LEFT  JOIN 
 			TB_COMPANY TC on TV.companyId = TC.ID
 			<where>
@@ -59,7 +61,9 @@
 	<select id="queryListCount" resultType="int" parameterType="hashmap">
 		SELECT COUNT(0)  FROM TB_VEHICLE TV   
 			LEFT  JOIN    
-						(SELECT id, vId, traWord, traCode, traBusLicNo, traBusLicDate, traEcoType, remark,testOrgan,createTime,MAX(ENDDATE) AS ENDDATE  FROM TB_TRANSPORT GROUP BY vid) C ON TV.ID = C.VID
+						(SELECT A.* FROM  TB_TRANSPORT A 
+				JOIN (SELECT MAX(ENDDATE) AS ENDDATE,VID  FROM TB_TRANSPORT  GROUP BY VID ) B 
+				ON A.VID =B.VID AND A.ENDDATE=B.ENDDATE GROUP BY VID ) C ON TV.ID = C.VID
 			LEFT  JOIN 
 			TB_COMPANY TC on TV.companyId = TC.ID
 			<where>

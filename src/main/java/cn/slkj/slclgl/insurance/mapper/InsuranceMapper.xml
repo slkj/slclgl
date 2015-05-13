@@ -55,10 +55,9 @@
 			FROM
 						TB_VEHICLE TV   
 			LEFT  JOIN    
-						(SELECT id, policy,vid, feiyong, insuranceType,
-		(SELECT typeName FROM TB_INSURANCE_TYPE WHERE TB_INSURANCE_TYPE.ID=insuranceType)typeName,
-		(SELECT shortName FROM TB_INSURANCE_COMPANY WHERE TB_INSURANCE_COMPANY.ID=insuranceCompany)companyName,
-		 riqi, startTime, insuranceCompany, checkMan, makeMan, remark,MAX(endTime) AS endTime  FROM TB_INSURANCE GROUP BY vid) C ON TV.ID = C.VID
+						(SELECT A.* FROM  TB_INSURANCE A 
+				JOIN (SELECT MAX(endTime) AS endTime,VID  FROM TB_INSURANCE  GROUP BY VID ) B 
+				ON A.VID =B.VID AND A.endTime=B.endTime  GROUP BY VID) C ON TV.ID = C.VID
 			LEFT  JOIN 
 			TB_COMPANY TC on TV.companyId = TC.ID
 			<where>
@@ -78,10 +77,9 @@
 	<select id="queryListCount" resultType="int" parameterType="hashmap">
 		SELECT COUNT(0) FROM TB_VEHICLE TV   
 			LEFT  JOIN    
-						(SELECT id, policy,vid, feiyong, insuranceType,
-		(SELECT typeName FROM TB_INSURANCE_TYPE WHERE TB_INSURANCE_TYPE.ID=insuranceType)typeName,
-		(SELECT shortName FROM TB_INSURANCE_COMPANY WHERE TB_INSURANCE_COMPANY.ID=insuranceCompany)companyName,
-		 riqi, startTime, insuranceCompany, checkMan, makeMan, remark,MAX(endTime) AS endTime  FROM TB_INSURANCE GROUP BY vid) C ON TV.ID = C.VID
+						(SELECT A.* FROM  TB_INSURANCE A 
+				JOIN (SELECT MAX(endTime) AS endTime,VID  FROM TB_INSURANCE  GROUP BY VID ) B 
+				ON A.VID =B.VID AND A.endTime=B.endTime  GROUP BY VID) C ON TV.ID = C.VID
 			LEFT  JOIN 
 			TB_COMPANY TC on TV.companyId = TC.ID
 			<where>

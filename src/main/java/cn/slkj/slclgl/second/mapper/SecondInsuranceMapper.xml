@@ -49,7 +49,10 @@
 			FROM
 						TB_VEHICLE TV   
 			LEFT  JOIN    
-						(SELECT id, vid,lastriqi, riqi, life, examine, keepaddress, remark,MAX(nextriqi) AS nextriqi  FROM TB_SECOND GROUP BY vid) C ON TV.ID = C.VID
+						(SELECT A.* FROM  TB_SECOND A 
+				JOIN (SELECT MAX(nextriqi) AS nextriqi,VID  FROM TB_SECOND  GROUP BY VID ) B 
+				ON A.VID =B.VID AND A.nextriqi=B.nextriqi GROUP BY VID  
+			) C ON TV.ID = C.VID  
 			LEFT  JOIN 
 			TB_COMPANY TC on TV.companyId = TC.ID
 			<where>
@@ -69,7 +72,10 @@
 	<select id="queryListCount" resultType="int" parameterType="hashmap">
 		SELECT COUNT(0) FROM TB_VEHICLE TV   
 			LEFT  JOIN    
-						(SELECT id, vid,lastriqi, riqi, life, examine, keepaddress, remark,MAX(nextriqi) AS nextriqi  FROM TB_SECOND GROUP BY vid) C ON TV.ID = C.VID
+						(SELECT A.* FROM  TB_SECOND A 
+				JOIN (SELECT MAX(nextriqi) AS nextriqi,VID  FROM TB_SECOND  GROUP BY VID ) B 
+				ON A.VID =B.VID AND A.nextriqi=B.nextriqi GROUP BY VID  
+			) C ON TV.ID = C.VID  
 			LEFT  JOIN 
 			TB_COMPANY TC on TV.companyId = TC.ID
 			<where>
