@@ -52,7 +52,10 @@
 					AND TC.COMPNAME LIKE CONCAT('%',#{companName},'%')
 				</if>
 				<if test="endDate != null and endDate != ''">
-					<![CDATA[ AND C.ENDDATE  >= #{endDate} AND C.ENDDATE  <= #{endDate1} ]]> 
+					<![CDATA[ AND C.ENDDATE  >= #{endDate} ]]> 
+				</if>
+				<if test="endDate1 != null and endDate1 != ''">
+					<![CDATA[ AND C.ENDDATE  <= #{endDate1} ]]> 
 				</if>
 			</where>
 		LIMIT #{startNum},#{endNum}
@@ -78,7 +81,10 @@
 					AND TC.COMPNAME LIKE CONCAT('%',#{companName},'%')
 				</if>
 				<if test="endDate != null and endDate != ''">
-					<![CDATA[ AND C.ENDDATE  >= #{endDate} AND C.ENDDATE  <= #{endDate1} ]]> 
+					<![CDATA[ AND C.ENDDATE  >= #{endDate} ]]> 
+				</if>
+				<if test="endDate1 != null and endDate1 != ''">
+					<![CDATA[ AND C.ENDDATE  <= #{endDate1} ]]> 
 				</if>
 			</where>
 	</select>
