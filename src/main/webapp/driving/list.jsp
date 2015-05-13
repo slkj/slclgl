@@ -19,7 +19,7 @@
 					<td><input id="carNumber" name="carNumber" style="width: 100px;" />
 					</td>
 					<td>所属公司:</td>
-					<td><input id="regCompanyId" name="regCompanyId" style="width: 100px;" />
+					<td><input id="companName" name="companName" style="width: 100px;" />
 					</td>
 					<td>年检日期:</td>
 					<td>

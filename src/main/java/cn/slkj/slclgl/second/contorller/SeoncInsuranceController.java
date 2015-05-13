@@ -58,15 +58,15 @@ public class SeoncInsuranceController {
 	public EPager<SecondInsurance> list(
 			@RequestParam(required = false, defaultValue = "1") Integer page,// 第几页
 			@RequestParam(required = false, defaultValue = "10") Integer rows,// 每页显示多少行
-			String carNumber, String regCompanyId, String vId, String operId, String endDate,
+			String carNumber, String companName, String vId, String operId, String endDate,
 			String endDate1, HttpSession session) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		if (StringUtils.isNotBlank(carNumber)) {
 			map.put("carNumber", carNumber);
 		}
-		if (StringUtils.isNotBlank(regCompanyId)) {
-			map.put("regCompanyId", regCompanyId);
+		if (StringUtils.isNotBlank(companName)) {
+			map.put("companName", companName);
 		}
 		if (StringUtils.isNotBlank(vId)) {
 			map.put("vId", vId);

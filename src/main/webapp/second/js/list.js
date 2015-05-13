@@ -93,9 +93,9 @@ function getData() {
 							formatter : function(value, row, index) {
 								var s = "";
 								
-									s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:addFun('" + row.vId + "');\">二保</span></a>";
+									s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:addFun('" + row.vid + "');\">二保</span></a>";
 									s += "&nbsp;|&nbsp;";
-									s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:listByCar('" + row.vId + "');\">二保记录</span></a>";
+									s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:listByCar('" + row.vid + "');\">二保记录</span></a>";
 									s += "&nbsp;|&nbsp;";
 									s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editFun('" + index + "');\">编辑</span></a>";
 									s += "&nbsp;|&nbsp;";
@@ -247,39 +247,7 @@ function editFun(index) {
 		} ]
 	});
 }
-// 详细信息
-/*function view(id) {
-	SL.showWindow({
-		title : '车辆信息',
-		iconCls : 'icon-search',
-		width : 1000,
-		height : 640,
-		closed : false,
-		cache : false,
-		modal : true,
-		url : 'vehicle/vehicleView.jsp',
-		onLoad : function() {
-			// ajax查询单个信息，form回填数据
-			$.ajax({
-				url : '../vehicle/queryOne?id=' + id,
-				async : false,
-				cache : false,
-				success : function(data) {
-					if (data) {
-						top.$("#uform").form('load', data);
-						top.$('#uform input').attr("disabled", "disabled");
-					}
-				}
-			});
-		},
-		buttons : [ {
-			text : '关闭',
-			handler : function() {
-				SL.closeWindow();
-			}
-		} ]
-	});
-};*/
+
 function listByCar(vid){
 	
 	SL.showWindow({
@@ -287,10 +255,10 @@ function listByCar(vid){
 		iconCls : 'icons_26',
 		width : 650,
 		height : 400,
-		url : 'second/record.jsp',
+		url : 'record.jsp',
 		onLoad : function() {
-			top.$('#facdg').datagrid({
-				url : 'second/listByVid?vId=' + vid,
+			$('#facdg').datagrid({
+				url : '../second/listByVid?vId=' + vid,
 				width : 'auto',
 				height : 'auto',
 				fit : true,
