@@ -30,16 +30,16 @@
 								<option value="0">未用</option>
 						</select>
 						</td>
-						<td>卡类型 : <select class="easyui-combobox" id="cardType"
-							name="cardType" panelheight="auto" style="width: 100px">
-								<option value="">请选择</option>
-								<option value="GPRS卡">GPRS卡</option>
-								<option value="短信卡">短信卡</option>
-						</select>
-						</td>
-						<td>领用人：<input class="easyui-textbox" id="lyr" name="lyr"
-							style="width: 150px">
-						</td>
+<!-- 						<td>卡类型 : <select class="easyui-combobox" id="cardType" -->
+<!-- 							name="cardType" panelheight="auto" style="width: 100px"> -->
+<!-- 								<option value="">请选择</option> -->
+<!-- 								<option value="GPRS卡">GPRS卡</option> -->
+<!-- 								<option value="短信卡">短信卡</option> -->
+<!-- 						</select> -->
+<!-- 						</td> -->
+<!-- 						<td>领用人：<input class="easyui-textbox" id="lyr" name="lyr" -->
+<!-- 							style="width: 150px"> -->
+<!-- 						</td> -->
 						<td><a id="search_btn" href="#" class="easyui-linkbutton"
 							data-options="iconCls:'icon-search'">查询</a></td>
 					</tr>

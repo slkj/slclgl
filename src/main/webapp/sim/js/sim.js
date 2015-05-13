@@ -61,29 +61,20 @@ function initDataGrid() {
 			field : 'telnum',
 			title : 'SIM号码'
 		}, {
-			field : 'cardType',
-			title : '卡类型'
+			field : 'listnum',
+			title : '序列号'
 		}, {
-			field : 'business',
-			title : '套餐业务'
-		// }, {
-		// field : 'kktime',
-		// title : '开卡日期'
+			field : 'kktime',
+			title : '开卡日期'
+		}, {
+			field : 'gys',
+			title : '供应商'
 		}, {
 			field : 'intime',
 			title : '录入日期'
 		}, {
 			field : 'lrr',
 			title : '操作人'
-		}, {
-			field : 'gys',
-			title : '供应商'
-		}, {
-			field : 'listnum',
-			title : '序列号'
-		}, {
-			field : 'renewtime',
-			title : '续费日期'
 		}, {
 			field : 'beizhu',
 			title : '备注'
@@ -94,9 +85,11 @@ function initDataGrid() {
 			formatter : function(value, row, index) {
 				var s = "";
 				s += "&nbsp;";
-//				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:simPay('" + row.id + "');\">缴费</span></a>";
-//				s += "&nbsp;|&nbsp;";
-				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editRow('" + index + "');\">编辑</span></a>";
+				// s += "<a href=\"javascript:void(0)\"><span
+				// onclick=\"javaScript:simPay('" + row.id +
+				// "');\">缴费</span></a>";
+				// s += "&nbsp;|&nbsp;";
+				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editRow(" + index + ");\">编辑</span></a>";
 				// s += "&nbsp;|&nbsp;";
 				// s += "<a href=\"javascript:void(0)\"><span
 				// onclick=\"javaScript:deleteRow('" + row.id +
@@ -157,7 +150,7 @@ function fCallback(url) {
 				SL.closeWindow();
 				if (data) {
 					grid.datagrid('reload');
-				}else{
+				} else {
 					SL.msgShow("提示", "请检查SIM卡号是否已经存在!", "warning");
 				}
 			}
@@ -167,11 +160,7 @@ function fCallback(url) {
 }
 // 编辑
 function editRow(index) {
-	var selRow = grid.datagrid("getSelections");// 返回选中多行
-	// if (selRow.length != 1) {
-	// SL.msgShow("提示", "请选择一行数据!！", "warning");
-	// return false;
-	// }
+	var data = grid.datagrid('getData').rows[index];
 	SL.showWindow({
 		title : 'SIM卡信息',
 		iconCls : 'icon-edit',
@@ -179,7 +168,7 @@ function editRow(index) {
 		height : 370,
 		url : basePath + 'simEdit.jsp',
 		onLoad : function() {
-			$("#uform").form('load', selRow[index]);
+			$("#uform").form('load', data);
 		},
 		buttons : [ {
 			text : '确定',
@@ -195,7 +184,7 @@ function editRow(index) {
 		} ]
 	});
 }
-//缴费
+// 缴费
 function simPay() {
 	var selRow = grid.datagrid("getSelections");// 返回选中多行
 	if (selRow.length == 0) {
