@@ -40,14 +40,14 @@
 	</select>
 	<insert id="save" parameterType="prove">
 	INSERT INTO TB_PROVE
-	(uid,number,ustype,wangjian,inspector,riqi,state,remark)
+	(uid,number,ustype,state,remark)
 		VALUES
-		(#{uid},#{number},#{ustype},#{wangjian},#{inspector},#{riqi},0,#{remark})
+		(#{uid},#{number},#{ustype},0,#{remark})
 	</insert>
 	
 	<update id="edit" parameterType="prove">
 		UPDATE TB_PROVE set 
-			uid = #{uid},number=#{number},ustype=#{ustype},wangjian=#{wangjian}, inspector=#{inspector}, riqi=#{riqi},remark = #{remark} where id = #{id}
+			uid = #{uid},number=#{number},ustype=#{ustype},remark = #{remark} where id = #{id}
 	</update>
 	<update id="use" parameterType="prove">
 		UPDATE TB_PROVE set 

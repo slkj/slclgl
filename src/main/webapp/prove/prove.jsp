@@ -30,11 +30,11 @@
 			<table cellspacing="0" cellpadding="0">
 				<tr>
 					<td>
-						<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onClick="javascript:addFun();">添加</a>
+						<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onClick="javascript:addFun();">入库</a>
 					</td>
 					<td><div class="datagrid-btn-separator"></div></td>
 					<td>
-						<a href="#" class="easyui-linkbutton" data-options="iconCls:'pic pic_221',plain:true" onClick="javascript:useFun();">使用</a>
+						<a href="#" class="easyui-linkbutton" data-options="iconCls:'pic pic_115',plain:true" onClick="javascript:useFun();">出库</a>
 					</td>
 					<td><div class="datagrid-btn-separator"></div></td>
 					<td>

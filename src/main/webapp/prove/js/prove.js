@@ -65,9 +65,9 @@ function loadDataGrid() {
 			formatter : function(value, row) {
 				var s = "";
 				if (value == "0") {
-					s = "<div  style='background-color:#CD3333;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>未使用</div>";
+					s = "<div  style='background-color:#CD3333;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>未出库</div>";
 				} else if (value == "1") {
-					s = "<div  style='background-color:#FF8C00;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>已使用</div>";
+					s = "<div  style='background-color:#FF8C00;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>已出库</div>";
 				}else if (value == "2") {
 					s = "<div  style='background-color:#aaaaaa;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>已作废</div>";
 				}
@@ -108,7 +108,7 @@ function loadDataGrid() {
 				var s = "";
 				if (row.id != null) {
 					
-					s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editFun('" + row.id + "');\">编辑</span></a>";
+					s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editFun('" + row.id + "','"+row.state+"');\">编辑</span></a>";
 					s += "&nbsp;|&nbsp;";
 					s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:delFun('" + row.id + "');\">删除</span></a>";
 					
@@ -203,8 +203,14 @@ function saveAjax(url) {
 	}
 }
 // 编辑
-function editFun(id) {
-
+function editFun(id,state) {
+	if(state=="1"){
+		SL.msgShow("提示", "证明已出库！", "warning");
+		return;
+	}else if (state == "2") {
+		SL.msgShow("提示", "证明已作废！", "warning");
+		return;
+	}
 	SL.showWindow({
 		title : '编辑',
 		iconCls : 'icon-edit',
