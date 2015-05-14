@@ -77,6 +77,9 @@ function loadDataGrid() {
 			field : 'address',
 			title : '使用地区'
 		}, {
+			field : 'ustype',
+			title : '使用类型'
+		}, {
 			field : 'number',
 			title : '编号'
 		},{
@@ -250,10 +253,10 @@ function useFun() {
 	// 得到选中的行
 	var selRow = grid.datagrid("getSelections");// 返回选中多行
 	if (selRow.length == 0) {
-		SL.msgShow("提示", "请选择一行数据!！", "warning");
+		SL.msgShow("提示", "请选择至少一行数据!！", "warning");
 		return false;
 	}
-	var id=selRow[0].id;
+	/*var id=selRow[0].id;
 	if (selRow[0].state == "1") {
 		SL.msgShow("提示", "证明已使用！", "warning");
 		return;
@@ -261,7 +264,17 @@ function useFun() {
 	if (selRow[0].state == "2") {
 		SL.msgShow("提示", "证明已作废！", "warning");
 		return;
+	}*/
+	var ids = [];
+	for (var i = 0; i < selRow.length; i++) {
+		if(selRow[i].state=="0"){
+		var id = selRow[i].id;
+		ids.push(id);
+		}
 	}
+	var param = {
+		ids : ids
+	};
 	SL.showWindow({
 		title : '使用',
 		iconCls : 'icon-add',
@@ -269,8 +282,8 @@ function useFun() {
 		height : 450,
 		url :'proveUse.jsp',
 		onLoad : function() {
-			$.ajax({
-				url : 'queryOne?id=' + id,
+			/*$.ajax({
+				url : 'queryOne?id=' + ids[0],
 				async : false,
 				cache : false,
 				success : function(data) {
@@ -280,11 +293,16 @@ function useFun() {
 						$('#remark').textbox('setValue',data.remark);
 					}
 				}
-			});
+			});*/
+			
+			$('#remark').textbox('setValue',selRow[0].remark);
 			$('#address1').combotree({
 				url : '../data/city_data.json',
 				required : true,
-				lines : true
+				lines : true,
+				onSelect:function(node) {
+					$('#address11').val(node.text);
+					  }
 			});
 			
 		},
@@ -292,8 +310,30 @@ function useFun() {
 			text : '保存',
 			iconCls : 'icons_45',
 			handler : function() {
-				var url = 'useSave';
-				saveAjax(url);
+				/*var url = 'useSave?ids='+ids;
+				saveAjax(url);*/
+				var param = {
+						ids : ids,
+						//address : $('#address1').combotree('getValue'),
+						address : $('#address11').val(),
+						usman : $('#usman').val(),
+						usriqi : $('#usriqi').datebox('getValue'),
+						remark : $('#remark').textbox('getValue')
+					};
+					$.ajax({
+						cache : false,
+						type : "POST",
+						url : "useSave",
+						data : param,
+						dataType : "json",
+						cache : false,
+						success : function(data) {
+							if (data) {
+								grid.datagrid('reload');
+								SL.closeWindow();
+							}
+						}
+					});
 			}
 		}, {
 			text : '关闭',
@@ -307,7 +347,7 @@ function tovoid() {
 	// 得到选中的行
 	var selRow = grid.datagrid("getSelections");// 返回选中多行
 	if (selRow.length == 0) {
-		SL.msgShow("提示", "请至少选择一行数据!！", "warning");
+		SL.msgShow("提示", "请至少选择一行数据！", "warning");
 		return false;
 	}
 	var ids = [];
@@ -338,4 +378,12 @@ function tovoid() {
 			});
 		}
 	});
+}
+function closedDiv() {
+$('#listnum').show();
+$('#listdiv').hide();
+}
+function showDiv() {
+$('#listdiv').show();
+$('#listnum').hide();
 }

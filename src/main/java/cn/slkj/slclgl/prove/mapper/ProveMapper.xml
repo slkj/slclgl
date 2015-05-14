@@ -14,6 +14,7 @@
 				<if test="endDate != null and endDate != ''">AND riqi >= #{endDate} </if>
 				<if test="endDate1 != null and endDate1 != ''"> AND riqi &lt;= #{endDate1} </if>
 				<if test="state != null and state != ''">AND STATE =  #{state} </if>
+				<if test="ustype != null and ustype != ''">AND ustype =  #{ustype} </if>
 			</where>
 		LIMIT #{startPage},#{endPage}
 	</select>
@@ -28,6 +29,7 @@
 				<if test="endDate != null and endDate != ''">AND riqi >= #{endDate} </if>
 				<if test="endDate1 != null and endDate1 != ''"> AND riqi &lt;= #{endDate1} </if>
 				<if test="state != null and state != ''">AND STATE =  #{state} </if>
+				<if test="ustype != null and ustype != ''">AND ustype =  #{ustype} </if>
 			</where>
 	</select>
 	<select id="queryOne" parameterType="prove" resultType="prove">
@@ -49,9 +51,12 @@
 		UPDATE TB_PROVE set 
 			uid = #{uid},number=#{number},ustype=#{ustype},remark = #{remark} where id = #{id}
 	</update>
-	<update id="use" parameterType="prove">
+	<update id="use" parameterType="hashmap">
 		UPDATE TB_PROVE set 
-			address = #{address},usman=#{usman}, usriqi=#{usriqi},state=1,remark = #{remark} where id = #{id}
+			address = #{address},usman=#{usman}, usriqi=#{usriqi},state=1,remark = #{remark} where id in
+<foreach collection="ids" index="index" item="item" open="(" separator="," close=")">   
+	        #{item}   
+	    </foreach> 
 	</update>
 	<update id="tovoid" parameterType="list">
 		UPDATE TB_PROVE set state=2 WHERE state=0 and ID in
