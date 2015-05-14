@@ -27,8 +27,8 @@
 			</tr>
 			<tr>
 				<th style="width: 100px">入网编号：</th>
-				<td><input name="number" class="easyui-validatebox" style="width: 200px" data-options="required:'true'"></td>
-				<th>测试日期：</th>
+				<td colspan="3"><input name="number" class="easyui-validatebox" style="width: 200px" data-options="required:'true'"></td>
+				<!-- <th>测试日期：</th>
 				<td><input name="riqi" class="easyui-datebox" editable="false"  style="width: 200px" data-options="required:'true'"></td>
 			</tr>
 			
@@ -36,7 +36,7 @@
 				<th style="width: 100px">安检员：</th>
 				<td><input name="inspector" class="easyui-validatebox" style="width: 200px" data-options="required:'true'"></td>
 			<th style="width: 100px">网监员：</th>
-				<td><input name="wangjian" class="easyui-validatebox" style="width: 200px"></td>
+				<td><input name="wangjian" class="easyui-validatebox" style="width: 200px"></td> -->
 			</tr>
 			
 			<tr>
