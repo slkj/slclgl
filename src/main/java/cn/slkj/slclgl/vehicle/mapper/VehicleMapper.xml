@@ -23,7 +23,7 @@
 		CARCONTWIDTH,CARCONTHEIGHT,CARAPPROVED,CARAPPRGUEST,CARTRAC,CARCABGUEST,CARUSENATU,CARUSENATUNAME,
 		CAROBTWAY,CARFACDATE,INSTALLERS,ATTENDANTS,INSTALLTIME,INSTALLADDRESS,FEES,FEESEEND,ISNOTICE,
 		SIMPAYER,PAYERTIME,CTRADINGLINE,CCATCHMENBERS,CARIMG,ENTRYTIME,ENTRYID,ENTRYNAME,DEPID,
-		SIMNUMBER,EQUITMENT,NETWORKNO,REMARK,AREACODE,CITYID,COUNTY,CARIMG,DJFILE,XSFILE,xszbh,xszdqrq,ysz,jyxkz,xkzdqrq,ejwhDqTime
+		SIMNUMBER,EQUITMENT,NETWORKNO,REMARK,AREACODE,CITYID,COUNTY,CARIMG,DJFILE,XSFILE,xszbh,xszdqrq,ysz,jyxkz,xkzdqrq,ejwhDqTime,policy,bxType,bxendTime
 	</sql>
 	<select id="queryList" resultType="Vehicle" parameterType="hashmap">
 			SELECT <include refid="sql_car"/>  FROM v_vehicle TBV
@@ -125,7 +125,7 @@
 			carTreadBe,carTreadAfter,carTireNum,carTireSpe,carNumOfSpring,carAxleDist,carAxleNum,carContLength,
 			carContWidth,carContHeight,carApproved,carApprGuest,carTrac,carCabGuest,carUseNatu,carUseNatuName,
 			carObtWay,carFacDate,installers,attendants,installtime,installAddress,fees,feeseEnd,isNotice,
-			simPayer,payerTime,CTradingLine,CCatchMenbers,entryTime,entryId,entryName,depId,simNumber,
+			simPayer,payerTime,CTradingLine,CCatchMenbers,entryTime,entryId,depId,simNumber,
 			equitment,networkNo,remark,companyId,areaCode,cityId,county,carImg,djFile,xsFile
 		)
 		VALUES(
@@ -135,7 +135,7 @@
 			#{carTreadBe},#{carTreadAfter},#{carTireNum},#{carTireSpe},#{carNumOfSpring},#{carAxleDist},#{carAxleNum},#{carContLength},
 			#{carContWidth},#{carContHeight},#{carApproved},#{carApprGuest},#{carTrac},#{carCabGuest},#{carUseNatu},#{carUseNatuName}
 			,#{carObtWay},#{carFacDate},#{installers},#{attendants},#{installtime},#{installAddress},#{fees},#{feeseEnd},#{isNotice},
-			#{simPayer},#{payerTime},#{CTradingLine},#{CCatchMenbers},#{entryTime},#{entryId},#{entryName},#{depId},
+			#{simPayer},#{payerTime},#{CTradingLine},#{CCatchMenbers},now(),#{entryId},#{depId},
 			#{simNumber},#{equitment},#{networkNo},#{remark},#{companyId},#{areaCode},#{cityId},#{county},#{carImg},#{djFile},#{xsFile}
 		)
 	</insert>
@@ -151,7 +151,7 @@
 		carTireSpe=#{carTireSpe},carNumOfSpring=#{carNumOfSpring},carAxleDist=#{carAxleDist},carAxleNum=#{carAxleNum},carContLength=#{carContLength},
 		carContWidth=#{carContWidth},carContHeight=#{carContHeight},carApproved=#{carApproved},carApprGuest=#{carApprGuest},carTrac=#{carTrac},
 		carCabGuest=#{carCabGuest},carUseNatu=#{carUseNatu},carUseNatuName=#{carUseNatuName},carObtWay=#{carObtWay},carFacDate=#{carFacDate},
-		CTradingLine=#{CTradingLine}, CCatchMenbers=#{CCatchMenbers},entryTime=#{entryTime},entryId=#{entryId},entryName=#{entryName},depId=#{depId}, 
+		CTradingLine=#{CTradingLine}, CCatchMenbers=#{CCatchMenbers},
 		remark=#{remark},companyId=#{companyId},areaCode=#{areaCode},cityId=#{cityId},county=#{county},carImg=#{carImg} ,djFile=#{djFile},xsFile=#{xsFile}
 		WHERE ID = #{id}
 	</update>
