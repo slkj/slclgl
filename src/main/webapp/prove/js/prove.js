@@ -61,7 +61,7 @@ function loadDataGrid() {
 			checkbox : true
 		},{
 			field : 'state',
-			title : '使用状态',
+			title : '出库状态',
 			formatter : function(value, row) {
 				var s = "";
 				if (value == "0") {
@@ -100,8 +100,21 @@ function loadDataGrid() {
 			field : 'riqi',
 			title : '测试日期'
 		}, {
-			field : 'remark',
-			title : '备注'
+			field : 'ustate',
+			title : '使用状态',
+			formatter : function(value, row) {
+				var s = "";
+				if (value == "0") {
+					s = "<div  style='background-color:#CD3333;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>未使用</div>";
+				} else if (value == "1") {
+					s = "<div  style='background-color:#FF8C00;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>已使用</div>";
+				}else if (value == "2") {
+					s = "<div  style='background-color:#00ff00;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>已回收</div>";
+				}else if (value == "3") {
+					s = "<div  style='background-color:#aaaaaa;text-align:center;margin:0px;padding:0px;color:#FFFFFF;'>已作废</div>";
+				}
+				return s;
+			}
 		},
 		{
 			title : '操作',
@@ -249,7 +262,7 @@ function editFun(id,state) {
 		} ]
 	});
 }
-function useFun() {
+function outFun() {
 	// 得到选中的行
 	var selRow = grid.datagrid("getSelections");// 返回选中多行
 	if (selRow.length == 0) {
@@ -343,7 +356,7 @@ function useFun() {
 		} ]
 	});
 }
-function tovoid() {
+function tovoid(ustate) {
 	// 得到选中的行
 	var selRow = grid.datagrid("getSelections");// 返回选中多行
 	if (selRow.length == 0) {
@@ -356,9 +369,10 @@ function tovoid() {
 		ids.push(id);
 	}
 	var param = {
-		ids : ids
+		ids : ids,
+		ustate:ustate
 	};
-	$.messager.confirm('提示框', '你确定要作废吗?', function(data) {
+	$.messager.confirm('提示框', '你确定要操作吗?', function(data) {
 		if (data) {
 			$.ajax({
 				cache : false,

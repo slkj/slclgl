@@ -123,7 +123,7 @@ public class ProveController {
 			map.put("address", address);
 			map.put("usman", usman);
 			map.put("usriqi", usriqi);
-			map.put("remark", remark);System.out.println("IIIIIIIIIIIIIIIIIII"+ids[0]+address+usman+usriqi+remark);
+			map.put("remark", remark);
 			int i = proveService.use(map);
 			if (i != -1) {
 				return new JsonResult(true, "");
@@ -137,11 +137,13 @@ public class ProveController {
 	/** 使用*/
 	@ResponseBody
 	@RequestMapping(value = "/voidSave", method = { RequestMethod.POST })
-	public JsonResult voidSave(@RequestParam(value = "ids[]") String[] ids)
+	public JsonResult voidSave(@RequestParam(value = "ids[]") String[] ids,Integer ustate)
 			throws Exception {
 		try {
-
-			int i = proveService.tovoid(ids);
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("ids", ids);
+			map.put("ustate", ustate);
+			int i = proveService.tovoid(map);
 			if (i != -1) {
 				return new JsonResult(true, "");
 			}

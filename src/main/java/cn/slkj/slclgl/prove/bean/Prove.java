@@ -11,7 +11,8 @@ public class Prove {
 	private String wangjian;//网监员
 	private String inspector;//安检员
 	private String riqi;//测试日期
-	private Integer state;
+	private Integer state;//出库状态
+	private Integer ustate;//使用状态
 	private String remark;//备注
 	private String listNo;//批量添加相同数字
 	private int addType;//添加类型
@@ -114,6 +115,12 @@ public class Prove {
 	}
 	public void setListnum_end(String listnum_end) {
 		this.listnum_end = listnum_end;
+	}
+	public Integer getUstate() {
+		return ustate;
+	}
+	public void setUstate(Integer ustate) {
+		this.ustate = ustate;
 	}
 	
 	 

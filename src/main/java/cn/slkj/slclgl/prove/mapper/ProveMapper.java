@@ -36,7 +36,7 @@ public interface ProveMapper {
 	 * 作废
 	 * @param ids
 	 */
-	int tovoid(String[] ids);
+	int tovoid(Map<String, Object> map);
 	/**
 	 * 根据id删除
 	 * @param id

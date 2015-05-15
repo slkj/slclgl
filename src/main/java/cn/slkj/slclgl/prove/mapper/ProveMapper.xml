@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.slkj.slclgl.prove.mapper.ProveMapper">
 	<sql id="sql_temp">
-		id,uid,number,address,ustype,usman,usriqi,wangjian,inspector,riqi,state,remark
+		id,uid,number,address,ustype,usman,usriqi,wangjian,inspector,riqi,state,remark,ustate
 	</sql>
 	
 	<select id="getAll" resultType="prove" parameterType="hashmap">
@@ -58,11 +58,11 @@
 	        #{item}   
 	    </foreach> 
 	</update>
-	<update id="tovoid" parameterType="list">
-		UPDATE TB_PROVE set state=2 WHERE state=0 and ID in
-		<foreach item="ids" collection="array" open="(" separator="," close=")">
-			#{ids}
-		</foreach>
+	<update id="tovoid" parameterType="hashmap">
+		UPDATE TB_PROVE set ustate=#{ustate} WHERE state=1 and ID in
+<foreach collection="ids" index="index" item="item" open="(" separator="," close=")">   
+	        #{item}   
+	    </foreach> 
 	</update>
 <delete id="delete" parameterType="string">
 		DELETE FROM TB_PROVE WHERE ID  = #{id}

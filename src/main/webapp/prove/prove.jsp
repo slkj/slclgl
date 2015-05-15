@@ -19,6 +19,7 @@
 							style="width: 150px" /> 使用地区:<input id="address" name="address"/> 领用人:<input
 							name="usman" class="easyui-textbox" style="width: 150px" />
 							使用类型：<select class="easyui-combobox"  name="ustype" >
+							<option value=""></option>
 								<option value="邯郸安装">邯郸安装</option>
 								<option value="邯郸使用">邯郸使用</option>
 								<option value="石家庄安装">石家庄安装</option>
@@ -43,11 +44,19 @@
 					</td>
 					<td><div class="datagrid-btn-separator"></div></td>
 					<td>
-						<a href="#" class="easyui-linkbutton" data-options="iconCls:'pic pic_115',plain:true" onClick="javascript:useFun();">出库</a>
+						<a href="#" class="easyui-linkbutton" data-options="iconCls:'pic pic_115',plain:true" onClick="javascript:outFun();">出库</a>
 					</td>
 					<td><div class="datagrid-btn-separator"></div></td>
 					<td>
-						<a href="#" class="easyui-linkbutton" data-options="iconCls:'pic pic_156',plain:true" onClick="javascript:tovoid();">作废</a>
+						<a href="#" class="easyui-linkbutton" data-options="iconCls:'pic pic_115',plain:true" onClick="javascript:tovoid(1);">使用</a>
+					</td>
+					<td><div class="datagrid-btn-separator"></div></td>
+					<td>
+						<a href="#" class="easyui-linkbutton" data-options="iconCls:'pic pic_115',plain:true" onClick="javascript:tovoid(2);">回收</a>
+					</td>
+					<td><div class="datagrid-btn-separator"></div></td>
+					<td>
+						<a href="#" class="easyui-linkbutton" data-options="iconCls:'pic pic_156',plain:true" onClick="javascript:tovoid(3);">作废</a>
 					</td>
 					<td><div class="datagrid-btn-separator"></div></td>
 					<td align="right">

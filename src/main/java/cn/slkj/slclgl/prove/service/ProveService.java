@@ -82,10 +82,10 @@ public class ProveService{
 	 * 作废
 	 * @param Agent
 	 */
-	public int tovoid(String[] ids){
+	public int tovoid(Map<String, Object> map){
 		try {
 			
-			return mapper.tovoid(ids);
+			return mapper.tovoid(map);
 		} catch (Exception e) {
 			return -1;
 		}
