@@ -138,7 +138,7 @@ function addNew() {
 	});
 }
 function fCallback(url) {
-	if (top.$("#uform").form('enableValidation').form('validate')) {
+	if ($("#uform").form('enableValidation').form('validate')) {
 		var data = $("#uform").serialize();
 		$.ajax({
 			cache : false,

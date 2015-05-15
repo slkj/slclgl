@@ -30,6 +30,7 @@
 		<typeAlias type="cn.slkj.slclgl.module.bean.Permission" alias="Permission" />
 		<typeAlias type="cn.slkj.slclgl.prove.bean.Prove" alias="prove" />
 		<typeAlias type="cn.slkj.slclgl.global.bean.Global" alias="global" />
+		<typeAlias type="cn.slkj.slclgl.department.bean.Department" alias="Department" />
 	</typeAliases>
 	<!-- 设置数据库连接环境 -->
 	<!-- 映射文件 -->
@@ -53,5 +54,6 @@
 		<mapper resource="cn/slkj/slclgl/insurance/mapper/InsuranceMapper.xml"/>
 		<mapper resource="cn/slkj/slclgl/prove/mapper/ProveMapper.xml"/>
 		<mapper resource="cn/slkj/slclgl/global/mapper/GlobalMapper.xml"/>
+		<mapper resource="cn/slkj/slclgl/department/mapper/DepartmentMapper.xml"/>
 	</mappers>
 </configuration>
