@@ -28,14 +28,13 @@
 	</select>
 	<insert id="insert" parameterType="Sim">
 		INSERT INTO TB_SIM
-		(TYPE,CARDTYPE,LISTNUM,TELNUM,STATE,INTIME,OUTTIME,KKTIME,FHTIME,BEIZHU,LYR,GYS,LRR,RENEWTIME,BUSINESS)
-		VALUES(#{type},#{cardType},#{listnum},#{telnum},#{state},now(),#{outtime},#{kktime},#{fhtime},#{beizhu},
+		(TYPE,LISTNUM,TELNUM,STATE,INTIME,OUTTIME,KKTIME,FHTIME,BEIZHU,LYR,GYS,LRR,RENEWTIME,BUSINESS)
+		VALUES(#{type},#{listnum},#{telnum},#{state},CURDATE(),#{outtime},#{kktime},#{fhtime},#{beizhu},
 		#{lyr},#{gys},#{lrr},#{renewtime},#{business})
 	</insert>
 	<update id="edit" parameterType="Sim">
 		UPDATE TB_SIM SET
-			CARDTYPE=#{cardType},LISTNUM=#{listnum},TELNUM=#{telnum},
-			GYS=#{gys},RENEWTIME=#{renewtime},BUSINESS=#{business},BEIZHU=#{beizhu}
+			 LISTNUM=#{listnum},TELNUM=#{telnum},GYS=#{gys},KKTIME=#{kktime},BEIZHU=#{beizhu}
 		WHERE ID=#{id}
 	</update>
 	<update id="simPay" parameterType="hashmap">

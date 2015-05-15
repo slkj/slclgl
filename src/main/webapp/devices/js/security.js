@@ -39,6 +39,8 @@ function loadDataGrid() {
 						pagination : true,
 						fitColumns : true,
 						singleSelect : true,
+						sortName: 'test',
+		                sortOrder: 'asc',
 						pageSize : 15,
 						pageList : [ 1, 10, 15, 20, 30, 50 ],
 						loadMsg : '数据加载中,请稍后……',
