@@ -171,7 +171,7 @@ function addFun(vid) {
 		},
 		buttons : [ {
 			text : '保存',
-			iconCls : 'icons_45',
+			iconCls : 'icon-save',
 			handler : function() {
 				var url = '../driving/saveDriving';
 				saveAjax(url);
@@ -237,7 +237,7 @@ function editFun(index) {
 		},
 		buttons : [ {
 			text : '保存',
-			iconCls : 'icons_45',
+			iconCls : 'icon-save',
 			handler : function() {
 				var url = '../driving/editDriving';
 				saveAjax(url);
@@ -288,7 +288,7 @@ function derRecord(index) {
 		},
 		buttons : [ {
 			text : '保存',
-			iconCls : 'icons_45',
+			iconCls : 'icon-save',
 			handler : function() {
 				var url = '../driving/saveDriving';
 				saveAjax(url);

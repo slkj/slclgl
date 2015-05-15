@@ -175,7 +175,7 @@ function addFun(vid) {
 		},
 		buttons : [ {
 			text : '保存',
-			iconCls : 'icons_45',
+			iconCls : 'icon-save',
 			handler : function() {
 				var url = '../transport/saveTransport';
 				saveAjax(url);
@@ -243,7 +243,7 @@ function editFun(index) {
 		},
 		buttons : [ {
 			text : '保存',
-			iconCls : 'icons_45',
+			iconCls : 'icon-save',
 			handler : function() {
 				var url = '../transport/editTransport';
 				saveAjax(url);
@@ -290,7 +290,7 @@ function derRecord(index) {
 		},
 		buttons : [ {
 			text : '保存',
-			iconCls : 'icons_45',
+			iconCls : 'icon-save',
 			handler : function() {
 				var url = '../transport/saveTransport';
 				saveAjax(url);

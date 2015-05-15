@@ -167,7 +167,7 @@ function addFun(vid) {
 		},
 		buttons : [ {
 			text : '保存',
-			iconCls : 'icons_45',
+			iconCls : 'icon-save',
 			handler : function() {
 				var url = '../second/save';
 				saveAjax(url);
@@ -234,7 +234,7 @@ function editFun(index) {
 		},
 		buttons : [ {
 			text : '保存',
-			iconCls : 'icons_45',
+			iconCls : 'icon-save',
 			handler : function() {
 				var url = '../second/editSave';
 				saveAjax(url);

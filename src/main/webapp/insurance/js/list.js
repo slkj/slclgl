@@ -66,7 +66,7 @@ function getData() {
 						},
 						{
 							title : '保险类型',
-							field : 'typeName'
+							field : 'insuranceType'
 						},
 						{
 							title : '投保日期',
@@ -82,7 +82,7 @@ function getData() {
 						},
 						{
 							title : '承保单位',
-							field : 'companyName'
+							field : 'insuranceCompany'
 						},
 						{
 							title : '核保人',
@@ -169,7 +169,7 @@ function addFun(vid) {
 		height : 400,
 		url : 'add.jsp',
 		onLoad : function() {
-			$('#insuranceCompany').combobox({
+			/*$('#insuranceCompany').combobox({
 				url : "../insurance/queryComboTreeOfInsuranceCompany",
 				required : true,
 				valueField : 'id',
@@ -181,12 +181,12 @@ function addFun(vid) {
 				required : true,
 				valueField : 'id',
 				textField : 'typeName'
-			});
+			});*/
 			$("#vid").val(vid);
 		},
 		buttons : [ {
 			text : '保存',
-			iconCls : 'icons_45',
+			iconCls : 'icon-save',
 			handler : function() {
 				var url = '../insurance/save';
 				saveAjax(url);
@@ -238,7 +238,7 @@ function editFun(index) {
 		height : 400,
 		url : 'edit.jsp',
 		onLoad : function() {
-			top.$('#insuranceCompany').combobox({
+		/*	top.$('#insuranceCompany').combobox({
 				url : "insurance/queryComboTreeOfInsuranceCompany",
 				required : true,
 				valueField : 'id',
@@ -250,7 +250,7 @@ function editFun(index) {
 				required : true,
 				valueField : 'id',
 				textField : 'typeName'
-			});
+			});*/
 			
 			$.ajax({
 				url : '../insurance/queryOne?id=' + obj.id,
@@ -266,7 +266,7 @@ function editFun(index) {
 		},
 		buttons : [ {
 			text : '保存',
-			iconCls : 'icons_45',
+			iconCls : 'icon-save',
 			handler : function() {
 				var url = '../insurance/editSave';
 				saveAjax(url);
@@ -317,7 +317,7 @@ function listByCar(vid){
 				},
 				{
 					title : '保险类型',
-					field : 'typeName'
+					field : 'insuranceType'
 				},
 				{
 					title : '投保日期',
@@ -333,7 +333,7 @@ function listByCar(vid){
 				},
 				{
 					title : '承保单位',
-					field : 'companyName'
+					field : 'insuranceCompany'
 				},
 				{
 					title : '核保人',

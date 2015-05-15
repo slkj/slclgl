@@ -180,7 +180,7 @@ function addFun() {
 		},
 		buttons : [ {
 			text : '保存',
-			iconCls : 'icons_45',
+			iconCls : 'icon-save',
 			handler : function() {
 				var url = 'save';
 				saveAjax(url);
@@ -249,7 +249,7 @@ function editFun(id,state) {
 		},
 		buttons : [ {
 			text : '保存',
-			iconCls : 'icons_45',
+			iconCls : 'icon-save',
 			handler : function() {
 				var url = 'editSave';
 				saveAjax(url);
@@ -321,7 +321,7 @@ function outFun() {
 		},
 		buttons : [ {
 			text : '保存',
-			iconCls : 'icons_45',
+			iconCls : 'icon-save',
 			handler : function() {
 				/*var url = 'useSave?ids='+ids;
 				saveAjax(url);*/
