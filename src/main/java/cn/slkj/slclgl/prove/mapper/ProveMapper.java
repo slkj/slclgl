@@ -31,7 +31,7 @@ public interface ProveMapper {
 	 * 使用
 	 * @param prove
 	 */
-	public int use(Prove prove);
+	public int use(Map<String, Object> map);
 	/**
 	 * 作废
 	 * @param ids

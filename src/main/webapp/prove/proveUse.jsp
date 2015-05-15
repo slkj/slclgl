@@ -10,12 +10,13 @@
 
 	<form id="dform">
 	<input id="id" name="id" type="hidden" />
+	<input id="address11" name="address" type="hidden" />
 		<table class="grid" style="width: 100%">
 			
 			<tr>
 				<th>使用地区：</th>
 				<td colspan="3">
-					<input id="address1" name="address"/>  
+					<input id="address1" name="address1"/>  
 					<span style="color: red;">*证明使用地区</span>
 				</td>
 			</tr>

@@ -70,11 +70,11 @@ public class ProveService{
 	 * 使用
 	 * @param Agent
 	 */
-	public int use(Prove prove) {
+	public int use(Map<String, Object> map) {
 		try {
 			
-			return mapper.use(prove);
-		} catch (Exception e) {
+			return mapper.use(map);
+		} catch (Exception e) {e.printStackTrace();
 			return -1;
 		}
 	}

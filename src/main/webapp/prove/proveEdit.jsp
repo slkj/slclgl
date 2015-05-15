@@ -15,7 +15,7 @@
 			<tr>
 				<th>使用类型：</th>
 				<td colspan="3">
-				<select class="easyui-combobox"  name="firm" style="width: 200px" data-options="required:'true'">
+				<select class="easyui-combobox"  name="ustype" style="width: 200px" data-options="required:'true'">
 								<option value="邯郸安装">邯郸安装</option>
 								<option value="邯郸使用">邯郸使用</option>
 								<option value="石家庄安装">石家庄安装</option>

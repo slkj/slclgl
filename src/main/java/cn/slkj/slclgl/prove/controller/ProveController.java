@@ -39,6 +39,7 @@ public class ProveController {
 		pageMap.put("endDate", request.getParameter("endDate"));
 		pageMap.put("endDate1", request.getParameter("endDate1"));
 		pageMap.put("state", request.getParameter("state"));
+		pageMap.put("ustype", request.getParameter("ustype"));
 		pageMap.put("startPage", (page - 1) * rows);
 		pageMap.put("endPage", rows);
 		int total = proveService.getAllCount(pageMap);
@@ -61,8 +62,25 @@ public class ProveController {
 	public JsonResult save(Prove prove)
 			throws Exception {
 		try {
-			
-			int i = proveService.save(prove);
+			int i = 0;
+			if (prove.getAddType() == 1) {
+				int begin = Integer.parseInt(prove.getListnum_begin());
+				int end = Integer.parseInt(prove.getListnum_end());
+				for (int j = begin; j <= end; j++) {
+					prove.setNumber("");
+					StringBuilder sb = new StringBuilder();
+					sb.append(prove.getListNo());
+					// 0 代表前面补充0
+					// 4 代表长度为4
+					// d 代表参数为正数型
+					String str = String.format("%04d", j);
+					sb.append(str);
+					prove.setNumber(sb.toString());
+					i = proveService.save(prove);
+				}
+			} else {
+			i = proveService.save(prove);
+			}
 			if (i != -1) {
 				return new JsonResult(true, "");
 			}
@@ -95,16 +113,22 @@ public class ProveController {
 	}
 	/** 使用*/
 	@ResponseBody
-	@RequestMapping(value = "/useSave", method = { RequestMethod.POST })
-	public JsonResult useSave(Prove prove)
+	@RequestMapping(value = "/useSave")
+	public JsonResult useSave(@RequestParam(value = "ids[]")String[] ids, String address, String usman,
+			String usriqi, String remark)
 			throws Exception {
 		try {
-
-			int i = proveService.use(prove);
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("ids", ids);
+			map.put("address", address);
+			map.put("usman", usman);
+			map.put("usriqi", usriqi);
+			map.put("remark", remark);System.out.println("IIIIIIIIIIIIIIIIIII"+ids[0]+address+usman+usriqi+remark);
+			int i = proveService.use(map);
 			if (i != -1) {
 				return new JsonResult(true, "");
 			}
-		} catch (Exception e) {
+		} catch (Exception e) {e.printStackTrace();
 			throw new Exception(
 					"this is the detail of ajax exception information");
 		}

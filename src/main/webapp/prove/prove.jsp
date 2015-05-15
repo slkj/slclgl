@@ -18,6 +18,15 @@
 						<td> 证明编号:<input name="number" class="easyui-textbox"
 							style="width: 150px" /> 使用地区:<input id="address" name="address"/> 领用人:<input
 							name="usman" class="easyui-textbox" style="width: 150px" />
+							使用类型：<select class="easyui-combobox"  name="ustype" >
+								<option value="邯郸安装">邯郸安装</option>
+								<option value="邯郸使用">邯郸使用</option>
+								<option value="石家庄安装">石家庄安装</option>
+								<option value="石家庄使用">石家庄使用</option>
+								<option value="廊坊专用">廊坊专用</option>
+								<option value="抚宁专用">抚宁专用</option>
+								<option value="山西专用">山西专用</option>
+					</select>
 							 <a
 							id="search_btn" href="#" class="easyui-linkbutton"
 							data-options="iconCls:'icon-search',plain:'true'">查询</a>

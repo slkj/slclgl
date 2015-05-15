@@ -13,6 +13,10 @@ public class Prove {
 	private String riqi;//测试日期
 	private Integer state;
 	private String remark;//备注
+	private String listNo;//批量添加相同数字
+	private int addType;//添加类型
+	private String listnum_begin;//添加始数字
+	private String listnum_end;//添加末数字
 	public String getId() {
 		return id;
 	}
@@ -85,6 +89,31 @@ public class Prove {
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	
+	public String getListNo() {
+		return listNo;
+	}
+	public void setListNo(String listNo) {
+		this.listNo = listNo;
+	}
+	public int getAddType() {
+		return addType;
+	}
+	public void setAddType(int addType) {
+		this.addType = addType;
+	}
+	public String getListnum_begin() {
+		return listnum_begin;
+	}
+	public void setListnum_begin(String listnum_begin) {
+		this.listnum_begin = listnum_begin;
+	}
+	public String getListnum_end() {
+		return listnum_end;
+	}
+	public void setListnum_end(String listnum_end) {
+		this.listnum_end = listnum_end;
 	}
 	
 	 
