@@ -115,7 +115,10 @@ function loadDataGrid() {
 			colspan : 3
 		}, {
 			title : '',
-			colspan : 2
+			colspan : 1
+		}, {
+			title : '保险信息',
+			colspan : 3
 		} ], [ {
 			field : 'equitment',
 			title : '设备号'
@@ -154,12 +157,15 @@ function loadDataGrid() {
 			title : '二保到期日期',
 			styler:cellStyler30
 		}, {
-			field : 'bx',
-			title : '保险',
-			align : 'center',
-			formatter : function(value, row, index) {
-				return "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:vehicleI1nfo('" + row.id + "');\">详细</span></a>";
-			}
+			field : 'policy',
+			title : '保单号'
+		}, {
+			field : 'bxType',
+			title : '保险类型'
+		}, {
+			field : 'bxendTime',
+			title : '到期日期',
+			styler:cellStyler30
 		} ] ],
 		toolbar : '#tb',
 	});

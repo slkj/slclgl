@@ -112,9 +112,11 @@
 	</div>
 	<div class="easyui-panel" title="车辆基本信息">
 		<form id="carForm" metdod="post">
-			<input type="hidden" id="djFileVal" name="djFile" /> <input
-				type="hidden" id="xsFileVal" name="xsFile" /> <input type="hidden"
-				id="carimgVal" name="carImg" />
+			<input type="hidden" id="djFileVal" name="djFile" /> 
+			<input type="hidden" id="xsFileVal" name="xsFile" /> 
+			<input type="hidden" id="carimgVal" name="carImg" />
+			<input type="hidden" name="depId" value="#{userSession.id }"/>
+			<input type="hidden" name="entryId" value="#{userSession.id}"/>
 			<table class="grid">
 				<tr>
 					<th style="width: 120px">所属地区：</th>

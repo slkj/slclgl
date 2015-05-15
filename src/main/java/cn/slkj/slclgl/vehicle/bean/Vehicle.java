@@ -320,6 +320,18 @@ public class Vehicle {
 	 * 二级维护到期日期
 	 */
 	private String ejwhDqTime;
+	/**
+	 * 保单号
+	 */
+	private String  policy;
+	/**
+	 * 保险类型
+	 */
+	private String  bxType;
+	/**
+	 * 保险到期日期
+	 */
+	private String 	bxendTime;
 
 	public String getXszbh() {
 		return xszbh;
@@ -943,6 +955,30 @@ public class Vehicle {
 
 	public void setXsFile(String xsFile) {
 		this.xsFile = xsFile;
+	}
+
+	public String getPolicy() {
+		return policy;
+	}
+
+	public void setPolicy(String policy) {
+		this.policy = policy;
+	}
+
+	public String getBxType() {
+		return bxType;
+	}
+
+	public void setBxType(String bxType) {
+		this.bxType = bxType;
+	}
+
+	public String getBxendTime() {
+		return bxendTime;
+	}
+
+	public void setBxendTime(String bxendTime) {
+		this.bxendTime = bxendTime;
 	}
 
 	@Override
