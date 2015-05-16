@@ -1,11 +1,29 @@
 var basePath = "../vehicle/";
-var grid;
-var carType, tabid;
+var grid="";
+var carType="";
+var tabid="";
+/**
+ * 用户所属公司，判断上用户类型
+ */
+var companyId="";
+var url="";
 var Request = new Object();
 $(function() {
+	
 	Request = GetRequest();
 	carType = Request['ct'];
 	tabid = Request['tabid'];
+	url =basePath + 'list?carUseNatu=' + carType;
+	var userType = $("#userType").val();
+	if(userType == "1"){
+//		companyId =  $("#company").val();
+//		url += '&companyId='+companyId;
+	}
+	if(userType == "2"){
+		companyId =  $("#company").val();
+		url += '&companyId='+companyId;
+	}
+	
 	loadButton();
 	// 初始化页面
 	loadDataGrid();
@@ -46,7 +64,7 @@ function loadButton() {
 function loadDataGrid() {
 	grid = $('#dg').datagrid({
 		method : 'post',
-		url : basePath + 'list?carUseNatu=' + carType,
+		url : url,
 		// title : '车辆列表',
 		fit : true,
 		fitColumns : true,

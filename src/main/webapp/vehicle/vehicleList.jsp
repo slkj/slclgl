@@ -10,6 +10,9 @@
 </head>
 <body>
 	<input id="roleId" type="hidden" value="${userSession.roleId }">
+	<input id="company" type="hidden" value="${userSession.company }">
+	<input id="userType" type="hidden" value="${userSession.type }">
+	
 	<div id="tb" style="padding: 5px; height: auto">
 		<form name="searchform" method="post" action="" id="searchform">
 			<table cellspacing="0" cellpadding="0">

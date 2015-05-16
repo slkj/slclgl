@@ -38,9 +38,6 @@
 				<if test="companyId != null and companyId != ''">
 					AND TBV.COMPANYID  = #{companyId}  
 				</if>
-				<if test="companyName != null and companyName != ''">
-					AND TBC.COMPNAME  LIKE   CONCAT('%',#{companyName},'%')   
-				</if>
 				<if test="carNumber != null and carNumber != ''">
 					AND TBV.CARNUMBER  LIKE   CONCAT('%',#{carNumber},'%')   
 				</if>
@@ -75,9 +72,6 @@
 				</if>
 				<if test="companyId != null and companyId != ''">
 					AND TBV.COMPANYID  = #{companyId}  
-				</if>
-				<if test="companyName != null and companyName != ''">
-					AND TBC.COMPNAME  LIKE   CONCAT('%',#{companyName},'%')   
 				</if>
 				<if test="carNumber != null and carNumber != ''">
 					AND TBV.CARNUMBER  LIKE   CONCAT('%',#{carNumber},'%')   

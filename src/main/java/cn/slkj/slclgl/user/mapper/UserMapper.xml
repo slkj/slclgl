@@ -3,7 +3,8 @@
 <mapper namespace="cn.slkj.slclgl.user.mapper.UserMapper">
 	<sql id="sql_base">
 		ID,USERNAME,PASSWORD,STATUS,EMAIL,REALNAME,SEX,PHONE,COMPANY,
-		(SELECT COMPNAME FROM TB_COMPANY WHERE ID= COMPANY) as COMPANYNAME,SALT,CREATE_TIME,LASTTIME,REMARK,TYPE,VALIDTIME,ROLEID
+		(SELECT COMPNAME FROM TB_COMPANY WHERE ID= COMPANY) AS COMPANYNAME,
+		DEPARTCODE,(SELECT D_NAME FROM TB_DEPARTMENT WHERE ID= DEPARTCODE) AS DEPARTNAME,CREATE_TIME,LASTTIME,REMARK,TYPE,VALIDTIME,ROLEID
 	</sql>
 	<select id="login" resultType="User" parameterType="hashmap">
 		SELECT <include refid="sql_base"></include> FROM TB_USER WHERE USERNAME=#{username} AND PASSWORD=#{password}
@@ -32,8 +33,8 @@
 	</select>
 	
 	<insert id="save" parameterType="User">
-		INSERT INTO TB_USER(ID,USERNAME,PASSWORD,STATUS,EMAIL,REALNAME,SEX,PHONE,COMPANY,SALT,CREATE_TIME,LASTTIME,REMARK,TYPE,VALIDTIME,ROLEID )
-		VALUES(#{id},#{username},#{password},#{status} ,#{email},#{realname},#{sex},#{phone},#{company},#{salt},now(),#{lastTime},#{remark},#{type},#{validTime},#{roleId})
+		INSERT INTO TB_USER(ID,USERNAME,PASSWORD,STATUS,EMAIL,REALNAME,SEX,PHONE,COMPANY,departcode,CREATE_TIME,LASTTIME,REMARK,TYPE,VALIDTIME,ROLEID )
+		VALUES(#{id},#{username},#{password},#{status} ,#{email},#{realname},#{sex},#{phone},#{company},#{departcode},now(),#{lastTime},#{remark},#{type},#{validTime},#{roleId})
 	</insert>
 	<insert id="saveRole" parameterType="string">
 <!-- 		INSERT INTO TB_USER_ROLE(role_id,user_id ) -->
@@ -47,7 +48,7 @@
 	
 	<update id="edit" parameterType="User">
 		UPDATE TB_USER SET PASSWORD=#{password},STATUS=#{status} ,EMAIL=#{email},REALNAME=#{realname},
-		SEX=#{sex},PHONE=#{phone},COMPANY=#{company},SALT=#{salt},REMARK=#{remark},TYPE=#{type},VALIDTIME=#{validTime},roleId=#{roleId}
+		SEX=#{sex},PHONE=#{phone},COMPANY=#{company},DEPARTCODE=#{departcode},REMARK=#{remark},TYPE=#{type},VALIDTIME=#{validTime},roleId=#{roleId}
 		WHERE ID = #{id}
 	</update>
 	

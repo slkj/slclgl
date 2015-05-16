@@ -55,7 +55,7 @@ public class VehicleController {
 		HashMap<String, Object> pageMap = new HashMap<String, Object>();
 		int page = Integer.parseInt(request.getParameter("page"));
 		int rows = Integer.parseInt(request.getParameter("rows"));
-		pageMap.put("companyName", request.getParameter("companyName"));
+		pageMap.put("companyId", request.getParameter("companyId"));
 		pageMap.put("listnum", request.getParameter("listnum"));
 		pageMap.put("phone", request.getParameter("phone"));
 		pageMap.put("carNumber", request.getParameter("carNumber"));

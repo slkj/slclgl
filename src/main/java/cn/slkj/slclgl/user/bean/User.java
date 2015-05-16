@@ -17,7 +17,8 @@ public class User implements Serializable {
 	private String phone;
 	private String company;
 	private String companyName;
-	private String salt;
+	private String departcode;
+	private String departName;
 	private String create_time;
 	private String remark;
 	private String lastTime;
@@ -63,14 +64,6 @@ public class User implements Serializable {
 	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
-	}
-
-	public String getLastTime() {
-		return lastTime;
-	}
-
-	public void setLastTime(String lastTime) {
-		this.lastTime = lastTime;
 	}
 
 	public String getId() {
@@ -145,12 +138,20 @@ public class User implements Serializable {
 		this.company = company;
 	}
 
-	public String getSalt() {
-		return salt;
+	public String getDepartcode() {
+		return departcode;
 	}
 
-	public void setSalt(String salt) {
-		this.salt = salt;
+	public void setDepartcode(String departcode) {
+		this.departcode = departcode;
+	}
+
+	public String getDepartName() {
+		return departName;
+	}
+
+	public void setDepartName(String departName) {
+		this.departName = departName;
 	}
 
 	public String getCreate_time() {
@@ -169,12 +170,28 @@ public class User implements Serializable {
 		this.remark = remark;
 	}
 
+	public String getLastTime() {
+		return lastTime;
+	}
+
+	public void setLastTime(String lastTime) {
+		this.lastTime = lastTime;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", status="
 				+ status + ", email=" + email + ", realname=" + realname + ", sex=" + sex
-				+ ", phone=" + phone + ", company=" + company + ", salt=" + salt + ", create_time="
-				+ create_time + ", remark=" + remark + "]";
+				+ ", phone=" + phone + ", company=" + company + ", companyName=" + companyName
+				+ ", departcode=" + departcode + ", departName=" + departName + ", create_time="
+				+ create_time + ", remark=" + remark + ", lastTime=" + lastTime + ", validTime="
+				+ validTime + ", roleId=" + roleId + ", type=" + type + "]";
 	}
+
+	 
 
 }
