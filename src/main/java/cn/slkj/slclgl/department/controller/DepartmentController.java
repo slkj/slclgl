@@ -92,6 +92,7 @@ public class DepartmentController {
 			Tree t = new Tree();
 			t.setId(c.getId() + "");
 			t.setText(c.getD_name());
+			t.setAttributes(c);
 			if (code.equals(c.getParentid())) {
 				t.setChildren(toTree(list, c.getId()));
 				trees.add(t);

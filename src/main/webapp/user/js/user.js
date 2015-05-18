@@ -33,7 +33,7 @@ function loadDataGrid() {
 //		} ] ],
 		columns : [ [ {
 			title : '基本信息',
-			colspan : 8
+			colspan : 9
 		}, {
 			field : 'opt',
 			title : '操作',
@@ -50,6 +50,17 @@ function loadDataGrid() {
 				return s;
 			}
 		} ], [ {
+			field : '_opt',
+			title : '用户类型',
+			formatter : function(value, row) {
+				if(row.type == '1'){
+					return '<span style="color:blue">平台用户</span>';
+				}
+				if(row.type == '2'){
+					return "公司用户";
+				}
+			}
+		},{
 			field : 'username',
 			title : '用户名',
 			width : 150

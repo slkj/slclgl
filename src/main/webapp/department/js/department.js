@@ -4,6 +4,9 @@ $(function() {
 	$('#comTree').tree({
 		url : '../dep/getDepTree',
 		lines : true,
+		formatter:function(node){
+			return node.attributes.d_code+"|"+node.text;
+		},
 		onLoadSuccess : function(node,data){
 			queryOne(data[0].id)
 		},

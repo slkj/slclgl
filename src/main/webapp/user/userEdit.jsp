@@ -10,10 +10,34 @@
 	var basePath = "../user/";
 	var Request = new Object();
 	$(function() {
-		$('#roleId').combobox({    
-		    url:'../role/queryAll',    
-		    valueField:'id',    
-		    textField:'name'   
+		$('#depCombobox').combotree({
+			url : '../dep/getDepTree',
+			editable : false,
+			lines : true,
+			required:true
+		});
+		$("#comCombobox").combobox({
+			url : '../company/queryComList',
+			editable : false,
+			required:true,
+			valueField : 'id',
+			textField : 'compName'
+		});
+		$('#roleId').combobox({
+			url : '../role/queryAll',
+			valueField : 'id',
+			textField : 'name'
+		});
+		$('#ctype').combobox({
+			onSelect : function(param) {
+				if (param.value == '2') {
+					$('#depCombobox').combobox('clear');
+					showCom();
+				} else {
+					$('#comCombobox').combobox('clear');
+					showDep();
+				}
+			}
 		});
 		Request = GetRequest();
 		uid = Request['id'];
@@ -22,8 +46,18 @@
 			success : function(data) {
 				if (data) {
 					$("#userForm").form('load', data);
-					$('.type').combobox('setValue', data.type);
-					$('#companyid').combobox('setValue', data.company);
+// 					$('.type').combobox('setValue', data.type);
+// 					$('#companyid').combobox('setValue', data.company);
+					if (data.type == '2') {
+						$('#depCombobox').combobox('clear');
+						showCom();
+						$('#comCombobox').combobox('setValue', data.company);
+					} 
+					if (data.type == '1') {
+						$('#comCombobox').combobox('clear');
+						showDep();
+						$('#depCombobox').combobox('setValue', data.departcode);
+					}
 				}
 			}
 		});
@@ -57,72 +91,96 @@
 	function backPage() {
 		window.location.href = 'users.jsp';
 	}
+	function showDep() {
+		$('#TDep').show(); //可用
+		$('#TCom').hide(); //不可用
+		$('#depCombobox').attr("disabled",false);
+		$('#comCombobox').attr("disabled",true);
+	}
+	function showCom() {
+		$('#TCom').show(); //可用
+		$('#TDep').hide(); //不可用
+		$('#comCombobox').attr("disabled",false);
+		$('#depCombobox').attr("disabled",true);
+	}
 </script>
 </head>
 <body class="easyui-layout">
 	<div style="text-align: left; padding: 5px">
-		<a href="javascript:void(0)" class="easyui-linkbutton"
+		<a href="javascript:void(0)" class="button white medium"
 			onclick="javascript:submitForm()">保存</a> <a href="javascript:void(0)"
-			class="easyui-linkbutton" onclick="javascript:clearForm()">重置</a> <a
-			href="javascript:void(0)" class="easyui-linkbutton"
+			class="button white medium" onclick="javascript:clearForm()">重置</a> <a
+			href="javascript:void(0)" class="button white medium"
 			onclick="javascript:backPage()">返回</a>
 	</div>
 	<form id="userForm" metdod="post">
 		<input name="id" type="hidden" />
-		<div class="easyui-accordion" data-options="border:false">
-			<div title="用户基本信息"
-				data-options="collapsed:false,collapsible:false,border:false"
-				style="overflow: auto;">
-				<table class="grid">
-					<tr>
-							<th style="width: 100px">用户类型 ：</th>
-						<td><select name="type" class="easyui-combobox">
-								<option value="1">平台用户</option>
-								<option value="2">公司用户</option>
-						</select></td>
-						<th style="width: 100px">角色:</th>
-						<td><input id="roleId" name="roleId" /> </td>
-					</tr>
-					<tr>
-						<th style="width: 100px">账号：</th>
-						<td><input class="easyui-textbox" name="username"
-							data-options="required:true" disabled="disabled"/></td>
-						<th style="width: 100px">密码：</th>
-						<td><input class="easyui-textbox" name="password" type="password"
-							data-options="required:true" /></td>
-					</tr>
-					<tr>
-						<th>用户姓名：</th>
-						<td><input class="easyui-textbox" name="realname"
-							data-options="required:true" /></td>
-						<th>性别：</th>
-						<td><label><input name="sex" type="radio" value="男"
-								checked="checked" />男 </label> <label><input name="sex"
-								type="radio" value="女" />女</label></td>
-					</tr>
-					<tr>
-						<th>电子邮件：</th>
-						<td><input name="email" class="easyui-textbox" /></td>
-						<th>联系电话：</th>
-						<td><input name="phone" class="easyui-textbox"
-							data-options="required:true" /></td>
-					</tr>
-					<tr>
-						<th>有效期：</th>
-						<td><input name="validTime" class="easyui-datebox"></input></td>
-						<th>所属公司：</th>
-						<td><select id="companyid" name="company"
-							class="easyui-combotree" style="width: 200px;"
-							data-options="url:'../company/getTreeList',lines:true"></select>
-						</td>
-					</tr>
-					<tr>
-						<th>备注：</th>
-						<td colspan="3"><input class="easyui-textbox" name="remark"
-							data-options="multiline:true" style="height: 60px; width: 100%" /></td>
-					</tr>
-				</table>
-			</div>
+		<div class="easyui-panel" title="用户基本信息">
+			<table class="grid" style="width: 500px">
+				<tr>
+					<th style="width: 100px">用户类型 ：</th>
+					<td><select id="ctype" name="type" style="width: 200px;">
+							<option value="1">平台用户</option>
+							<option value="2" selected="selected">公司用户</option>
+					</select></td>
+
+				</tr>
+				<tr>
+					<th style="width: 100px">角色:</th>
+					<td><input id="roleId" name="roleId" style="width: 200px;" /></td>
+				</tr>
+				<tr>
+					<th style="width: 100px">用户名：</th>
+					<td><input class="easyui-textbox" name="username"
+						data-options="required:true" style="width: 200px;" /></td>
+				</tr>
+				<tr>
+					<th style="width: 100px">密码：</th>
+					<td><input class="easyui-textbox" name="password"
+						type="password" data-options="required:true" style="width: 200px;" /></td>
+				</tr>
+				<tr>
+					<th>真实姓名：</th>
+					<td><input class="easyui-textbox" name="realname"
+						data-options="required:true" style="width: 200px;" /></td>
+				</tr>
+				<tr>
+					<th>性别：</th>
+					<td><label><input name="sex" type="radio" value="男"
+							checked="checked" />男 </label> <label><input name="sex"
+							type="radio" value="女" />女</label></td>
+				</tr>
+				<tr>
+					<th>联系电话：</th>
+					<td><input name="phone" class="easyui-textbox"
+						data-options="required:true" style="width: 200px;" /></td>
+				</tr>
+				<tr>
+					<th>电子邮件：</th>
+					<td><input name="email" class="easyui-textbox"
+						style="width: 200px;" /></td>
+				</tr>
+				<tr>
+					<th>有效期：</th>
+					<td><input name="validTime" class="easyui-datebox"
+						style="width: 200px;"></input></td>
+				</tr>
+				<tr id="TCom">
+					<th>所属公司：</th>
+					<td><input id="comCombobox" name="companyid"
+						style="width: 200px;"></input></td>
+				</tr>
+				<tr id="TDep">
+					<th>所属机构：</th>
+					<td><input id="depCombobox" name="departcode"
+						style="width: 200px;" /></td>
+				</tr>
+				<tr>
+					<th>备注：</th>
+					<td><input class="easyui-textbox" name="remark"
+						data-options="multiline:true" style="height: 60px; width: 100%" /></td>
+				</tr>
+			</table>
 		</div>
 	</form>
 	<div style="height: 30px"></div>

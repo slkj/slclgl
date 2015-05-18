@@ -106,6 +106,29 @@ a:hover {
 	color: #D16C00; font-weight: bold
 }
 </style>
+<script type="text/javascript">
+$(function() {
+// 	openPwd();
+// 	$('#editpass').click(function() {
+// 		$('#w').window('open');
+// 	});
+// 	$('#btnCancel').click(function() {
+// 		closePwd();
+// 	})
+// 	$('#btnEp').click(function() {
+// 		serverLogin();
+// 	})
+	$('#loginOut').click(function() {
+		$.messager.confirm('系统提示', '您确定要退出本次登录吗?', function(r) {
+
+			if (r) {
+				location.href = 'login.jsp';
+			}
+		});
+	})
+});
+
+</script>
 <script type="text/javascript" src="js/main.js"></script>
 </head>
 <body id="index_layout" class="easyui-layout" style="overflow-y: hidden" scroll="no">
