@@ -1,15 +1,7 @@
-/**   
- * @Title: package-info.java 
- * @Package cn.slkj.clgl.driver.contorller 
- * @Description: TODO(用一句话描述该文件做什么) 
- * @author zhangtc   
- * @date 2014年12月9日 下午2:12:48 
- */
 /** 
  * @ClassName: package-info 
  * @Description: TODO(这里用一句话描述这个类的作用) 
  * @author zhangtc
- * @date 2014年12月9日 下午2:12:48 
  *  
  */
 package cn.slkj.slclgl.person.controller;

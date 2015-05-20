@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import cn.slkj.easyui.util.EPager;
 import cn.slkj.slclgl.driving.bean.Driving;
 import cn.slkj.slclgl.driving.mapper.DrivingMapper;
-import cn.slkj.slclgl.person.bean.Person;
 
 /**
  * 行驶证年检信息

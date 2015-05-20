@@ -213,7 +213,7 @@ $(function() {
 		style="height: 25px; overflow: hidden;">
 		<div align="center" style="color: #1fa3e5; padding-top: 2px">
 			&copy; 版权所有 <span class="tip"> <a href="http://www.wlsh.cn"
-				title="河北神龙物流信息科技有限公司">河北神龙物流信息科技有限公司</a> 版本 V2.0
+				title="河北神龙物流信息科技有限公司">河北神龙物流信息科技有限公司</a> 版本 V1.0
 			</span>
 		</div>
 	</div>

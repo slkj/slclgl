@@ -35,7 +35,6 @@ function loadDataGrid() {
 					{
 						method : 'post',
 						url : basePath + 'list?type='+type,
-						title : '司机列表',
 						fit : true,
 						nowrap : true, // false:折行
 						rownumbers : true, // 行号

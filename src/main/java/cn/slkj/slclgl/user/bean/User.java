@@ -8,22 +8,71 @@ public class User implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String id;
+	/**
+	 * 登录账号
+	 */
 	private String username;
+	/**
+	 * 登录密码
+	 */
 	private String password;
+	/**
+	 * 使用状态
+	 */
 	private String status = "enabled";
+	/**
+	 * 邮箱
+	 */
 	private String email;
+	/**
+	 * 真实姓名
+	 */
 	private String realname;
+	/**
+	 * 性别
+	 */
 	private String sex;
+	/**
+	 * 联系电话
+	 */
 	private String phone;
+	/**
+	 * 所属公司id
+	 */
 	private String company;
+	/**
+	 * 所属公司名称
+	 */
 	private String companyName;
+	/**
+	 * 所属部门编码
+	 */
 	private String departcode;
+	/**
+	 * 所属部门名称
+	 */
 	private String departName;
+	/**
+	 * 创建时间
+	 */
 	private String create_time;
+	/**
+	 * 备注
+	 */
 	private String remark;
+	/**
+	 * 最后登录时间
+	 */
 	private String lastTime;
+	/**
+	 * 有效时间
+	 */
 	private String validTime;
+	/**
+	 * 角色id
+	 */
 	private String roleId;
+
 	public String getRoleId() {
 		return roleId;
 	}
@@ -191,7 +240,5 @@ public class User implements Serializable {
 				+ create_time + ", remark=" + remark + ", lastTime=" + lastTime + ", validTime="
 				+ validTime + ", roleId=" + roleId + ", type=" + type + "]";
 	}
-
-	 
 
 }

@@ -5,15 +5,18 @@ package cn.slkj.slclgl.vehicle.bean;
 
 /**
  * @author maxh
- *
+ *车辆基本属性
  */
 public class Vehicle {
 
 	private String id;
 	/**
-	 * 所属公司
+	 * 所属公司id
 	 */
 	private String companyId;
+	/**
+	 * 所属公司名称
+	 */
 	private String companyName;
 	/**
 	 * 业户/车主
@@ -986,5 +989,4 @@ public class Vehicle {
 		return "Vehicle [id=" + id + ", carNumber=" + carNumber + ", equitment=" + equitment
 				+ ", simNumber=" + simNumber + ", installtime=" + installtime + "]";
 	}
-
 }
