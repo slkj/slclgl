@@ -87,13 +87,13 @@ function getData() {
 				var s = "";
 				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:addFun('" + row.vId + "');\">设备</span></a>";
 				s += "&nbsp;|&nbsp;";
-				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:record('" + row.vId + "');\">续保</span></a>";
-				s += "&nbsp;|&nbsp;";
+				//s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:record('" + row.vId + "');\">续保</span></a>";
+				//s += "&nbsp;|&nbsp;";
 				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:record('" + row.vId + "');\">安装记录</span></a>";
 				s += "&nbsp;|&nbsp;";
 				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:editFun('" + row.id + "');\">编辑</span></a>";
 				s += "&nbsp;|&nbsp;";
-//				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:delFun('" + index + "');\">删除</span></a>";
+				s += "<a href=\"javascript:void(0)\"><span onclick=\"javaScript:delFun('" + index + "');\">删除</span></a>";
 				return s;
 			}
 		} ] ],

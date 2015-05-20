@@ -31,7 +31,7 @@ public class Insurance {
 	/**
 	 * 保险类型
 	 */
-	private Integer insuranceType;
+	private String insuranceType;
 	/**
 	 * 投保日期
 	 */
@@ -67,7 +67,7 @@ public class Insurance {
 	/**
 	 * 承保单位
 	 */
-	private Integer insuranceCompany;
+	private String insuranceCompany;
 	/**
 	 * 承保单位
 	 */
@@ -138,10 +138,10 @@ public class Insurance {
 	}
 	
 	
-	public Integer getInsuranceType() {
+	public String getInsuranceType() {
 		return insuranceType;
 	}
-	public void setInsuranceType(Integer insuranceType) {
+	public void setInsuranceType(String insuranceType) {
 		this.insuranceType = insuranceType;
 	}
 	public String getStartTime() {
@@ -181,10 +181,10 @@ public class Insurance {
 	public void setTypeName(String typeName) {
 		this.typeName = typeName;
 	}
-	public Integer getInsuranceCompany() {
+	public String getInsuranceCompany() {
 		return insuranceCompany;
 	}
-	public void setInsuranceCompany(Integer insuranceCompany) {
+	public void setInsuranceCompany(String insuranceCompany) {
 		this.insuranceCompany = insuranceCompany;
 	}
 	public String getCompanyName() {
